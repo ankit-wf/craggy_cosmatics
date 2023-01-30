@@ -1,0 +1,43 @@
+[
+    {
+        "images": "https://craggycosmetic.com/wp-content/uploads/2022/11/d-tan-scrub-300x300.jpg",
+        "description": "CRAGGY D-TAN SCRUB WITH KOKUM, TEA TREE OIL, AVOCADO",
+        "latestProduct_id": 0,
+        "price": "250.00",
+        "quantity": 1,
+        "oldprice": "325.00",
+        "brand": "Samsung",
+        "discountPercentage": 15.46,
+        "rating": 4.09,
+        "category": "Smartphones",
+        "stock": 36,
+        "title": "Samsung M32"
+    },
+    {
+        "images": "https://craggycosmetic.com/wp-content/uploads/2022/11/D-TAN-MASSAGE-CREAM-768x768.jpg",
+        "description": "CRAGGY D-TAN MASSAGE CREAM WITH KOKUM AND ALOEVERA",
+        "latestProduct_id": 1,
+        "price": "250.00",
+        "quantity": 1,
+        "oldprice": "325.00",
+        "brand": "Samsung"
+    },
+    {
+        "images": "https://craggycosmetic.com/wp-content/uploads/2022/06/15-300x300.jpg",
+        "description": "CRAGGY BEAUTY & BALANCED FACE PACK 135 ml. FOR TANNING WITH KAOLIN, GLYCOLIC ACID, D-PANTHENOL, CAUSTIC SODA,MULTANI MITTI, AVOCADO FRUIT, SALICYLIC ACID",
+        "latestProduct_id": 2,
+        "price": "275.00",
+        "quantity": 1,
+        "oldprice": "399.00",
+        "brand": "Samsung"
+    },
+    {
+        "images": "https://craggycosmetic.com/wp-content/uploads/2022/06/13-300x300.jpg",
+        "description": "CRAGGY ULTIMATE FACE CREAM 75 G. WITH ANAR , PAPAYA, GUAVA, CARROT, CUCUMBER, KOKUM BUTTER, ALOVERA",
+        "latestProduct_id": 3,
+        "price": "249.00",
+        "quantity": 1,
+        "oldprice": "395.00",
+        "brand": "Samsung"
+    }
+]
