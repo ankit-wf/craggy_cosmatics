@@ -38,7 +38,6 @@ const AccountScreen = ({ navigation }) => {
             <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}
 
             >
-              <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
 
             </View>
 
