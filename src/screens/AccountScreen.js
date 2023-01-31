@@ -80,7 +80,7 @@ const AccountScreen = ({ navigation }) => {
             <View style={styles.iconStyle}>
               <Ionicons
                 name="pencil"
-                color='#A07738'
+                color='#000'
                 size={22}
               />
             </View>
