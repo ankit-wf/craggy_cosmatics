@@ -11,7 +11,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 
 const bannerImg = require('../../Data/bannerSlider.json')
 
-const ProductListing = ({ navigation, route }) => {
+const ProductListingScreen = ({ navigation, route }) => {
     const styles = useStyles()
     const dispatch = useDispatch();
     const storeData = useSelector(state => state.cartData.cart);
@@ -68,7 +68,7 @@ const ProductListing = ({ navigation, route }) => {
         <View style={styles1.panel}>
             <View style={{ alignItems: 'center' }}>
                 <Text style={styles1.panelTitle}>Sort By</Text>
-                {/* <Text style={styles1.panelSubtitle}></Text> */}
+                {/* {/ <Text style={styles1.panelSubtitle}></Text> /} */}
             </View>
             <TouchableOpacity style={styles1.panelButton} >
                 <Text style={styles1.panelButtonTitle}>Latest</Text>
@@ -146,7 +146,7 @@ const ProductListing = ({ navigation, route }) => {
                             <FlatList
                                 data={data}
                                 renderItem={({ item }) => (
-                                    < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
+                                    < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("ProductListing", item.product_id)} >
                                         <View style={sS.imgRoot} >
                                             <Image source={{ uri: item.image }} style={sS.productImg} />
                                         </View>
@@ -163,7 +163,7 @@ const ProductListing = ({ navigation, route }) => {
                                             </View>
                                         </View>
 
-                                        {/* Buy Now Button  */}
+                                        {/* {/ Buy Now Button  /} */}
                                         <TouchableOpacity style={sS.buyNowButton}
                                             onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                         >
@@ -189,7 +189,7 @@ const ProductListing = ({ navigation, route }) => {
     )
 }
 
-export default ProductListing
+export default ProductListingScreen
 
 const styles1 = StyleSheet.create({
     panel: {

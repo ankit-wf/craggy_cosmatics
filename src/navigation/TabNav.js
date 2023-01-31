@@ -1,4 +1,6 @@
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
 import HomeScreen from '../screens/HomeScreen';
 import ShopScreen from '../screens/ShopScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
@@ -11,6 +13,7 @@ const Tab = createMaterialBottomTabNavigator();
 const TabNav = () => {
 
     return (
+
         <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: 'red',
@@ -26,11 +29,14 @@ const TabNav = () => {
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
+              
                 options={{
                     tabBarLabel: 'Home',
+
                     tabBarIcon: ({ focused }) => (
                         focused ? <Image source={require('../../assets/Vector1.png')} style={{ padding: 2, marginTop: -5 }} size={25} />
                             : <Image style={{ padding: 2, marginTop: -5 }} source={require('../../assets/Vector.png')} />
+
                     ),
                 }}
             />
@@ -42,6 +48,7 @@ const TabNav = () => {
                     tabBarIcon: ({ focused }) => (
                         focused ? <Image source={require('../../assets/soap1.png')} style={{ padding: 2, marginTop: -5 }} size={30} />
                             : <Image style={{ padding: 2, marginTop: -5 }} source={require('../../assets/soap.png')} />
+
                     ),
                 }}
             />
@@ -53,9 +60,11 @@ const TabNav = () => {
                     tabBarIcon: ({ focused, color }) => (
                         focused ? <Image source={require('../../assets/categories.png')} style={{ padding: 2, marginTop: -5 }} />
                             : <Image source={require('../../assets/categories.png')} style={{ padding: 2, marginTop: -5 }} />
+
                     ),
                 }}
             />
+
             <Tab.Screen
                 name="MY CART"
                 component={MyCartScreen}
@@ -78,6 +87,8 @@ const TabNav = () => {
                     ),
                 }}
             />
+
+
         </Tab.Navigator>
     )
 }

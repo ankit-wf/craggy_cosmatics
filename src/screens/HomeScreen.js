@@ -2,61 +2,53 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Animated, Keyboard } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Heading from '../components/Heading'
+import Logo from '../components/Logo'
+import SearchBar from '../components/SearchBar'
 import { defaultStyles as ds } from '../styles/defaultStyle'
 import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
 import { letestProductStyle as lP } from '../styles/letestProductStyle'
 import { wePromiseStyle as wP } from '../styles/wePromiseStyle'
 import { categoriesStyle as cS } from '../styles/categoriesStyle'
+
 import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
-import Header from '../components/Header'
-import { useStyles } from '../styles/responsiveStyle'
-import axios from 'axios'
 const imgData = require('../../imgData.json');
 const bannerImg = require('../../Data/bannerSlider.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const latestProductImg = require('../../Data/latestProduct.json')
+import Header from '../components/Header'
+import { TextInput } from 'react-native-paper'
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useStyles } from '../styles/responsiveStyle'
+import axios from 'axios'
+import BackgroundImageService from '../components/CatImage'
+import FooterImage from '../components/FooterImage'
 
 const HomeScreen = ({ navigation }) => {
-  const styles = useStyles();
+  const styles = useStyles()
+  // const scrollY = new Animated.Value(0)
+  // const diffClamp = Animated.diffClamp(scrollY, 0, 80)
+  // const translateY = diffClamp.interpolate({
+  //   inputRange: [0, 80],
+  //   outputRange: [0, -80]
+  // })
   const reviewData = useSelector(state => state.reviewData.review);
+  // console.log("reviewData", reviewData);
+
   const storeData = useSelector(state => state.cartData.cart);
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
+  // const [searchQuery, setSearchQuery] = useState('');
+  // const onChangeSearch = query => {
+  //   setSearchQuery(query)
+  //   // console.log('first', query)
+  // }
+  const imageData = BackgroundImageService();
+  const imageFooter = FooterImage();
+  const [data, setData] = useState([])
+  // const [allData, setAllData] = useState([])
+  // console.log("alldataaa", allData)
 
-  const bestSellingHolder = (description, sellingProduct_id, images, price, oldprice, quantity) => {
-    let Data = [...storeData, {
-      description: description,
-      sellingProduct_id: sellingProduct_id,
-      images: images,
-      price: price,
-      oldprice: oldprice,
-      quantity: quantity
-    }];
-    dispatch(submitActions.price(
-      {
-        cart: Data
-      }
-    ));
-    navigation.navigate('Cart', sellingProduct_id);
-  }
-
-  const SkinCareHandler = () => {
-    navigation.navigate('ProductListing')
-  }
-
-  const openDrawer = () => {
-    navigation.openDrawer();
-  }
-  const PageHandler = () => {
-    navigation.navigate('SearchPage')
-    Keyboard.dismiss()
-  }
-  const RewardHandler = () => {
-    navigation.navigate('Reward')
-  }
-
-  const getCategory = () => {
+  useEffect(() => {
     axios.get(
       `https://craggycosmetic.com/api/products/category/`,
       {
@@ -70,22 +62,73 @@ const HomeScreen = ({ navigation }) => {
         setData(res.data.response)
       }
     })
-    return;
-  }
 
-  useEffect(() => {
-    getCategory()
   }, [])
 
+  const bestSellingHolder = (description, sellingProduct_id, images, price, oldprice, quantity) => {
 
+    let Data = [...storeData, {
+      description: description,
+      sellingProduct_id: sellingProduct_id,
+      images: images,
+      price: price,
+      oldprice: oldprice,
+      quantity: quantity
+    }];
+    // console.log("Dataaa", Data)
+    dispatch(submitActions.price(
+      {
+        cart: Data
+      }
+    ));
+    navigation.navigate('Cart', sellingProduct_id);
+  }
+  const notification = () => {
+    navigation.navigate('NotificationScreen')
+  }
+  const openDrawer = () => {
+    navigation.openDrawer();
+  }
+  const searchHandler = () => {
+    navigation.navigate('SearchPage')
+    Keyboard.dismiss()
+  }
+  const RewardHandler = () => {
+    navigation.navigate('Reward')
+  }
+  // const [text, setText] = useState("");
   return (
     <View style={ds.appContainer}>
-      <Header onPress={openDrawer} notification={PageHandler} Gift={RewardHandler} search={PageHandler} />
-
+      <Header onPress={openDrawer} notification={notification} Gift={RewardHandler} search={searchHandler} />
+      {/* <View style={styles.SearchBar_container}>
+        <View style={styles.TextInput_container}>
+          <View style={styles.passwordContainer}>
+            <TextInput
+              placeholder="Search here..."
+              value={text}
+              onChangeText={text => setText(text)}
+              onFocus={PageHandler}
+              placeholderTextColor="#7C7C7C"
+              backgroundColor="#222222"
+              // underlineColorAndroid='white'
+              // activeUnderlineColor="#222222"
+              style={styles.TextInputSearch}
+            />
+            <TouchableOpacity onPress={PageHandler} style={styles.searchIcon}>
+              <Ionicons
+                name="search-outline"
+                color='#CC933B'
+                size={25}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View> */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled={true}
       >
+
         {/* Banner Swiper  */}
         <View style={styles.swiperRoot}>
           <Swiper style={styles.wrapper} autoplay >
@@ -102,38 +145,50 @@ const HomeScreen = ({ navigation }) => {
                     <View style={styles.bannerCode} >
                       <Image source={require('../../assets/CodeImg.png')} />
                     </View>
-                    {/* 
+
                     <TouchableOpacity style={styles.bannerButton}>
                       <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                   </View>
                 </View>
               )
             })}
           </Swiper>
+
         </View>
 
         <View style={cS.categoriesRoot}>
-          <Heading />
-          <View style={cS.categoriesImgRoot}>
-            <View style={cS.blankSpace} ></View>
-            {data.map((data, index) => {
-              if (data.count > 0)
-                return (
-                  <TouchableOpacity style={cS.touchableImg} onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={index}>
-                    <View style={cS.skinImgRoot}>
-                      <Image source={require('../../assets/Ellipse6.png')} style={cS.imgCenter} />
-                    </View>
-                    <View>
-                      <Text style={cS.skinImgText}>{data.name}</Text>
-                    </View>
-                  </TouchableOpacity>
-                )
-            })}
-          </View>
+
+          {/* <Heading /> */}
+          {/* <View style={cS.categoriesImgRoot}> */}
+
+          {data.map((data, i) => {
+            if (data.count > 0)
+              return (
+                <TouchableOpacity
+                  onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
+                  style={{ height: 100, width: 80, marginLeft: 8, marginTop: 30 }}
+                >
+                  {imageData.map((item, id) => {
+                    return (
+                      (item.name === data.slug) &&
+                      <View style={cS.skinImgRoot} key={id}>
+                        <Image source={item.image} style={cS.imgCenter} />
+                      </View>
+                    )
+                  })}
+
+                  <View key={i}>
+                    <Text style={cS.skinImgText}>{data.name}</Text>
+                  </View>
+                </TouchableOpacity>
+              )
+          })}
+
+          {/* </View> */}
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginBottom: 10 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 10 }}>
           <Heading title=' best selling ' />
 
           <TouchableOpacity
@@ -148,6 +203,7 @@ const HomeScreen = ({ navigation }) => {
 
         <View style={bsP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+
             {bestSellingProduct.map((e, i) => {
               return (
                 <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
@@ -167,9 +223,11 @@ const HomeScreen = ({ navigation }) => {
                       <Text style={bsP.spaceRoot}>/ </Text>
                       <Text style={bsP.oldprice}>₹{e.oldprice}</Text>
                     </View>
+
                   </View>
 
                   {/* Buy Now Button  */}
+
                   <TouchableOpacity style={bsP.buyNowButton}
                     onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
                   >
@@ -180,10 +238,13 @@ const HomeScreen = ({ navigation }) => {
             })}
           </ScrollView>
         </View>
+        {/* <View style={styles.BestSellingRoot}> */}
 
         {/* Latest Product  */}
+
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginBottom: 10 }}>
           <Heading title=' latest product ' />
+
           <TouchableOpacity
             style={styles.viewLatestProduct}
             onPress={() => navigation.navigate("AllLatestProduct")}
@@ -193,10 +254,11 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-
         {/* <Heading title=' latest product ' /> */}
+
         <View style={lP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+
             {latestProductImg.map((e, i) => {
               return (
                 <TouchableOpacity style={lP.touchable} key={i} onPress={() => navigation.navigate('Product', e.latestProduct_id)}>
@@ -205,6 +267,7 @@ const HomeScreen = ({ navigation }) => {
                   </View>
 
                   <View style={lP.contentRoot}>
+
                     <View style={lP.descriptionRoot}>
                       <Text style={lP.descriptionText}>{e.description}</Text>
                     </View>
@@ -216,11 +279,14 @@ const HomeScreen = ({ navigation }) => {
                       <Text style={lP.spaceRoot}>/ </Text>
                       <Text style={lP.oldprice}>₹{e.oldprice}</Text>
                     </View>
+
                   </View>
 
                   {/* Buy Now Button  */}
+
                   <TouchableOpacity style={lP.buyNowButton}
                     onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
+                  // onPress={() => navigation.navigate('Product', e.latestProduct_id)}
                   >
                     <Text style={lP.buttonText}>BUY NOW</Text>
                   </TouchableOpacity>
@@ -232,11 +298,13 @@ const HomeScreen = ({ navigation }) => {
         </View>
 
         {/* Footer Banner  */}
+
         <View style={styles.footerBannerRoot}>
           <Image source={require('../../assets/footer_banner.png')} style={styles.footerBannerImage} />
         </View>
 
         {/* We Promise  */}
+
         <View >
           <View style={styles.promiseOuterRoot}>
             <View style={styles.promiseRoot}>
@@ -245,109 +313,24 @@ const HomeScreen = ({ navigation }) => {
             </View>
 
             <View style={styles.group115Root}>
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/hypoallergenic.png')} />
-                </View>
+              {imageFooter.map((img, i) => {
+                // console.log("ddddddddd", img.image)
+                return (
+                  <View style={styles.oilIconRoot} key={i}>
+                    <View style={styles.iconRoot} >
+                      <Image source={img.image} />
+                    </View>
 
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >ESSIENTIALOILS</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/natural.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >100% VEGAN</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/green.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >SKIN FRIENDLY</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/gluten.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >GLUTEN FREE</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/toxic.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >NON   TOXIC</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/cruelty.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >CRUELTY FREE</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/paraben.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >NO HARSH CHEMICALS</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/industry.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >GMP CERTIFIED</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/Group117.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >PROPERLY TESTED</Text>
-                </View>
-              </View>
-
-              <View style={styles.oilIconRoot}>
-                <View style={styles.iconRoot}>
-                  <Image source={require('../../assets/solidarity.png')} />
-                </View>
-
-                <View style={styles.essientialOilRoot}>
-                  <Text style={styles.essientialOilText} >MADE WITH LOVE</Text>
-                </View>
-              </View>
-
+                    <View style={styles.essientialOilRoot}>
+                      <Text style={styles.essientialOilText} > {img.text} </Text>
+                    </View>
+                  </View>
+                )
+              })}
             </View>
 
-            {/* View all Product  */}
+            {/* View Product  */}
+
             <TouchableOpacity style={styles.ViewProduct}
               onPress={() => navigation.navigate('ViewProduct')}
             >

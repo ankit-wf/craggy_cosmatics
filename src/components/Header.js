@@ -46,10 +46,10 @@ export default function Header({ navigation, onPress, notification, Gift, search
                     </View>
                 </View>
                 {/* <SearchBar onChangeText={onChangeSearch} value={searchQuery} onFocus={search} /> */}
-
                 <View style={{ width: "100%", flexDirection: 'row', backgroundColor: '#222222', marginTop: 20, borderRadius: 8, alignSelf: 'center' }}>
                     <View style={{ width: '90%' }}>
                         <TextInput
+                            caretHidden={true}
                             placeholder="Search here..."
                             onPress={Keyboard.dismiss}
                             accessible={false}

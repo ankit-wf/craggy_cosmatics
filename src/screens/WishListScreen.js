@@ -5,11 +5,13 @@ import BackButton from '../components/BackButton'
 const WishListScreen = ({ navigation }) => {
     return (
         <View>
-            <View style={{ flexDirection: 'row', }}>
+            {/* <View style={{ flexDirection: 'row', }}>
 
                 <BackButton goBack={navigation.goBack} Color={'#666666'} />
                 <Text style={styles.deliveryText}>MY WISHLIST</Text>
-            </View>
+            </View> */}
+            <Text style={styles.deliveryText}>MY WISHLIST</Text>
+
 
         </View>
     )
@@ -22,6 +24,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         alignSelf: 'center',
         paddingTop: 35,
-        paddingLeft: '25%'
+        // paddingLeft: '25%'
     },
 })
