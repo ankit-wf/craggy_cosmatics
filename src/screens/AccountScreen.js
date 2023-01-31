@@ -63,7 +63,7 @@ const AccountScreen = ({ navigation }) => {
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle"
-              color='red'
+              color='#000'
               size={35}
               style={{ marginTop: 8 }}
             />
