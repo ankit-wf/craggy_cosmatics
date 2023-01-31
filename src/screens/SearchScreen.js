@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Appbar, Searchbar, } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Heading from '../components/Heading'
 import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
+const placeholderText = require('../../Data/Placeholder.json');
+
 
 const SearchScreen = ({ navigation }) => {
     const [back, setBack] = useState(false);
@@ -12,13 +14,23 @@ const SearchScreen = ({ navigation }) => {
 
     const onChangeSearch = query => setSearchQuery(query);
 
+    const [newName, setnewName] = useState("");
+    const shuffle = useCallback(() => {
+        const index = Math.floor(Math.random() * placeholderText.length);
+        setnewName(placeholderText[index]);
+    }, []);
+
+    useEffect(() => {
+        const intervalID = setInterval(shuffle, 5000);
+        return () => clearInterval(intervalID);
+    }, [shuffle])
     return (
         <View>
             <Appbar.Header style={{ backgroundColor: 'white', }}>
                 <Appbar.BackAction onPress={navigation.goBack} color="blue" />
                 {!back ? (
                     <Searchbar
-                        placeholder="Search"
+                        placeholder={newName.placeholder}
                         onChangeText={onChangeSearch}
                         value={searchQuery}
                         style={{ maxWidth: "85%", maxHeight: 35, }}

@@ -4,7 +4,7 @@ import React from 'react'
 const Reward = () => {
     return (
         <View>
-            <Text>Reward</Text>
+
         </View>
     )
 }
