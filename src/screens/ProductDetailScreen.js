@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Swiper from 'react-native-swiper'
 import { List } from 'react-native-paper';
@@ -14,7 +14,6 @@ const productImg = require('../../Data/productDetail.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
-import { ActivityIndicator } from 'react-native-paper'
 
 const ProductDetailScreen = ({ navigation, route }) => {
 
@@ -88,20 +87,30 @@ const ProductDetailScreen = ({ navigation, route }) => {
         navigation.navigate('Cart', product_id);
     }
 
+
     return (
         <View >
             <SafeAreaView style={styles.safe_roor}>
+
+
                 {
                     loading ?
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
                             <ActivityIndicator size="large" />
                         </View>
                         :
-                        <ScrollView>
+
+                        <ScrollView onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}>
+
                             {data.map((data, index) => {
                                 // console.log("eeee", e)
                                 return (
                                     <View key={index}>
+
+                                        <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
+                                            <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
+                                        </View>
+
                                         <View style={styles.swiperRoot}>
                                             <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
 

@@ -10,21 +10,16 @@ import Checkbox from 'expo-checkbox';
 import axios from 'axios';
 import { useStyles } from '../styles/responsiveStyle';
 
-
 const LoginScreen = ({ navigation }) => {
     const styles = useStyles()
     const [isChecked, setChecked] = useState(false);
     const dispatch = useDispatch();
     const logindata = useSelector(state => state.userData.user);
     const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
-    // console.log("logged-in ", isLoggedIn)
-    // console.log("logindata ", logindata)
-
     const [login, setLogin] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(true);
     const [userData, setUserData] = useState({});
-    // console.log("userData", userData)
-
+    // console.log("hjshssd", userData)
     const { control, handleSubmit, reset, formState: { errors } } = useForm()
 
     // login
@@ -34,14 +29,12 @@ const LoginScreen = ({ navigation }) => {
                 index: 0,
                 routes: [{ name: 'HomeScreen' }],
             });
-            // console.log("first:", isLoggedIn)
             setLogin(true);
         };
     }, [login])
 
 
     const onSubmit = (data) => {
-        // console.log("first", data)
         axios({
             method: 'post',
             url: 'https://craggycosmetic.com/api/user/login/',
@@ -56,12 +49,13 @@ const LoginScreen = ({ navigation }) => {
         }).then((response) => {
             console.log(response.data, "response2");
             if (response.data.login == true) {
-                dispatch(loginActions.loginform({ isLoggedIn: true }));
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: 'HomeScreen' }],
-                });
-                // setUserData(response.data.user_data);
+                setUserData(response.data.user_data);
+                dispatch(loginActions.userlogin({ user_data: userData }));
+                // dispatch(loginActions.loginform({ isLoggedIn: true }));
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{ name: 'HomeScreen' }],
+                // });
             }
         })
         // alert("You Are SuccessFully Registered");

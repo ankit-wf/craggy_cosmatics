@@ -6,7 +6,7 @@ const TermAndCondition = ({ navigation }) => {
     return (
         <View>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                <BackButton goBack={navigation.goBack} />
+                <BackButton goBack={navigation.goBack} Color={'#666666'} />
                 <Text style={styles.ReviewsTitle}>TERM AND CONDITION</Text>
             </View>
             <Text style={{ alignSelf: 'center' }}>Term And Condition</Text>

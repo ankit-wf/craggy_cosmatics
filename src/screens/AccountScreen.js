@@ -6,13 +6,16 @@ import { Ionicons } from '@expo/vector-icons'
 import { Badge, Button } from 'react-native-paper';
 import { loginActions } from '../store/UserSlice'
 import * as ImagePicker from 'expo-image-picker';
+import BottomSheet from 'reanimated-bottom-sheet';
+
 import RBSheet from "react-native-raw-bottom-sheet";
 
 const AccountScreen = ({ navigation }) => {
 
   const storeData = useSelector(state => state.cartData.cart);
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
-  const logindata = useSelector(state => state.userData.user);
+  const userData = useSelector(state => state.userData.user_data);
+  // console.log("nnneeewewwwww", userData)
 
   const dispatch = useDispatch();
 
@@ -26,130 +29,46 @@ const AccountScreen = ({ navigation }) => {
   }
 
 
-  // image picker
-  const refRBSheet = useRef();
-  const [pickedImagePath, setPickedImagePath] = useState('');
-
-  const showImagePicker = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your photos!");
-      return;
-    }
-    const result = await ImagePicker.launchImageLibraryAsync();
-    console.log(result);
-    if (!result.cancelled) {
-      setPickedImagePath(result.uri);
-      console.log(result.uri);
-    }
-  }
-
-  const openCamera = async () => {
-    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-    if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your camera!");
-      return;
-    }
-
-    const result = await ImagePicker.launchCameraAsync();
-    console.log(result);
-    if (!result.cancelled) {
-      setPickedImagePath(result.uri);
-      console.log(result.uri);
-    }
-  }
-
-
 
   return (
     <View>
       <View style={styles.Root}>
-        <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }} onPress={openCamera} >
+        <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
           <View style={styles.profileImgRoot}>
-            <TouchableOpacity style={{ height: 100, width: 100, borderWidth: 2, borderColor: 'red', borderRadius: 100, alignSelf: 'center' }}
-              onPress={() => refRBSheet.current.open()}
-            >
-              {
-                pickedImagePath !== '' && <Image
-                  source={{ uri: pickedImagePath }}
-                  style={styles.image}
-                />
-              }
-            </TouchableOpacity>
+            <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}
 
-            <View style={styles.iconStyle}>
-              <Ionicons
-                name="pencil"
-                color='#000'
-                size={22}
-              />
+            >
+
             </View>
 
-            {logindata.map((name, i) => {
-              return (
-                <View style={styles.profileTextRoot} key={i}>
-                  <Text style={styles.helloText}>Hello </Text>
-                  <Text style={styles.redText}>{name.email}</Text>
-                </View>
-              )
-            })}
-          </View>
-
-          <RBSheet
-            ref={refRBSheet}
-            closeOnDragDown={true}
-            closeOnPressMask={false}
-            customStyles={{
-              wrapper: {
-                backgroundColor: "transparent",
-              },
-              draggableIcon: {
-                backgroundColor: "#000"
-              }
-            }}
-          >
-            <View style={styles.screen}>
-              <View style={styles.buttonContainer}>
-                <View>
-                  <Button onPress={showImagePicker} title="Select an image" />
-                </View>
-                <View style={{ marginTop: 10 }} >
-                  <Button onPress={openCamera} title="Open camera" />
-                </View>
+            <View style={styles.profileTextRoot}>
+              <View style={{ width: 300 }}>
+                <Text style={styles.redTextName}>{userData.display_name}</Text>
+              </View>
+              <View style={{ width: 300, marginTop: 12 }}>
+                <Text style={styles.redText}>+91{userData.user_phone}</Text>
+              </View>
+              <View style={{ width: 300 }}>
+                <Text style={styles.redText}>{userData.user_email}</Text>
               </View>
             </View>
-          </RBSheet>
+
+          </View>
         </ImageBackground>
-      </View>
-      <View style={{ position: 'absolute' }}>
-        <BackButton goBack={navigation.goBack} Color={'#666666'} />
       </View>
 
       <View style={styles.CraggyTextRoot}>
-        <View style={styles.textRoot}>
-          <TouchableOpacity style={styles.myOrderRoot} onPress={() => navigation.navigate('my_order')}>
-            <Image source={require('../../assets/myorder.png')} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.myWishlistRoot} onPress={() => navigation.navigate('my_wishlist')}>
-            <Image source={require('../../assets/wishlist.png')} />
-          </TouchableOpacity>
-
-          {storeData.length < 1 ?
-            <TouchableOpacity style={styles.myNotificationRoot} onPress={() => navigation.navigate('Cart')}>
-              <Image source={require('../../assets/notification.png')} />
-            </TouchableOpacity>
-
-            : <TouchableOpacity style={styles.myNotificationRoot} onPress={() => navigation.navigate('Cart')}>
-              <Image source={require('../../assets/notification.png')} />
-              <Badge style={styles.badgeStyle}>{storeData.length}</Badge>
-            </TouchableOpacity>
-          }
-        </View>
-        <View style={styles.baseLine2} />
-
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_profile')}>
-          <Text style={styles.profileText}>MY PROFILE</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#000'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>My Profile</Text>
+          </View>
+
           <Ionicons
             name="chevron-forward"
             color='#666666'
@@ -161,7 +80,16 @@ const AccountScreen = ({ navigation }) => {
         <View style={styles.baseLine} />
 
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('Addresses')}>
-          <Text style={styles.profileText}>MANAGE ADDRESSES</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}> Addresses</Text>
+          </View>
+
           <Ionicons
             name="chevron-forward"
             color='#666666'
@@ -172,59 +100,128 @@ const AccountScreen = ({ navigation }) => {
 
         <View style={styles.baseLine} />
 
-        {/* <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('reviews')} >
-          <Text style={styles.profileText}>MY REVIEWS</Text>
-          <Ionicons
-            name="chevron-forward"
-            color='#666666'
-            size={25}
-            style={{ lineHeight: 42 }}
-          />
-        </TouchableOpacity>
-
-        <View style={styles.baseLine} /> */}
-
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
-          <Text style={styles.profileText}>OFFER AND COUPAN</Text>
-          <Ionicons
-            name="chevron-forward"
-            color='#666666'
-            size={25}
-            style={{ lineHeight: 42 }}
-          />
-        </TouchableOpacity>
-
-        <Button style={styles.checkoutButton} onPress={LogoutUserHandler}>
-          <Text style={styles.checkoutText}>LOG OUT</Text>
-        </Button>
-      </View>
-
-      <RBSheet
-        ref={refRBSheet}
-        closeOnDragDown={true}
-        closeOnPressMask={false}
-        customStyles={{
-          wrapper: {
-            backgroundColor: "transparent",
-          },
-          draggableIcon: {
-            backgroundColor: "#000"
-          }
-        }}
-      >
-        <View style={styles.screen}>
-
-          <View style={styles.buttonContainer}>
-            <View>
-              <Button onPress={showImagePicker} title="Select an image" />
-            </View>
-            <View style={{ marginTop: 10 }} >
-              <Button onPress={openCamera} title="Open camera" />
-            </View>
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('reviews')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>Wishlist</Text>
           </View>
 
-        </View>
-      </RBSheet>
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.baseLine} />
+
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>Help & Suport</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+        <View style={styles.baseLine} />
+
+
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>Terms & Conditions</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+        <View style={styles.baseLine} />
+
+
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>About Us</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.baseLine} />
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>OFFER AND COUPAN</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+        <View style={styles.baseLine} />
+        <TouchableOpacity style={styles.myProfileRoot} onPress={LogoutUserHandler} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>Logout</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+
+      </View>
     </View>
   )
 }
@@ -236,11 +233,13 @@ const styles = StyleSheet.create({
     // position: 'relative'
   },
   profileImgRoot: {
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    // height: 100,
+    width: "80%",
+    // borderRadius: 50,
     alignSelf: 'center',
-    marginVertical: '22%'
+    marginVertical: '18%',
+    marginHorizontal: '10%',
+    flexDirection: 'row'
   },
   imgStyle: {
     height: '100%',
@@ -254,9 +253,9 @@ const styles = StyleSheet.create({
   },
 
   profileTextRoot: {
-    flexDirection: 'row',
-    marginTop: 15,
-    alignSelf: 'center',
+    // flexDirection: 'row',
+    // marginTop: 15,
+    // alignSelf: 'center',
   },
   helloText: {
     color: '#fff',
@@ -265,19 +264,28 @@ const styles = StyleSheet.create({
     fontFamily: 'Raleway500',
     lineHeight: 22
   },
-  redText: {
+  redTextName: {
     color: '#CC933B',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: '500',
     fontFamily: 'Raleway500',
-    lineHeight: 22
+    lineHeight: 22,
+    paddingLeft: 15
+  },
+  redText: {
+    color: '#CC933B',
+    fontSize: 15,
+    fontWeight: '500',
+    fontFamily: 'Raleway500',
+    lineHeight: 22,
+    paddingLeft: 15
   },
   CraggyTextRoot: {
-    height: 105,
+    height: 460,
     backgroundColor: '#ffffff',
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-    marginTop: '-22%',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    marginTop: '-40%',
     position: 'relative'
 
   },
@@ -319,13 +327,13 @@ const styles = StyleSheet.create({
   },
   baseLine: {
     height: 1,
-    width: '90%',
+    width: '100%',
     alignSelf: 'center',
     backgroundColor: '#C4C4C4',
     marginTop: 10
   },
   myProfileRoot: {
-    height: 35,
+    height: 45,
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -336,6 +344,8 @@ const styles = StyleSheet.create({
     lineHeight: 42,
     fontWeight: '500',
     fontFamily: 'Raleway500',
+    paddingHorizontal: 15,
+    paddingTop: 3
 
   },
   craggyText: {
@@ -382,6 +392,22 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: 50,
+  },
+  closeIcon: {
+    alignSelf: 'flex-end',
+    marginRight: 15
+  },
+  cameraPermissin: {
+    height: 30,
+    width: 120,
+    borderRadius: 10,
+    borderWidth: 1,
+    alignSelf: 'center',
+    marginTop: 15
+  },
+  cameraText: {
+    alignSelf: 'center',
+    fontSize: 16
   }
 })
 

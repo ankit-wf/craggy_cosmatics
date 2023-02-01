@@ -14,14 +14,14 @@ const Drawer = createDrawerNavigator();
 export default function DrawerScreen(props) {
     return (
         <Drawer.Navigator initialRouteName="mainScreen"
-        // screenOptions={{
-        //     headerStyle: {
-        //         height: 70,
-        //         backgroundColor: 'black',
-        //         borderBottomColor: 'black'
-        //     },
-        //     headerTintColor: '#CC933B',
-        // }}
+            screenOptions={{
+                headerStyle: {
+                    height: 70,
+                    backgroundColor: 'black',
+                    borderBottomColor: 'black'
+                },
+                headerTintColor: '#CC933B',
+            }}
         >
             <Drawer.Screen name='mainScreen' component={BottomTabs} options={{ headerShown: false, headerTitle: Logo, title: 'Home' }} />
             <Drawer.Screen name='login' component={LoginScreen} options={{ headerShown: false, title: 'Login' }} />

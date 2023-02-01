@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { categoriesStyle as cS } from '../styles/categoriesStyle'
 import { searchBarStyle as sBs } from '../styles/searchBarStyle'
 import axios from 'axios'
+import BackgroundImageService from '../components/CatImage'
+
 
 const CategoriesScreen = ({ navigation }) => {
   // const storeData = useSelector(state => state.cartData.cart);
@@ -16,6 +18,7 @@ const CategoriesScreen = ({ navigation }) => {
   // const [searchQuery, setSearchQuery] = useState('');
 
   const [data, setData] = useState([])
+  let imageData = BackgroundImageService();
 
   useEffect(() => {
     axios.get(
@@ -27,52 +30,60 @@ const CategoriesScreen = ({ navigation }) => {
         }
       }
     ).then((res) => {
-      // console.log('catscreen', res.data.response)
       if (res.data.status = "success") {
         setData(res.data.response)
       }
+
     })
   }, [])
 
   return (
     <View>
+
       <View style={styles.categories_root}>
         <Text style={styles.categories_text}>Categories</Text>
       </View>
 
       <View>
-        {/* <ScrollView > */}
-        <View>
-          {data.map((data, i) => {
-            if (data.count > 0)
-              return (
-                <TouchableOpacity style={styles.Root} onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i} >
-                  <View style={styles.mens_rooot} >
-                    <Text style={styles.mens_text}> {data.name} </Text>
-                    <View >
-                      <Image source={require('../../assets/images/for-mens.png')} style={{ height: 50, width: 50, }} />
-                    </View>
+        <View style={{ height: 10, }}></View>
+        {data.map((data, i) => {
+          if (data.count > 0)
+            return (
+              <TouchableOpacity style={styles.Root} onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i} >
+                <View style={styles.mens_rooot} >
+
+                  <Text style={styles.mens_text}> {data.name} </Text>
+
+                  <View >
+                    {imageData.map((item, id) => {
+                      return (
+                        (item.name === data.slug) &&
+                        <Image source={item.image} style={{ height: 40, width: 40 }} key={id} />
+                      )
+                    })}
                   </View>
-                </TouchableOpacity>
-              )
-          })}
-        </View>
-        {/* </ScrollView> */}
+
+                </View>
+              </TouchableOpacity>
+            )
+        })}
       </View>
+
     </View >
   );
 };
-
 export default CategoriesScreen;
 const styles = StyleSheet.create({
   Root: {
-    margin: 20
+    margin: 5,
+
   },
   categories_root: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    height: 80
+    height: 70,
+
   },
   categories_text: {
     fontSize: 25,

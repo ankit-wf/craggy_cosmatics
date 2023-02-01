@@ -8,7 +8,7 @@ const AddressesScreen = ({ navigation }) => {
 
   return (
     <View>
-      <View style={styles.searchRoot}>
+      {/* <View style={styles.searchRoot}>
         <View >
           <BackButton goBack={navigation.goBack} Color={'#666666'} />
         </View>
@@ -17,7 +17,7 @@ const AddressesScreen = ({ navigation }) => {
           <Text style={styles.mycartText}>MANAGE   ADDRESS</Text>
         </View>
 
-      </View>
+      </View> */}
       <Text style={styles.addressText}>The following addresses will be used on the checkout page by default.</Text>
 
       <View style={styles.AddressBtnRoot}>
