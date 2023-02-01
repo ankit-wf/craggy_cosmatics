@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import axios from 'axios'
 
+
+
 const CategoriesScreen = ({ navigation }) => {
-  const styles = useStyles()
-  let imageData = BackgroundImageService();
   const [data, setData] = useState([])
-  let imageData = BackgroundImageService();
 
   useEffect(() => {
     axios.get(
