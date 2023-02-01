@@ -39,9 +39,9 @@ const AddressesScreen = ({ navigation }) => {
         <Image source={require('../../assets/images/dummy_location.png')} style={styles.default_img} />
       </View>
 
-      <View style={styles.add_address}>
-
-      </View>
+      <TouchableOpacity style={styles.add_address} onPress={() => navigation.navigate('AddAddress')}>
+        <Text style={styles.btn_text}>+</Text>
+      </TouchableOpacity>
 
     </View>
   )
@@ -117,8 +117,18 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   add_address: {
-    height: 40,
-    width: 40,
-    backgroundColor: 'black'
+    height: 60,
+    width: 60,
+    borderRadius: 50,
+    marginTop: '20%',
+    marginRight: 20,
+    alignSelf: 'flex-end',
+    backgroundColor: '#000',
+    justifyContent: 'center'
+  },
+  btn_text: {
+    color: '#fff',
+    alignSelf: 'center',
+    fontSize: 25
   }
 })

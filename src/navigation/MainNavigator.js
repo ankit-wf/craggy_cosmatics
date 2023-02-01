@@ -36,6 +36,7 @@ import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import ResetPassword from '../screens/ResetPassword';
 // import ProductListingScreen from '../screens/ProductListingScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
+import AddAddress from '../screens/AddAddress';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useStyles } from '../styles/responsiveStyle';
@@ -101,9 +102,9 @@ const MainNavigator = () => {
         })}
 
       />
-
-
+      <Stack.Screen name='AddAddress' component={AddAddress} />
     </Stack.Navigator>
+
   );
 }
 export default MainNavigator;
