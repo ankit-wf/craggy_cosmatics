@@ -63,8 +63,7 @@ export const shopStyle = StyleSheet.create({
         width: '100%',
         alignSelf: 'center',
         // borderColor: 'red',
-        // borderWidth: 1,
-        minHeight: 350
+        // borderWidth: 1
     },
     product109: {
         height: 252,

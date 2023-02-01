@@ -1,17 +1,19 @@
 import React from 'react'
-import { TouchableOpacity, Image, StyleSheet ,} from 'react-native'
+import { TouchableOpacity, Image, StyleSheet, View } from 'react-native'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { Ionicons } from '@expo/vector-icons'
 
 export default function BackButton(props) {
     return (
         <TouchableOpacity onPress={props.goBack} style={styles.container}>
-            <Ionicons
-                name="chevron-back"
-                color={props.Color}
-                size={30}
-                style={{marginTop:-7,}}
-                 />
+            <View style={{ height: 30, width: 30, backgroundColor: 'black', borderRadius: 15, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Ionicons
+                    name="chevron-back"
+                    color={props.Color}
+                    size={30}
+                    style={{ marginTop: -2, }}
+                />
+            </View>
             {/* <Image
                 style={styles.image}
                 source={require('../../assets/backArrow.png')}

@@ -5,11 +5,12 @@ import BackButton from '../components/BackButton'
 const CoupanOfferScreen = ({ navigation }) => {
     return (
         <View>
-            <View style={{ flexDirection: 'row', }}>
+            {/* <View style={{ flexDirection: 'row', }}>
 
                 <BackButton goBack={navigation.goBack} Color={'#666666'} />
                 <Text style={styles.deliveryText}>OFFERS AND COUPAN</Text>
-            </View>
+            </View> */}
+            <Text style={styles.deliveryText}>OFFERS AND COUPAN</Text>
 
         </View>
     )

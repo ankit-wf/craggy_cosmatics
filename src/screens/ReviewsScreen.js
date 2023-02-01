@@ -9,10 +9,10 @@ const ReviewsScreen = ({ navigation }) => {
     const [page, setPage] = useState('1')
     return (
         <View>
-            <View>
+            {/* <View style={{ backgroundColor: 'white' }}>
 
                 <Text style={styles.deliveryText}>REVIEWS</Text>
-            </View>
+            </View> */}
 
             {newData.map((value, k) => {
                 // console.log("rewviewData", newData)
@@ -21,31 +21,33 @@ const ReviewsScreen = ({ navigation }) => {
                 let starting = ending - 2;
                 if (k >= starting && k <= ending) {
                     return (
-                        <View style={{ marginTop: 30 }} key={k}>
-                            <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
+                        <View style={{ backgroundColor: 'white' }}>
+                            <View style={{ marginTop: 30, width: '90%', alignSelf: 'center', }} key={k}>
+                                <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
+                                    <Text style={styles.review_Name}>{value.title}</Text>
+                                    <Text style={styles.review_Date}>{value.date}</Text>
+                                </View>
 
-                                {/* <Text style={styles.review_Name}>{k}</Text> */}
-                                <Text style={styles.review_Name}>{value.title}</Text>
-                                <Text style={styles.review_Date}>{value.date}</Text>
+                                <View style={{ flexDirection: 'row', marginLeft: -8 }} >
+
+                                    <Rating
+                                        readonly={true}
+                                        ratingCount={5}
+                                        startingValue={value.star}
+                                        imageSize={28}
+                                        style={{ padding: 10 }}
+                                    // tintColor="white"
+
+                                    />
+                                    <Text style={styles.starReviws}>{value.star}</Text>
+                                </View>
+
+                                <Text style={styles.review_Title}>{value.title}</Text>
+                                <Text style={styles.review_Review}>{value.description}</Text>
+                                <View style={pDs.baseLine} />
                             </View>
-
-                            <View style={{ flexDirection: 'row', marginLeft: -8 }} >
-
-                                <Rating
-                                    readonly={true}
-                                    ratingCount={5}
-                                    startingValue={value.star}
-                                    imageSize={28}
-                                    style={{ padding: 10 }}
-
-                                />
-                                <Text style={styles.starReviws}>{value.star}</Text>
-                            </View>
-
-                            <Text style={styles.review_Title}>{value.title}</Text>
-                            <Text style={styles.review_Review}>{value.description}</Text>
-                            <View style={pDs.baseLine} />
                         </View>
+
                     )
                 }
             })}

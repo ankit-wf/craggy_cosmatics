@@ -6,13 +6,15 @@ import MainNavigator from './src/navigation/MainNavigator';
 import { Provider } from 'react-redux'
 import Index from './src/store/index'
 import { PersistGate } from "redux-persist/integration/react";
+import { View } from 'react-native'
+
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 // import DrawerScreen from './src/navigation/Drawer';
+// import NewCameraTesting from './src/NewCameraTesting';
 
 export default function App() {
   const { store, persistor } = Index();
-
   const [fontsLoaded] = useFonts({
     'Raleway': require('./assets/fonts/Ralway/Raleway-Regular.ttf'),
     'Raleway800': require('./assets/fonts/Ralway/Raleway-ExtraBold.ttf'),
@@ -21,7 +23,6 @@ export default function App() {
     'Raleway500': require('./assets/fonts/Ralway/Raleway-Medium.ttf'),
     'Raleway400': require('./assets/fonts/Ralway/Raleway-Regular.ttf'),
     'Raleway300': require('./assets/fonts/Ralway/Raleway-Light.ttf'),
-
     'Lato': require('./assets/fonts/Lato/Lato-Regular.ttf'),
     'Lato800': require('./assets/fonts/Lato/Lato-ExtraBold.ttf'),
     'Lato700': require('./assets/fonts/Lato/Lato-Bold.ttf'),
@@ -29,7 +30,6 @@ export default function App() {
     'Lato500': require('./assets/fonts/Lato/Lato-Medium.ttf'),
     'Lato400': require('./assets/fonts/Lato/Lato-Regular.ttf'),
     'Lato300': require('./assets/fonts/Lato/Lato-Light.ttf'),
-
     'Baskervville400': require('./assets/fonts/Baskervville/Baskervville-Regular.ttf'),
 
   });
@@ -49,8 +49,9 @@ export default function App() {
 
 
   return (
+
     <NavigationContainer >
-      <StatusBar style="auto" />
+      {/* <StatusBar /> */}
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <MainNavigator />

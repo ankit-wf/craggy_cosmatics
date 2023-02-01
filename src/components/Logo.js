@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Keyboard } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -15,7 +15,7 @@ export default Logo = () => {
     // }
 
     const searchPageHandler = () => {
-        // navigation.navigate("searchPage");
+        navigation.navigate("searchPage");
     }
     const PageHandler = () => {
         navigation.navigate('NotificationScreen')
@@ -43,6 +43,31 @@ export default Logo = () => {
                     <Ionicons name="gift-outline" color='#CC933B' size={20} style={{ marginLeft: 20, marginTop: 5 }} />
                 </TouchableOpacity>
             </View>
+
+
+
+            {/* <View style={{ width: "100%", flexDirection: 'row', backgroundColor: '#222222', marginTop: 20, borderRadius: 8, alignSelf: 'center' }}>
+                <View style={{ width: '90%' }}>
+                    <TextInput
+                        caretHidden={true}
+                        placeholder="Search here..."
+                        onPress={Keyboard.dismiss}
+                        accessible={false}
+                        onFocus={searchPageHandler}
+                        placeholderTextColor="#7C7C7C"
+                        style={{ height: 48, padding: 15 }}
+                    />
+                </View>
+                <TouchableOpacity onPress={searchPageHandler} style={{ justifyContent: 'center', alignItems: 'center' }} >
+                    <Ionicons
+                        name="search-outline"
+                        color='#CC933B'
+                        size={25}
+                    />
+                </TouchableOpacity>
+            </View> */}
+
+
             <View>
                 {/* <View style={styles.passwordContainer}>
                     <TextInput

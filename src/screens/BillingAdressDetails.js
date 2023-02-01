@@ -3,22 +3,22 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import BackButton from '../components/BackButton'
 import Input from '../components/InputHook'
-import TextInput from '../components/InputHook'
+import TextInput from '../components/AccountInputHook'
 
 const BillingAdressDetails = ({ navigation }) => {
 
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
-        defaultValues: {
-            FirstName: '',
-            LastName: '',
-            CompanyName: '',
-            StreetName: '',
-            Apartment: '',
-            TownCity: '',
-            Pincode: '',
-            PhoneNumber: '',
-            email: '',
-        }
+        // defaultValues: {
+        //     FirstName: '',
+        //     LastName: '',
+        //     CompanyName: '',
+        //     StreetName: '',
+        //     Apartment: '',
+        //     TownCity: '',
+        //     Pincode: '',
+        //     PhoneNumber: '',
+        //     email: '',
+        // }
     })
 
     const onSubmit = data => {
@@ -28,11 +28,12 @@ const BillingAdressDetails = ({ navigation }) => {
 
     return (
         <View>
-            <View style={{ flexDirection: 'row', }}>
+            {/* <View style={{ flexDirection: 'row', }}>
 
                 <BackButton goBack={navigation.goBack} Color={'#666666'} />
+
                 <Text style={styles.deliveryText}>Billing address</Text>
-            </View>
+            </View> */}
 
             <ScrollView>
                 <View style={{ marginTop: 20, width: '90%', alignSelf: 'center' }}>
@@ -281,6 +282,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         alignSelf: 'center',
         paddingTop: 35,
+        paddingBottom: 10,
         paddingLeft: 20
     },
     handleBtnRoot: {
