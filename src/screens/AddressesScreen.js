@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import BackButton from '../components/BackButton';
@@ -7,7 +7,7 @@ import BackButton from '../components/BackButton';
 const AddressesScreen = ({ navigation }) => {
 
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {/* <View style={styles.searchRoot}>
         <View >
           <BackButton goBack={navigation.goBack} Color={'#666666'} />
@@ -18,7 +18,7 @@ const AddressesScreen = ({ navigation }) => {
         </View>
 
       </View> */}
-      <Text style={styles.addressText}>The following addresses will be used on the checkout page by default.</Text>
+      {/* <Text style={styles.addressText}>The following addresses will be used on the checkout page by default.</Text>
 
       <View style={styles.AddressBtnRoot}>
         <View style={styles.billingRoot}>
@@ -34,7 +34,15 @@ const AddressesScreen = ({ navigation }) => {
           <Text style={styles.AddBtn} onPress={() => navigation.navigate('shippingaddressDetails')}>Add</Text>
         </View>
         <Text style={styles.BillingaddressText}> You have not set up this type of address yet.</Text>
+      </View> */}
+      <View style={styles.default_root}>
+        <Image source={require('../../assets/images/dummy_location.png')} style={styles.default_img} />
       </View>
+
+      <View style={styles.add_address}>
+
+      </View>
+
     </View>
   )
 }
@@ -99,5 +107,18 @@ const styles = StyleSheet.create({
     marginTop: 22,
     color: 'blue',
     marginLeft: 10
+  },
+  default_root: {
+    height: 250,
+    width: "100%",
+  },
+  default_img: {
+    height: '100%',
+    width: '100%'
+  },
+  add_address: {
+    height: 40,
+    width: 40,
+    backgroundColor: 'black'
   }
 })

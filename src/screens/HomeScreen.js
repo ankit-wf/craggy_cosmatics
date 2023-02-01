@@ -128,7 +128,6 @@ const HomeScreen = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled={true}
       >
-
         {/* Banner Swiper  */}
         <View style={styles.swiperRoot}>
           <Swiper style={styles.wrapper} autoplay >
