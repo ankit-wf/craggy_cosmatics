@@ -34,6 +34,7 @@ const AccountScreen = ({ navigation }) => {
           <View style={styles.profileImgRoot}>
             <View style={styles.p_root} >
               <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
+              <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
             </View>
 
             <View style={styles.profileTextRoot}>
@@ -55,13 +56,12 @@ const AccountScreen = ({ navigation }) => {
       <View style={styles.CraggyTextRoot}>
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_profile')}>
           <View style={{ flexDirection: 'row' }}>
-            <View style={styles.address_iconRoot}>
-              <Ionicons
-                name="heart-circle"
-                color='#666666'
-                size={22}
-              />
-            </View>
+            <Ionicons
+              name="heart-circle"
+              color='#000'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
             <Text style={styles.profileText}>My Profile</Text>
           </View>
 
