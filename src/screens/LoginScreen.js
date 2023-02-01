@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Button, ImageBackground, Image } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import TextInput from '../components/InputHook';
 import { useDispatch, useSelector, } from 'react-redux';
@@ -9,6 +9,7 @@ import { TextInput as Input, Title } from 'react-native-paper';
 import Checkbox from 'expo-checkbox';
 import axios from 'axios';
 import { useStyles } from '../styles/responsiveStyle';
+import BackButton from '../components/BackButton';
 
 const LoginScreen = ({ navigation }) => {
     const styles = useStyles()
@@ -52,10 +53,10 @@ const LoginScreen = ({ navigation }) => {
                 setUserData(response.data.user_data);
                 dispatch(loginActions.userlogin({ user_data: userData }));
                 // dispatch(loginActions.loginform({ isLoggedIn: true }));
-                // navigation.reset({
-                //     index: 0,
-                //     routes: [{ name: 'HomeScreen' }],
-                // });
+                 navigation.reset({
+                     index: 0,
+                     routes: [{ name: 'HomeScreen' }],
+                 });
             }
         })
         // alert("You Are SuccessFully Registered");
@@ -75,12 +76,9 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
-
-                <View style={styles.Containter}>
-                    <View style={styles.reset_container}>
-                        <Text style={styles.loginText}> customer login </Text>
-                    </View>
-                    <View style={styles.containerInner}>
+                <BackButton goBack={navigation.goBack} />
+                <Image source={require('../../assets/images/logo-image.jpg')} style={styles.logoBackground} />
+                <View style={styles.Containterlogin}>
                         <View style={styles.inputWidth}>
                             <Controller
                                 control={control}
@@ -119,7 +117,7 @@ const LoginScreen = ({ navigation }) => {
                                         label="Password"
                                         returnKeyType="done"
                                         secureTextEntry={passwordVisible}
-                                        right={<Input.Icon name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)} color="#fff" style={styles.inputIcon} />}
+                                        right={<Input.Icon name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)} color="#222" style={styles.inputIcon} />}
                                     />
                                 )}
                                 name="password"
@@ -130,10 +128,10 @@ const LoginScreen = ({ navigation }) => {
                             <View style={styles.checkboxInput}>
                                 <Checkbox
                                     style={styles.checkboxField}
-                                    uncheckedColor="#fff"
+                                    uncheckedColor="#222"
                                     value={isChecked}
                                     onValueChange={setChecked}
-                                    color={isChecked ? '#cc933b' : '#fff'}
+                                    color={isChecked ? '#cc933b' : '#222'}
                                 />
                                 <Text style={styles.checkboxLabel}>Remember me</Text>
                             </View>
@@ -146,10 +144,10 @@ const LoginScreen = ({ navigation }) => {
                                 <Title style={styles.LoginButtongTittle}>Login</Title>
                             </TouchableOpacity>
                         </View>
-                        <View>
-                            <TouchableOpacity onPress={skipHandler}><Title style={styles.creatAccount}>Skip</Title></TouchableOpacity>
-                        </View>
-                    </View>
+                </View>
+                <View style={styles.loginBottom}>
+                    <Text style={styles.needHelpBottom}>Need Help?</Text>
+                    <TouchableOpacity><Text style={styles.contactUsBottom}> Contact us</Text></TouchableOpacity>
                 </View>
             </ImageBackground>
         </View>
