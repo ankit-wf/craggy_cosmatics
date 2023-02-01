@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
-import TextInput from '../components/InputHook'
+import TextInput from '../components/AccountInputHook'
 import { TextInput as Input } from 'react-native-paper'
 import BackButton from '../components/BackButton';
 
@@ -28,16 +28,14 @@ const MyProfileScreen = ({ navigation }) => {
 
     return (
         <View>
-            <View style={styles.searchRoot}>
-                <View >
-                    <BackButton goBack={navigation.goBack} Color={'#666666'} />
-                </View>
+            {/* <View style={styles.searchRoot}>
+                <BackButton goBack={navigation.goBack} Color={'#666666'} />
 
                 <View style={styles.searchImgRoot}>
                     <Text style={styles.mycartText}>MY PROFILE</Text>
                 </View>
 
-            </View>
+            </View> */}
 
             <ScrollView>
                 <View style={styles.controllerRoot}>
@@ -57,7 +55,6 @@ const MyProfileScreen = ({ navigation }) => {
                                 autoCapitalize="none"
                                 autoCompleteType="firstname"
                                 textContentType="firstname"
-
                             />
                         )}
                         name="firstname"
@@ -80,7 +77,6 @@ const MyProfileScreen = ({ navigation }) => {
                                 autoCompleteType="lastname"
                                 textContentType="lastname"
                                 keyboardType="lastname"
-
                             />
                         )}
                         name="lastname"
@@ -105,7 +101,6 @@ const MyProfileScreen = ({ navigation }) => {
                                 autoCompleteType="displayname"
                                 textContentType="displayname"
                                 keyboardType="displayname"
-
                             />
                         )}
                         name="displayname"
@@ -128,7 +123,6 @@ const MyProfileScreen = ({ navigation }) => {
                                 autoCompleteType="email"
                                 textContentType="email"
                                 keyboardType="email-address"
-
                             />
                         )}
                         name="email"
@@ -212,7 +206,6 @@ const MyProfileScreen = ({ navigation }) => {
                         name="confirmNewPassword"
                     />
 
-
                     <View style={styles.btnRoot}>
                         <Button
                             title="Save changes"
@@ -233,7 +226,8 @@ const styles = StyleSheet.create({
         // marginTop: 10,
         width: '90%',
         alignSelf: 'center',
-        height: 870
+        height: 870,
+        // backgroundColor: 'blue'
     },
     changePassword: {
         fontSize: 16,

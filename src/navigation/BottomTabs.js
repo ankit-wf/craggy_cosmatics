@@ -13,8 +13,9 @@ export default function BottomTabs() {
         <Tab.Navigator
             tabBarPosition='bottom'
             initialRouteName="Home"
+            headerMode='screen'
             screenOptions={{
-                headerShown: true,
+                headerShown: false,
                 swipeEnabled: false,
                 tabBarActiveTintColor: '#C68625',
                 tabBarInactiveTintColor: '#444444',
@@ -34,6 +35,7 @@ export default function BottomTabs() {
                 name="Home"
                 component={HomeScreen}
                 options={{
+
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ focused }) => (
                         focused ? <Image source={require('../../assets/home_color.png')} style={{ padding: 2, marginTop: -5 }} size={25} />
@@ -41,23 +43,12 @@ export default function BottomTabs() {
                     ),
                 }}
             />
-            {/* <Tab.Screen
-                name="Shop"
-                component={ShopScreen}
-                options={{
-                    tabBarLabel: 'Shop',
-                    tabBarIcon: ({ focused }) => (
-                        focused ? <Image source={require('../../assets/soap_color.png')} style={{ padding: 2, marginTop: -5, marginLeft: 3 }} size={30} />
-                            : <Image source={require('../../assets/soap.png')} style={{ padding: 2, marginTop: -5, marginLeft: 3 }} />
-                    ),
-                }}
-            /> */}
+
             <Tab.Screen
                 name="Categories"
                 component={CategoriesScreen}
-
-                tabBarOptions={{
-                    headerShown: true
+                screenOptions={{
+                    headerShown: true,
                 }}
                 options={{
                     tabBarLabel: 'Categories',

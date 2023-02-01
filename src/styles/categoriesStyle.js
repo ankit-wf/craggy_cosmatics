@@ -3,44 +3,52 @@ import { StyleSheet } from "react-native";
 
 export const categoriesStyle = StyleSheet.create({
     categoriesRoot: {
-        height: 212,
+        height: 150,
         backgroundColor: '#050505',
+        flexDirection: 'row',
+        width: "100%",
 
     },
-    categoriesImgRoot: {
-        flexDirection: 'row',
-        width: "95%",
-        // backgroundColor: "red"
-        alignSelf: 'center'
-    },
+    // categoriesImgRoot: {
+    //     flexDirection: 'row',
+    //     width: "100%",
+    //     // justifyContent: 'center',
+    //     // alignSelf: 'center'
+    // },
     blankSpace: {
-        width: "5%",
+        width: "10%",
     },
     touchableImg: {
         height: 126,
-        width: "30%",
+        width: "23%",
         justifyContent: 'center',
-        // backgroundColor: "pink"
-        // marginLeft: 24,
+        alignItems: 'center',
+        marginLeft: 5,
         // marginTop: 20,
         // borderColor: '#fff',
-        borderWidth: 1
+        // borderWidth: 1
     },
     skinImgRoot: {
-        height: 90,
-        width: "100%",
+        height: 80,
+        width: 80,
+        birderWidth: 1,
+        borderColor: 'white',
     },
     imgCenter: {
-        alignSelf: 'center'
+        alignSelf: 'center',
+        height: "100%",
+        width: '100%',
+        birderWidth: 1,
+        borderRadius: 40
     },
     skinImgText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: '500',
         fontFamily: 'Raleway500',
         lineHeight: 14,
         textAlign: 'center',
-        marginTop: 5
+        marginTop: 5,
     },
     productsListRoot: {
         height: '80%',

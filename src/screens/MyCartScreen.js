@@ -94,7 +94,7 @@ const MyCartScreen = ({ navigation, route }) => {
 
       <View style={styles.searchRoot}>
         <View >
-          <BackButton goBack={navigation.goBack} Color={'#666666'} />
+          {/* <BackButton goBack={navigation.goBack} Color={'#666666'} /> */}
         </View>
 
         <View style={styles.searchImgRoot}>
@@ -225,6 +225,7 @@ const styles = StyleSheet.create({
     marginRight: '35%',
     height: 50,
     width: '80%',
+    // alignSelf: 'center'
   },
   mycartText: {
     alignSelf: 'center',
