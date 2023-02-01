@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Button, Image, ScrollView, TouchableOpacity, FlatList, StyleSheet } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import BackButton from '../components/BackButton'
-import SearchBar from '../components/SearchBar'
-import Heading from '../components/Heading'
-import { defaultStyles as ds } from '../styles/defaultStyle'
-import { useSelector, useDispatch } from 'react-redux';
-import { categoriesStyle as cS } from '../styles/categoriesStyle'
-import { searchBarStyle as sBs } from '../styles/searchBarStyle'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import axios from 'axios'
+<<<<<<< HEAD
+import { useStyles } from '../styles/responsiveStyle';
+=======
+>>>>>>> 99fe51cd186b8eb93766156f1496243c5ed71d61
 import BackgroundImageService from '../components/CatImage'
 
 
 const CategoriesScreen = ({ navigation }) => {
-  // const storeData = useSelector(state => state.cartData.cart);
-  // const dispatch = useDispatch();
-  // const [searchQuery, setSearchQuery] = useState('');
-
+  const styles = useStyles()
+  let imageData = BackgroundImageService();
   const [data, setData] = useState([])
   let imageData = BackgroundImageService();
 
@@ -25,7 +19,6 @@ const CategoriesScreen = ({ navigation }) => {
       `https://craggycosmetic.com/api/products/category/`,
       {
         headers: {
-          // 'Content-Type': 'application/json',
           'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
         }
       }
@@ -44,6 +37,27 @@ const CategoriesScreen = ({ navigation }) => {
         <Text style={styles.categories_text}>Categories</Text>
       </View>
 
+<<<<<<< HEAD
+      <View style={styles.categoryMainDiv}>
+          {data.map((data, i) => {
+            return (
+              <TouchableOpacity style={styles.CatRoot} onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i} >
+                  <View style={styles.catMainSec}>
+                  <Text style={styles.mens_text}> {data.name} </Text>
+                    {imageData.map((item, id) => {
+                      return (
+                        (item.name === data.slug) &&
+                        <Image style={{width:'100%',height:95,}} source={item.image}  key={id} />
+                      )
+                    })}
+                  </View>
+                </TouchableOpacity>
+              )
+            })}
+
+          </View>
+        <View>  
+=======
       <View>
         <View style={{ height: 10, }}></View>
         {data.map((data, i) => {
@@ -67,11 +81,15 @@ const CategoriesScreen = ({ navigation }) => {
               </TouchableOpacity>
             )
         })}
+>>>>>>> 99fe51cd186b8eb93766156f1496243c5ed71d61
       </View>
 
     </View >
   );
 };
+<<<<<<< HEAD
+export default CategoriesScreen;
+=======
 export default CategoriesScreen;
 const styles = StyleSheet.create({
   Root: {
@@ -114,3 +132,4 @@ const styles = StyleSheet.create({
   }
 })
 
+>>>>>>> 99fe51cd186b8eb93766156f1496243c5ed71d61
