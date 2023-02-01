@@ -529,6 +529,47 @@ export const useStyles = CreateResponsiveStyle(
             alignSelf: 'center',
         },
 
+        /** Category Page **/
+
+        categoryMainDiv: {
+            paddingTop:30,
+            backgroundColor:'#f2f2f2',
+            height:'100%',
+          },
+
+          categories_root: {
+            display:'flex',
+            padding:10,
+            paddingTop:30,
+            justifyContent:'center',
+            alignItems: 'center',
+            backgroundColor: '#fff',
+          },
+          catMainSec: {
+            position:'relative',
+            marginBottom:5,
+          },
+          categories_text: {
+            fontSize:20,
+            color:'#222222',
+            fontWeight:'700',
+          },
+          mens_rooot: {
+            height:80,
+            width: '100%',
+          },
+          mens_text: {
+            fontSize: 18,
+            color:'#222222',
+            textTransform:'capitalize',
+            fontWeight:'700',
+            letterSpacing:'0.5px',
+            position:'absolute',
+            top:40,
+            left:15,
+            zIndex:10,
+          },
+
     },
     {
         [maxSize(DEVICE_SIZES.SM)]: {
