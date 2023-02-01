@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeScreen from './HomeScreen';
+// import HomeScreen from './HomeScreen';
 import NotificationsScreen from './NotificationsScreen';
 import BottomTabs from './BottomTabs';
 import LoginScreen from '../screens/LoginScreen';

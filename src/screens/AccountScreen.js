@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
@@ -15,9 +15,16 @@ const AccountScreen = ({ navigation }) => {
   const storeData = useSelector(state => state.cartData.cart);
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
   const userData = useSelector(state => state.userData.user_data);
-  // console.log("nnneeewewwwww", userData)
+  // console.log("nnneeewewwwww", isLoggedIn)
 
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (isLoggedIn == false) {
+  //     navigation.navigate('login')
+  //   }
+  // }, [])
+
 
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
@@ -27,8 +34,6 @@ const AccountScreen = ({ navigation }) => {
     });
     // navigation.navigate('login');
   }
-
-
 
   return (
     <View>
@@ -61,12 +66,14 @@ const AccountScreen = ({ navigation }) => {
       <View style={styles.CraggyTextRoot}>
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_profile')}>
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.icon_root}>
+              <Ionicons
+                name="heart-circle"
+                color='#666666'
+                size={35}
+                style={{ marginTop: 8 }}
+              />
+            </View>
             <Text style={styles.profileText}>My Profile</Text>
           </View>
 
