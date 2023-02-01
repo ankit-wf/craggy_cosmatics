@@ -18,7 +18,6 @@ const AccountScreen = ({ navigation }) => {
   // console.log("nnneeewewwwww", userData)
 
   const dispatch = useDispatch();
-
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
     navigation.reset({
@@ -28,18 +27,14 @@ const AccountScreen = ({ navigation }) => {
     // navigation.navigate('login');
   }
 
-
-
   return (
     <View>
       <View style={styles.Root}>
         <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
           <View style={styles.profileImgRoot}>
-            <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}
-
-            >
+            <View style={styles.p_root} >
               <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
-
+              <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
             </View>
 
             <View style={styles.profileTextRoot}>
@@ -47,7 +42,7 @@ const AccountScreen = ({ navigation }) => {
                 <Text style={styles.redTextName}>{userData.display_name}</Text>
               </View>
               <View style={{ width: 300, marginTop: 12 }}>
-                <Text style={styles.redText}>+91{userData.user_phone}</Text>
+                <Text style={styles.redText}>+91 {userData.user_phone}</Text>
               </View>
               <View style={{ width: 300 }}>
                 <Text style={styles.redText}>{userData.user_email}</Text>
@@ -63,7 +58,7 @@ const AccountScreen = ({ navigation }) => {
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle"
-              color='#666666'
+              color='#000'
               size={35}
               style={{ marginTop: 8 }}
             />
@@ -82,12 +77,13 @@ const AccountScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('Addresses')}>
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.address_iconRoot}>
+              <Ionicons
+                name="location-outline"
+                color='#666666'
+                size={22}
+              />
+            </View>
             <Text style={styles.profileText}> Addresses</Text>
           </View>
 
@@ -103,12 +99,13 @@ const AccountScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('reviews')} >
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.address_iconRoot}>
+              <Ionicons
+                name="ios-heart-outline"
+                color='#666666'
+                size={22}
+              />
+            </View>
             <Text style={styles.profileText}>Wishlist</Text>
           </View>
 
@@ -124,12 +121,13 @@ const AccountScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.address_iconRoot}>
+              <Ionicons
+                name="ios-headset-outline"
+                color='#666666'
+                size={22}
+              />
+            </View>
             <Text style={styles.profileText}>Help & Suport</Text>
           </View>
 
@@ -145,12 +143,13 @@ const AccountScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.address_iconRoot}>
+              <Ionicons
+                name="md-document-text-outline"
+                color='#666666'
+                size={22}
+              />
+            </View>
             <Text style={styles.profileText}>Terms & Conditions</Text>
           </View>
 
@@ -166,12 +165,13 @@ const AccountScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.address_iconRoot}>
+              <Ionicons
+                name="heart-circle"
+                color='#666666'
+                size={22}
+              />
+            </View>
             <Text style={styles.profileText}>About Us</Text>
           </View>
 
@@ -186,12 +186,13 @@ const AccountScreen = ({ navigation }) => {
         <View style={styles.baseLine} />
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.address_iconRoot}>
+              <Ionicons
+                name="heart-circle"
+                color='#666666'
+                size={22}
+              />
+            </View>
             <Text style={styles.profileText}>OFFER AND COUPAN</Text>
           </View>
 
@@ -205,12 +206,13 @@ const AccountScreen = ({ navigation }) => {
         <View style={styles.baseLine} />
         <TouchableOpacity style={styles.myProfileRoot} onPress={LogoutUserHandler} >
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.address_iconRoot}>
+              <Ionicons
+                name="ios-log-in-outline"
+                color='#666666'
+                size={22}
+              />
+            </View>
             <Text style={styles.profileText}>Logout</Text>
           </View>
 
@@ -241,6 +243,14 @@ const styles = StyleSheet.create({
     marginVertical: '18%',
     marginHorizontal: '10%',
     flexDirection: 'row'
+  },
+  p_root: {
+    height: 90,
+    width: 90,
+    borderWidth: 3,
+    borderColor: '#CC933B',
+    borderRadius: 100,
+    alignSelf: 'center'
   },
   imgStyle: {
     height: '100%',
@@ -339,6 +349,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center'
+  },
+  address_iconRoot: {
+    height: 30,
+    width: 30,
+    borderRadius: 50,
+    borderWidth: 1,
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   profileText: {
     fontSize: 14,
