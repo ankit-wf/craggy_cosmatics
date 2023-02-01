@@ -38,6 +38,7 @@ const AccountScreen = ({ navigation }) => {
             <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}
 
             >
+              <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
 
             </View>
 
@@ -62,7 +63,7 @@ const AccountScreen = ({ navigation }) => {
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle"
-              color='#000'
+              color='#666666'
               size={35}
               style={{ marginTop: 8 }}
             />
