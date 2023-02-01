@@ -23,6 +23,13 @@ const AccountScreen = ({ navigation }) => {
     }, [])
   );
 
+  // useEffect(() => {
+  //   if (isLoggedIn == false) {
+  //     navigation.navigate('login')
+  //   }
+  // }, [])
+
+
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
     navigation.reset({
@@ -31,8 +38,6 @@ const AccountScreen = ({ navigation }) => {
     });
     // navigation.navigate('login');
   }
-
-
 
   return (
     <View>
@@ -60,12 +65,14 @@ const AccountScreen = ({ navigation }) => {
       <View style={styles.CraggyTextRoot}>
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_profile')}>
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons
-              name="heart-circle"
-              color='#666666'
-              size={35}
-              style={{ marginTop: 8 }}
-            />
+            <View style={styles.icon_root}>
+              <Ionicons
+                name="heart-circle"
+                color='#666666'
+                size={35}
+                style={{ marginTop: 8 }}
+              />
+            </View>
             <Text style={styles.profileText}>My Profile</Text>
           </View>
 
