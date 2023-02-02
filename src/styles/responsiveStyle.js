@@ -217,12 +217,12 @@ export const useStyles = CreateResponsiveStyle(
         },
         needHelpBottom: {
 
-            color:'#fff',
-            fontWeight:'600',
+            color: '#fff',
+            fontWeight: '600',
         },
         contactUsBottom: {
-            color:'#CC933B',
-            fontWeight:'700',
+            color: '#CC933B',
+            fontWeight: '700',
 
             color: '#fff',
             fontWeight: '600',
@@ -401,13 +401,13 @@ export const useStyles = CreateResponsiveStyle(
             alignItems: 'center',
             display: 'flex',
             alignSelf: 'center',
-            backgroundColor:'#CC933B',
-            borderRadius:22,
+            backgroundColor: '#CC933B',
+            borderRadius: 22,
         },
         viewProductText: {
             fontWeight: '700',
-            fontSize:13,
-            color:'#fff',
+            fontSize: 13,
+            color: '#fff',
         },
         swiperRoot: {
             height: 350,
@@ -550,27 +550,25 @@ export const useStyles = CreateResponsiveStyle(
         mens_text: {
             fontSize: 18,
 
-            color:'#222222',
-            textTransform:'capitalize',
-            fontWeight:'700',
-            position:'absolute',
-            top:40,
-            left:15,
-            zIndex:10,
-          },
-
             color: '#222222',
             textTransform: 'capitalize',
             fontWeight: '700',
-            // letterSpacing: '0.5px',
             position: 'absolute',
             top: 40,
             left: 15,
             zIndex: 10,
         },
 
-
+        color: '#222222',
+        textTransform: 'capitalize',
+        fontWeight: '700',
+        // letterSpacing: '0.5px',
+        position: 'absolute',
+        top: 40,
+        left: 15,
+        zIndex: 10,
     },
+
     {
         [maxSize(DEVICE_SIZES.SM)]: {
 

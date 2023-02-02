@@ -8,7 +8,6 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 import RBSheet from "react-native-raw-bottom-sheet";
-import { useFocusEffect } from '@react-navigation/native';
 
 
 const AccountScreen = ({ navigation }) => {
