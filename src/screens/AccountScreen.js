@@ -6,7 +6,6 @@ import { Ionicons } from '@expo/vector-icons'
 import { loginActions } from '../store/UserSlice'
 import { useFocusEffect } from '@react-navigation/native';
 
-
 const AccountScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const storeData = useSelector(state => state.cartData.cart);
@@ -33,9 +32,6 @@ const AccountScreen = ({ navigation }) => {
     });
     // navigation.navigate('login');
   }
-
-
-
   return (
     <View>
       <View style={styles.Root}>
