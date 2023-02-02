@@ -20,6 +20,8 @@ const AccountScreen = ({ navigation }) => {
         navigation.navigate('login');
       }
       return;
+
+
     }, [])
   );
 
