@@ -2,10 +2,6 @@
 // import { TouchableOpacity, } from 'react-native'
 // import Ionicons from '@expo/vector-icons/Ionicons';
 
-
-// import { TouchableOpacity, } from 'react-native'
-// import Ionicons from '@expo/vector-icons/Ionicons';
-
 import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabs from './BottomTabs';
 import ProductDetailScreen from '../screens/ProductDetailScreen';
@@ -31,8 +27,8 @@ import WriteReview from '../screens/WriteReview';
 import SkinCareProduct from '../screens/SkinCareProduct';
 import DrawerScreen from './Drawer';
 // import searchPage from '../screens/searchPage';
-// import Logo from '../components/Logo';
-// import HomeScreen from './HomeScreen';
+import Logo from '../components/Logo';
+import HomeScreen from './HomeScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import Reward from '../screens/Reward';
 import SearchScreen from '../screens/SearchScreen';
@@ -40,12 +36,10 @@ import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import ResetPassword from '../screens/ResetPassword';
 // import ProductListingScreen from '../screens/ProductListingScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
-import AddAddress from '../screens/AddAdress';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useStyles } from '../styles/responsiveStyle';
 
-import { useSelector } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 const Stack = createStackNavigator();
@@ -55,17 +49,11 @@ const MainNavigator = () => {
   const Catname = useSelector(state => state.cartData.name);
   // const name = route.params;
   // console.log("catName", name);
-const MainNavigator = () => {
-  const gs = useStyles()
-  const Catname = useSelector(state => state.cartData.name);
-  // const name = route.params;
-  // console.log("catName", name);
   return (
-    <Stack.Navigator initialRouteName='HomeScreen'
     <Stack.Navigator initialRouteName='HomeScreen'
       screenOptions={{
         headerStyle: {
-          backgroundColor: 'black', //Set Header color  
+          backgroundColor: 'black', //Set Header color 
         },
         headerTintColor: '#C68625', //Set Header text color
         headerBackTitleVisible: false,
@@ -113,6 +101,8 @@ const MainNavigator = () => {
         })}
 
       />
+
+
     </Stack.Navigator>
   );
 }
