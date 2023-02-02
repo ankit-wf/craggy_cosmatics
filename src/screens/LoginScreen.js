@@ -19,7 +19,7 @@ const LoginScreen = ({ navigation }) => {
     const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
     const [login, setLogin] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(true);
-    const [userData, setUserData] = useState({});
+    // const [userData, setUserData] = useState({});
     // console.log("hjshssd", userData)
     const { control, handleSubmit, reset, formState: { errors } } = useForm()
 
@@ -50,9 +50,9 @@ const LoginScreen = ({ navigation }) => {
         }).then((response) => {
             console.log(response.data, "response2");
             if (response.data.login == true) {
-                setUserData(response.data.user_data);
-                dispatch(loginActions.userlogin({ user_data: userData }));
-                // dispatch(loginActions.loginform({ isLoggedIn: true }));
+                // setUserData(response.data.user_data);
+                dispatch(loginActions.userlogin({ user_data: response.data.user_data }));
+                dispatch(loginActions.loginform({ isLoggedIn: true }));
                 navigation.reset({
                     index: 0,
                     routes: [{ name: 'HomeScreen' }],

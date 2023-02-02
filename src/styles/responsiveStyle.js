@@ -30,7 +30,7 @@ export const useStyles = CreateResponsiveStyle(
             marginTop: 0
         },
         headerLogo: {
-            width: 130,
+            width: 115,
             height: 30,
             marginLeft: 1,
         },
@@ -216,6 +216,14 @@ export const useStyles = CreateResponsiveStyle(
             alignItems: 'center',
         },
         needHelpBottom: {
+
+            color: '#fff',
+            fontWeight: '600',
+        },
+        contactUsBottom: {
+            color: '#CC933B',
+            fontWeight: '700',
+
             color: '#fff',
             fontWeight: '600',
             // letterSpacing:0,
@@ -224,6 +232,7 @@ export const useStyles = CreateResponsiveStyle(
             color: '#CC933B',
             fontWeight: '700',
             // letterSpacing:0,
+
         },
 
         /** Home Page Style **/
@@ -386,17 +395,19 @@ export const useStyles = CreateResponsiveStyle(
             textAlign: 'center',
         },
         ViewProduct: {
-            height: 30,
-            width: 140,
-            borderColor: '#333333',
-            borderWidth: 1,
+            height: 44,
+            width: 160,
             justifyContent: 'center',
             alignItems: 'center',
             display: 'flex',
             alignSelf: 'center',
+            backgroundColor: '#CC933B',
+            borderRadius: 22,
         },
         viewProductText: {
-            fontWeight: 'bold',
+            fontWeight: '700',
+            fontSize: 13,
+            color: '#fff',
         },
         swiperRoot: {
             height: 350,
@@ -538,17 +549,26 @@ export const useStyles = CreateResponsiveStyle(
         },
         mens_text: {
             fontSize: 18,
+
             color: '#222222',
             textTransform: 'capitalize',
             fontWeight: '700',
-            // letterSpacing: '0.5px',
             position: 'absolute',
             top: 40,
             left: 15,
             zIndex: 10,
         },
 
+        color: '#222222',
+        textTransform: 'capitalize',
+        fontWeight: '700',
+        // letterSpacing: '0.5px',
+        position: 'absolute',
+        top: 40,
+        left: 15,
+        zIndex: 10,
     },
+
     {
         [maxSize(DEVICE_SIZES.SM)]: {
 
