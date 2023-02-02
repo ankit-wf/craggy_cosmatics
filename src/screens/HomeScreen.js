@@ -1,52 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Animated, Keyboard } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Animated, Keyboard, RefreshControl, } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Heading from '../components/Heading'
-import Logo from '../components/Logo'
-import SearchBar from '../components/SearchBar'
+import Header from '../components/Header'
+import axios from 'axios'
+import BackgroundImageService from '../components/CatImage'
+import FooterImage from '../components/FooterImage'
 import { defaultStyles as ds } from '../styles/defaultStyle'
 import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
 import { letestProductStyle as lP } from '../styles/letestProductStyle'
-import { wePromiseStyle as wP } from '../styles/wePromiseStyle'
 import { categoriesStyle as cS } from '../styles/categoriesStyle'
-
 import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
+import { useStyles } from '../styles/responsiveStyle'
+
 const imgData = require('../../imgData.json');
 const bannerImg = require('../../Data/bannerSlider.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const latestProductImg = require('../../Data/latestProduct.json')
-import Header from '../components/Header'
-import { TextInput } from 'react-native-paper'
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useStyles } from '../styles/responsiveStyle'
-import axios from 'axios'
-import BackgroundImageService from '../components/CatImage'
-import FooterImage from '../components/FooterImage'
 
 const HomeScreen = ({ navigation }) => {
   const styles = useStyles()
-  // const scrollY = new Animated.Value(0)
-  // const diffClamp = Animated.diffClamp(scrollY, 0, 80)
-  // const translateY = diffClamp.interpolate({
-  //   inputRange: [0, 80],
-  //   outputRange: [0, -80]
-  // })
-  const reviewData = useSelector(state => state.reviewData.review);
-  // console.log("reviewData", reviewData);
-
-  const storeData = useSelector(state => state.cartData.cart);
   const dispatch = useDispatch();
-  // const [searchQuery, setSearchQuery] = useState('');
-  // const onChangeSearch = query => {
-  //   setSearchQuery(query)
-  //   // console.log('first', query)
-  // }
-  const imageData = BackgroundImageService();
   const imageFooter = FooterImage();
+  const reviewData = useSelector(state => state.reviewData.review);
+  const storeData = useSelector(state => state.cartData.cart);
+  const imageData = BackgroundImageService();
   const [data, setData] = useState([])
-  // const [allData, setAllData] = useState([])
-  // console.log("alldataaa", allData)
+
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     axios.get(
@@ -62,11 +50,9 @@ const HomeScreen = ({ navigation }) => {
         setData(res.data.response)
       }
     })
-
   }, [])
 
   const bestSellingHolder = (description, sellingProduct_id, images, price, oldprice, quantity) => {
-
     let Data = [...storeData, {
       description: description,
       sellingProduct_id: sellingProduct_id,
@@ -75,7 +61,6 @@ const HomeScreen = ({ navigation }) => {
       oldprice: oldprice,
       quantity: quantity
     }];
-    // console.log("Dataaa", Data)
     dispatch(submitActions.price(
       {
         cart: Data
@@ -96,39 +81,19 @@ const HomeScreen = ({ navigation }) => {
   const RewardHandler = () => {
     navigation.navigate('Reward')
   }
-  // const [text, setText] = useState("");
+
+
   return (
     <View style={ds.appContainer}>
       <Header onPress={openDrawer} notification={notification} Gift={RewardHandler} search={searchHandler} />
-      {/* <View style={styles.SearchBar_container}>
-        <View style={styles.TextInput_container}>
-          <View style={styles.passwordContainer}>
-            <TextInput
-              placeholder="Search here..."
-              value={text}
-              onChangeText={text => setText(text)}
-              onFocus={PageHandler}
-              placeholderTextColor="#7C7C7C"
-              backgroundColor="#222222"
-              // underlineColorAndroid='white'
-              // activeUnderlineColor="#222222"
-              style={styles.TextInputSearch}
-            />
-            <TouchableOpacity onPress={PageHandler} style={styles.searchIcon}>
-              <Ionicons
-                name="search-outline"
-                color='#CC933B'
-                size={25}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View> */}
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled={true}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-
         {/* Banner Swiper  */}
         <View style={styles.swiperRoot}>
           <Swiper style={styles.wrapper} autoplay >
@@ -157,11 +122,8 @@ const HomeScreen = ({ navigation }) => {
 
         </View>
 
+        {/* <catgories /> */}
         <View style={cS.categoriesRoot}>
-
-          {/* <Heading /> */}
-          {/* <View style={cS.categoriesImgRoot}> */}
-
           {data.map((data, i) => {
             if (data.count > 0)
               return (
@@ -177,15 +139,12 @@ const HomeScreen = ({ navigation }) => {
                       </View>
                     )
                   })}
-
                   <View key={i}>
                     <Text style={cS.skinImgText}>{data.name}</Text>
                   </View>
                 </TouchableOpacity>
               )
           })}
-
-          {/* </View> */}
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 10 }}>
@@ -203,7 +162,6 @@ const HomeScreen = ({ navigation }) => {
 
         <View style={bsP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-
             {bestSellingProduct.map((e, i) => {
               return (
                 <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
@@ -227,7 +185,6 @@ const HomeScreen = ({ navigation }) => {
                   </View>
 
                   {/* Buy Now Button  */}
-
                   <TouchableOpacity style={bsP.buyNowButton}
                     onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
                   >
@@ -238,10 +195,8 @@ const HomeScreen = ({ navigation }) => {
             })}
           </ScrollView>
         </View>
-        {/* <View style={styles.BestSellingRoot}> */}
 
         {/* Latest Product  */}
-
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginBottom: 10 }}>
           <Heading title=' latest product ' />
 
@@ -254,11 +209,9 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-        {/* <Heading title=' latest product ' /> */}
 
         <View style={lP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-
             {latestProductImg.map((e, i) => {
               return (
                 <TouchableOpacity style={lP.touchable} key={i} onPress={() => navigation.navigate('Product', e.latestProduct_id)}>
@@ -283,10 +236,8 @@ const HomeScreen = ({ navigation }) => {
                   </View>
 
                   {/* Buy Now Button  */}
-
                   <TouchableOpacity style={lP.buyNowButton}
                     onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
-                  // onPress={() => navigation.navigate('Product', e.latestProduct_id)}
                   >
                     <Text style={lP.buttonText}>BUY NOW</Text>
                   </TouchableOpacity>
@@ -298,13 +249,11 @@ const HomeScreen = ({ navigation }) => {
         </View>
 
         {/* Footer Banner  */}
-
         <View style={styles.footerBannerRoot}>
           <Image source={require('../../assets/footer_banner.png')} style={styles.footerBannerImage} />
         </View>
 
         {/* We Promise  */}
-
         <View >
           <View style={styles.promiseOuterRoot}>
             <View style={styles.promiseRoot}>
@@ -314,7 +263,6 @@ const HomeScreen = ({ navigation }) => {
 
             <View style={styles.group115Root}>
               {imageFooter.map((img, i) => {
-                // console.log("ddddddddd", img.image)
                 return (
                   <View style={styles.oilIconRoot} key={i}>
                     <View style={styles.iconRoot} >
@@ -330,7 +278,6 @@ const HomeScreen = ({ navigation }) => {
             </View>
 
             {/* View Product  */}
-
             <TouchableOpacity style={styles.ViewProduct} onPress={() => navigation.navigate('ViewProduct')} >
               <Text style={styles.viewProductText}>VIEW PRODUCT</Text>
             </TouchableOpacity>

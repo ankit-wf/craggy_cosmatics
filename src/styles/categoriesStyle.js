@@ -7,6 +7,8 @@ export const categoriesStyle = StyleSheet.create({
         backgroundColor: '#050505',
         flexDirection: 'row',
         width: "100%",
+        alignContent: 'center',
+        justifyContent: 'space-around'
 
     },
     // categoriesImgRoot: {

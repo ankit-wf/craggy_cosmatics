@@ -34,24 +34,25 @@ const CategoriesScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.categoryMainDiv}>
-          {data.map((data, i) => {
-            return (
-              <TouchableOpacity style={styles.CatRoot} onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i} >
-                  <View style={styles.catMainSec}>
-                  <Text style={styles.mens_text}> {data.name} </Text>
-                    {imageData.map((item, id) => {
-                      return (
-                        (item.name === data.slug) &&
-                        <Image style={{width:'100%',height:95,}} source={item.image}  key={id} />
-                      )
-                    })}
-                  </View>
-                </TouchableOpacity>
-              )
-            })}
+        {data.map((data, i) => {
+          // if (data.count > 0)
+          return (
+            <TouchableOpacity style={styles.CatRoot} onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i} >
+              <View style={styles.catMainSec}>
+                <Text style={styles.mens_text}> {data.name} </Text>
+                {imageData.map((item, id) => {
+                  return (
+                    (item.name === data.slug) &&
+                    <Image style={{ width: '100%', height: 95, }} source={item.image} key={id} />
+                  )
+                })}
+              </View>
+            </TouchableOpacity>
+          )
+        })}
 
-          </View>
-        <View>  
+      </View>
+      <View>
       </View>
 
     </View >

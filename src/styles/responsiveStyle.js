@@ -120,7 +120,7 @@ export const useStyles = CreateResponsiveStyle(
         },
         buttonStyle: {
             padding: 20,
-            backgroundColor: '#CC933B',
+            backgroundColor: '#C68625',
             borderRadius: 24,
         },
         LoginButtongTittle: {
