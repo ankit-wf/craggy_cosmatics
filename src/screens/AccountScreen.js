@@ -20,216 +20,212 @@ const AccountScreen = ({ navigation }) => {
           index: 0,
           routes: [{ name: 'login' }],
         });
-        // navigation.reset({
-        index: 0,
-          routes: [{ name: 'login' }],
-        });
-}
-return;
+      }
+      return;
     }, [])
   );
 
-const LogoutUserHandler = () => {
-  dispatch(loginActions.loginform({ isLoggedIn: false }));
-  navigation.reset({
-    index: 0,
-    routes: [{ name: 'HomeScreen' }],
-  });
-  // navigation.navigate('login');
-}
+  const LogoutUserHandler = () => {
+    dispatch(loginActions.loginform({ isLoggedIn: false }));
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'HomeScreen' }],
+    });
+    // navigation.navigate('login');
+  }
 
 
 
-return (
-  <View>
-    <View style={styles.Root}>
-      <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
-        <View style={styles.profileImgRoot}>
-          <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}>
-            <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
+  return (
+    <View>
+      <View style={styles.Root}>
+        <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
+          <View style={styles.profileImgRoot}>
+            <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}>
+              <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
+            </View>
+            <View style={styles.profileTextRoot}>
+              <View style={{ width: 300 }}>
+                <Text style={styles.redTextName}>{userData.display_name}</Text>
+              </View>
+              <View style={{ width: 300, marginTop: 12 }}>
+                <Text style={styles.redText}>+91{userData.user_phone}</Text>
+              </View>
+              <View style={{ width: 300 }}>
+                <Text style={styles.redText}>{userData.user_email}</Text>
+              </View>
+            </View>
           </View>
-          <View style={styles.profileTextRoot}>
-            <View style={{ width: 300 }}>
-              <Text style={styles.redTextName}>{userData.display_name}</Text>
-            </View>
-            <View style={{ width: 300, marginTop: 12 }}>
-              <Text style={styles.redText}>+91{userData.user_phone}</Text>
-            </View>
-            <View style={{ width: 300 }}>
-              <Text style={styles.redText}>{userData.user_email}</Text>
-            </View>
+        </ImageBackground>
+      </View>
+
+      <View style={styles.CraggyTextRoot}>
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_profile')}>
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>My Profile</Text>
           </View>
-        </View>
-      </ImageBackground>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.baseLine} />
+
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('Addresses')}>
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}> Addresses</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.baseLine} />
+
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('reviews')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>Wishlist</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.baseLine} />
+
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>Help & Suport</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+        <View style={styles.baseLine} />
+
+
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>Terms & Conditions</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+        <View style={styles.baseLine} />
+
+
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>About Us</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.baseLine} />
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>OFFER AND COUPAN</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+        <View style={styles.baseLine} />
+        <TouchableOpacity style={styles.myProfileRoot} onPress={LogoutUserHandler} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle"
+              color='#666666'
+              size={35}
+              style={{ marginTop: 8 }}
+            />
+            <Text style={styles.profileText}>Logout</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={{ lineHeight: 42 }}
+          />
+        </TouchableOpacity>
+
+      </View>
     </View>
-
-    <View style={styles.CraggyTextRoot}>
-      <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_profile')}>
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="heart-circle"
-            color='#666666'
-            size={35}
-            style={{ marginTop: 8 }}
-          />
-          <Text style={styles.profileText}>My Profile</Text>
-        </View>
-
-        <Ionicons
-          name="chevron-forward"
-          color='#666666'
-          size={25}
-          style={{ lineHeight: 42 }}
-        />
-      </TouchableOpacity>
-
-      <View style={styles.baseLine} />
-
-      <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('Addresses')}>
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="heart-circle"
-            color='#666666'
-            size={35}
-            style={{ marginTop: 8 }}
-          />
-          <Text style={styles.profileText}> Addresses</Text>
-        </View>
-
-        <Ionicons
-          name="chevron-forward"
-          color='#666666'
-          size={25}
-          style={{ lineHeight: 42 }}
-        />
-      </TouchableOpacity>
-
-      <View style={styles.baseLine} />
-
-      <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('reviews')} >
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="heart-circle"
-            color='#666666'
-            size={35}
-            style={{ marginTop: 8 }}
-          />
-          <Text style={styles.profileText}>Wishlist</Text>
-        </View>
-
-        <Ionicons
-          name="chevron-forward"
-          color='#666666'
-          size={25}
-          style={{ lineHeight: 42 }}
-        />
-      </TouchableOpacity>
-
-      <View style={styles.baseLine} />
-
-      <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="heart-circle"
-            color='#666666'
-            size={35}
-            style={{ marginTop: 8 }}
-          />
-          <Text style={styles.profileText}>Help & Suport</Text>
-        </View>
-
-        <Ionicons
-          name="chevron-forward"
-          color='#666666'
-          size={25}
-          style={{ lineHeight: 42 }}
-        />
-      </TouchableOpacity>
-      <View style={styles.baseLine} />
-
-
-      <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="heart-circle"
-            color='#666666'
-            size={35}
-            style={{ marginTop: 8 }}
-          />
-          <Text style={styles.profileText}>Terms & Conditions</Text>
-        </View>
-
-        <Ionicons
-          name="chevron-forward"
-          color='#666666'
-          size={25}
-          style={{ lineHeight: 42 }}
-        />
-      </TouchableOpacity>
-      <View style={styles.baseLine} />
-
-
-      <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="heart-circle"
-            color='#666666'
-            size={35}
-            style={{ marginTop: 8 }}
-          />
-          <Text style={styles.profileText}>About Us</Text>
-        </View>
-
-        <Ionicons
-          name="chevron-forward"
-          color='#666666'
-          size={25}
-          style={{ lineHeight: 42 }}
-        />
-      </TouchableOpacity>
-
-      <View style={styles.baseLine} />
-      <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="heart-circle"
-            color='#666666'
-            size={35}
-            style={{ marginTop: 8 }}
-          />
-          <Text style={styles.profileText}>OFFER AND COUPAN</Text>
-        </View>
-
-        <Ionicons
-          name="chevron-forward"
-          color='#666666'
-          size={25}
-          style={{ lineHeight: 42 }}
-        />
-      </TouchableOpacity>
-      <View style={styles.baseLine} />
-      <TouchableOpacity style={styles.myProfileRoot} onPress={LogoutUserHandler} >
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="heart-circle"
-            color='#666666'
-            size={35}
-            style={{ marginTop: 8 }}
-          />
-          <Text style={styles.profileText}>Logout</Text>
-        </View>
-
-        <Ionicons
-          name="chevron-forward"
-          color='#666666'
-          size={25}
-          style={{ lineHeight: 42 }}
-        />
-      </TouchableOpacity>
-
-    </View>
-  </View>
-)
+  )
 }
 export default AccountScreen;
 const styles = StyleSheet.create({
