@@ -331,12 +331,9 @@ const HomeScreen = ({ navigation }) => {
 
             {/* View Product  */}
 
-            <TouchableOpacity style={styles.ViewProduct}
-              onPress={() => navigation.navigate('ViewProduct')}
-            >
+            <TouchableOpacity style={styles.ViewProduct} onPress={() => navigation.navigate('ViewProduct')} >
               <Text style={styles.viewProductText}>VIEW PRODUCT</Text>
             </TouchableOpacity>
-
           </View>
         </View>
 
