@@ -30,7 +30,7 @@ export const useStyles = CreateResponsiveStyle(
             marginTop: 0
         },
         headerLogo: {
-            width: 130,
+            width: 115,
             height: 30,
             marginLeft: 1,
         },
@@ -384,17 +384,19 @@ export const useStyles = CreateResponsiveStyle(
             textAlign: 'center',
         },
         ViewProduct: {
-            height: 30,
-            width: 140,
-            borderColor: '#333333',
-            borderWidth: 1,
+            height: 44,
+            width: 160,
             justifyContent: 'center',
             alignItems: 'center',
             display: 'flex',
             alignSelf: 'center',
+            backgroundColor:'#CC933B',
+            borderRadius:22,
         },
         viewProductText: {
-            fontWeight: 'bold',
+            fontWeight: '700',
+            fontSize:13,
+            color:'#fff',
         },
         swiperRoot: {
             height: 350,
