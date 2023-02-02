@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Button, ImageBackground, Image } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import TextInput from '../components/InputHook';
 import { useDispatch, useSelector, } from 'react-redux';
 import { loginActions } from '../store/UserSlice';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
 import Checkbox from 'expo-checkbox';
 import { useStyles } from '../styles/responsiveStyle';
-// import OTPInputView from '@twotalltotems/react-native-otp-input';
+import BackButton from '../components/BackButton';
 
 const ResetPassword = ({ navigation }) => {
 
@@ -59,14 +59,14 @@ const ResetPassword = ({ navigation }) => {
 
 
     return (
+        
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
-
-                <View style={styles.Containter}>
-                    <View style={styles.reset_container}>
-                        <Text style={styles.loginText}> RESET PASSWORD </Text>
-                    </View>
-                    <View style={styles.containerInner}>
+            <BackButton goBack={navigation.goBack} />
+                <Image source={require('../../assets/images/logo-image.jpg')} style={styles.logoBackground} />
+                
+                <View style={styles.Containterlogin}>
+                    
                         <View style={styles.inputWidth}>
                             <Controller
                                 control={control}
@@ -112,6 +112,7 @@ const ResetPassword = ({ navigation }) => {
                             />
                             {errors.confirm_password && <Text style={styles.inputError}>This field is required.</Text>}
                         </View>
+                        
                         <View style={styles.checkboxPassword}>
                             <View style={styles.checkboxInput}>
 
@@ -122,8 +123,11 @@ const ResetPassword = ({ navigation }) => {
                                 <Title style={styles.LoginButtongTittle}>SAVE</Title>
                             </TouchableOpacity>
                         </View>
-
                     </View>
+                   
+                    <View style={styles.loginBottom}>
+                    <Text style={styles.needHelpBottom}>Need Help?</Text>
+                    <TouchableOpacity><Text style={styles.contactUsBottom}> Contact us</Text></TouchableOpacity>
                 </View>
             </ImageBackground>
         </View>
