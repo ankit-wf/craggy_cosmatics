@@ -23,6 +23,8 @@ import Reward from '../screens/Reward';
 import SearchScreen from '../screens/SearchScreen';
 import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import ResetPassword from '../screens/ResetPassword';
+import AddAddress from '../screens/AddAdress';
+// import ProductListingScreen from '../screens/ProductListingScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -78,6 +80,7 @@ const MainNavigator = () => {
                 <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
               </TouchableOpacity>
 
+
               <TouchableOpacity onPress={() => navigation.navigate('Reward')}>
                 <Ionicons name="gift-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
               </TouchableOpacity>
@@ -85,6 +88,8 @@ const MainNavigator = () => {
           ),
         })}
       />
+      <Stack.Screen name='AddAddress' component={AddAddress} />
+
     </Stack.Navigator>
   );
 }

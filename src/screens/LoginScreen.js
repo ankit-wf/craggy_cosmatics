@@ -34,7 +34,6 @@ const LoginScreen = ({ navigation }) => {
         };
     }, [login])
 
-
     const onSubmit = (data) => {
         axios({
             method: 'post',
@@ -61,7 +60,6 @@ const LoginScreen = ({ navigation }) => {
         // alert("You Are SuccessFully Registered");
         // reset();
     }
-
     const forgetHandler = () => {
         navigation.navigate('forgetPassword')
     }

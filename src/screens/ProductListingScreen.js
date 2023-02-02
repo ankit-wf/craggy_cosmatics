@@ -68,7 +68,6 @@ const ProductListingScreen = ({ navigation, route }) => {
         <View style={styles1.panel}>
             <View style={{ alignItems: 'center' }}>
                 <Text style={styles1.panelTitle}>Sort By</Text>
-                {/* {/ <Text style={styles1.panelSubtitle}></Text> /} */}
             </View>
             <TouchableOpacity style={styles1.panelButton} >
                 <Text style={styles1.panelButtonTitle}>Latest</Text>
@@ -132,7 +131,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                 </View>
 
                 <View style={{ height: 50, flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'black' }}>
-                    <Text style={{ fontSize: 25, color: '#C68625' }}>Hair Care</Text>
+                    <Text style={{ fontSize: 25, color: '#C68625' }}>{name}</Text>
                     <TouchableOpacity onPress={bottomSheetHandler}>
                         <Text style={{ fontSize: 20, color: '#C68625' }}>Sort</Text>
                     </TouchableOpacity>
