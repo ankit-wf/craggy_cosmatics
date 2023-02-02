@@ -10,16 +10,15 @@ export default function TextInput({ errorText, description, ...props }) {
         <View style={styles.containerInput}>
             <Input
                 style={styles.formInput}
-                outlineColor="transparent"
-                activeOutlineColor="transparent"
-                activeUnderlineColor="#fff"
+                outlineColor="#000"
+                activeOutlineColor="#CC933B"
+                activeUnderlineColor="#CC933B"
                 mode="outlined"
-                textColor="#fff"
-                selectionColor='#ffff'
+
                 theme={{
                     colors: {
-                        placeholder: '#fff',
-                        text: '#fff',
+                        placeholder: '#222',
+                        text: '#222',
                     }
                 }}
 
