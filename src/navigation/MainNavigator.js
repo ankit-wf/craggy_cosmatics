@@ -27,8 +27,8 @@ import WriteReview from '../screens/WriteReview';
 import SkinCareProduct from '../screens/SkinCareProduct';
 import DrawerScreen from './Drawer';
 // import searchPage from '../screens/searchPage';
-// import Logo from '../components/Logo';
-// import HomeScreen from './HomeScreen';
+import Logo from '../components/Logo';
+import HomeScreen from './HomeScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import Reward from '../screens/Reward';
 import SearchScreen from '../screens/SearchScreen';
@@ -36,7 +36,6 @@ import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import ResetPassword from '../screens/ResetPassword';
 // import ProductListingScreen from '../screens/ProductListingScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
-import AddAddress from '../screens/AddAdress';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useStyles } from '../styles/responsiveStyle';
@@ -102,7 +101,7 @@ const MainNavigator = () => {
         })}
 
       />
-      <Stack.Screen name='AddAddress' component={AddAddress} />
+
 
     </Stack.Navigator>
   );
