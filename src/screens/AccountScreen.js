@@ -7,6 +7,10 @@ import { loginActions } from '../store/UserSlice'
 import { useFocusEffect } from '@react-navigation/native';
 
 
+import RBSheet from "react-native-raw-bottom-sheet";
+import { useFocusEffect } from '@react-navigation/native';
+
+
 const AccountScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const storeData = useSelector(state => state.cartData.cart);
@@ -20,6 +24,19 @@ const AccountScreen = ({ navigation }) => {
           index: 0,
           routes: [{ name: 'login' }],
         });
+      }
+      return;
+    }, [])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (isLoggedIn === false) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'login' }],
+        });
+        // navigation.navigate('login');
       }
       return;
     }, [])
