@@ -218,12 +218,10 @@ export const useStyles = CreateResponsiveStyle(
         needHelpBottom: {
             color:'#fff',
             fontWeight:'600',
-            letterSpacing:0,
         },
         contactUsBottom: {
             color:'#CC933B',
             fontWeight:'700',
-            letterSpacing:0,
         },
 
         /** Home Page Style **/
@@ -541,7 +539,6 @@ export const useStyles = CreateResponsiveStyle(
             color:'#222222',
             textTransform:'capitalize',
             fontWeight:'700',
-            letterSpacing:'0.5px',
             position:'absolute',
             top:40,
             left:15,

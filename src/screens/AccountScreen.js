@@ -9,6 +9,7 @@ import * as ImagePicker from 'expo-image-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
 
 import RBSheet from "react-native-raw-bottom-sheet";
+import { useFocusEffect } from '@react-navigation/native';
 
 const AccountScreen = ({ navigation }) => {
 
@@ -18,6 +19,19 @@ const AccountScreen = ({ navigation }) => {
   // console.log("nnneeewewwwww", userData)
 
   const dispatch = useDispatch();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (isLoggedIn === false) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'login' }],
+        });
+        // navigation.navigate('login');
+      }
+      return;
+    }, [])
+  );
 
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
