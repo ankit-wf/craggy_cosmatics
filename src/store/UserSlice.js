@@ -2,9 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     isLoggedIn: false,
-    user_data: {
-
-    }
+    user_data: {}
 }
 // console.log("hhhhh", user_data)
 
@@ -18,8 +16,9 @@ const UserSlice = createSlice({
         },
 
         loginform(state, action) {
-            console.log("actions22 :", action);
+            // console.log("actions22 :", action);
             state.isLoggedIn = action.payload.isLoggedIn;
+
 
         },
         userlogin(state, action) {

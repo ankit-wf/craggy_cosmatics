@@ -7,7 +7,9 @@ import { loginActions } from '../store/UserSlice'
 import { useFocusEffect } from '@react-navigation/native';
 
 
+
 import RBSheet from "react-native-raw-bottom-sheet";
+
 
 
 const AccountScreen = ({ navigation }) => {
@@ -49,9 +51,6 @@ const AccountScreen = ({ navigation }) => {
     });
     // navigation.navigate('login');
   }
-
-
-
   return (
     <View>
       <View style={styles.Root}>
