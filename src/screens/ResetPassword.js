@@ -33,99 +33,85 @@ const ResetPassword = ({ navigation }) => {
     }, [login])
 
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
-        defaultValues: {
-            password: '',
-            confirm_password: '',
-        }
+        // defaultValues: {
+        //     password: '',
+        //     confirm_password: '',
+        // }
     })
-
     const onSubmit = (data) => {
         // console.log("dataaaaaaaaaaaaa",data);
-        {
-            logindata.map((item) => {
-                console.log("data.email", item.email, item.password);
-                if (data.email == item.email && data.password == item.password) {
-                    navigation.reset({
-                        index: 0,
-                        routes: [{ name: 'HomeScreen' }],
-                    });
-                }
-
-            })
+        if (data.password == data.confirm_password) {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'HomeScreen' }],
+            });
         }
         dispatch(loginActions.loginform({ isLoggedIn: true }));
         reset();
     }
 
-
     return (
-        
+
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
-            <BackButton goBack={navigation.goBack} />
+                <BackButton goBack={navigation.goBack} />
                 <Image source={require('../../assets/images/logo-image.jpg')} style={styles.logoBackground} />
-                
+
                 <View style={styles.Containterlogin}>
-                    
-                        <View style={styles.inputWidth}>
-                            <Controller
-                                control={control}
-                                rules={{
-                                    required: true,
-                                }}
-                                render={({ field: { onChange, onBlur, value } }) => (
-                                    <TextInput
-                                        style={styles.loginInput}
-                                        onChangeText={onChange}
-                                        value={value}
-                                        label="Password"
-                                        returnKeyType="next"
-                                        autoCapitalize="none"
-                                        autoCompleteType="email"
-                                        textContentType="emailAddress"
-                                        keyboardType='numeric'
-                                    />
-                                )}
-                                name="password"
-                            />
-                            {errors.password && <Text style={styles.inputError}>This field is required.</Text>}
+                    <View style={styles.inputWidth}>
+                        <Controller
+                            control={control}
+                            rules={{
+                                required: true,
+                            }}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <TextInput
+                                    style={styles.loginInput}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    label="Password"
+                                    returnKeyType="next"
+                                    autoCapitalize="none"
+                                    autoCompleteType="email"
+                                    textContentType="emailAddress"
+                                    keyboardType='numeric'
+                                />
+                            )}
+                            name="password"
+                        />
+                        {errors.password && <Text style={styles.inputError}>This field is required.</Text>}
 
-                            <Controller
-                                control={control}
-                                rules={{
-                                    required: true,
-                                }}
-                                render={({ field: { onChange, onBlur, value } }) => (
-                                    <TextInput
-                                        style={styles.loginInput}
-                                        onChangeText={onChange}
-                                        value={value}
-                                        label="Confirm Password"
-                                        returnKeyType="next"
-                                        autoCapitalize="none"
-                                        autoCompleteType="email"
-                                        textContentType="emailAddress"
-                                        keyboardType='numeric'
-                                    />
-                                )}
-                                name="confirm_password"
-                            />
-                            {errors.confirm_password && <Text style={styles.inputError}>This field is required.</Text>}
-                        </View>
-                        
-                        <View style={styles.checkboxPassword}>
-                            <View style={styles.checkboxInput}>
-
-                            </View>
-                        </View>
-                        <View style={styles.LoginButtong}>
-                            <TouchableOpacity style={styles.buttonStyle} onPress={handleSubmit(onSubmit)} >
-                                <Title style={styles.LoginButtongTittle}>SAVE</Title>
-                            </TouchableOpacity>
-                        </View>
+                        <Controller
+                            control={control}
+                            rules={{
+                                required: true,
+                            }}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <TextInput
+                                    style={styles.loginInput}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    label="Confirm Password"
+                                    returnKeyType="next"
+                                    autoCapitalize="none"
+                                    autoCompleteType="email"
+                                    textContentType="emailAddress"
+                                    keyboardType='numeric'
+                                />
+                            )}
+                            name="confirm_password"
+                        />
+                        {errors.confirm_password && <Text style={styles.inputError}>This field is required.</Text>}
                     </View>
-                   
-                    <View style={styles.loginBottom}>
+
+                    <View style={styles.LoginButtong}>
+                        <TouchableOpacity style={styles.buttonStyle} onPress={handleSubmit(onSubmit)} >
+                            <Title style={styles.LoginButtongTittle}>SAVE</Title>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                <View style={styles.loginBottom}>
                     <Text style={styles.needHelpBottom}>Need Help?</Text>
                     <TouchableOpacity><Text style={styles.contactUsBottom}> Contact us</Text></TouchableOpacity>
                 </View>

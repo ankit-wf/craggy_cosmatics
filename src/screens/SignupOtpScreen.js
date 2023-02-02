@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Button, ImageBackground, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, ImageBackground, TextInput, Image } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 // import TextInput from '../components/InputHook';
 import { useDispatch, useSelector, } from 'react-redux';
@@ -9,6 +9,7 @@ import { TextInput as Input, Title } from 'react-native-paper';
 import { useStyles } from '../styles/responsiveStyle';
 import { Ionicons } from '@expo/vector-icons'
 const otp = require("../../Data/otp.json")
+import BackButton from '../components/BackButton';
 
 const SignupOtpScreen = ({ navigation }) => {
     const styles = useStyles()
@@ -47,73 +48,61 @@ const SignupOtpScreen = ({ navigation }) => {
     return (
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
-                <View style={styles.Containter}>
-                    <View style={styles.icon_container}>
-                        <Ionicons
-                            name="arrow-back-outline"
-                            color={'white'}
-                            size={22}
-                            style={{ marginTop: 12, marginLeft: 10 }}
-                            onPress={navigation.goBack}
-                        />
-                        <Text style={styles.loginText}> VERIFY OTP </Text>
-                    </View>
+                <BackButton goBack={navigation.goBack} />
+                <Image source={require('../../assets/images/logo-image.jpg')} style={styles.logoBackground} />
+                <View style={styles.Containterlogin}>
 
+                    <View style={styles.checkboxPassword}>
+                        <View style={styles.Textinput_root}>
+                            <TextInput
+                                ref={firstInput}
+                                onChangeText={(text) => {
 
-                    <View style={styles.containerInner}>
-                        <View style={styles.checkboxPassword}>
-                            <View style={styles.Textinput_root}>
-                                <TextInput
-                                    ref={firstInput}
-                                    onChangeText={(text) => {
-
-                                        if (text !== '') { seconInput.current.focus(), setValue1(text) }
-                                    }}
-                                    maxLength={1}
-                                    keyboardType="number-pad"
-                                    style={styles.input_Style}
-                                />
-                                <TextInput
-                                    ref={seconInput}
-                                    onChangeText={(text) => {
-
-                                        (text !== '') ? (thirdInput.current.focus(), setValue2(text)) : (firstInput.current.focus(), setValue2(""))
-                                    }}
-                                    // onChangeText={(text) => { text ? thirdInput.current.focus() : firstInput.current.focus() }}
-                                    maxLength={1}
-                                    keyboardType="number-pad"
-                                    style={styles.input_Style}
-                                />
-                                <TextInput
-                                    ref={thirdInput}
-                                    onChangeText={(text) => {
-                                        (text !== '') ? (fourthInput.current.focus(), setValue3(text)) : (seconInput.current.focus(), setValue3(""))
-                                    }}
-                                    // onChangeText={(text) => { text ? fourthInput.current.focus() : seconInput.current.focus() }}
-                                    maxLength={1}
-                                    keyboardType="number-pad"
-                                    style={styles.input_Style}
-                                />
-                                <TextInput
-                                    ref={fourthInput}
-                                    onChangeText={(text) => {
-                                        (text !== '') ? (fourthInput.current.focus(), setValue4(text)) : (thirdInput.current.focus(), setValue4(""))
-                                        // alert("THANKS")
-                                    }}
-                                    // onChangeText={(text) => { text ? fourthInput.current.focus() : thirdInput.current.focus() }}
-                                    maxLength={1}
-                                    keyboardType="number-pad"
-                                    style={styles.input_Style}
-                                />
-                            </View>
-                        </View>
-
-                        <View style={styles.LoginButtong}>
-                            <TouchableOpacity style={styles.buttonStyle} onPress={verifyHandler}>
-                                <Title style={styles.LoginButtongTittle}>SAVE</Title>
-                            </TouchableOpacity>
+                                    if (text !== '') { seconInput.current.focus(), setValue1(text) }
+                                }}
+                                maxLength={1}
+                                keyboardType="number-pad"
+                                style={styles.input_Style}
+                            />
+                            <TextInput
+                                ref={seconInput}
+                                onChangeText={(text) => {
+                                    (text !== '') ? (thirdInput.current.focus(), setValue2(text)) : (firstInput.current.focus(), setValue2(""))
+                                }}
+                                // onChangeText={(text) => { text ? thirdInput.current.focus() : firstInput.current.focus() }}
+                                maxLength={1}
+                                keyboardType="number-pad"
+                                style={styles.input_Style}
+                            />
+                            <TextInput
+                                ref={thirdInput}
+                                onChangeText={(text) => {
+                                    (text !== '') ? (fourthInput.current.focus(), setValue3(text)) : (seconInput.current.focus(), setValue3(""))
+                                }}
+                                // onChangeText={(text) => { text ? fourthInput.current.focus() : seconInput.current.focus() }}
+                                maxLength={1}
+                                keyboardType="number-pad"
+                                style={styles.input_Style}
+                            />
+                            <TextInput
+                                ref={fourthInput}
+                                onChangeText={(text) => {
+                                    (text !== '') ? (fourthInput.current.focus(), setValue4(text)) : (thirdInput.current.focus(), setValue4(""))
+                                    // alert("THANKS")
+                                }}
+                                // onChangeText={(text) => { text ? fourthInput.current.focus() : thirdInput.current.focus() }}
+                                maxLength={1}
+                                keyboardType="number-pad"
+                                style={styles.input_Style}
+                            />
                         </View>
                     </View>
+                    <View style={styles.LoginButtong}>
+                        <TouchableOpacity style={styles.buttonStyle} onPress={verifyHandler}>
+                            <Title style={styles.LoginButtongTittle}>SAVE</Title>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
             </ImageBackground>
         </View>

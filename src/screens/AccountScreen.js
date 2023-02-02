@@ -99,9 +99,9 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('Addresses')}>
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="location-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
             <Text style={styles.profileText}> Addresses</Text>
@@ -120,7 +120,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('reviews')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="heart-circle-outline"
               color='#666666'
               size={35}
               style={{ marginTop: 8 }}
@@ -141,9 +141,9 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="headset-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
             <Text style={styles.profileText}>Help & Suport</Text>
@@ -162,9 +162,9 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="md-document-text-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
             <Text style={styles.profileText}>Terms & Conditions</Text>
@@ -222,9 +222,9 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={LogoutUserHandler} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="exit-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
             <Text style={styles.profileText}>Logout</Text>
