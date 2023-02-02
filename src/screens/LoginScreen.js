@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
     const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
     const [login, setLogin] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(true);
-    const [userData, setUserData] = useState({});
+    // const [userData, setUserData] = useState({});
     // console.log("hjshssd", userData)
     const { control, handleSubmit, reset, formState: { errors } } = useForm()
 
@@ -33,7 +33,6 @@ const LoginScreen = ({ navigation }) => {
         };
     }, [login])
 
-
     const onSubmit = (data) => {
         axios({
             method: 'post',
@@ -47,15 +46,15 @@ const LoginScreen = ({ navigation }) => {
                 'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629'
             }
         }).then((response) => {
-            console.log(response.data, "response2");
+            // console.log(response.data, "response2");
             if (response.data.login == true) {
-                setUserData(response.data.user_data);
-                dispatch(loginActions.userlogin({ user_data: userData }));
-                // dispatch(loginActions.loginform({ isLoggedIn: true }));
-                // navigation.reset({
-                //     index: 0,
-                //     routes: [{ name: 'HomeScreen' }],
-                // });
+                // setUserData(response.data.user_data);
+                dispatch(loginActions.loginform({ isLoggedIn: true }));
+                dispatch(loginActions.userlogin({ user_data: response.data.user_data }));
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'HomeScreen' }],
+                });
             }
         })
         // alert("You Are SuccessFully Registered");
@@ -75,7 +74,6 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
-
                 <View style={styles.Containter}>
                     <View style={styles.reset_container}>
                         <Text style={styles.loginText}> customer login </Text>

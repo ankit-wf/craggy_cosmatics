@@ -17,18 +17,15 @@ const AccountScreen = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       if (isLoggedIn === false) {
-        navigation.navigate('login');
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'login' }],
+        });
+        // navigation.navigate('login');
       }
       return;
     }, [])
   );
-
-  // useEffect(() => {
-  //   if (isLoggedIn == false) {
-  //     navigation.navigate('login')
-  //   }
-  // }, [])
-
 
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
