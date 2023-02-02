@@ -1,24 +1,33 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
-import { Badge, Button } from 'react-native-paper';
 import { loginActions } from '../store/UserSlice'
-import * as ImagePicker from 'expo-image-picker';
-import BottomSheet from 'reanimated-bottom-sheet';
+import { useFocusEffect } from '@react-navigation/native';
+
 
 import RBSheet from "react-native-raw-bottom-sheet";
 import { useFocusEffect } from '@react-navigation/native';
 
-const AccountScreen = ({ navigation }) => {
 
+const AccountScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const storeData = useSelector(state => state.cartData.cart);
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
   const userData = useSelector(state => state.userData.user_data);
-  // console.log("nnneeewewwwww", userData)
 
-  const dispatch = useDispatch();
+  useFocusEffect(
+    React.useCallback(() => {
+      if (isLoggedIn === false) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'login' }],
+        });
+      }
+      return;
+    }, [])
+  );
 
   useFocusEffect(
     React.useCallback(() => {
@@ -49,13 +58,9 @@ const AccountScreen = ({ navigation }) => {
       <View style={styles.Root}>
         <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
           <View style={styles.profileImgRoot}>
-            <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}
-
-            >
+            <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}>
               <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
-
             </View>
-
             <View style={styles.profileTextRoot}>
               <View style={{ width: 300 }}>
                 <Text style={styles.redTextName}>{userData.display_name}</Text>
@@ -67,7 +72,6 @@ const AccountScreen = ({ navigation }) => {
                 <Text style={styles.redText}>{userData.user_email}</Text>
               </View>
             </View>
-
           </View>
         </ImageBackground>
       </View>
