@@ -17,7 +17,20 @@ const AccountScreen = ({ navigation }) => {
   const userData = useSelector(state => state.userData.user_data);
   // console.log("nnneeewewwwww", userData)
 
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (isLoggedIn === false) {
+        navigation.navigate('login');
+      }
+      return;
+
+
+    }, [])
+  );
+
   const dispatch = useDispatch();
+
 
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
