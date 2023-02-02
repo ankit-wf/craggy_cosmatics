@@ -8,12 +8,9 @@ import Index from './src/store/index'
 import { PersistGate } from "redux-persist/integration/react";
 import { View } from 'react-native'
 
-import { View } from 'react-native'
-
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 // import DrawerScreen from './src/navigation/Drawer';
-// import NewCameraTesting from './src/NewCameraTesting';
 // import NewCameraTesting from './src/NewCameraTesting';
 
 export default function App() {
@@ -53,10 +50,8 @@ export default function App() {
 
   return (
 
-
     <NavigationContainer >
       <StatusBar />
-      {/* <StatusBar /> */}
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <MainNavigator />
