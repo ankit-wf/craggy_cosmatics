@@ -22,7 +22,6 @@ const ProductListingScreen = ({ navigation, route }) => {
     const id = route.params.id;
 
     useEffect(() => {
-        dispatch(submitActions.name({ name: name }))
         axios.get(
             `https://craggycosmetic.com/api/products/`,
             {
