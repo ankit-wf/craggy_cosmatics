@@ -1,16 +1,16 @@
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { shopStyle as sS } from '../styles/shopStyle';
+import { useSelector, useDispatch } from 'react-redux';
+import { submitActions } from '../store/dataSlice';
 
-import React, { useState, useEffect } from 'react'
-import BackButton from '../components/BackButton'
-import axios from 'axios'
-import { shopStyle as sS } from '../styles/shopStyle'
 
-
-const ViewProduct = () => {
+const ViewProduct = ({ navigation }) => {
+    const dispatch = useDispatch();
     const [allData, setAllData] = useState([])
-    // console.log("allDataaaaaa", allData)
     const [loading, setLoading] = useState(true);
-
+    const storeData = useSelector(state => state.cartData.cart);
 
     useEffect(() => {
         axios.get(
@@ -22,13 +22,29 @@ const ViewProduct = () => {
                 }
             }
         ).then((res) => {
-            // console.log("first", res.data.status)
             if (res.data.status = "success") {
                 setAllData(res.data.response)
                 setLoading(false)
             }
         })
     }, [])
+
+    const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price) => {
+        let Data = [...storeData, {
+            description: product_title,
+            categoriesDetail_id: product_id,
+            images: image,
+            price: regular_price,
+            oldprice: sale_price,
+            quantity: 1
+        }];
+        dispatch(submitActions.price(
+            {
+                cart: Data
+            }
+        ));
+        navigation.navigate('Cart', product_id);
+    }
 
 
     return (
@@ -64,9 +80,8 @@ const ViewProduct = () => {
                                     </View>
 
                                     {/* Buy Now Button  */}
-
                                     <TouchableOpacity style={sS.buyNowButton}
-                                    // onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                        onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                     >
                                         <Text style={sS.buttonText}>BUY NOW</Text>
                                     </TouchableOpacity>
