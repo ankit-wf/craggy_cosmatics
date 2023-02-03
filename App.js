@@ -51,7 +51,7 @@ export default function App() {
   return (
 
     <NavigationContainer >
-      {/* <StatusBar /> */}
+      <StatusBar />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <MainNavigator />

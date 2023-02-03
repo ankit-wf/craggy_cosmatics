@@ -24,6 +24,7 @@ const SearchScreen = ({ navigation }) => {
         const intervalID = setInterval(shuffle, 5000);
         return () => clearInterval(intervalID);
     }, [shuffle])
+
     return (
         <View>
             <Appbar.Header style={{ backgroundColor: 'white', }}>

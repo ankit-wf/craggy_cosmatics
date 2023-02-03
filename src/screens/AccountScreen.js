@@ -1,23 +1,47 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
-import { Badge, Button } from 'react-native-paper';
 import { loginActions } from '../store/UserSlice'
-import * as ImagePicker from 'expo-image-picker';
-import BottomSheet from 'reanimated-bottom-sheet';
+import { useFocusEffect } from '@react-navigation/native';
+
+
 
 import RBSheet from "react-native-raw-bottom-sheet";
 
-const AccountScreen = ({ navigation }) => {
 
+
+const AccountScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const storeData = useSelector(state => state.cartData.cart);
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
   const userData = useSelector(state => state.userData.user_data);
-  // console.log("nnneeewewwwww", userData)
 
-  const dispatch = useDispatch();
+  useFocusEffect(
+    React.useCallback(() => {
+      if (isLoggedIn === false) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'login' }],
+        });
+      }
+      return;
+    }, [])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (isLoggedIn === false) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'login' }],
+        });
+        // navigation.navigate('login');
+      }
+      return;
+    }, [])
+  );
 
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
@@ -27,21 +51,14 @@ const AccountScreen = ({ navigation }) => {
     });
     // navigation.navigate('login');
   }
-
-
-
   return (
     <View>
       <View style={styles.Root}>
         <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
           <View style={styles.profileImgRoot}>
-            <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}
-
-            >
+            <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}>
               <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
-
             </View>
-
             <View style={styles.profileTextRoot}>
               <View style={{ width: 300 }}>
                 <Text style={styles.redTextName}>{userData.display_name}</Text>
@@ -53,7 +70,6 @@ const AccountScreen = ({ navigation }) => {
                 <Text style={styles.redText}>{userData.user_email}</Text>
               </View>
             </View>
-
           </View>
         </ImageBackground>
       </View>
@@ -83,9 +99,9 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('Addresses')}>
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="location-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
             <Text style={styles.profileText}> Addresses</Text>
@@ -104,7 +120,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('reviews')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="heart-circle-outline"
               color='#666666'
               size={35}
               style={{ marginTop: 8 }}
@@ -125,9 +141,9 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="headset-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
             <Text style={styles.profileText}>Help & Suport</Text>
@@ -146,9 +162,9 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="md-document-text-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
             <Text style={styles.profileText}>Terms & Conditions</Text>
@@ -206,9 +222,9 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.myProfileRoot} onPress={LogoutUserHandler} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="exit-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
             <Text style={styles.profileText}>Logout</Text>

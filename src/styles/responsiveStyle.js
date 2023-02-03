@@ -30,7 +30,7 @@ export const useStyles = CreateResponsiveStyle(
             marginTop: 0
         },
         headerLogo: {
-            width: 130,
+            width: 115,
             height: 30,
             marginLeft: 1,
         },
@@ -59,58 +59,31 @@ export const useStyles = CreateResponsiveStyle(
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 50
+            marginTop: 50,
         },
         loginBg: {
             width: '100%',
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
+            backgroundColor: '#000',
         },
-        Containter: {
+        Containterlogin: {
             display: 'flex',
             justifyContent: "center",
             alignItems: "center",
-            width: "80%",
-            backgroundColor: theme.siteColor.color444550,
-            borderRadius: 20,
-            overflow: 'hidden',
-            borderWidth: 3,
-            borderColor: theme.siteColor.colora8a6af,
-            // marginTop: 55
+            padding: 25,
+            paddingBottom: 10,
+            backgroundColor: '#fff',
+            width: '90%',
+            borderRadius: 8,
+            position: 'relative',
+            zIndex: 999,
+            bottom: '15%',
         },
-        Containters: {
-            display: 'flex',
-            // justifyContent: "center",
-            // alignItems: "center",
-            width: "80%",
-            backgroundColor: theme.siteColor.color444550,
-            borderRadius: 20,
-            overflow: 'hidden',
-            borderWidth: 3,
-            borderColor: theme.siteColor.colora8a6af,
-            marginTop: 50
-        },
-        containerInner: {
-            display: 'flex',
-            flexDirection: 'column',
+        logoBackground: {
+            height: '50%',
             width: '100%',
-            paddingTop: 40,
-            paddingBottom: 40,
-            paddingLeft: 25,
-            paddingRight: 25,
-        },
-        loginText: {
-            fontSize: theme.fontsT.fontS16,
-            lineHeight: theme.lineHeightT.lineH18,
-            textTransform: 'uppercase',
-            color: theme.siteColor.colorFFFFFF,
-            // backgroundColor: theme.siteColor.color9e9da4,
-            // padding: 25,
-            // width: '100%',
-            textAlign: 'center',
-            fontWeight: '700',
-            fontFamily: 'Raleway',
         },
         icon_container: {
             flexDirection: 'row',
@@ -124,19 +97,16 @@ export const useStyles = CreateResponsiveStyle(
         logInContainer: {
             flexDirection: 'row',
             backgroundColor: theme.siteColor.color9e9da4,
-            padding: 25,
             width: '100%',
         },
         loginInput: {
             width: '100%',
             fontSize: theme.fontsT.fontS14,
-            backgroundColor: 'transparent',
             borderTopWidth: 0,
             borderLeftWidth: 0,
             borderRightWidth: 0,
-            borderWidth: 2,
-            borderColor: theme.siteColor.colorede9f1,
-            color: theme.siteColor.colorFFFFFF,
+            borderBottomWidth: 0,
+            backgroundColor: '#fff',
             padding: 0,
         },
         inputWidth: {
@@ -150,23 +120,20 @@ export const useStyles = CreateResponsiveStyle(
         },
         buttonStyle: {
             padding: 20,
-            backgroundColor: theme.siteColor.color686a78,
+            backgroundColor: '#C68625',
             borderRadius: 24,
-            marginBottom: 30,
         },
         LoginButtongTittle: {
             textAlign: 'center',
             textTransform: 'uppercase',
             color: theme.siteColor.colorFFFFFF,
-            fontWeight: '700',
-            fontFamily: 'Raleway',
+            fontWeight: '800',
             fontSize: theme.fontsT.fontS16,
             lineHeight: theme.lineHeightT.lineH14,
         },
         inputError: {
             color: theme.siteColor.colorCC933B,
             ffontSize: theme.fontsT.fontS16,
-            fontFamily: 'Raleway',
             fontStyle: 'italic',
             fontWeight: '600',
         },
@@ -174,7 +141,6 @@ export const useStyles = CreateResponsiveStyle(
             position: 'relative',
             top: 5,
         },
-
         Textinput_root: {
             flex: 2,
             justifyContent: 'space-evenly',
@@ -216,22 +182,16 @@ export const useStyles = CreateResponsiveStyle(
             height: 20,
         },
         checkboxLabel: {
-            color: theme.siteColor.colorFFFFFF,
+            color: '#222',
             fontSize: theme.fontsT.fontS16,
             paddingLeft: 10,
         },
         forgetLabel: {
-            color: theme.siteColor.colorFFFFFF,
+            color: '#222',
             fontSize: theme.fontsT.fontS16,
             fontFamily: 'Raleway',
             fontWeight: '400',
             fontStyle: 'italic',
-        },
-        creatAccount: {
-            textAlign: 'center',
-            color: theme.siteColor.colorFFFFFF,
-            fontSize: theme.fontsT.fontS16,
-            lineHeight: theme.lineHeightT.lineH16,
         },
         containerInput: {
             width: '100%',
@@ -246,6 +206,33 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: theme.fontsT.fontS11,
             color: theme.colors.error,
             paddingTop: 8,
+        },
+        loginBottom: {
+            position: 'relative',
+            bottom: 50,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        needHelpBottom: {
+
+            color: '#fff',
+            fontWeight: '600',
+        },
+        contactUsBottom: {
+            color: '#CC933B',
+            fontWeight: '700',
+
+            color: '#fff',
+            fontWeight: '600',
+            // letterSpacing:0,
+        },
+        contactUsBottom: {
+            color: '#CC933B',
+            fontWeight: '700',
+            // letterSpacing:0,
+
         },
 
         /** Home Page Style **/
@@ -408,17 +395,19 @@ export const useStyles = CreateResponsiveStyle(
             textAlign: 'center',
         },
         ViewProduct: {
-            height: 30,
-            width: 140,
-            borderColor: '#333333',
-            borderWidth: 1,
+            height: 44,
+            width: 160,
             justifyContent: 'center',
             alignItems: 'center',
             display: 'flex',
             alignSelf: 'center',
+            backgroundColor: '#CC933B',
+            borderRadius: 22,
         },
         viewProductText: {
-            fontWeight: 'bold',
+            fontWeight: '700',
+            fontSize: 13,
+            color: '#fff',
         },
         swiperRoot: {
             height: 350,
@@ -529,7 +518,57 @@ export const useStyles = CreateResponsiveStyle(
             alignSelf: 'center',
         },
 
+        /** Category Page **/
+
+        categoryMainDiv: {
+            paddingTop: 30,
+            backgroundColor: '#f2f2f2',
+            height: '100%',
+        },
+
+        categories_root: {
+            display: 'flex',
+            padding: 10,
+            paddingTop: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#fff',
+        },
+        catMainSec: {
+            position: 'relative',
+            marginBottom: 5,
+        },
+        categories_text: {
+            fontSize: 20,
+            color: '#222222',
+            fontWeight: '700',
+        },
+        mens_rooot: {
+            height: 80,
+            width: '100%',
+        },
+        mens_text: {
+            fontSize: 18,
+
+            color: '#222222',
+            textTransform: 'capitalize',
+            fontWeight: '700',
+            position: 'absolute',
+            top: 40,
+            left: 15,
+            zIndex: 10,
+        },
+
+        color: '#222222',
+        textTransform: 'capitalize',
+        fontWeight: '700',
+        // letterSpacing: '0.5px',
+        position: 'absolute',
+        top: 40,
+        left: 15,
+        zIndex: 10,
     },
+
     {
         [maxSize(DEVICE_SIZES.SM)]: {
 
