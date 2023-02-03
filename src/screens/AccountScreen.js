@@ -7,11 +7,6 @@ import { loginActions } from '../store/UserSlice'
 import { useFocusEffect } from '@react-navigation/native';
 
 
-
-import RBSheet from "react-native-raw-bottom-sheet";
-
-
-
 const AccountScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const storeData = useSelector(state => state.cartData.cart);

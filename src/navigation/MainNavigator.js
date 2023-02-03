@@ -24,6 +24,7 @@ import SearchScreen from '../screens/SearchScreen';
 import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import ResetPassword from '../screens/ResetPassword';
 import AddAddress from '../screens/AddAdress';
+import EditAddress from '../screens/EditAddress';
 // import ProductListingScreen from '../screens/ProductListingScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
@@ -89,6 +90,7 @@ const MainNavigator = () => {
         })}
       />
       <Stack.Screen name='AddAddress' component={AddAddress} />
+      <Stack.Screen name='editAddress' component={EditAddress} options={{ headerTitle: 'EditAdress' }} />
 
     </Stack.Navigator>
   );
