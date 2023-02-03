@@ -57,7 +57,7 @@ const MainNavigator = () => {
       <Stack.Screen name='forgetPassword' component={ForgetPasswordScreen} options={{ headerShown: false }} />
       <Stack.Screen name='reset_password' component={ResetPassword} options={{ headerShown: false }} />
       <Stack.Screen name='checkOut' component={CheckOutScreen} options={{ headerShown: false }} />
-      <Stack.Screen name='my_order' component={OrderScreen} options={{ headerShown: true, headerTitle: 'MY ORDERS' }} />
+      <Stack.Screen name='my_order' component={OrderScreen} options={{ headerShown: true, headerTitle: 'ORDERS' }} />
       <Stack.Screen name='my_wishlist' component={WishListScreen} options={{ headerShown: true, headerTitle: 'MY WISHLIST' }} />
       <Stack.Screen name='my_profile' component={MyProfileScreen} options={{ headerShown: true, headerTitle: "MY PROFILE" }} />
       <Stack.Screen name='Addresses' component={AddressesScreen} options={{ headerShown: true, headerTitle: 'ADDRESS' }} />
