@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Animated, Keyboard, RefreshControl, } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Keyboard, RefreshControl, } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Heading from '../components/Heading'
 import Header from '../components/Header'
@@ -14,13 +14,12 @@ import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/responsiveStyle'
 
-const imgData = require('../../imgData.json');
 const bannerImg = require('../../Data/bannerSlider.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const latestProductImg = require('../../Data/latestProduct.json')
 
 const HomeScreen = ({ navigation }) => {
-  const styles = useStyles()
+  const styles = useStyles();
   const dispatch = useDispatch();
   const imageFooter = FooterImage();
   const reviewData = useSelector(state => state.reviewData.review);
@@ -94,6 +93,7 @@ const HomeScreen = ({ navigation }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+
         {/* Banner Swiper  */}
         <View style={styles.swiperRoot}>
           <Swiper style={styles.wrapper} autoplay >
@@ -181,7 +181,6 @@ const HomeScreen = ({ navigation }) => {
                       <Text style={bsP.spaceRoot}>/ </Text>
                       <Text style={bsP.oldprice}>₹{e.oldprice}</Text>
                     </View>
-
                   </View>
 
                   {/* Buy Now Button  */}
@@ -220,7 +219,6 @@ const HomeScreen = ({ navigation }) => {
                   </View>
 
                   <View style={lP.contentRoot}>
-
                     <View style={lP.descriptionRoot}>
                       <Text style={lP.descriptionText}>{e.description}</Text>
                     </View>
@@ -232,7 +230,6 @@ const HomeScreen = ({ navigation }) => {
                       <Text style={lP.spaceRoot}>/ </Text>
                       <Text style={lP.oldprice}>₹{e.oldprice}</Text>
                     </View>
-
                   </View>
 
                   {/* Buy Now Button  */}
@@ -241,7 +238,6 @@ const HomeScreen = ({ navigation }) => {
                   >
                     <Text style={lP.buttonText}>BUY NOW</Text>
                   </TouchableOpacity>
-
                 </TouchableOpacity>
               )
             })}
@@ -253,7 +249,7 @@ const HomeScreen = ({ navigation }) => {
           <Image source={require('../../assets/footer_banner.png')} style={styles.footerBannerImage} />
         </View>
 
-        {/* We Promise  */}
+        {/* We Promise You */}
         <View >
           <View style={styles.promiseOuterRoot}>
             <View style={styles.promiseRoot}>
@@ -277,9 +273,9 @@ const HomeScreen = ({ navigation }) => {
               })}
             </View>
 
-            {/* View Product  */}
+            {/* View all Product  */}
             <TouchableOpacity style={styles.ViewProduct} onPress={() => navigation.navigate('ViewProduct')} >
-              <Text style={styles.viewProductText}>VIEW PRODUCT</Text>
+              <Text style={styles.viewProductText}>VIEW ALL PRODUCT</Text>
             </TouchableOpacity>
           </View>
         </View>

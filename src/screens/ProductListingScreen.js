@@ -7,6 +7,7 @@ import { useStyles } from '../styles/responsiveStyle'
 import { useDispatch, useSelector } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 import { ScrollView } from 'react-native-virtualized-view';
+import { Ionicons } from '@expo/vector-icons'
 import BottomSheet from 'reanimated-bottom-sheet';
 
 const bannerImg = require('../../Data/bannerSlider.json')
@@ -22,7 +23,6 @@ const ProductListingScreen = ({ navigation, route }) => {
     const id = route.params.id;
 
     useEffect(() => {
-        dispatch(submitActions.name({ name: name }))
         axios.get(
             `https://craggycosmetic.com/api/products/`,
             {
@@ -130,10 +130,11 @@ const ProductListingScreen = ({ navigation, route }) => {
                     </Swiper>
                 </View>
 
-                <View style={{ height: 50, flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'black' }}>
+                <View style={{ height: 50, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: 'black' }}>
                     <Text style={{ fontSize: 25, color: '#C68625' }}>{name}</Text>
-                    <TouchableOpacity onPress={bottomSheetHandler}>
-                        <Text style={{ fontSize: 20, color: '#C68625' }}>Sort</Text>
+                    <TouchableOpacity onPress={bottomSheetHandler} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 25, color: '#C68625' }}>Sort</Text>
+                        <Ionicons name="swap-vertical" size={25} style={{ color: '#C68625', marginLeft: 3 }} />
                     </TouchableOpacity>
                 </View>
 
@@ -145,7 +146,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                             <FlatList
                                 data={data}
                                 renderItem={({ item }) => (
-                                    < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("ProductListing", item.product_id)} >
+                                    < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
                                         <View style={sS.imgRoot} >
                                             <Image source={{ uri: item.image }} style={sS.productImg} />
                                         </View>

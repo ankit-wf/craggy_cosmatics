@@ -24,7 +24,6 @@ import SearchScreen from '../screens/SearchScreen';
 import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import ResetPassword from '../screens/ResetPassword';
 import AddAddress from '../screens/AddAdress';
-// import ProductListingScreen from '../screens/ProductListingScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -34,8 +33,7 @@ import { useSelector } from 'react-redux';
 const Stack = createStackNavigator();
 
 const MainNavigator = () => {
-  const gs = useStyles()
-  const Catname = useSelector(state => state.cartData.name);
+  const gs = useStyles();
 
   return (
     <Stack.Navigator initialRouteName='HomeScreen'
@@ -79,8 +77,6 @@ const MainNavigator = () => {
               <TouchableOpacity onPress={() => navigation.navigate('NotificationScreen')}>
                 <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
               </TouchableOpacity>
-
-
               <TouchableOpacity onPress={() => navigation.navigate('Reward')}>
                 <Ionicons name="gift-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
               </TouchableOpacity>

@@ -6,31 +6,27 @@ import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
 import Heading from '../components/Heading';
 import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
-// import Pagination from 'tvt-pagination';
 const productImg = require('../../Data/productDetail.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
 
 const ProductDetailScreen = ({ navigation, route }) => {
-
+    const dispatch = useDispatch();
     const newData = useSelector(state => state.reviewData.review);
     const storeData = useSelector(state => state.cartData.cart);
-    const dispatch = useDispatch();
 
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true);
+    const [heart, setHeart] = useState(false);
 
     useEffect(() => {
-
-        axios.get(
-            `https://craggycosmetic.com/api/products/`,
-
+        axios.get(`https://craggycosmetic.com/api/products/`,
             {
                 params: {
                     product_id: id
@@ -41,12 +37,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 }
             }
         ).then((res) => {
-            // console.log("datataa", res.data)
             setData(res.data)
             setLoading(false);
         })
     }, [id])
-
 
     const ratingCompleted = (rating) => {
         setStar(rating);
@@ -87,37 +81,32 @@ const ProductDetailScreen = ({ navigation, route }) => {
         navigation.navigate('Cart', product_id);
     }
 
+    const wishlistHandler = () => {
+        setHeart(!heart);
+    }
+
 
     return (
-        <View >
-            <SafeAreaView style={styles.safe_roor}>
-
-
+        <View>
+            <SafeAreaView style={styles.safe_root}>
                 {
                     loading ?
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
                             <ActivityIndicator size="large" />
                         </View>
                         :
-
                         <ScrollView onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}>
-
                             {data.map((data, index) => {
-                                // console.log("eeee", e)
                                 return (
                                     <View key={index}>
-
                                         <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
                                             <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
                                         </View>
-
                                         <View style={styles.swiperRoot}>
                                             <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
-
                                                 <View key={index}>
                                                     <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
                                                 </View>
-
                                             </Swiper>
                                         </View>
                                         <View style={styles.CraggyTextRoot}>
@@ -125,8 +114,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 <Text style={styles.craggyText}>{data.product_title}</Text>
                                             </View>
                                         </View>
-
-
                                         <View style={{ width: '100%' }}>
                                             <View style={pDs.productRoot}>
                                                 <View style={pDs.priceRoot}>
@@ -135,20 +122,22 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                     <Text style={pDs.oldprice}>₹{data.regular_price}</Text>
                                                 </View>
 
-                                                <View style={styles.productButtonRoot}>
-                                                    <TouchableOpacity onPress={subOne} style={(one < 1) ? styles.blackButton : styles.whiteButton} >
-                                                        <Text style={styles.blackText}>-</Text>
-                                                    </TouchableOpacity>
-
-                                                    <Text style={styles.Textone}>{one < 1 ? 1 : one}</Text>
-
-                                                    <TouchableOpacity onPress={addOne} style={(one >= 1) ? styles.blackButton : styles.whiteButton} >
-                                                        <Text style={(one >= 1) ? styles.whiteText : styles.blackText} >+</Text>
+                                                <View>
+                                                    <TouchableOpacity onPress={wishlistHandler} >
+                                                        <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
                                                     </TouchableOpacity>
                                                 </View>
 
+                                                {/* <View style={styles.productButtonRoot}>
+                                                    <TouchableOpacity onPress={subOne} style={(one < 1) ? styles.blackButton : styles.whiteButton} >
+                                                        <Text style={styles.blackText}>-</Text>
+                                                    </TouchableOpacity>
+                                                    <Text style={styles.Textone}>{one < 1 ? 1 : one}</Text>
+                                                    <TouchableOpacity onPress={addOne} style={(one >= 1) ? styles.blackButton : styles.whiteButton} >
+                                                        <Text style={(one >= 1) ? styles.whiteText : styles.blackText} >+</Text>
+                                                    </TouchableOpacity>
+                                                </View> */}
                                             </View>
-
                                             <View>
                                                 <TouchableOpacity
                                                     onPress={() => AddToCartHolder(data.product_title, data.product_id, data.image, data.regular_price, data.sale_price)}
@@ -159,11 +148,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             </View>
                                         </View>
 
-
                                         <View style={pDs.baseLine2} />
 
                                         <View style={styles.Accordion_Root}>
-
                                             <List.Section >
                                                 <List.Accordion
                                                     id='1'
@@ -172,12 +159,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                     expanded={((expanded === "1") ? true : false)}
                                                     onPress={() => handlePress("1")}
                                                     right={() => <List.Icon icon={(expanded === "1") ? 'minus' : 'plus'} />}>
-
                                                     <View style={styles.li_text_root} >
                                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                                         <Text style={styles.li_text}>{data.description}</Text>
                                                     </View>
-
                                                 </List.Accordion>
 
                                                 <View style={pDs.baseLine} />
@@ -189,12 +174,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                     expanded={(expanded === "2") ? true : false}
                                                     onPress={() => handlePress("2")}
                                                     right={() => <List.Icon icon={(expanded === "2") ? 'minus' : 'plus'} />}>
-
                                                     <View style={styles.li_text_root} >
                                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                                         <Text style={styles.li_text}>{data.key_feature}</Text>
                                                     </View>
-
                                                 </List.Accordion>
 
                                                 <View style={pDs.baseLine} />
@@ -206,26 +189,19 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                     expanded={(expanded === "3") ? true : false}
                                                     onPress={() => handlePress("3")}
                                                     right={() => <List.Icon icon={(expanded === "3") ? 'minus' : 'plus'} />}>
-
                                                     <View style={styles.li_text_root}>
                                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                                         <Text style={styles.li_text}>{data.how_to_use}</Text>
                                                     </View>
-
                                                 </List.Accordion>
                                                 <View style={pDs.baseLine} />
-
                                             </List.Section>
                                         </View>
 
-
-
                                         <View style={styles.review_outerRoot}>
                                             <View style={styles.review_innerRoot}>
-
                                                 <View style={styles.reviews_root} >
                                                     <Text style={styles.review_MainHeading}>REVIEWS</Text>
-
                                                     <TouchableOpacity style={styles.write_review} onPress={() => navigation.navigate('write_review')}>
                                                         <Text style={styles.review_heading}> WRITE A REVIEW </Text>
                                                     </TouchableOpacity>
@@ -239,22 +215,16 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 <View style={[pDs.baseLine2, { height: 1, }]} />
 
                                                 {newData.map((value, k) => {
-                                                    // console.log("rewviewData", newData)
-
                                                     let ending = parseInt(page) * 3;
                                                     let starting = ending - 2;
                                                     if (k >= starting && k <= ending) {
                                                         return (
                                                             <View style={{ marginTop: 30 }} key={k}>
                                                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
-
-                                                                    {/* <Text style={styles.review_Name}>{k}</Text> */}
                                                                     <Text style={styles.review_Name}>{value.title}</Text>
                                                                     <Text style={styles.review_Date}>{value.date}</Text>
                                                                 </View>
-
                                                                 <View style={{ flexDirection: 'row', marginLeft: -8 }} >
-
                                                                     <Rating
                                                                         readonly={true}
                                                                         ratingCount={5}
@@ -265,7 +235,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                     />
                                                                     <Text style={styles.starReviws}>{value.star}</Text>
                                                                 </View>
-
                                                                 <Text style={styles.review_Title}>{value.title}</Text>
                                                                 <Text style={styles.review_Review}>{value.description}</Text>
                                                                 <View style={pDs.baseLine} />
@@ -274,20 +243,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                     }
                                                 })}
 
-                                                {/* <Pagination
-                                                        total={newData.length}
-                                                        defaultCurrent={page}
-                                                        defaultPageSize={3}
-                                                        activeDotStyle={{ backgroundColor: 'red' }}
-                                                        onChange={setPage}
-                                                        size="middle"
-                                                        styleBox={styles.boxStyle}
-                                                        style={styles.paginationStyle}
-                                                        pageSizeOptions={5}
-
-                                                    /> */}
                                                 <TouchableOpacity style={styles.allreview_root} onPress={() => navigation.navigate('reviews')} >
-
                                                     <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
                                                     <Ionicons
                                                         name="chevron-forward-outline"
@@ -298,7 +254,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 </TouchableOpacity>
 
                                                 <View style={styles.youMayAlso}>
-
                                                     <Heading title=' YOU MAY ALSO LIKE ' />
                                                     <TouchableOpacity style={styles.viewLatestProduct}
                                                         onPress={() => console.log("first")}
@@ -308,18 +263,16 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                         </Text>
                                                     </TouchableOpacity>
                                                 </View>
+
                                                 <View style={pDs.productsListRoot}>
                                                     <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-
                                                         {bestSellingProduct.map((e, i) => {
                                                             return (
                                                                 <TouchableOpacity style={pDs.product109} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
                                                                     <View style={pDs.imgRoot}>
                                                                         <Image source={{ uri: e.images }} style={pDs.productImg} />
                                                                     </View>
-
                                                                     <View style={pDs.contentRoot}  >
-
                                                                         <View style={pDs.textRoot1}>
                                                                             <Text style={pDs.contentText}>{e.description}</Text>
                                                                         </View>
@@ -331,7 +284,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                             <Text style={pDs.spaceRoot}>/ </Text>
                                                                             <Text style={pDs.oldprice}> ₹{e.oldprice}</Text>
                                                                         </View>
-
                                                                     </View>
 
                                                                     {/* Buy Now Button  */}
@@ -350,7 +302,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     </View>
                                 )
                             })}
-
                         </ScrollView >
                 }
             </SafeAreaView>
@@ -361,7 +312,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
 export default ProductDetailScreen
 
 const styles = StyleSheet.create({
-    safe_roor: {
+    safe_root: {
         height: '100%',
         width: '100%',
         alignSelf: 'center',
@@ -420,12 +371,12 @@ const styles = StyleSheet.create({
 
     productButtonRoot: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         borderColor: '#333333',
-        borderWidth: 3,
-        borderRadius: 50,
+        // borderWidth: 2,
+        borderRadius: 15,
         height: 40,
-        width: 90
+        width: 55
     },
     blackButton: {
         backgroundColor: 'black',
