@@ -1,15 +1,38 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form'
 import TextInput from '../components/AccountInputHook'
 import { ScrollView } from 'react-native-gesture-handler'
+import { loginActions } from '../store/UserSlice'
+
 
 const AddAddress = () => {
+    const userAdd = useSelector(state => state.userData.userAddress);
+    const dispatch = useDispatch();
+    // console.log("recieved", userAdd)
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
 
     })
     const onSubmit = data => {
-        console.log("datatata", data);
+        // console.log("datatata", data);
+        let AddData = [...userAdd, {
+            firstname: data.firstname,
+            Lastname: data.Lastname,
+            flate: data.flate,
+            Apartment: data.Apartment,
+            State: data.State,
+            City: data.City,
+            Pincode: data.Pincode,
+            phone: data.phone
+        }];
+
+        dispatch(loginActions.useraddress(
+            {
+                userAddress: AddData
+            }
+        ));
+
         reset();
     }
     return (
@@ -34,7 +57,7 @@ const AddAddress = () => {
                                         autoCompleteType="firstname"
                                         textContentType="firstname"
                                         keyboardType="text"
-                                        style={{ height: 40 }}
+                                        State style={{ height: 40 }}
                                     />
                                 )}
                                 name="firstname"
@@ -75,7 +98,7 @@ const AddAddress = () => {
                             rules={{
                                 required: true,
                                 pattern: { value: /^[0-9]{10,10}$/ }
-                            }}
+                            }} Pincode
                             render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     onChangeText={onChange}
@@ -100,7 +123,7 @@ const AddAddress = () => {
                             control={control}
                             rules={{
                                 required: true,
-                                pattern: { value: /^[a-zA-Z ]{2,10}$/ }
+                                pattern: { value: /^[a-zA-Z,0-9 ]{2,10}$/ }
                             }}
                             render={({ field: { onChange, value } }) => (
                                 <TextInput

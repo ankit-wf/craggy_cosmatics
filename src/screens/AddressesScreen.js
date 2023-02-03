@@ -1,12 +1,24 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView } from 'react-native'
 import React from 'react'
+import { FAB } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons'
 import BackButton from '../components/BackButton';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { loginActions } from '../store/UserSlice'
 
 const AddressesScreen = ({ navigation }) => {
-  const AddressData = useSelector(state => state.userData.user_address);
+  const dispatch = useDispatch();
+  const AddData = useSelector(state => state.userData.userAddress);
+  // console.log("XXXXXX", AddData)
+
+  const removeHandler = (index) => {
+
+    dispatch(loginActions.remove(
+      {
+        index: index
+      }
+    ))
+  }
 
   return (
     <View style={styles.root_container}>
@@ -14,11 +26,9 @@ const AddressesScreen = ({ navigation }) => {
         <View >
           <BackButton goBack={navigation.goBack} Color={'#666666'} />
         </View>
-
         <View style={styles.searchImgRoot}>
           <Text style={styles.mycartText}>MANAGE   ADDRESS</Text>
         </View>
-
       </View> */}
       {/* <Text style={styles.addressText}>The following addresses will be used on the checkout page by default.</Text>
 
@@ -38,7 +48,7 @@ const AddressesScreen = ({ navigation }) => {
         <Text style={styles.BillingaddressText}> You have not set up this type of address yet.</Text>
       </View> */}
 
-      {AddressData == true ?
+      {AddData.length < 1 ?
         <View>
           <View style={styles.root_defaultImg}>
             <Image source={(require('../../assets/images/dummy_location.png'))} resizeMode="cover" />
@@ -48,35 +58,45 @@ const AddressesScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         :
-        <View style={styles.default_address}>
-          <TouchableOpacity onPress={() => navigation.navigate('AddAddress')}>
+        <View>
+          <FAB
+            icon="plus"
+            style={styles.fab}
+            onPress={() => navigation.navigate('AddAddress')}
+          />
+          {/* <TouchableOpacity onPress={() => navigation.navigate('AddAddress')} style={styles.btn_btn}>
             <Text style={styles.add_Add}>+ Add</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
-          <View style={{ width: '90%', alignSelf: 'center' }}>
-            <View style={styles.default_color} >
-              <Text style={{ color: '#fff', alignSelf: 'center', }}>DEFAULT</Text>
-            </View>
+          {AddData.map((data, i) => {
+            return (
+              <View style={styles.default_address} key={i}>
 
-            <Text style={styles.default_Name}>Name</Text>
+                <View style={{ width: '90%', alignSelf: 'center' }}>
+                  <View style={styles.default_color} >
+                    <Text style={{ color: '#fff', alignSelf: 'center', }}>DEFAULT</Text>
+                  </View>
 
-            <Text style={styles.add_text}>Full Address</Text>
-            <Text style={styles.add_text}>Phone : 1234567890</Text>
+                  <Text style={styles.default_Name}> {data.firstname} {data.Lastname} </Text>
 
-            <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity>
-                <Text style={styles.add_delete}>Delete</Text>
-              </TouchableOpacity>
+                  <Text style={styles.add_text}> {data.flate} {data.Apartment} {data.City} {data.State} {data.Pincode} </Text>
+                  <Text style={styles.add_text}>Phone : {data.phone} </Text>
 
-              <TouchableOpacity>
-                <Text style={styles.add_text}>Edit</Text>
-              </TouchableOpacity>
-            </View>
+                  <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => removeHandler(i)}>
+                      <Text style={styles.add_delete}>Delete</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('editAddress', (i))}>
+                      <Text style={styles.add_text}>Edit</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
 
-          </View>
+              </View>
+            )
+          })}
         </View>
       }
-
 
     </View>
   )
@@ -117,14 +137,28 @@ const styles = StyleSheet.create({
   },
   default_address: {
     height: 200,
-    width: "90%",
+    // width: "90%",
     backgroundColor: '#fff',
-    borderRadius: 10
+    borderRadius: 10,
+    marginTop: 10
+  },
+  btn_btn: {
+    height: 70,
+    width: 70,
+    backgroundColor: 'red',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    // right: "-20%",
+    // bottom: 0,
   },
   add_Add: {
-    alignSelf: 'flex-end',
-    fontSize: 16,
-    paddingRight: 15
+    fontSize: 18,
+    color: '#fff',
+    // alignSelf: 'flex-end',
+    // paddingRight: 15
+    // alignItems: 'center'
   },
   default_color: {
     height: 30,
@@ -154,7 +188,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '400',
     paddingRight: 20
-  }
+  },
+  fab: {
+    position: 'absolute',
+    zIndex: 999,
+    // margin: 16,
+    top: "-15%",
+    right: 0,
+    // bottom: 0,
+  },
   // searchRoot: {
   //   // width: '95%',
   //   // alignSelf: 'center',
