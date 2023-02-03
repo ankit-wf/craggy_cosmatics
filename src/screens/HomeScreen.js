@@ -125,25 +125,25 @@ const HomeScreen = ({ navigation }) => {
         {/* <catgories /> */}
         <View style={cS.categoriesRoot}>
           {data.map((data, i) => {
-            if (data.count > 0)
-              return (
-                <TouchableOpacity
-                  onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
-                  style={{ height: 100, width: 80, marginLeft: 8, marginTop: 30 }}
-                >
-                  {imageData.map((item, id) => {
-                    return (
-                      (item.name === data.slug) &&
-                      <View style={cS.skinImgRoot} key={id}>
-                        <Image source={item.image} style={cS.imgCenter} />
-                      </View>
-                    )
-                  })}
-                  <View key={i}>
-                    <Text style={cS.skinImgText}>{data.name}</Text>
-                  </View>
-                </TouchableOpacity>
-              )
+            // if (data.count > 0)
+            return (
+              <TouchableOpacity
+                onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
+                style={{ height: 100, width: 80, marginLeft: 8, marginTop: 30 }}
+              >
+                {imageData.map((item, id) => {
+                  return (
+                    (item.name === data.slug) &&
+                    <View style={cS.skinImgRoot} key={id}>
+                      <Image source={item.image} style={cS.imgCenter} />
+                    </View>
+                  )
+                })}
+                <View key={i}>
+                  <Text style={cS.skinImgText}>{data.name}</Text>
+                </View>
+              </TouchableOpacity>
+            )
           })}
         </View>
 
