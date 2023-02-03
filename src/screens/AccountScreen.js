@@ -7,11 +7,6 @@ import { loginActions } from '../store/UserSlice'
 import { useFocusEffect } from '@react-navigation/native';
 
 
-
-import RBSheet from "react-native-raw-bottom-sheet";
-
-
-
 const AccountScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const storeData = useSelector(state => state.cartData.cart);
@@ -75,15 +70,15 @@ const AccountScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.CraggyTextRoot}>
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_profile')}>
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_order')}>
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
-              name="heart-circle"
+              name="newspaper-outline"
               color='#666666'
-              size={35}
+              size={32}
               style={{ marginTop: 8 }}
             />
-            <Text style={styles.profileText}>My Profile</Text>
+            <Text style={styles.profileText}>Orders</Text>
           </View>
 
           <Ionicons
