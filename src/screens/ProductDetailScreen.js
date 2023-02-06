@@ -24,6 +24,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true);
     const [heart, setHeart] = useState(false);
+    const id = route.params;
 
     useEffect(() => {
         axios.get(`https://craggycosmetic.com/api/products/`,
@@ -52,7 +53,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const handlePress = (gg) => {
         setExpanded(gg);
     };
-    const id = route.params;
+
 
     const addOne = () => {
         setOne(one + 1)
@@ -64,13 +65,13 @@ const ProductDetailScreen = ({ navigation, route }) => {
         }
     }
 
-    const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price) => {
+    const CartHolder = (description, product_id, image, regular_price, sale_price) => {
         let Data = [...storeData, {
-            description: product_title,
+            description: description,
             categoriesDetail_id: product_id,
             images: image,
-            price: regular_price,
-            oldprice: sale_price,
+            oldprice: regular_price,
+            price: sale_price,
             quantity: 1
         }];
         dispatch(submitActions.price(
@@ -78,7 +79,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 cart: Data
             }
         ));
-        navigation.navigate('Cart', product_id);
+        navigation.navigate("Cart", product_id);
     }
 
     const wishlistHandler = () => {
@@ -140,7 +141,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             </View>
                                             <View>
                                                 <TouchableOpacity
-                                                    onPress={() => AddToCartHolder(data.product_title, data.product_id, data.image, data.regular_price, data.sale_price)}
+                                                    onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
                                                     style={styles.buyNowButton}
                                                 >
                                                     <Text style={styles.buttonText}>ADD TO CART </Text>

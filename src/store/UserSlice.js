@@ -21,7 +21,7 @@ const UserSlice = createSlice({
         },
         useraddress(state, action) {
             state.userAddress = action.payload.userAddress;
-            console.log("gggggg", action.payload.userAddress)
+            // console.log("gggggg", action.payload.userAddress)
         },
         remove(state, action) {
             state.userAddress.splice(action.payload.index, 1);

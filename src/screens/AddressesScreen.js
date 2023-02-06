@@ -9,8 +9,7 @@ import { loginActions } from '../store/UserSlice'
 const AddressesScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const AddData = useSelector(state => state.userData.userAddress);
-  // console.log("XXXXXX", AddData)
-
+  // console.log("datataaaaa", AddData)
   const removeHandler = (index) => {
 
     dispatch(loginActions.remove(

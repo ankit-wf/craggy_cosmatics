@@ -8,11 +8,10 @@ import TextInput from '../components/AccountInputHook'
 import { useRoute } from '@react-navigation/native'
 
 
-const EditAddress = () => {
+const EditAddress = ({ navigation }) => {
     const route = useRoute();
     const index = route.params;
     // console.log("iiiinnnnddddxxx", index)
-
     const userAdd = useSelector(state => state.userData.userAddress);
     const dispatch = useDispatch();
     // console.log("recieved", userAdd)
@@ -22,7 +21,7 @@ const EditAddress = () => {
     useEffect(() => {
         {
             userAdd.map((v, i) => {
-                console.log("vvvgggg", v)
+                // console.log("vvvgggg", v)
                 reset({
                     firstname: v.firstname,
                     Lastname: v.Lastname,
@@ -37,8 +36,8 @@ const EditAddress = () => {
         }
     }, [])
     const onSubmit = data => {
-        console.log("datatata", data);
-        let AddData = [...userAdd, {
+        // console.log("datatata", data);
+        let AddData = [{
             index: index,
             firstname: data.firstname,
             Lastname: data.Lastname,
@@ -49,11 +48,14 @@ const EditAddress = () => {
             Pincode: data.Pincode,
             phone: data.phone
         }];
+        // console.log("dddddd", AddData)
+
         dispatch(loginActions.useraddress(
             {
                 userAddress: AddData
             }
         ));
+        navigation.navigate('Addresses')
         // reset();
     }
     return (
