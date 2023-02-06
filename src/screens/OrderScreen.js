@@ -4,11 +4,14 @@ import BackButton from '../components/BackButton'
 import Heading from '../components/Heading'
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
+import { useStyles } from '../styles/responsiveStyle'
 
 
 const OrderScreen = ({ navigation }) => {
+  const gs = useStyles();
+
   return (
-    <View >
+    <View>
       {/* <View style={{ flexDirection: 'row', }}>
         <BackButton goBack={navigation.goBack} Color={'#666666'} />
         <Text style={styles.deliveryText}>MY ORDERS</Text>
@@ -16,16 +19,18 @@ const OrderScreen = ({ navigation }) => {
       {/* <View style={{ alignItems: 'center', marginTop: '40%' }}>
         <Text style={{ fontSize: 20 }}> Order List Empty</Text>
       </View> */}
-
+      <TouchableOpacity style={styles.shopping_btn}>
+        <Text style={styles.shopping_text}>Continue Shopping</Text>
+      </TouchableOpacity>
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 10, }}>
         <Heading title=' best selling ' />
 
         <TouchableOpacity
-          style={styles.viewLatestProduct}
+          style={gs.viewLatestProduct}
           onPress={() => navigation.navigate("AllBestseller")}
         >
-          <Text style={styles.latestProductText} >
+          <Text style={gs.latestProductText} >
             View All
           </Text>
         </TouchableOpacity>
@@ -69,9 +74,7 @@ const OrderScreen = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <TouchableOpacity style={styles.shopping_btn}>
-        <Text style={styles.shopping_text}>Continue Shopping</Text>
-      </TouchableOpacity>
+
     </View>
   )
 }
