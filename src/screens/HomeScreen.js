@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView, Keyboard, RefreshControl, } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Keyboard, RefreshControl, StyleSheet } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Heading from '../components/Heading'
 import Header from '../components/Header'
@@ -34,14 +34,13 @@ const HomeScreen = ({ navigation }) => {
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
-  }, []);
+  }, []); StyleSheet
 
   useEffect(() => {
     axios.get(
       `https://craggycosmetic.com/api/products/category/`,
       {
         headers: {
-          // 'Content-Type': 'application/json',
           'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
         }
       }
@@ -55,7 +54,6 @@ const HomeScreen = ({ navigation }) => {
         `https://craggycosmetic.com/api/products/best-selling/`,
         {
           headers: {
-            // 'Content-Type': 'application/json',
             'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
           }
         }
@@ -65,7 +63,6 @@ const HomeScreen = ({ navigation }) => {
           setBestData(res.data.response)
         }
       })
-
   }, [])
 
   const bestSellingHolder = (description, product_id, image, sale_price, regular_price,) => {
@@ -98,11 +95,9 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate('Reward')
   }
 
-
   return (
     <View style={ds.appContainer}>
       <Header onPress={openDrawer} notification={notification} Gift={RewardHandler} search={searchHandler} />
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled={true}
@@ -110,14 +105,13 @@ const HomeScreen = ({ navigation }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-
         {/* Banner Swiper  */}
         <View style={styles.swiperRoot}>
           <Swiper style={styles.wrapper} autoplay >
             {bannerImg.map((e, i) => {
               return (
                 <View key={i} >
-                  <Image source={{ uri: e.images }} style={{ height: '100%', width: '100%' }} />
+                  <Image source={{ uri: e.images }} style={styles1.bannerImgHight} />
 
                   <View style={styles.sliderContent}>
                     <View style={styles.bannerTextRoot}>
@@ -136,7 +130,6 @@ const HomeScreen = ({ navigation }) => {
               )
             })}
           </Swiper>
-
         </View>
 
         {/* <catgories /> */}
@@ -146,7 +139,7 @@ const HomeScreen = ({ navigation }) => {
             return (
               <TouchableOpacity
                 onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
-                style={{ height: 100, width: 80, marginLeft: 8, marginTop: 30 }}
+                style={styles1.categoriesHeight}
               >
                 {imageData.map((item, id) => {
                   return (
@@ -164,65 +157,57 @@ const HomeScreen = ({ navigation }) => {
           })}
         </View>
 
+        <View style={styles1.bestSellerRoot}>
+          <Heading title=' best selling ' />
 
-        <View>
-
-
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 10 }}>
-            <Heading title=' best selling ' />
-
-            <TouchableOpacity
-              style={styles.viewLatestProduct}
-              onPress={() => navigation.navigate("AllBestseller")}
-            >
-              <Text style={styles.latestProductText}>
-                View All
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={bsP.productsListRoot}>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-              {bestData.map((e, i) => {
-                // console.log("eeeeee", e.category)
-                return (
-                  <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.product_id)} >
-                    <View style={bsP.imgRoot} >
-                      <Image source={{ uri: e.image }} style={bsP.productImg} />
-                    </View>
-
-                    <View style={bsP.contentRoot}>
-                      <View style={bsP.descriptionRoot}>
-                        <Text style={bsP.descriptionText}>{e.description}</Text>
-                      </View>
-
-                      <View style={bsP.baseLine}></View>
-
-                      <View style={bsP.priceRoot}>
-                        <Text style={bsP.price}>₹{e.sale_price}</Text>
-                        <Text style={bsP.spaceRoot}>/ </Text>
-                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
-                      </View>
-                    </View>
-
-                    {/* Buy Now Button  */}
-                    <TouchableOpacity style={bsP.buyNowButton}
-                      onPress={() => bestSellingHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
-                    >
-                      <Text style={bsP.buttonText}>BUY NOW</Text>
-                    </TouchableOpacity>
-                  </TouchableOpacity>
-                )
-              })}
-            </ScrollView>
-          </View>
-
-
-
-
+          <TouchableOpacity
+            style={styles.viewLatestProduct}
+            onPress={() => navigation.navigate("AllBestseller")}
+          >
+            <Text style={styles.latestProductText}>
+              View All
+            </Text>
+          </TouchableOpacity>
         </View>
+
+        <View style={bsP.productsListRoot}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+            {bestData.map((e, i) => {
+              // console.log("eeeeee", e.category)
+              return (
+                <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.product_id)} >
+                  <View style={bsP.imgRoot} >
+                    <Image source={{ uri: e.image }} style={bsP.productImg} />
+                  </View>
+
+                  <View style={bsP.contentRoot}>
+                    <View style={bsP.descriptionRoot}>
+                      <Text style={bsP.descriptionText}>{e.description}</Text>
+                    </View>
+
+                    <View style={bsP.baseLine}></View>
+
+                    <View style={bsP.priceRoot}>
+                      <Text style={bsP.price}>₹{e.sale_price}</Text>
+                      <Text style={bsP.spaceRoot}>/ </Text>
+                      <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                    </View>
+                  </View>
+
+                  {/* Buy Now Button  */}
+                  <TouchableOpacity style={bsP.buyNowButton}
+                    onPress={() => bestSellingHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
+                  >
+                    <Text style={bsP.buttonText}>BUY NOW</Text>
+                  </TouchableOpacity>
+                </TouchableOpacity>
+              )
+            })}
+          </ScrollView>
+        </View>
+
         {/* Latest Product  */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginBottom: 10 }}>
+        <View style={styles1.bestSellerRoot}>
           <Heading title=' latest product ' />
 
           <TouchableOpacity
@@ -310,5 +295,22 @@ const HomeScreen = ({ navigation }) => {
     </View >
   )
 }
-
 export default HomeScreen;
+const styles1 = StyleSheet.create({
+  bannerImgHight: {
+    height: '100%',
+    width: '100%'
+  },
+  categoriesHeight: {
+    height: 100,
+    width: 80,
+    marginLeft: 8,
+    marginTop: 30
+  },
+  bestSellerRoot: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+    marginBottom: 10
+  }
+})

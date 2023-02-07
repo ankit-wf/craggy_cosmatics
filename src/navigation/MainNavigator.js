@@ -83,11 +83,11 @@ const MainNavigator = () => {
       <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'OFFERS AND COUPAN' }} />
       <Stack.Screen name='AllBestseller' component={ViewAllBestsellers} options={{ headerShown: true, headerTitle: 'Bestsellers' }} />
       <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} />
-      <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerShown: true, }} />
+      <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerShown: true, headerTitle: 'AllProducts' }} />
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />
       <Stack.Screen name='skinCare_product' component={SkinCareProduct} options={{ headerShown: true }} />
-      <Stack.Screen name='NotificationScreen' component={NotificationScreen} options={{ headerShown: true }} />
-      <Stack.Screen name='Reward' component={Reward} options={{ headerShown: true }} />
+      <Stack.Screen name='NotificationScreen' component={NotificationScreen} options={{ headerTitle: 'Notification' }} />
+      <Stack.Screen name='Reward' component={Reward} options={{ headerTitle: 'Reward' }} />
       <Stack.Screen name='SearchPage' component={SearchScreen} options={{ headerShown: false }} />
       <Stack.Screen name='ProductListing' component={ProductListingScreen}
       // options={({ navigation, route }) => ({
@@ -104,7 +104,7 @@ const MainNavigator = () => {
       //   ),
       // })}
       />
-      <Stack.Screen name='AddAddress' component={AddAddress} />
+      <Stack.Screen name='AddAddress' component={AddAddress} options={{ headerTitle: 'AddAddress' }} />
       <Stack.Screen name='editAddress' component={EditAddress} options={{ headerTitle: 'EditAdress' }} />
 
     </Stack.Navigator>

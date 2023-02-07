@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Swiper from 'react-native-swiper'
-import { List } from 'react-native-paper';
+import { List, Snackbar } from 'react-native-paper';
 import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
 import Heading from '../components/Heading';
@@ -25,6 +25,16 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true);
     const [heart, setHeart] = useState(false);
     const id = route.params;
+
+    // Pop - Up add to cart
+
+    const [visible, setVisible] = useState(false);
+    const onToggleSnackBar = () => {
+        setVisible(!visible)
+    }
+    const onDismissSnackBar = () => {
+        setVisible(false)
+    }
 
     useEffect(() => {
         axios.get(`https://craggycosmetic.com/api/products/`,
@@ -53,8 +63,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const handlePress = (gg) => {
         setExpanded(gg);
     };
-
-
     const addOne = () => {
         setOne(one + 1)
     }
@@ -64,7 +72,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
             setOne(one - 1)
         }
     }
-
     const CartHolder = (description, product_id, image, regular_price, sale_price) => {
         let Data = [...storeData, {
             description: description,
@@ -79,13 +86,13 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 cart: Data
             }
         ));
-        navigation.navigate("Cart", product_id);
+        onToggleSnackBar();
+        // navigation.navigate("Cart");
     }
 
     const wishlistHandler = () => {
         setHeart(!heart);
     }
-
 
     return (
         <View>
@@ -100,7 +107,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                             {data.map((data, index) => {
                                 return (
                                     <View key={index}>
-                                        <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
+                                        <View style={styles.BackButton_root}>
                                             <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
                                         </View>
                                         <View style={styles.swiperRoot}>
@@ -144,8 +151,19 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                     onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
                                                     style={styles.buyNowButton}
                                                 >
-                                                    <Text style={styles.buttonText}>ADD TO CART </Text>
+                                                    {visible ? <Text style={styles.buttonText}>ADD TO CART </Text> : <Text style={styles.buttonText}>ADD TO CART </Text>}
+
                                                 </TouchableOpacity>
+                                                <View>
+                                                    <Snackbar
+                                                        visible={visible}
+                                                        onDismiss={onDismissSnackBar}
+                                                        duration={2000}
+                                                        wrapperStyle={{ maxWidth: 168, alignSelf: 'center', }}
+                                                    >
+                                                        Item Added to Cart
+                                                    </Snackbar>
+                                                </View>
                                             </View>
                                         </View>
 
@@ -313,10 +331,18 @@ const ProductDetailScreen = ({ navigation, route }) => {
 export default ProductDetailScreen
 
 const styles = StyleSheet.create({
+    container: {
+        marginTop: 250
+    },
     safe_root: {
         height: '100%',
         width: '100%',
         alignSelf: 'center',
+    },
+    BackButton_root: {
+        position: 'absolute',
+        zIndex: 1,
+        marginLeft: '5%',
     },
     swiperRoot: {
         height: 400,
