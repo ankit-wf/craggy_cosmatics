@@ -99,7 +99,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
             <SafeAreaView style={styles.safe_root}>
                 {
                     loading ?
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
+                        <View style={styles.loader} >
                             <ActivityIndicator size="large" />
                         </View>
                         :
@@ -113,7 +113,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <View style={styles.swiperRoot}>
                                             <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
                                                 <View key={index}>
-                                                    <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
+                                                    <Image source={{ uri: data.image }} style={styles.swiper_img} />
                                                 </View>
                                             </Swiper>
                                         </View>
@@ -121,6 +121,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             <View style={styles.textRoot}>
                                                 <Text style={styles.craggyText}>{data.product_title}</Text>
                                             </View>
+
                                         </View>
                                         <View style={{ width: '100%' }}>
                                             <View style={pDs.productRoot}>
@@ -146,6 +147,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                     </TouchableOpacity>
                                                 </View> */}
                                             </View>
+
                                             <View>
                                                 <TouchableOpacity
                                                     onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
@@ -159,7 +161,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                         visible={visible}
                                                         onDismiss={onDismissSnackBar}
                                                         duration={2000}
-                                                        wrapperStyle={{ maxWidth: 168, alignSelf: 'center', }}
+                                                        wrapperStyle={styles.Snackbar_style}
                                                     >
                                                         Item Added to Cart
                                                     </Snackbar>
@@ -243,7 +245,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                     <Text style={styles.review_Name}>{value.title}</Text>
                                                                     <Text style={styles.review_Date}>{value.date}</Text>
                                                                 </View>
-                                                                <View style={{ flexDirection: 'row', marginLeft: -8 }} >
+                                                                <View style={styles.rating_root} >
                                                                     <Rating
                                                                         readonly={true}
                                                                         ratingCount={5}
@@ -339,6 +341,11 @@ const styles = StyleSheet.create({
         width: '100%',
         alignSelf: 'center',
     },
+    loader: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     BackButton_root: {
         position: 'absolute',
         zIndex: 1,
@@ -347,6 +354,10 @@ const styles = StyleSheet.create({
     swiperRoot: {
         height: 400,
         position: 'relative'
+    },
+    swiper_img: {
+        height: '100%',
+        width: '100%'
     },
     buyNowButton: {
         height: 40,
@@ -366,7 +377,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway700',
         fontSize: 10,
         lineHeight: 13
-
+    },
+    Snackbar_style: {
+        maxWidth: 168,
+        alignSelf: 'center',
     },
     Accordion_Root: {
         alignContent: 'center',
@@ -569,6 +583,10 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontFamily: 'Lato400',
         lineHeight: 15
+    },
+    rating_root: {
+        flexDirection: 'row',
+        marginLeft: -8
     },
     review_Title: {
         fontSize: 14,

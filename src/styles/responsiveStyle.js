@@ -4,6 +4,7 @@ import { theme } from '../../src/core/theme';
 export const useStyles = CreateResponsiveStyle(
     {
         wrapper: {},
+
         headerN: {
             paddingTop: 30,
             paddingBottom: 20,

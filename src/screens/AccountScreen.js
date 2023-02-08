@@ -51,17 +51,17 @@ const AccountScreen = ({ navigation }) => {
       <View style={styles.Root}>
         <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
           <View style={styles.profileImgRoot}>
-            <View style={{ height: 90, width: 90, borderWidth: 3, borderColor: '#CC933B', borderRadius: 100, alignSelf: 'center' }}>
+            <View style={styles.ImgRoot_Radius}>
               <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
             </View>
             <View style={styles.profileTextRoot}>
-              <View style={{ width: 300 }}>
+              <View style={styles.display_name}>
                 <Text style={styles.redTextName}>{userData.display_name}</Text>
               </View>
-              <View style={{ width: 300, marginTop: 12 }}>
+              <View style={styles.user_phone}>
                 <Text style={styles.redText}>+91{userData.user_phone}</Text>
               </View>
-              <View style={{ width: 300 }}>
+              <View style={styles.display_name}>
                 <Text style={styles.redText}>{userData.user_email}</Text>
               </View>
             </View>
@@ -76,7 +76,7 @@ const AccountScreen = ({ navigation }) => {
               name="newspaper-outline"
               color='#666666'
               size={32}
-              style={{ marginTop: 8 }}
+              style={styles.icon_style}
             />
             <Text style={styles.profileText}>Orders</Text>
           </View>
@@ -85,7 +85,7 @@ const AccountScreen = ({ navigation }) => {
             name="chevron-forward"
             color='#666666'
             size={25}
-            style={{ lineHeight: 42 }}
+            style={styles.icon_lineHieght}
           />
         </TouchableOpacity>
 
@@ -97,7 +97,7 @@ const AccountScreen = ({ navigation }) => {
               name="location-outline"
               color='#666666'
               size={32}
-              style={{ marginTop: 8 }}
+              style={styles.icon_style}
             />
             <Text style={styles.profileText}> Addresses</Text>
           </View>
@@ -106,19 +106,19 @@ const AccountScreen = ({ navigation }) => {
             name="chevron-forward"
             color='#666666'
             size={25}
-            style={{ lineHeight: 42 }}
+            style={styles.icon_lineHieght}
           />
         </TouchableOpacity>
 
         <View style={styles.baseLine} />
 
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('reviews')} >
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_wishlist')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle-outline"
               color='#666666'
               size={35}
-              style={{ marginTop: 8 }}
+              style={styles.icon_style}
             />
             <Text style={styles.profileText}>Wishlist</Text>
           </View>
@@ -127,7 +127,7 @@ const AccountScreen = ({ navigation }) => {
             name="chevron-forward"
             color='#666666'
             size={25}
-            style={{ lineHeight: 42 }}
+            style={styles.icon_lineHieght}
           />
         </TouchableOpacity>
 
@@ -139,7 +139,7 @@ const AccountScreen = ({ navigation }) => {
               name="headset-outline"
               color='#666666'
               size={32}
-              style={{ marginTop: 8 }}
+              style={styles.icon_style}
             />
             <Text style={styles.profileText}>Help & Suport</Text>
           </View>
@@ -148,7 +148,7 @@ const AccountScreen = ({ navigation }) => {
             name="chevron-forward"
             color='#666666'
             size={25}
-            style={{ lineHeight: 42 }}
+            style={styles.icon_lineHieght}
           />
         </TouchableOpacity>
         <View style={styles.baseLine} />
@@ -160,7 +160,7 @@ const AccountScreen = ({ navigation }) => {
               name="md-document-text-outline"
               color='#666666'
               size={32}
-              style={{ marginTop: 8 }}
+              style={styles.icon_style}
             />
             <Text style={styles.profileText}>Terms & Conditions</Text>
           </View>
@@ -169,7 +169,7 @@ const AccountScreen = ({ navigation }) => {
             name="chevron-forward"
             color='#666666'
             size={25}
-            style={{ lineHeight: 42 }}
+            style={styles.icon_lineHieght}
           />
         </TouchableOpacity>
         <View style={styles.baseLine} />
@@ -181,7 +181,7 @@ const AccountScreen = ({ navigation }) => {
               name="heart-circle"
               color='#666666'
               size={35}
-              style={{ marginTop: 8 }}
+              style={styles.icon_style}
             />
             <Text style={styles.profileText}>About Us</Text>
           </View>
@@ -190,7 +190,7 @@ const AccountScreen = ({ navigation }) => {
             name="chevron-forward"
             color='#666666'
             size={25}
-            style={{ lineHeight: 42 }}
+            style={styles.icon_lineHieght}
           />
         </TouchableOpacity>
 
@@ -201,7 +201,7 @@ const AccountScreen = ({ navigation }) => {
               name="heart-circle"
               color='#666666'
               size={35}
-              style={{ marginTop: 8 }}
+              style={styles.icon_style}
             />
             <Text style={styles.profileText}>OFFER AND COUPAN</Text>
           </View>
@@ -210,7 +210,7 @@ const AccountScreen = ({ navigation }) => {
             name="chevron-forward"
             color='#666666'
             size={25}
-            style={{ lineHeight: 42 }}
+            style={styles.icon_lineHieght}
           />
         </TouchableOpacity>
         <View style={styles.baseLine} />
@@ -220,7 +220,7 @@ const AccountScreen = ({ navigation }) => {
               name="exit-outline"
               color='#666666'
               size={32}
-              style={{ marginTop: 8 }}
+              style={styles.icon_style}
             />
             <Text style={styles.profileText}>Logout</Text>
           </View>
@@ -229,7 +229,7 @@ const AccountScreen = ({ navigation }) => {
             name="chevron-forward"
             color='#666666'
             size={25}
-            style={{ lineHeight: 42 }}
+            style={styles.icon_lineHieght}
           />
         </TouchableOpacity>
 
@@ -253,6 +253,14 @@ const styles = StyleSheet.create({
     marginHorizontal: '10%',
     flexDirection: 'row'
   },
+  ImgRoot_Radius: {
+    height: 90,
+    width: 90,
+    borderWidth: 3,
+    borderColor: '#CC933B',
+    borderRadius: 100,
+    alignSelf: 'center'
+  },
   imgStyle: {
     height: '100%',
     width: '100%'
@@ -268,6 +276,13 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     // marginTop: 15,
     // alignSelf: 'center',
+  },
+  display_name: {
+    width: 300
+  },
+  user_phone: {
+    width: 300,
+    marginTop: 12
   },
   helloText: {
     color: '#fff',
@@ -351,6 +366,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignSelf: 'center'
   },
+  icon_style: {
+    marginTop: 8
+  },
   profileText: {
     fontSize: 14,
     lineHeight: 42,
@@ -359,6 +377,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingTop: 3
 
+  },
+  icon_lineHieght: {
+    lineHeight: 42
   },
   craggyText: {
     fontSize: 20,

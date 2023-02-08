@@ -103,7 +103,6 @@ const ProductListingScreen = ({ navigation, route }) => {
         }
         // (!bottomSheet) ? bs.current.snapTo(1) : bs.current.snapTo(0)
     }
-
     return (
         <View>
             <ScrollView onScroll={onScrollHandle} >
@@ -112,7 +111,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                         {bannerImg.map((e, i) => {
                             return (
                                 <View key={i} >
-                                    <Image source={{ uri: e.images }} style={{ height: '100%', width: '100%' }} />
+                                    <Image source={{ uri: e.images }} style={styles1.banner_img} />
                                     <View style={styles.sliderContent}>
                                         <View style={styles.bannerTextRoot}>
                                             <Text style={styles.bannerText}>{e.line}</Text>
@@ -130,18 +129,18 @@ const ProductListingScreen = ({ navigation, route }) => {
                     </Swiper>
                 </View>
 
-                <View style={{ height: 50, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: 'black' }}>
-                    <Text style={{ fontSize: 25, color: '#C68625' }}>{name}</Text>
-                    <TouchableOpacity onPress={bottomSheetHandler} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 25, color: '#C68625' }}>Sort</Text>
-                        <Ionicons name="swap-vertical" size={25} style={{ color: '#C68625', marginLeft: 3 }} />
+                <View style={styles1.shorting_root}>
+                    <Text style={styles1.name_text}>{name}</Text>
+                    <TouchableOpacity onPress={bottomSheetHandler} style={styles1.sort_text_root}>
+                        <Text style={styles1.sort_text}>Sort</Text>
+                        <Ionicons name="swap-vertical" size={25} style={styles1.sort_icon} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={sS.productsListRoot}>
                     {
                         loading ?
-                            <ActivityIndicator size="large" color="#00ff00" style={{ marginTop: 150 }} />
+                            <ActivityIndicator size="large" color="#00ff00" style={styles1.loader} />
                             :
                             <FlatList
                                 data={data}
@@ -240,4 +239,34 @@ const styles1 = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+    banner_img: {
+        height: '100%',
+        width: '100%'
+    },
+    shorting_root: {
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: 'black'
+    },
+    name_text: {
+        fontSize: 25,
+        color: '#C68625'
+    },
+    sort_text_root: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    sort_text: {
+        fontSize: 25,
+        color: '#C68625'
+    },
+    sort_icon: {
+        color: '#C68625',
+        marginLeft: 3
+    },
+    loader: {
+        marginTop: 150
+    }
 })
