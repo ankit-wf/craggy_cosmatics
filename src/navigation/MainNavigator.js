@@ -19,18 +19,16 @@ import WriteReview from '../screens/WriteReview';
 import SkinCareProduct from '../screens/SkinCareProduct';
 import DrawerScreen from './Drawer';
 import NotificationScreen from '../screens/NotificationScreen';
-import Reward from '../screens/Reward';
+import RewardScreen from '../screens/RewardScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import ResetPassword from '../screens/ResetPassword';
 import AddAddress from '../screens/AddAdress';
 import EditAddress from '../screens/EditAddress';
-// import ProductListingScreen from '../screens/ProductListingScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useStyles } from '../styles/responsiveStyle';
-import { useSelector } from 'react-redux';
 
 const Stack = createStackNavigator();
 
@@ -69,7 +67,7 @@ const MainNavigator = () => {
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />
       <Stack.Screen name='skinCare_product' component={SkinCareProduct} options={{ headerShown: true }} />
       <Stack.Screen name='NotificationScreen' component={NotificationScreen} options={{ headerShown: true }} />
-      <Stack.Screen name='Reward' component={Reward} options={{ headerShown: true }} />
+      <Stack.Screen name='Reward' component={RewardScreen} options={{ headerShown: true }} />
       <Stack.Screen name='SearchPage' component={SearchScreen} options={{ headerShown: false }} />
       <Stack.Screen name='ProductListing' component={ProductListingScreen}
         options={({ navigation, route }) => ({

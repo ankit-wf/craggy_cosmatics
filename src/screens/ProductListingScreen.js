@@ -9,6 +9,8 @@ import { submitActions } from '../store/dataSlice'
 import { ScrollView } from 'react-native-virtualized-view';
 import { Ionicons } from '@expo/vector-icons'
 import BottomSheet from 'reanimated-bottom-sheet';
+import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+
 
 const bannerImg = require('../../Data/bannerSlider.json')
 
@@ -36,11 +38,9 @@ const ProductListingScreen = ({ navigation, route }) => {
             }
         ).then((res) => {
             setData(res.data)
-            setLoading(false);
-            //   if (res.data.status = "success") {
-            //     setData(res.data.response)
-            //   }
-            // console.log("first", res.data)
+            setTimeout(() => {
+                setLoading(false)
+            }, 2000);
         })
     }, [id])
 
@@ -130,7 +130,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                     </Swiper>
                 </View>
 
-                <View style={{ height: 50, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: 'black' }}>
+                <View style={{ height: 50, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: 'black', }}>
                     <Text style={{ fontSize: 25, color: '#C68625' }}>{name}</Text>
                     <TouchableOpacity onPress={bottomSheetHandler} style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{ fontSize: 25, color: '#C68625' }}>Sort</Text>
@@ -139,52 +139,51 @@ const ProductListingScreen = ({ navigation, route }) => {
                 </View>
 
                 <View style={sS.productsListRoot}>
-                    {
-                        loading ?
-                            <ActivityIndicator size="large" color="#00ff00" style={{ marginTop: 150 }} />
-                            :
-                            <FlatList
-                                data={data}
-                                renderItem={({ item }) => (
-                                    < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
-                                        <View style={sS.imgRoot} >
-                                            <Image source={{ uri: item.image }} style={sS.productImg} />
-                                        </View>
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => (
+                            <SkeletonContainer isLoading={loading}>
+                                <TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
+                                    <View style={sS.imgRoot} >
+                                        <Image source={{ uri: item.image }} style={sS.productImg} />
+                                    </View>
 
-                                        <View style={sS.contentRoot}>
-                                            <View style={sS.textRoot}>
-                                                <Text style={sS.contentText}>{item.product_title}</Text>
-                                            </View>
-                                            <View style={sS.baseLine}></View>
-                                            <View style={sS.priceRoot}>
-                                                <Text style={sS.price}>₹{item.sale_price}</Text>
-                                                <Text style={sS.spaceRoot}>/ </Text>
-                                                <Text style={sS.oldprice}>₹{item.regular_price}</Text>
-                                            </View>
+                                    <View style={sS.contentRoot}>
+                                        <View style={sS.textRoot}>
+                                            <Text style={sS.contentText}>{item.product_title}</Text>
                                         </View>
+                                        <View style={sS.baseLine}></View>
+                                        <View style={sS.priceRoot}>
+                                            <Text style={sS.price}>₹{item.sale_price}</Text>
+                                            <Text style={sS.spaceRoot}>/ </Text>
+                                            <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                        </View>
+                                    </View>
 
-                                        {/* {/ Buy Now Button  /} */}
-                                        <TouchableOpacity style={sS.buyNowButton}
-                                            onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                        >
-                                            <Text style={sS.buttonText}>BUY NOW</Text>
-                                        </TouchableOpacity>
+                                    {/* {/ Buy Now Button  /} */}
+                                    <TouchableOpacity style={sS.buyNowButton}
+                                        onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                    >
+                                        <Text style={sS.buttonText}>BUY NOW</Text>
                                     </TouchableOpacity>
-                                )}
-                                numColumns={2}
-                                keyExtractor={(item, index) => index}
-                            />
-                    }
+                                </TouchableOpacity>
+                            </SkeletonContainer>
+                        )}
+                        numColumns={2}
+                        keyExtractor={(item, index) => index}
+                    />
                 </View>
             </ScrollView>
-            <BottomSheet
-                ref={bs}
-                snapPoints={[340, 0]}
-                renderContent={renderInner}
-                initialSnap={1}
-                // callbackNode={fall}
-                enabledGestureInteraction={true}
-            />
+            <View style={{ marginTop: 300 }}>
+                <BottomSheet
+                    ref={bs}
+                    snapPoints={[340, 0]}
+                    renderContent={renderInner}
+                    initialSnap={1}
+                    // callbackNode={fall}
+                    enabledGestureInteraction={true}
+                />
+            </View>
         </View>
     )
 }

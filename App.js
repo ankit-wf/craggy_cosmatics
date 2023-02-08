@@ -6,12 +6,11 @@ import MainNavigator from './src/navigation/MainNavigator';
 import { Provider } from 'react-redux'
 import Index from './src/store/index'
 import { PersistGate } from "redux-persist/integration/react";
-import { View } from 'react-native'
-
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-// import DrawerScreen from './src/navigation/Drawer';
-// import NewCameraTesting from './src/NewCameraTesting';
+import { View } from 'react-native';
+import SkeletonTestScreen from './src/screens/SkeletonTestScreen';
+
 
 export default function App() {
   const { store, persistor } = Index();
@@ -49,7 +48,6 @@ export default function App() {
 
 
   return (
-
     <NavigationContainer >
       <StatusBar />
       <Provider store={store}>
@@ -58,6 +56,11 @@ export default function App() {
         </PersistGate>
       </Provider>
     </NavigationContainer >
+
+    // <View>
+    //   <SkeletonTestScreen />
+    // </View>
+
   );
 }
 
