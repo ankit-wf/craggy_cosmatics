@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { loginActions } from '../store/UserSlice'
 
 
-const AddAddress = () => {
+const AddAddress = ({ navigation }) => {
     const userAdd = useSelector(state => state.userData.userAddress);
     const dispatch = useDispatch();
     // console.log("recieved", userAdd)
@@ -32,8 +32,8 @@ const AddAddress = () => {
                 userAddress: AddData
             }
         ));
-
         reset();
+        navigation.navigate('Addresses')
     }
     return (
         <View>
@@ -255,11 +255,14 @@ const AddAddress = () => {
 export default AddAddress;
 const styles = StyleSheet.create({
     root_container: {
+        // flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center',
         height: '85%',
         width: '90%',
         borderWidth: 0.5,
         borderRadius: 15,
-        // marginTop: 15,
+        marginTop: "8%",
         alignSelf: 'center',
         backgroundColor: '#fff'
     },

@@ -28,6 +28,7 @@ const HomeScreen = ({ navigation }) => {
   const storeData = useSelector(state => state.cartData.cart);
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
+  const [bestData, setBestData] = useState([])
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = React.useCallback(() => {
@@ -50,24 +51,40 @@ const HomeScreen = ({ navigation }) => {
       if (res.data.status = "success") {
         setData(res.data.response)
       }
-    })
+    }),
+
+      axios.get(
+        `https://craggycosmetic.com/api/products/best-selling/`,
+        {
+          headers: {
+            // 'Content-Type': 'application/json',
+            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+          }
+        }
+      ).then((res) => {
+        // console.log("resss", res.data)
+        if (res.data.status = "success") {
+          setBestData(res.data.response)
+        }
+      })
+
   }, [])
 
-  const bestSellingHolder = (description, sellingProduct_id, images, price, oldprice, quantity) => {
+  const bestSellingHolder = (description, product_id, image, sale_price, regular_price,) => {
     let Data = [...storeData, {
       description: description,
-      sellingProduct_id: sellingProduct_id,
-      images: images,
-      price: price,
-      oldprice: oldprice,
-      quantity: quantity
+      sellingProduct_id: product_id,
+      images: image,
+      oldprice: sale_price,
+      price: regular_price,
+      quantity: 1
     }];
     dispatch(submitActions.price(
       {
         cart: Data
       }
     ));
-    navigation.navigate('Cart', sellingProduct_id);
+    navigation.navigate('Cart', product_id);
   }
   const notification = () => {
     navigation.navigate('NotificationScreen')
@@ -150,54 +167,63 @@ const HomeScreen = ({ navigation }) => {
           })}
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 10 }}>
-          <Heading title=' best selling ' />
 
-          <TouchableOpacity
-            style={styles.viewLatestProduct}
-            onPress={() => navigation.navigate("AllBestseller")}
-          >
-            <Text style={styles.latestProductText}>
-              View All
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <View>
 
-        <View style={bsP.productsListRoot}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-            {bestSellingProduct.map((e, i) => {
-              return (
-                <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
-                  <View style={bsP.imgRoot} >
-                    <Image source={{ uri: e.images }} style={bsP.productImg} />
-                  </View>
 
-                  <View style={bsP.contentRoot}>
-                    <View style={bsP.descriptionRoot}>
-                      <Text style={bsP.descriptionText}>{e.description}</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 10 }}>
+            <Heading title=' best selling ' />
+
+            <TouchableOpacity
+              style={styles.viewLatestProduct}
+              onPress={() => navigation.navigate("AllBestseller")}
+            >
+              <Text style={styles.latestProductText}>
+                View All
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={bsP.productsListRoot}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+              {bestData.map((e, i) => {
+                // console.log("eeeeee", e.category)
+                return (
+                  <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.product_id)} >
+                    <View style={bsP.imgRoot} >
+                      <Image source={{ uri: e.image }} style={bsP.productImg} />
                     </View>
 
-                    <View style={bsP.baseLine}></View>
+                    <View style={bsP.contentRoot}>
+                      <View style={bsP.descriptionRoot}>
+                        <Text style={bsP.descriptionText}>{e.description}</Text>
+                      </View>
 
-                    <View style={bsP.priceRoot}>
-                      <Text style={bsP.price}>₹{e.price}</Text>
-                      <Text style={bsP.spaceRoot}>/ </Text>
-                      <Text style={bsP.oldprice}>₹{e.oldprice}</Text>
+                      <View style={bsP.baseLine}></View>
+
+                      <View style={bsP.priceRoot}>
+                        <Text style={bsP.price}>₹{e.sale_price}</Text>
+                        <Text style={bsP.spaceRoot}>/ </Text>
+                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                      </View>
                     </View>
-                  </View>
 
-                  {/* Buy Now Button  */}
-                  <TouchableOpacity style={bsP.buyNowButton}
-                    onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
-                  >
-                    <Text style={bsP.buttonText}>BUY NOW</Text>
+                    {/* Buy Now Button  */}
+                    <TouchableOpacity style={bsP.buyNowButton}
+                      onPress={() => bestSellingHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
+                    >
+                      <Text style={bsP.buttonText}>BUY NOW</Text>
+                    </TouchableOpacity>
                   </TouchableOpacity>
-                </TouchableOpacity>
-              )
-            })}
-          </ScrollView>
-        </View>
+                )
+              })}
+            </ScrollView>
+          </View>
 
+
+
+
+        </View>
         {/* Latest Product  */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginBottom: 10 }}>
           <Heading title=' latest product ' />

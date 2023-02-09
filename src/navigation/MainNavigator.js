@@ -37,18 +37,36 @@ const MainNavigator = () => {
 
   return (
     <Stack.Navigator initialRouteName='HomeScreen'
-      screenOptions={{
+      // screenOptions={{
+      //   headerStyle: {
+      //     backgroundColor: 'black', //Set Header color 
+      //   },
+      //   headerTintColor: '#C68625', //Set Header text color
+      //   headerBackTitleVisible: false,
+      // }}
+      screenOptions={({ navigation, route }) => ({
         headerStyle: {
           backgroundColor: 'black', //Set Header color 
         },
         headerTintColor: '#C68625', //Set Header text color
         headerBackTitleVisible: false,
-      }}
+        headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
+        headerRight: () => (
+          <View style={gs.headerNotification}>
+            <TouchableOpacity onPress={() => navigation.navigate('NotificationScreen')}>
+              <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Reward')}>
+              <Ionicons name="gift-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
+            </TouchableOpacity>
+          </View>
+        ),
+      })}
     >
       <Stack.Screen name='HomeScreen' component={DrawerScreen} options={{ headerShown: false, headerShadowVisible: false }} />
       <Stack.Screen name="Product" component={ProductDetailScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="billingaddressDetails" component={BillingAdressDetails} options={{ headerShown: true, headerTitle: 'Billing Address' }} />
-      <Stack.Screen name='shippingaddressDetails' component={ShippingAddressDetails} options={{ headerShown: true, headerTitle: 'Shipping Address' }} />
+      {/* <Stack.Screen name="billingaddressDetails" component={BillingAdressDetails} options={{ headerShown: true, headerTitle: 'Billing Address' }} />
+      <Stack.Screen name='shippingaddressDetails' component={ShippingAddressDetails} options={{ headerShown: true, headerTitle: 'Shipping Address' }} /> */}
       <Stack.Screen name='PasswordScreen' component={PasswordScreen} options={{ headerShown: false }} />
       <Stack.Screen name='OtpScreen' component={OtpScreen} options={{ headerShown: false }} />
       <Stack.Screen name='SignupOtpScreen' component={SignupOtpScreen} options={{ headerShown: false }} />
@@ -62,27 +80,27 @@ const MainNavigator = () => {
       <Stack.Screen name='reviews' component={ReviewsScreen} options={{ headerShown: true, headerTitle: 'REVIEWS' }} />
       <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'OFFERS AND COUPAN' }} />
       <Stack.Screen name='AllBestseller' component={ViewAllBestsellers} options={{ headerShown: true, headerTitle: 'Bestsellers' }} />
-      <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, headerTitle: 'LatestProducts' }} />
-      <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerShown: true, headerTitle: 'AllProducts' }} />
+      <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} />
+      <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerShown: true, }} />
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />
       <Stack.Screen name='skinCare_product' component={SkinCareProduct} options={{ headerShown: true }} />
       <Stack.Screen name='NotificationScreen' component={NotificationScreen} options={{ headerShown: true }} />
       <Stack.Screen name='Reward' component={RewardScreen} options={{ headerShown: true }} />
       <Stack.Screen name='SearchPage' component={SearchScreen} options={{ headerShown: false }} />
       <Stack.Screen name='ProductListing' component={ProductListingScreen}
-        options={({ navigation, route }) => ({
-          headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
-          headerRight: () => (
-            <View style={gs.headerNotification}>
-              <TouchableOpacity onPress={() => navigation.navigate('NotificationScreen')}>
-                <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate('Reward')}>
-                <Ionicons name="gift-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
-              </TouchableOpacity>
-            </View>
-          ),
-        })}
+      // options={({ navigation, route }) => ({
+      //   headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
+      //   headerRight: () => (
+      //     <View style={gs.headerNotification}>
+      //       <TouchableOpacity onPress={() => navigation.navigate('NotificationScreen')}>
+      //         <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
+      //       </TouchableOpacity>
+      //       <TouchableOpacity onPress={() => navigation.navigate('Reward')}>
+      //         <Ionicons name="gift-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
+      //       </TouchableOpacity>
+      //     </View>
+      //   ),
+      // })}
       />
       <Stack.Screen name='AddAddress' component={AddAddress} />
       <Stack.Screen name='editAddress' component={EditAddress} options={{ headerTitle: 'EditAdress' }} />
