@@ -169,23 +169,23 @@ const ProductListingScreen = ({ navigation, route }) => {
                                             <Text style={sS.buttonText}>BUY NOW</Text>
                                         </TouchableOpacity>
                                     </TouchableOpacity>
-                            </SkeletonContainer>
-                        )}
-                numColumns={2}
-                keyExtractor={(item, index) => index}
-                    />
-        </View>
+
+                                )}
+                                numColumns={2}
+                                keyExtractor={(item, index) => index}
+                            />}
+                </View>
             </ScrollView >
-    <View style={{ marginTop: 300 }}>
-        <BottomSheet
-            ref={bs}
-            snapPoints={[340, 0]}
-            renderContent={renderInner}
-            initialSnap={1}
-            // callbackNode={fall}
-            enabledGestureInteraction={true}
-        />
-    </View>
+            <View style={{ marginTop: 300 }}>
+                <BottomSheet
+                    ref={bs}
+                    snapPoints={[340, 0]}
+                    renderContent={renderInner}
+                    initialSnap={1}
+                    // callbackNode={fall}
+                    enabledGestureInteraction={true}
+                />
+            </View>
         </View >
     )
 }
