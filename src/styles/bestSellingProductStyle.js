@@ -5,6 +5,7 @@ export const bestSellingProductStyle = StyleSheet.create({
         height: 252,
         width: '95%',
         alignSelf: 'center',
+        // bottom: 1
     },
     touchable: {
         height: 252,

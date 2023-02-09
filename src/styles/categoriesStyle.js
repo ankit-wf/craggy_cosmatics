@@ -9,7 +9,6 @@ export const categoriesStyle = StyleSheet.create({
         width: "100%",
         alignContent: 'center',
         justifyContent: 'space-around'
-
     },
     // categoriesImgRoot: {
     //     flexDirection: 'row',
