@@ -12,7 +12,7 @@ const CategoriesScreen = ({ navigation }) => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true);
 
-  console.log('category', loading);
+  // console.log('category', loading);
 
   useEffect(() => {
     axios.get(
