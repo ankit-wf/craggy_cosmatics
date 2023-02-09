@@ -13,6 +13,7 @@ const productImg = require('../../Data/productDetail.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
+import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -39,7 +40,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
             }
         ).then((res) => {
             setData(res.data)
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
         })
     }, [id])
 
@@ -90,46 +93,42 @@ const ProductDetailScreen = ({ navigation, route }) => {
     return (
         <View>
             <SafeAreaView style={styles.safe_root}>
-                {
-                    loading ?
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-                            <ActivityIndicator size="large" />
-                        </View>
-                        :
-                        <ScrollView onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}>
-                            {data.map((data, index) => {
-                                return (
-                                    <View key={index}>
-                                        <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
-                                            <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
-                                        </View>
-                                        <View style={styles.swiperRoot}>
-                                            <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
-                                                <View key={index}>
-                                                    <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
-                                                </View>
-                                            </Swiper>
-                                        </View>
-                                        <View style={styles.CraggyTextRoot}>
-                                            <View style={styles.textRoot}>
-                                                <Text style={styles.craggyText}>{data.product_title}</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{ width: '100%' }}>
-                                            <View style={pDs.productRoot}>
-                                                <View style={pDs.priceRoot}>
-                                                    <Text style={pDs.price}>₹{data.sale_price}</Text>
-                                                    <Text style={pDs.spaceRoot}>/ </Text>
-                                                    <Text style={pDs.oldprice}>₹{data.regular_price}</Text>
-                                                </View>
 
-                                                <View>
-                                                    <TouchableOpacity onPress={wishlistHandler} >
-                                                        <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
-                                                    </TouchableOpacity>
-                                                </View>
+                <ScrollView onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}>
+                    {data.map((data, index) => {
+                        return (
+                            <SkeletonContainer isLoading={loading} key={index}>
+                                {/* <View key={index}> */}
+                                <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
+                                    <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
+                                </View>
+                                <View style={styles.swiperRoot}>
+                                    <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
+                                        <View key={index}>
+                                            <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
+                                        </View>
+                                    </Swiper>
+                                </View>
+                                <View style={styles.CraggyTextRoot}>
+                                    <View style={styles.textRoot}>
+                                        <Text style={styles.craggyText}>{data.product_title}</Text>
+                                    </View>
+                                </View>
+                                <View style={{ width: '100%' }}>
+                                    <View style={pDs.productRoot}>
+                                        <View style={pDs.priceRoot}>
+                                            <Text style={pDs.price}>₹{data.sale_price}</Text>
+                                            <Text style={pDs.spaceRoot}>/ </Text>
+                                            <Text style={pDs.oldprice}>₹{data.regular_price}</Text>
+                                        </View>
 
-                                                {/* <View style={styles.productButtonRoot}>
+                                        <View>
+                                            <TouchableOpacity onPress={wishlistHandler} >
+                                                <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
+                                            </TouchableOpacity>
+                                        </View>
+
+                                        {/* <View style={styles.productButtonRoot}>
                                                     <TouchableOpacity onPress={subOne} style={(one < 1) ? styles.blackButton : styles.whiteButton} >
                                                         <Text style={styles.blackText}>-</Text>
                                                     </TouchableOpacity>
@@ -138,173 +137,174 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                         <Text style={(one >= 1) ? styles.whiteText : styles.blackText} >+</Text>
                                                     </TouchableOpacity>
                                                 </View> */}
+                                    </View>
+                                    <View>
+                                        <TouchableOpacity
+                                            onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
+                                            style={styles.buyNowButton}
+                                        >
+                                            <Text style={styles.buttonText}>ADD TO CART </Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+
+                                <View style={pDs.baseLine2} />
+
+                                <View style={styles.Accordion_Root}>
+                                    <List.Section >
+                                        <List.Accordion
+                                            id='1'
+                                            title="DESCRIPTION"
+                                            titleStyle={styles.titleStyle_description}
+                                            expanded={((expanded === "1") ? true : false)}
+                                            onPress={() => handlePress("1")}
+                                            right={() => <List.Icon icon={(expanded === "1") ? 'minus' : 'plus'} />}>
+                                            <View style={styles.li_text_root} >
+                                                <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
+                                                <Text style={styles.li_text}>{data.description}</Text>
                                             </View>
-                                            <View>
-                                                <TouchableOpacity
-                                                    onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
-                                                    style={styles.buyNowButton}
-                                                >
-                                                    <Text style={styles.buttonText}>ADD TO CART </Text>
-                                                </TouchableOpacity>
+                                        </List.Accordion>
+
+                                        <View style={pDs.baseLine} />
+
+                                        <List.Accordion
+                                            id='2'
+                                            title="KEY FEATURES"
+                                            titleStyle={styles.titleStyle_description}
+                                            expanded={(expanded === "2") ? true : false}
+                                            onPress={() => handlePress("2")}
+                                            right={() => <List.Icon icon={(expanded === "2") ? 'minus' : 'plus'} />}>
+                                            <View style={styles.li_text_root} >
+                                                <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
+                                                <Text style={styles.li_text}>{data.key_feature}</Text>
                                             </View>
+                                        </List.Accordion>
+
+                                        <View style={pDs.baseLine} />
+
+                                        <List.Accordion
+                                            id='3'
+                                            title="HOW TO USE"
+                                            titleStyle={styles.titleStyle_description}
+                                            expanded={(expanded === "3") ? true : false}
+                                            onPress={() => handlePress("3")}
+                                            right={() => <List.Icon icon={(expanded === "3") ? 'minus' : 'plus'} />}>
+                                            <View style={styles.li_text_root}>
+                                                <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
+                                                <Text style={styles.li_text}>{data.how_to_use}</Text>
+                                            </View>
+                                        </List.Accordion>
+                                        <View style={pDs.baseLine} />
+                                    </List.Section>
+                                </View>
+
+                                <View style={styles.review_outerRoot}>
+                                    <View style={styles.review_innerRoot}>
+                                        <View style={styles.reviews_root} >
+                                            <Text style={styles.review_MainHeading}>REVIEWS</Text>
+                                            <TouchableOpacity style={styles.write_review} onPress={() => navigation.navigate('write_review')}>
+                                                <Text style={styles.review_heading}> WRITE A REVIEW </Text>
+                                            </TouchableOpacity>
                                         </View>
 
-                                        <View style={pDs.baseLine2} />
-
-                                        <View style={styles.Accordion_Root}>
-                                            <List.Section >
-                                                <List.Accordion
-                                                    id='1'
-                                                    title="DESCRIPTION"
-                                                    titleStyle={styles.titleStyle_description}
-                                                    expanded={((expanded === "1") ? true : false)}
-                                                    onPress={() => handlePress("1")}
-                                                    right={() => <List.Icon icon={(expanded === "1") ? 'minus' : 'plus'} />}>
-                                                    <View style={styles.li_text_root} >
-                                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                                        <Text style={styles.li_text}>{data.description}</Text>
-                                                    </View>
-                                                </List.Accordion>
-
-                                                <View style={pDs.baseLine} />
-
-                                                <List.Accordion
-                                                    id='2'
-                                                    title="KEY FEATURES"
-                                                    titleStyle={styles.titleStyle_description}
-                                                    expanded={(expanded === "2") ? true : false}
-                                                    onPress={() => handlePress("2")}
-                                                    right={() => <List.Icon icon={(expanded === "2") ? 'minus' : 'plus'} />}>
-                                                    <View style={styles.li_text_root} >
-                                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                                        <Text style={styles.li_text}>{data.key_feature}</Text>
-                                                    </View>
-                                                </List.Accordion>
-
-                                                <View style={pDs.baseLine} />
-
-                                                <List.Accordion
-                                                    id='3'
-                                                    title="HOW TO USE"
-                                                    titleStyle={styles.titleStyle_description}
-                                                    expanded={(expanded === "3") ? true : false}
-                                                    onPress={() => handlePress("3")}
-                                                    right={() => <List.Icon icon={(expanded === "3") ? 'minus' : 'plus'} />}>
-                                                    <View style={styles.li_text_root}>
-                                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                                        <Text style={styles.li_text}>{data.how_to_use}</Text>
-                                                    </View>
-                                                </List.Accordion>
-                                                <View style={pDs.baseLine} />
-                                            </List.Section>
+                                        <View style={styles.reviews_root}>
+                                            <Text style={styles.reviews_length}>REVIEWS  ({newData.length - 1})</Text>
+                                            <Text style={styles.review_Short}>SHORT:</Text>
                                         </View>
 
-                                        <View style={styles.review_outerRoot}>
-                                            <View style={styles.review_innerRoot}>
-                                                <View style={styles.reviews_root} >
-                                                    <Text style={styles.review_MainHeading}>REVIEWS</Text>
-                                                    <TouchableOpacity style={styles.write_review} onPress={() => navigation.navigate('write_review')}>
-                                                        <Text style={styles.review_heading}> WRITE A REVIEW </Text>
-                                                    </TouchableOpacity>
-                                                </View>
+                                        <View style={[pDs.baseLine2, { height: 1, }]} />
 
-                                                <View style={styles.reviews_root}>
-                                                    <Text style={styles.reviews_length}>REVIEWS  ({newData.length - 1})</Text>
-                                                    <Text style={styles.review_Short}>SHORT:</Text>
-                                                </View>
+                                        {newData.map((value, k) => {
+                                            let ending = parseInt(page) * 3;
+                                            let starting = ending - 2;
+                                            if (k >= starting && k <= ending) {
+                                                return (
+                                                    <View style={{ marginTop: 30 }} key={k}>
+                                                        <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
+                                                            <Text style={styles.review_Name}>{value.title}</Text>
+                                                            <Text style={styles.review_Date}>{value.date}</Text>
+                                                        </View>
+                                                        <View style={{ flexDirection: 'row', marginLeft: -8 }} >
+                                                            <Rating
+                                                                readonly={true}
+                                                                ratingCount={5}
+                                                                startingValue={value.star}
+                                                                imageSize={28}
+                                                                style={{ padding: 10 }}
 
-                                                <View style={[pDs.baseLine2, { height: 1, }]} />
+                                                            />
+                                                            <Text style={styles.starReviws}>{value.star}</Text>
+                                                        </View>
+                                                        <Text style={styles.review_Title}>{value.title}</Text>
+                                                        <Text style={styles.review_Review}>{value.description}</Text>
+                                                        <View style={pDs.baseLine} />
+                                                    </View>
+                                                )
+                                            }
+                                        })}
 
-                                                {newData.map((value, k) => {
-                                                    let ending = parseInt(page) * 3;
-                                                    let starting = ending - 2;
-                                                    if (k >= starting && k <= ending) {
-                                                        return (
-                                                            <View style={{ marginTop: 30 }} key={k}>
-                                                                <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
-                                                                    <Text style={styles.review_Name}>{value.title}</Text>
-                                                                    <Text style={styles.review_Date}>{value.date}</Text>
-                                                                </View>
-                                                                <View style={{ flexDirection: 'row', marginLeft: -8 }} >
-                                                                    <Rating
-                                                                        readonly={true}
-                                                                        ratingCount={5}
-                                                                        startingValue={value.star}
-                                                                        imageSize={28}
-                                                                        style={{ padding: 10 }}
+                                        <TouchableOpacity style={styles.allreview_root} onPress={() => navigation.navigate('reviews')} >
+                                            <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
+                                            <Ionicons
+                                                name="chevron-forward-outline"
+                                                color={'black'}
+                                                size={25}
+                                                style={{ marginRight: 20 }}
+                                            />
+                                        </TouchableOpacity>
 
-                                                                    />
-                                                                    <Text style={styles.starReviws}>{value.star}</Text>
-                                                                </View>
-                                                                <Text style={styles.review_Title}>{value.title}</Text>
-                                                                <Text style={styles.review_Review}>{value.description}</Text>
-                                                                <View style={pDs.baseLine} />
+                                        <View style={styles.youMayAlso}>
+                                            <Heading title=' YOU MAY ALSO LIKE ' />
+                                            <TouchableOpacity style={styles.viewLatestProduct}
+                                                onPress={() => console.log("first")}
+                                            >
+                                                <Text style={styles.latestProductText}>
+                                                    View All
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </View>
+
+                                        <View style={pDs.productsListRoot}>
+                                            <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+                                                {bestSellingProduct.map((e, i) => {
+                                                    return (
+                                                        <TouchableOpacity style={pDs.product109} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
+                                                            <View style={pDs.imgRoot}>
+                                                                <Image source={{ uri: e.images }} style={pDs.productImg} />
                                                             </View>
-                                                        )
-                                                    }
+                                                            <View style={pDs.contentRoot}  >
+                                                                <View style={pDs.textRoot1}>
+                                                                    <Text style={pDs.contentText}>{e.description}</Text>
+                                                                </View>
+
+                                                                <View style={pDs.baseLine}></View>
+
+                                                                <View style={pDs.priceRoot}>
+                                                                    <Text style={pDs.price}>₹{e.price}</Text>
+                                                                    <Text style={pDs.spaceRoot}>/ </Text>
+                                                                    <Text style={pDs.oldprice}> ₹{e.oldprice}</Text>
+                                                                </View>
+                                                            </View>
+
+                                                            {/* Buy Now Button  */}
+                                                            <TouchableOpacity style={pDs.buyNowButton1}
+                                                                onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
+                                                            >
+                                                                <Text style={pDs.buttonText1}>BUY NOW</Text>
+                                                            </TouchableOpacity>
+                                                        </TouchableOpacity>
+                                                    )
                                                 })}
-
-                                                <TouchableOpacity style={styles.allreview_root} onPress={() => navigation.navigate('reviews')} >
-                                                    <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
-                                                    <Ionicons
-                                                        name="chevron-forward-outline"
-                                                        color={'black'}
-                                                        size={25}
-                                                        style={{ marginRight: 20 }}
-                                                    />
-                                                </TouchableOpacity>
-
-                                                <View style={styles.youMayAlso}>
-                                                    <Heading title=' YOU MAY ALSO LIKE ' />
-                                                    <TouchableOpacity style={styles.viewLatestProduct}
-                                                        onPress={() => console.log("first")}
-                                                    >
-                                                        <Text style={styles.latestProductText}>
-                                                            View All
-                                                        </Text>
-                                                    </TouchableOpacity>
-                                                </View>
-
-                                                <View style={pDs.productsListRoot}>
-                                                    <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-                                                        {bestSellingProduct.map((e, i) => {
-                                                            return (
-                                                                <TouchableOpacity style={pDs.product109} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
-                                                                    <View style={pDs.imgRoot}>
-                                                                        <Image source={{ uri: e.images }} style={pDs.productImg} />
-                                                                    </View>
-                                                                    <View style={pDs.contentRoot}  >
-                                                                        <View style={pDs.textRoot1}>
-                                                                            <Text style={pDs.contentText}>{e.description}</Text>
-                                                                        </View>
-
-                                                                        <View style={pDs.baseLine}></View>
-
-                                                                        <View style={pDs.priceRoot}>
-                                                                            <Text style={pDs.price}>₹{e.price}</Text>
-                                                                            <Text style={pDs.spaceRoot}>/ </Text>
-                                                                            <Text style={pDs.oldprice}> ₹{e.oldprice}</Text>
-                                                                        </View>
-                                                                    </View>
-
-                                                                    {/* Buy Now Button  */}
-                                                                    <TouchableOpacity style={pDs.buyNowButton1}
-                                                                        onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
-                                                                    >
-                                                                        <Text style={pDs.buttonText1}>BUY NOW</Text>
-                                                                    </TouchableOpacity>
-                                                                </TouchableOpacity>
-                                                            )
-                                                        })}
-                                                    </ScrollView>
-                                                </View>
-                                            </View>
+                                            </ScrollView>
                                         </View>
                                     </View>
-                                )
-                            })}
-                        </ScrollView >
-                }
+                                </View>
+                                {/* </View> */}
+                            </SkeletonContainer>
+                        )
+                    })}
+                </ScrollView >
+
             </SafeAreaView>
         </View >
     )

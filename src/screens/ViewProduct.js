@@ -4,6 +4,8 @@ import axios from 'axios';
 import { shopStyle as sS } from '../styles/shopStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/dataSlice';
+import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+
 
 
 const ViewProduct = ({ navigation }) => {
@@ -11,6 +13,7 @@ const ViewProduct = ({ navigation }) => {
     const [allData, setAllData] = useState([])
     const [loading, setLoading] = useState(true);
     const storeData = useSelector(state => state.cartData.cart);
+
 
     useEffect(() => {
         axios.get(
@@ -23,9 +26,11 @@ const ViewProduct = ({ navigation }) => {
             }
         ).then((res) => {
             if (res.data.status = "success") {
-                setAllData(res.data.response)
-                setLoading(false)
+                setAllData(res.data.response);
             }
+            setTimeout(() => {
+                setLoading(false)
+            }, 2000);
         })
     }, [])
 
@@ -50,48 +55,50 @@ const ViewProduct = ({ navigation }) => {
     return (
         <View>
             <SafeAreaView style={sS.productsListRoot}>
-                {
-                    loading ?
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-                            <ActivityIndicator size="large" />
-                        </View>
-                        :
-                        <FlatList
-                            data={allData}
-                            renderItem={({ item }) => (
-                                < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
-                                    <View style={sS.imgRoot} >
-                                        <Image source={{ uri: item.image }} style={sS.productImg} />
+                <FlatList
+                    data={allData}
+                    renderItem={({ item }) => (
+                        <SkeletonContainer isLoading={loading}>
+                            < TouchableOpacity style={{
+                                backgroundColor: ['#e1e1e1', '#f2f2f2', '#e1e1e1'],
+                                height: 252,
+                                width: '42.2%',
+                                marginLeft: '5%',
+                                marginTop: 20,
+                                marginBottom: 20,
+                            }}
+                                onPress={() => navigation.navigate("Product", item.product_id)} >
+                                <View style={sS.imgRoot} >
+                                    <Image source={{ uri: item.image }} style={sS.productImg} />
+                                </View>
+
+                                <View style={sS.contentRoot}>
+                                    <View style={sS.textRoot}>
+                                        <Text style={sS.contentText}>{item.product_title}</Text>
                                     </View>
 
-                                    <View style={sS.contentRoot}>
-                                        <View style={sS.textRoot}>
-                                            <Text style={sS.contentText}>{item.product_title}</Text>
-                                        </View>
+                                    <View style={sS.baseLine}></View>
 
-                                        <View style={sS.baseLine}></View>
-
-                                        <View style={sS.priceRoot}>
-                                            <Text style={sS.price}>₹{item.sale_price}</Text>
-                                            <Text style={sS.spaceRoot}>/ </Text>
-                                            <Text style={sS.oldprice}>₹{item.regular_price}</Text>
-                                        </View>
-
+                                    <View style={sS.priceRoot}>
+                                        <Text style={sS.price}>₹{item.sale_price}</Text>
+                                        <Text style={sS.spaceRoot}>/ </Text>
+                                        <Text style={sS.oldprice}>₹{item.regular_price}</Text>
                                     </View>
 
-                                    {/* Buy Now Button  */}
-                                    <TouchableOpacity style={sS.buyNowButton}
-                                        onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                    >
-                                        <Text style={sS.buttonText}>BUY NOW</Text>
-                                    </TouchableOpacity>
+                                </View>
+
+                                {/* Buy Now Button  */}
+                                <TouchableOpacity style={sS.buyNowButton}
+                                    onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                >
+                                    <Text style={sS.buttonText}>BUY NOW</Text>
                                 </TouchableOpacity>
-
-                            )}
-                            numColumns={2}
-                            keyExtractor={(item, index) => index}
-                        />
-                }
+                            </TouchableOpacity>
+                        </SkeletonContainer>
+                    )}
+                    numColumns={2}
+                    keyExtractor={(item, index) => index}
+                />
             </SafeAreaView>
 
         </View>

@@ -29,7 +29,6 @@ export const shopStyle = StyleSheet.create({
         width: '71%',
         marginLeft: '4%'
     },
-
     allProductRoot: {
         height: 45,
         width: '90%',
@@ -56,8 +55,6 @@ export const shopStyle = StyleSheet.create({
         alignSelf: 'center',
         height: 40, width: 40
     },
-
-
     productsListRoot: {
         height: '100%',
         width: '100%',
@@ -68,7 +65,6 @@ export const shopStyle = StyleSheet.create({
     product109: {
         height: 252,
         width: '42.2%',
-
         marginLeft: '5%',
         marginTop: 20,
         marginBottom: 20,
@@ -160,6 +156,5 @@ export const shopStyle = StyleSheet.create({
         fontWeight: '700',
         fontSize: 10,
         lineHeight: 13,
-
     },
 });
