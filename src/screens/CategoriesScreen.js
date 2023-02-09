@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
-import { View, Text, Image, TouchableOpacity, Dimensions, FlatList } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Dimensions, FlatList, StyleSheet } from 'react-native'
 import axios from 'axios'
 import { useStyles } from '../styles/responsiveStyle';
 import BackgroundImageService from '../components/CatImage'

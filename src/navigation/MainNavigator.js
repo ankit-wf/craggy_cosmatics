@@ -85,7 +85,7 @@ const MainNavigator = () => {
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />
       <Stack.Screen name='skinCare_product' component={SkinCareProduct} options={{ headerShown: true }} />
       <Stack.Screen name='NotificationScreen' component={NotificationScreen} options={{ headerTitle: 'Notification' }} />
-      <Stack.Screen name='Reward' component={Reward} options={{ headerTitle: 'Reward' }} />
+      <Stack.Screen name='Reward' component={RewardScreen} options={{ headerTitle: 'Reward' }} />
       <Stack.Screen name='SearchPage' component={SearchScreen} options={{ headerShown: false }} />
       <Stack.Screen name='ProductListing' component={ProductListingScreen}
       // options={({ navigation, route }) => ({
