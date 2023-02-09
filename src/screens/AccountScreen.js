@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import BackButton from '../components/BackButton';
+// import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
 import { loginActions } from '../store/UserSlice'
 import { useFocusEffect } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const AccountScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const storeData = useSelector(state => state.cartData.cart);
+  // const storeData = useSelector(state => state.cartData.cart);
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
   const userData = useSelector(state => state.userData.user_data);
 

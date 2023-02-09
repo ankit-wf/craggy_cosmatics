@@ -15,14 +15,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/responsiveStyle'
 
 const bannerImg = require('../../Data/bannerSlider.json')
-const bestSellingProduct = require('../../Data/bestSellingProduct.json')
+// const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const latestProductImg = require('../../Data/latestProduct.json')
 
 const HomeScreen = ({ navigation }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const imageFooter = FooterImage();
-  const reviewData = useSelector(state => state.reviewData.review);
+  // const reviewData = useSelector(state => state.reviewData.review);
   const storeData = useSelector(state => state.cartData.cart);
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
@@ -34,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
-  }, []); StyleSheet
+  }, []);
 
   useEffect(() => {
     axios.get(

@@ -9,9 +9,9 @@ import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
-const productImg = require('../../Data/productDetail.json')
+// const productImg = require('../../Data/productDetail.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
-const productDes = require('../../Data/productDescription.json')
+// const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
 
 const ProductDetailScreen = ({ navigation, route }) => {
