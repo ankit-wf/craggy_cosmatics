@@ -3,6 +3,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import MyCartScreen from '../screens/MyCartScreen';
 import AccountScreen from '../screens/AccountScreen';
+import RewardScreen from '../screens/RewardScreen';
 import { Image } from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
@@ -53,10 +54,10 @@ export default function BottomTabs() {
                 }}
             />
             <Tab.Screen
-                name="Cart"
-                component={MyCartScreen}
+                name="offers"
+                component={RewardScreen}
                 options={{
-                    tabBarLabel: 'Cart',
+                    tabBarLabel: 'Hot-Offers',
                     tabBarIcon: ({ focused }) => (
                         focused ? <Image source={require('../../assets/cart_color.png')} style={{ padding: 2, marginTop: -5 }} />
                             : <Image source={require('../../assets/cart.png')} style={{ padding: 2, marginTop: -5 }} />

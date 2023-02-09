@@ -3,10 +3,13 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import ResponsiveImage from "react-native-responsive-image";
 import { useStyles } from '../styles/responsiveStyle'
 import React, { useState } from 'react'
+import { Badge } from 'react-native-paper';
+import { useSelector, useDispatch } from 'react-redux';
 // import SearchBar from '../components/SearchBar'
 
-export default function Header({ navigation, onPress, notification, Gift, search }) {
+export default function Header({ navigation, onPress, notification, Gift, search, CartHandler }) {
     const styles = useStyles()
+    const BadgeData = useSelector(state => state.cartData.cart);
     // const [toggle, setToggle] = useState(true)
     // const [text, setText] = useState("");
 
@@ -36,13 +39,23 @@ export default function Header({ navigation, onPress, notification, Gift, search
                         <ResponsiveImage style={styles.headerLogo} source={require('../../assets/logo1.png')} />
                     </View>
                     <View style={styles.headerNotification}>
-                        <TouchableOpacity onPress={notification}>
-                            <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 8 }} />
-                        </TouchableOpacity>
+                        {BadgeData.length > 0 ?
+                            <TouchableOpacity onPress={CartHandler} >
+                                <Ionicons name='cart-outline' color='#CC933B' size={25} />
+                                <Badge style={{ position: 'absolute', marginTop: -10, }}><Text style={{ color: '#000' }}>{BadgeData.length}</Text></Badge>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity onPress={CartHandler} >
+                                <Ionicons name='cart-outline' color='#CC933B' size={25} />
+                            </TouchableOpacity>
+                        }
 
-                        <TouchableOpacity onPress={Gift} >
+                        {/* <TouchableOpacity onPress={notification}>
+                            <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 8 }} />
+                        </TouchableOpacity> */}
+                        {/* <TouchableOpacity onPress={Gift} >
                             <Ionicons name="gift-outline" color='#CC933B' size={20} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
                 {/* <SearchBar onChangeText={onChangeSearch} value={searchQuery} onFocus={search} /> */}

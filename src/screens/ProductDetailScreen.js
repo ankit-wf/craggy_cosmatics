@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Swiper from 'react-native-swiper'
-import { List } from 'react-native-paper';
+import { List, Snackbar } from 'react-native-paper';
 import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
 import Heading from '../components/Heading';
@@ -9,9 +9,9 @@ import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
-const productImg = require('../../Data/productDetail.json')
+// const productImg = require('../../Data/productDetail.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
-const productDes = require('../../Data/productDescription.json')
+// const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
@@ -19,7 +19,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const newData = useSelector(state => state.reviewData.review);
     const storeData = useSelector(state => state.cartData.cart);
-
+    const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
     const [data, setData] = useState([])
@@ -56,8 +56,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const handlePress = (gg) => {
         setExpanded(gg);
     };
-
-
     const addOne = () => {
         setOne(one + 1)
     }
@@ -82,13 +80,18 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 cart: Data
             }
         ));
-        navigation.navigate("Cart", product_id);
+        onToggleSnackBar();
+        // navigation.navigate("Cart", product_id);
     }
-
+    const onToggleSnackBar = () => {
+        setVisible(!visible)
+    }
+    const onDismissSnackBar = () => {
+        setVisible(false)
+    }
     const wishlistHandler = () => {
         setHeart(!heart);
     }
-
 
     return (
         <View>
@@ -97,36 +100,41 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 <ScrollView onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}>
                     {data.map((data, index) => {
                         return (
-                            <SkeletonContainer isLoading={loading} key={index}>
-                                {/* {/ <View key={index}> /} */}
+
+                            <View>
                                 <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
                                     <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
                                 </View>
-                                <View style={styles.swiperRoot}>
-                                    <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
-                                        <View key={index}>
-                                            <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
-                                        </View>
-                                    </Swiper>
-                                </View>
-                                <View style={styles.CraggyTextRoot}>
-                                    <View style={styles.textRoot}>
-                                        <Text style={styles.craggyText}>{data.product_title}</Text>
+                                <SkeletonContainer isLoading={loading} key={index}>
+                                    <View style={styles.swiperRoot}>
+                                        <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
+                                            <View key={index}>
+                                                <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
+                                            </View>
+                                        </Swiper>
                                     </View>
-                                </View>
+
+                                    <View style={styles.CraggyTextRoot}>
+                                        <View style={styles.textRoot}>
+                                            <Text style={styles.craggyText}>{data.product_title}</Text>
+                                        </View>
+                                    </View>
+                                </SkeletonContainer>
                                 <View style={{ width: '100%' }}>
                                     <View style={pDs.productRoot}>
-                                        <View style={pDs.priceRoot}>
-                                            <Text style={pDs.price}>₹{data.sale_price}</Text>
-                                            <Text style={pDs.spaceRoot}>/ </Text>
-                                            <Text style={pDs.oldprice}>₹{data.regular_price}</Text>
-                                        </View>
+                                        <SkeletonContainer isLoading={loading} key={index}>
+                                            <View style={pDs.priceRoot}>
+                                                <Text style={pDs.price}>₹{data.sale_price}</Text>
+                                                <Text style={pDs.spaceRoot}>/ </Text>
+                                                <Text style={pDs.oldprice}>₹{data.regular_price}</Text>
+                                            </View>
 
-                                        <View>
-                                            <TouchableOpacity onPress={wishlistHandler} >
-                                                <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
-                                            </TouchableOpacity>
-                                        </View>
+                                            <View>
+                                                <TouchableOpacity onPress={wishlistHandler} >
+                                                    <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
+                                                </TouchableOpacity>
+                                            </View>
+                                        </SkeletonContainer>
 
                                         {/* <View style={styles.productButtonRoot}>
                                                     <TouchableOpacity onPress={subOne} style={(one < 1) ? styles.blackButton : styles.whiteButton} >
@@ -139,12 +147,22 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 </View> */}
                                     </View>
                                     <View>
-                                        <TouchableOpacity
-                                            onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
-                                            style={styles.buyNowButton}
+                                        <SkeletonContainer isLoading={loading}>
+                                            <TouchableOpacity
+                                                onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
+                                                style={styles.buyNowButton}
+                                            >
+                                                <Text style={styles.buttonText}>ADD TO CART </Text>
+                                            </TouchableOpacity>
+                                        </SkeletonContainer>
+                                        <Snackbar
+                                            visible={visible}
+                                            onDismiss={onDismissSnackBar}
+                                            duration={2000}
+                                            wrapperStyle={{ maxWidth: 170, alignSelf: 'center', }}
                                         >
-                                            <Text style={styles.buttonText}>ADD TO CART </Text>
-                                        </TouchableOpacity>
+                                            Item Added to Cart
+                                        </Snackbar>
                                     </View>
                                 </View>
 
@@ -299,14 +317,14 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         </View>
                                     </View>
                                 </View>
+                            </View>
 
-                            </SkeletonContainer>
                         )
                     })}
                 </ScrollView >
 
             </SafeAreaView>
-        </View >
+        </View>
     )
 }
 
