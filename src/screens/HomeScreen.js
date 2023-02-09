@@ -17,7 +17,6 @@ import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 
 const bannerImg = require('../../Data/bannerSlider.json')
-// const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const latestProductImg = require('../../Data/latestProduct.json')
 
 const HomeScreen = ({ navigation }) => {
@@ -39,6 +38,11 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+    getCategories();
+    getBestSellingProduct();
+  }, [])
+
+  const getCategories = () => {
     axios.get(
       `https://craggycosmetic.com/api/products/category/`,
       {
@@ -50,22 +54,23 @@ const HomeScreen = ({ navigation }) => {
       if (res.data.status = "success") {
         setData(res.data.response)
       }
-    }),
+    })
+  };
 
-      axios.get(
-        `https://craggycosmetic.com/api/products/best-selling/`,
-        {
-          headers: {
-            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-          }
+  const getBestSellingProduct = () => {
+    axios.get(
+      `https://craggycosmetic.com/api/products/best-selling/`,
+      {
+        headers: {
+          'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
         }
-      ).then((res) => {
-        // console.log("resss", res.data)
-        if (res.data.status = "success") {
-          setBestData(res.data.response)
-        }
-      })
-  }, [])
+      }
+    ).then((res) => {
+      if (res.data.status = "success") {
+        setBestData(res.data.response)
+      }
+    })
+  };
 
   const bestSellingHolder = (description, product_id, image, sale_price, regular_price,) => {
     let Data = [...storeData, {
@@ -107,6 +112,7 @@ const HomeScreen = ({ navigation }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+
         {/* Banner Swiper  */}
         <View style={styles.swiperRoot}>
           <Swiper style={styles.wrapper} autoplay >
@@ -114,7 +120,6 @@ const HomeScreen = ({ navigation }) => {
               return (
                 <View key={i} >
                   <Image source={{ uri: e.images }} style={styles1.bannerImgHight} />
-
                   <View style={styles.sliderContent}>
                     <View style={styles.bannerTextRoot}>
                       <Text style={styles.bannerText}>{e.line}</Text>
@@ -139,7 +144,6 @@ const HomeScreen = ({ navigation }) => {
           {data.map((data, i) => {
             if (data.count > 0)
               return (
-
                 <TouchableOpacity
                   onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
                   style={{ height: 100, width: 80, marginLeft: 8, marginTop: 30 }}
@@ -195,7 +199,6 @@ const HomeScreen = ({ navigation }) => {
         <View style={bsP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
             {bestData.map((e, i) => {
-              // console.log("eeeeee", e.category)
               return (
                 <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.product_id)} >
                   <View style={bsP.imgRoot} >

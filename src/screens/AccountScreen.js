@@ -52,7 +52,7 @@ const AccountScreen = ({ navigation }) => {
         <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
           <View style={styles.profileImgRoot}>
             <View style={styles.ImgRoot_Radius}>
-              <Image source={(require('../../assets/images/hair.png'))} style={styles.image} />
+              <Image source={(require('../../assets/images/avtar.jpg'))} style={styles.image} />
             </View>
             <View style={styles.profileTextRoot}>
               <View style={styles.display_name}>
@@ -314,7 +314,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     marginTop: '-40%',
     position: 'relative'
-
   },
   textRoot: {
     flexDirection: 'row',
@@ -376,7 +375,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Raleway500',
     paddingHorizontal: 15,
     paddingTop: 3
-
   },
   icon_lineHieght: {
     lineHeight: 42

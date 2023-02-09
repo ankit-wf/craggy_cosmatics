@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Swiper from 'react-native-swiper'
-import { List } from 'react-native-paper';
+import { List, Snackbar } from 'react-native-paper';
 import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
 import Heading from '../components/Heading';
@@ -9,9 +9,7 @@ import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
-const productImg = require('../../Data/productDetail.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
-const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
@@ -19,7 +17,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const newData = useSelector(state => state.reviewData.review);
     const storeData = useSelector(state => state.cartData.cart);
-
+    const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
     const [data, setData] = useState([])
@@ -56,8 +54,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const handlePress = (gg) => {
         setExpanded(gg);
     };
-
-
     const addOne = () => {
         setOne(one + 1)
     }
@@ -82,13 +78,18 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 cart: Data
             }
         ));
-        navigation.navigate("Cart", product_id);
+        onToggleSnackBar();
+        // navigation.navigate("Cart", product_id);
     }
-
+    const onToggleSnackBar = () => {
+        setVisible(!visible)
+    }
+    const onDismissSnackBar = () => {
+        setVisible(false)
+    }
     const wishlistHandler = () => {
         setHeart(!heart);
     }
-
 
     return (
         <View>
@@ -98,7 +99,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     {data.map((data, index) => {
                         return (
                             <SkeletonContainer isLoading={loading} key={index}>
-                                {/ <View key={index}> /}
                                 <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
                                     <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
                                 </View>
@@ -145,6 +145,14 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         >
                                             <Text style={styles.buttonText}>ADD TO CART </Text>
                                         </TouchableOpacity>
+                                        <Snackbar
+                                            visible={visible}
+                                            onDismiss={onDismissSnackBar}
+                                            duration={2000}
+                                            wrapperStyle={{ maxWidth: 170, alignSelf: 'center', }}
+                                        >
+                                            Item Added to Cart
+                                        </Snackbar>
                                     </View>
                                 </View>
 
@@ -286,7 +294,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                 </View>
                                                             </View>
 
-                                                            {/ Buy Now Button  /}
+                                                            {/* {/  Buy Now Button  /} */}
                                                             <TouchableOpacity style={pDs.buyNowButton1}
                                                                 onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
                                                             >
@@ -306,11 +314,12 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 </ScrollView >
 
             </SafeAreaView>
-        </View >
+        </View>
     )
 }
 
 export default ProductDetailScreen
+
 
 const styles = StyleSheet.create({
     safe_root: {

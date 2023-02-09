@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, RefreshControl, } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Swiper from 'react-native-swiper'
@@ -21,10 +21,16 @@ const ProductListingScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true);
     const [bottomSheet, setBottomSheet] = useState(false);
     const [data, setData] = useState([])
+    const [refreshing, setRefreshing] = useState(false);
+
     const name = route.params.name
     const id = route.params.id;
 
     useEffect(() => {
+        getData()
+    }, [id])
+
+    const getData = () => {
         axios.get(
             `https://craggycosmetic.com/api/products/`,
             {
@@ -37,12 +43,23 @@ const ProductListingScreen = ({ navigation, route }) => {
                 }
             }
         ).then((res) => {
+            setRefreshing(false);
             setData(res.data)
             setTimeout(() => {
                 setLoading(false)
             }, 2000);
         })
-    }, [id])
+    }
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);;
+        setData([]);
+        getData();
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 2000);
+    }, []);
+
 
     const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price) => {
         let Data = [...storeData, {
@@ -105,7 +122,11 @@ const ProductListingScreen = ({ navigation, route }) => {
     }
     return (
         <View>
-            <ScrollView onScroll={onScrollHandle} >
+            <ScrollView onScroll={onScrollHandle}
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }
+            >
                 <View style={styles.swiperRoot}>
                     <Swiper style={styles.wrapper}  >
                         {bannerImg.map((e, i) => {
@@ -138,42 +159,41 @@ const ProductListingScreen = ({ navigation, route }) => {
                 </View>
 
                 <View style={sS.productsListRoot}>
-                    {
-                        loading ?
-                            <ActivityIndicator size="large" color="#00ff00" style={styles1.loader} />
-                            :
-                            <FlatList
-                                data={data}
-                                renderItem={({ item }) => (
-                                    < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
-                                        <View style={sS.imgRoot} >
-                                            <Image source={{ uri: item.image }} style={sS.productImg} />
-                                        </View>
 
-                                        <View style={sS.contentRoot}>
-                                            <View style={sS.textRoot}>
-                                                <Text style={sS.contentText}>{item.product_title}</Text>
-                                            </View>
-                                            <View style={sS.baseLine}></View>
-                                            <View style={sS.priceRoot}>
-                                                <Text style={sS.price}>₹{item.sale_price}</Text>
-                                                <Text style={sS.spaceRoot}>/ </Text>
-                                                <Text style={sS.oldprice}>₹{item.regular_price}</Text>
-                                            </View>
-                                        </View>
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => (
+                            <SkeletonContainer isLoading={loading} >
+                                < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
+                                    <View style={sS.imgRoot} >
+                                        <Image source={{ uri: item.image }} style={sS.productImg} />
+                                    </View>
 
-                                        {/* {/ Buy Now Button  /} */}
-                                        <TouchableOpacity style={sS.buyNowButton}
-                                            onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                        >
-                                            <Text style={sS.buttonText}>BUY NOW</Text>
-                                        </TouchableOpacity>
+                                    <View style={sS.contentRoot}>
+                                        <View style={sS.textRoot}>
+                                            <Text style={sS.contentText}>{item.product_title}</Text>
+                                        </View>
+                                        <View style={sS.baseLine}></View>
+                                        <View style={sS.priceRoot}>
+                                            <Text style={sS.price}>₹{item.sale_price}</Text>
+                                            <Text style={sS.spaceRoot}>/ </Text>
+                                            <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                        </View>
+                                    </View>
+
+                                    {/* {/ Buy Now Button  /} */}
+                                    <TouchableOpacity style={sS.buyNowButton}
+                                        onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                    >
+                                        <Text style={sS.buttonText}>BUY NOW</Text>
                                     </TouchableOpacity>
+                                </TouchableOpacity>
+                            </SkeletonContainer>
 
-                                )}
-                                numColumns={2}
-                                keyExtractor={(item, index) => index}
-                            />}
+                        )}
+                        numColumns={2}
+                        keyExtractor={(item, index) => index}
+                    />
                 </View>
             </ScrollView >
             <View style={{ marginTop: 300 }}>
