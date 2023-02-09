@@ -249,7 +249,7 @@ export const useStyles = CreateResponsiveStyle(
         },
         categoriesRoot: {
             height: 212,
-            backgroundColor: '#050505'
+            backgroundColor: '#050505',
         },
         categoriesImgRoot: {
             flexDirection: 'row',
@@ -522,9 +522,9 @@ export const useStyles = CreateResponsiveStyle(
         /** Category Page **/
 
         categoryMainDiv: {
-            paddingTop: 30,
-            backgroundColor: '#f2f2f2',
-            height: '100%',
+            // paddingTop: 30,
+            // backgroundColor: '#f2f2f2',
+            height: 95,
         },
 
         categories_root: {
@@ -538,6 +538,7 @@ export const useStyles = CreateResponsiveStyle(
         catMainSec: {
             position: 'relative',
             marginBottom: 5,
+            // marginTop: 20
         },
         categories_text: {
             fontSize: 20,

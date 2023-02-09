@@ -9,6 +9,8 @@ import { submitActions } from '../store/dataSlice'
 import { ScrollView } from 'react-native-virtualized-view';
 import { Ionicons } from '@expo/vector-icons'
 import BottomSheet from 'reanimated-bottom-sheet';
+import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+
 
 const bannerImg = require('../../Data/bannerSlider.json')
 
@@ -36,11 +38,9 @@ const ProductListingScreen = ({ navigation, route }) => {
             }
         ).then((res) => {
             setData(res.data)
-            setLoading(false);
-            //   if (res.data.status = "success") {
-            //     setData(res.data.response)
-            //   }
-            // console.log("first", res.data)
+            setTimeout(() => {
+                setLoading(false)
+            }, 2000);
         })
     }, [id])
 
@@ -169,22 +169,24 @@ const ProductListingScreen = ({ navigation, route }) => {
                                             <Text style={sS.buttonText}>BUY NOW</Text>
                                         </TouchableOpacity>
                                     </TouchableOpacity>
+
                                 )}
                                 numColumns={2}
                                 keyExtractor={(item, index) => index}
-                            />
-                    }
+                            />}
                 </View>
-            </ScrollView>
-            <BottomSheet
-                ref={bs}
-                snapPoints={[340, 0]}
-                renderContent={renderInner}
-                initialSnap={1}
-                // callbackNode={fall}
-                enabledGestureInteraction={true}
-            />
-        </View>
+            </ScrollView >
+            <View style={{ marginTop: 300 }}>
+                <BottomSheet
+                    ref={bs}
+                    snapPoints={[340, 0]}
+                    renderContent={renderInner}
+                    initialSnap={1}
+                    // callbackNode={fall}
+                    enabledGestureInteraction={true}
+                />
+            </View>
+        </View >
     )
 }
 
