@@ -29,6 +29,7 @@ const HomeScreen = ({ navigation }) => {
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
   const [bestData, setBestData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = React.useCallback(() => {
@@ -49,6 +50,9 @@ const HomeScreen = ({ navigation }) => {
     ).then((res) => {
       if (res.data.status = "success") {
         setData(res.data.response)
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000);
       }
     }),
 
@@ -83,9 +87,6 @@ const HomeScreen = ({ navigation }) => {
     ));
     navigation.navigate('Cart', product_id);
   }
-  const notification = () => {
-    navigation.navigate('NotificationScreen')
-  }
   const openDrawer = () => {
     navigation.openDrawer();
   }
@@ -93,13 +94,21 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate('SearchPage')
     Keyboard.dismiss()
   }
-  const RewardHandler = () => {
-    navigation.navigate('Reward')
+  const CartHandler = () => {
+    navigation.navigate('Cart')
   }
+  // const notification = () => {
+  //   navigation.navigate('NotificationScreen')
+  // }
+  // const RewardHandler = () => {
+  //   navigation.navigate('Reward')
+  // }
 
   return (
     <View style={ds.appContainer}>
-      <Header onPress={openDrawer} notification={notification} Gift={RewardHandler} search={searchHandler} />
+
+      <Header onPress={openDrawer} search={searchHandler} CartHandler={CartHandler} />
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled={true}
@@ -108,170 +117,167 @@ const HomeScreen = ({ navigation }) => {
         }
       >
         {/* Banner Swiper  */}
-        <View style={styles.swiperRoot}>
-          <Swiper style={styles.wrapper} autoplay >
-            {bannerImg.map((e, i) => {
-              return (
-                <View key={i} >
-                  <Image source={{ uri: e.images }} style={styles1.bannerImgHight} />
+        <SkeletonContainer isLoading={loading}>
+          <View style={styles.swiperRoot}>
+            <Swiper style={styles.wrapper} autoplay >
+              {bannerImg.map((e, i) => {
+                return (
+                  <View key={i} >
+                    <Image source={{ uri: e.images }} style={styles1.bannerImgHight} />
 
-                  <View style={styles.sliderContent}>
-                    <View style={styles.bannerTextRoot}>
-                      <Text style={styles.bannerText}>{e.line}</Text>
+                    <View style={styles.sliderContent}>
+                      <View style={styles.bannerTextRoot}>
+                        <Text style={styles.bannerText}>{e.line}</Text>
+                      </View>
+
+                      <View style={styles.bannerCode} >
+                        <Image source={require('../../assets/CodeImg.png')} />
+                      </View>
+
+                      <TouchableOpacity style={styles.bannerButton}>
+                        <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
+                      </TouchableOpacity>
                     </View>
-
-                    <View style={styles.bannerCode} >
-                      <Image source={require('../../assets/CodeImg.png')} />
-                    </View>
-
-                    <TouchableOpacity style={styles.bannerButton}>
-                      <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
-                    </TouchableOpacity>
                   </View>
-                </View>
-              )
-            })}
-          </Swiper>
-        </View>
+                )
+              })}
+            </Swiper>
+          </View>
+        </SkeletonContainer>
 
         {/* <catgories /> */}
-        <View style={cS.categoriesRoot}>
-          {data.map((data, i) => {
-            if (data.count > 0)
-              return (
-
-                <TouchableOpacity
-                  onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
-                  style={{ height: 100, width: 80, marginLeft: 8, marginTop: 30 }}
-                >
-                  {imageData.map((item, id) => {
-                    return (
-                      (item.name === data.slug) &&
-                      <View style={cS.skinImgRoot} key={id}>
-                        <Image source={item.image} style={cS.imgCenter} />
+        <ScrollView horizontal>
+          <View style={cS.categoriesRoot}>
+            {data.map((data, i) => {
+              if (data.count > 0)
+                return (
+                  <SkeletonContainer isLoading={loading} key={i}>
+                    <TouchableOpacity
+                      onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
+                      style={{ height: 80, width: 80, marginLeft: 8, marginTop: 30, borderRadius: 50 }}
+                    >
+                      {imageData.map((item, id) => {
+                        return (
+                          (item.name === data.slug) &&
+                          <View style={cS.skinImgRoot} key={id}>
+                            <Image source={item.image} style={cS.imgCenter} />
+                          </View>
+                        )
+                      })}
+                      <View key={i}>
+                        <Text style={cS.skinImgText}>{data.name}</Text>
                       </View>
-                    )
-                  })}
-                  <View key={i}>
-                    <Text style={cS.skinImgText}>{data.name}</Text>
-                  </View>
-                </TouchableOpacity>
-              )
-            if (data.count > 0)
-              return (
-                <TouchableOpacity
-                  onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
-                  style={styles1.categoriesHeight}
-                >
-                  {imageData.map((item, id) => {
-                    return (
-                      (item.name === data.slug) &&
-                      <View style={cS.skinImgRoot} key={id}>
-                        <Image source={item.image} style={cS.imgCenter} />
-                      </View>
-                    )
-                  })}
-                  <View key={i}>
-                    <Text style={cS.skinImgText}>{data.name}</Text>
-                  </View>
-                </TouchableOpacity>
-              )
-          })}
-        </View>
+                    </TouchableOpacity>
+                  </SkeletonContainer>
+                )
+            })}
+          </View>
+        </ScrollView>
 
-        <View style={styles1.bestSellerRoot}>
-          <Heading title=' best selling ' />
+        <SkeletonContainer isLoading={loading}>
+          <View style={styles1.bestSellerRoot}>
 
-          <TouchableOpacity
-            style={styles.viewLatestProduct}
-            onPress={() => navigation.navigate("AllBestseller")}
-          >
-            <Text style={styles.latestProductText}>
-              View All
-            </Text>
-          </TouchableOpacity>
-        </View>
+            <Heading title=' best selling ' />
+
+            <TouchableOpacity
+              style={styles.viewLatestProduct}
+              onPress={() => navigation.navigate("AllBestseller")}
+
+            >
+              <Text style={styles.latestProductText}>
+                View All
+              </Text>
+            </TouchableOpacity>
+
+          </View>
+        </SkeletonContainer>
 
         <View style={bsP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
             {bestData.map((e, i) => {
               // console.log("eeeeee", e.category)
               return (
-                <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.product_id)} >
-                  <View style={bsP.imgRoot} >
-                    <Image source={{ uri: e.image }} style={bsP.productImg} />
-                  </View>
-
-                  <View style={bsP.contentRoot}>
-                    <View style={bsP.descriptionRoot}>
-                      <Text style={bsP.descriptionText}>{e.description}</Text>
+                <SkeletonContainer isLoading={loading} key={i}>
+                  <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.product_id)} >
+                    <View style={bsP.imgRoot} >
+                      <Image source={{ uri: e.image }} style={bsP.productImg} />
                     </View>
 
-                    <View style={bsP.baseLine}></View>
+                    <View style={bsP.contentRoot}>
+                      <View style={bsP.descriptionRoot}>
+                        <Text style={bsP.descriptionText}>{e.description}</Text>
+                      </View>
 
-                    <View style={bsP.priceRoot}>
-                      <Text style={bsP.price}>₹{e.sale_price}</Text>
-                      <Text style={bsP.spaceRoot}>/ </Text>
-                      <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                      <View style={bsP.baseLine}></View>
+
+                      <View style={bsP.priceRoot}>
+                        <Text style={bsP.price}>₹{e.sale_price}</Text>
+                        <Text style={bsP.spaceRoot}>/ </Text>
+                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                      </View>
                     </View>
-                  </View>
 
-                  {/* Buy Now Button  */}
-                  <TouchableOpacity style={bsP.buyNowButton}
-                    onPress={() => bestSellingHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
-                  >
-                    <Text style={bsP.buttonText}>BUY NOW</Text>
+                    {/* Buy Now Button  */}
+                    <TouchableOpacity style={bsP.buyNowButton}
+                      onPress={() => bestSellingHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
+                    >
+                      <Text style={bsP.buttonText}>BUY NOW</Text>
+                    </TouchableOpacity>
                   </TouchableOpacity>
-                </TouchableOpacity>
+                </SkeletonContainer>
               )
             })}
           </ScrollView>
         </View>
 
         {/* Latest Product  */}
-        <View style={styles1.bestSellerRoot}>
-          <Heading title=' latest product ' />
+        <SkeletonContainer isLoading={loading} >
+          <View style={styles1.bestSellerRoot}>
+            <Heading title=' latest product ' />
 
-          <TouchableOpacity
-            style={styles.viewLatestProduct}
-            onPress={() => navigation.navigate("AllLatestProduct")}
-          >
-            <Text style={styles.latestProductText}>
-              View All
-            </Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={styles.viewLatestProduct}
+              onPress={() => navigation.navigate("AllLatestProduct")}
+            >
+              <Text style={styles.latestProductText}>
+                View All
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </SkeletonContainer>
 
         <View style={lP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {latestProductImg.map((e, i) => {
               return (
-                <TouchableOpacity style={lP.touchable} key={i} onPress={() => navigation.navigate('Product', e.latestProduct_id)}>
-                  <View style={lP.imgRoot} >
-                    <Image source={{ uri: e.images }} style={lP.productImg} />
-                  </View>
-
-                  <View style={lP.contentRoot}>
-                    <View style={lP.descriptionRoot}>
-                      <Text style={lP.descriptionText}>{e.description}</Text>
+                <SkeletonContainer isLoading={loading} key={i} >
+                  <TouchableOpacity style={lP.touchable} key={i} onPress={() => navigation.navigate('Product', e.latestProduct_id)}>
+                    <View style={lP.imgRoot} >
+                      <Image source={{ uri: e.images }} style={lP.productImg} />
                     </View>
 
-                    <View style={lP.baseLine}></View>
+                    <View style={lP.contentRoot}>
+                      <View style={lP.descriptionRoot}>
+                        <Text style={lP.descriptionText}>{e.description}</Text>
+                      </View>
 
-                    <View style={lP.priceRoot}>
-                      <Text style={lP.price}>₹{e.price}</Text>
-                      <Text style={lP.spaceRoot}>/ </Text>
-                      <Text style={lP.oldprice}>₹{e.oldprice}</Text>
+                      <View style={lP.baseLine}></View>
+
+                      <View style={lP.priceRoot}>
+                        <Text style={lP.price}>₹{e.price}</Text>
+                        <Text style={lP.spaceRoot}>/ </Text>
+                        <Text style={lP.oldprice}>₹{e.oldprice}</Text>
+                      </View>
                     </View>
-                  </View>
 
-                  {/* Buy Now Button  */}
-                  <TouchableOpacity style={lP.buyNowButton}
-                    onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
-                  >
-                    <Text style={lP.buttonText}>BUY NOW</Text>
+                    {/* Buy Now Button  */}
+                    <TouchableOpacity style={lP.buyNowButton}
+                      onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
+                    >
+                      <Text style={lP.buttonText}>BUY NOW</Text>
+                    </TouchableOpacity>
                   </TouchableOpacity>
-                </TouchableOpacity>
+                </SkeletonContainer>
               )
             })}
           </ScrollView>
@@ -279,7 +285,9 @@ const HomeScreen = ({ navigation }) => {
 
         {/* Footer Banner  */}
         <View style={styles.footerBannerRoot}>
-          <Image source={require('../../assets/footer_banner.png')} style={styles.footerBannerImage} />
+          <SkeletonContainer isLoading={loading} >
+            <Image source={require('../../assets/footer_banner.png')} style={styles.footerBannerImage} />
+          </SkeletonContainer>
         </View>
 
         {/* We Promise You */}
@@ -307,9 +315,11 @@ const HomeScreen = ({ navigation }) => {
             </View>
 
             {/* View all Product  */}
+
             <TouchableOpacity style={styles.ViewProduct} onPress={() => navigation.navigate('ViewProduct')} >
               <Text style={styles.viewProductText}>VIEW ALL PRODUCT</Text>
             </TouchableOpacity>
+
           </View>
         </View>
 
@@ -330,6 +340,7 @@ const styles1 = StyleSheet.create({
     marginTop: 30
   },
   bestSellerRoot: {
+    height: 50, width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
