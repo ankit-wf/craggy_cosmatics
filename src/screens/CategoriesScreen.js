@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { View, Text, Image, TouchableOpacity, Dimensions, FlatList } from 'react-native'
 import axios from 'axios'
 import { useStyles } from '../styles/responsiveStyle';
@@ -68,3 +69,9 @@ const CategoriesScreen = ({ navigation }) => {
   );
 };
 export default CategoriesScreen;
+const styles1 = StyleSheet.create({
+  img_style: {
+    width: '100%',
+    height: 95
+  }
+})

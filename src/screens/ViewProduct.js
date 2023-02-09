@@ -87,7 +87,7 @@ const ViewProduct = ({ navigation }) => {
 
                                 </View>
 
-                                {/* Buy Now Button  */}
+                                {/* {/ Buy Now Button  /} */}
                                 <TouchableOpacity style={sS.buyNowButton}
                                     onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                 >
