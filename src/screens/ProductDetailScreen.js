@@ -98,7 +98,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     {data.map((data, index) => {
                         return (
                             <SkeletonContainer isLoading={loading} key={index}>
-                                {/ <View key={index}> /}
+                                {/* {/ <View key={index}> /} */}
                                 <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
                                     <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
                                 </View>
@@ -286,7 +286,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                 </View>
                                                             </View>
 
-                                                            {/ Buy Now Button  /}
+                                                            {/* {/ Buy Now Button  /} */}
                                                             <TouchableOpacity style={pDs.buyNowButton1}
                                                                 onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
                                                             >
