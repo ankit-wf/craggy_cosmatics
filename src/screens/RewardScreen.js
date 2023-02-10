@@ -10,10 +10,10 @@ const RewardScreen = () => {
     }
 
     return (
-        <View style={{ alignItems: 'center', marginTop: 20 }}>
-            <View style={{ backgroundColor: 'white', width: '90%' }}>
+        <View style={styles.root_container}>
+            <View style={styles.inner_root}>
 
-                <View style={{ backgroundColor: 'white', height: 90, width: '100%', flexDirection: 'row' }}>
+                <View style={styles.off_root}>
                     <View style={{ width: '35%', borderRightWidth: 2, borderRightColor: '#D3D3D3', justifyContent: 'center', alignItems: 'center', }}>
                         <Text style={{ color: 'green', fontSize: 23, fontWeight: '800' }}>1000</Text>
                         <Text style={{ color: 'green', fontSize: 23, fontWeight: '800' }}>OFF</Text>
@@ -51,4 +51,19 @@ const RewardScreen = () => {
 
 export default RewardScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    root_container: {
+        alignItems: 'center',
+        marginTop: "10%"
+    },
+    inner_root: {
+        backgroundColor: 'white',
+        width: '90%'
+    },
+    off_root: {
+        backgroundColor: 'white',
+        height: 90,
+        width: '100%',
+        flexDirection: 'row'
+    }
+})

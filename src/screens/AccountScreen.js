@@ -25,19 +25,6 @@ const AccountScreen = ({ navigation }) => {
     }, [])
   );
 
-  useFocusEffect(
-    React.useCallback(() => {
-      if (isLoggedIn === false) {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'login' }],
-        });
-        // navigation.navigate('login');
-      }
-      return;
-    }, [])
-  );
-
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
     navigation.reset({
@@ -195,7 +182,7 @@ const AccountScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         <View style={styles.baseLine} />
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offers')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle"
@@ -203,7 +190,7 @@ const AccountScreen = ({ navigation }) => {
               size={35}
               style={styles.icon_style}
             />
-            <Text style={styles.profileText}>OFFER AND COUPAN</Text>
+            <Text style={styles.profileText}>Hot Offers</Text>
           </View>
 
           <Ionicons

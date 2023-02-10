@@ -122,90 +122,91 @@ const ProductListingScreen = ({ navigation, route }) => {
     }
     return (
         <View>
-            <ScrollView onScroll={onScrollHandle}
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                }
-            >
-                <View style={styles.swiperRoot}>
-                    <Swiper style={styles.wrapper}  >
-                        {bannerImg.map((e, i) => {
-                            return (
-                                <View key={i} >
-                                    <Image source={{ uri: e.images }} style={styles1.banner_img} />
-                                    <View style={styles.sliderContent}>
-                                        <View style={styles.bannerTextRoot}>
-                                            <Text style={styles.bannerText}>{e.line}</Text>
+            <ScrollView onScroll={onScrollHandle} >
+                <SkeletonContainer isLoading={loading}>
+                    <View style={styles.swiperRoot}>
+                        <Swiper style={styles.wrapper}  >
+                            {bannerImg.map((e, i) => {
+                                return (
+                                    <View key={i} >
+                                        <Image source={{ uri: e.images }} style={styles1.banner_img} />
+                                        <View style={styles.sliderContent}>
+                                            <View style={styles.bannerTextRoot}>
+                                                <Text style={styles.bannerText}>{e.line}</Text>
+                                            </View>
+                                            <View style={styles.bannerCode} >
+                                                <Image source={require('../../assets/CodeImg.png')} />
+                                            </View>
+                                            <TouchableOpacity style={styles.bannerButton}>
+                                                <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
+                                            </TouchableOpacity>
                                         </View>
-                                        <View style={styles.bannerCode} >
-                                            <Image source={require('../../assets/CodeImg.png')} />
-                                        </View>
-                                        <TouchableOpacity style={styles.bannerButton}>
-                                            <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
-                                        </TouchableOpacity>
                                     </View>
-                                </View>
-                            )
-                        })}
-                    </Swiper>
-                </View>
-
-                <View style={styles1.shorting_root}>
-                    <Text style={styles1.name_text}>{name}</Text>
-                    <TouchableOpacity onPress={bottomSheetHandler} style={styles1.sort_text_root}>
-                        <Text style={styles1.sort_text}>Sort</Text>
-                        <Ionicons name="swap-vertical" size={25} style={styles1.sort_icon} />
-                    </TouchableOpacity>
-                </View>
+                                )
+                            })}
+                        </Swiper>
+                    </View>
+                </SkeletonContainer>
+                <SkeletonContainer isLoading={loading}>
+                    <View style={styles1.shorting_root}>
+                        <Text style={styles1.name_text}>{name}</Text>
+                        <TouchableOpacity onPress={bottomSheetHandler} style={styles1.sort_text_root}>
+                            <Text style={styles1.sort_text}>Sort</Text>
+                            <Ionicons name="swap-vertical" size={25} style={styles1.sort_icon} />
+                        </TouchableOpacity>
+                    </View>
+                </SkeletonContainer>
 
                 <View style={sS.productsListRoot}>
-
-                    <FlatList
-                        data={data}
-                        renderItem={({ item }) => (
-                            <SkeletonContainer isLoading={loading} >
-                                < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
-                                    <View style={sS.imgRoot} >
-                                        <Image source={{ uri: item.image }} style={sS.productImg} />
-                                    </View>
-
-                                    <View style={sS.contentRoot}>
-                                        <View style={sS.textRoot}>
-                                            <Text style={sS.contentText}>{item.product_title}</Text>
+                    {
+                        loading ?
+                            <ActivityIndicator size="large" color="#00ff00" style={styles1.loader} />
+                            :
+                            <FlatList
+                                data={data}
+                                renderItem={({ item }) => (
+                                    < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
+                                        <View style={sS.imgRoot} >
+                                            <Image source={{ uri: item.image }} style={sS.productImg} />
                                         </View>
-                                        <View style={sS.baseLine}></View>
-                                        <View style={sS.priceRoot}>
-                                            <Text style={sS.price}>₹{item.sale_price}</Text>
-                                            <Text style={sS.spaceRoot}>/ </Text>
-                                            <Text style={sS.oldprice}>₹{item.regular_price}</Text>
-                                        </View>
-                                    </View>
 
-                                    {/* {/ Buy Now Button  /} */}
-                                    <TouchableOpacity style={sS.buyNowButton}
-                                        onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                    >
-                                        <Text style={sS.buttonText}>BUY NOW</Text>
+                                        <View style={sS.contentRoot}>
+                                            <View style={sS.textRoot}>
+                                                <Text style={sS.contentText}>{item.product_title}</Text>
+                                            </View>
+                                            <View style={sS.baseLine}></View>
+                                            <View style={sS.priceRoot}>
+                                                <Text style={sS.price}>₹{item.sale_price}</Text>
+                                                <Text style={sS.spaceRoot}>/ </Text>
+                                                <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                            </View>
+                                        </View>
+
+                                        {/* {/ Buy Now Button  /} */}
+                                        <TouchableOpacity style={sS.buyNowButton}
+                                            onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                        >
+                                            <Text style={sS.buttonText}>BUY NOW</Text>
+                                        </TouchableOpacity>
                                     </TouchableOpacity>
-                                </TouchableOpacity>
                             </SkeletonContainer>
 
                         )}
-                        numColumns={2}
-                        keyExtractor={(item, index) => index}
+                numColumns={2}
+                keyExtractor={(item, index) => index}
                     />
-                </View>
+        </View>
             </ScrollView >
-            <View style={{ marginTop: 300 }}>
-                <BottomSheet
-                    ref={bs}
-                    snapPoints={[340, 0]}
-                    renderContent={renderInner}
-                    initialSnap={1}
-                    // callbackNode={fall}
-                    enabledGestureInteraction={true}
-                />
-            </View>
+    <View style={{ marginTop: 300 }}>
+        <BottomSheet
+            ref={bs}
+            snapPoints={[340, 0]}
+            renderContent={renderInner}
+            initialSnap={1}
+            // callbackNode={fall}
+            enabledGestureInteraction={true}
+        />
+    </View>
         </View >
     )
 }

@@ -93,8 +93,8 @@ const MyCartScreen = ({ navigation, route }) => {
     <View >
 
       <View style={styles.searchRoot}>
-        <View >
-          {/* <BackButton goBack={navigation.goBack} Color={'#666666'} /> */}
+        <View style={{ marginTop: 10, marginLeft: '2%' }}>
+          <BackButton goBack={navigation.goBack} Color={'#666666'} />
         </View>
 
         <View style={styles.searchImgRoot}>
