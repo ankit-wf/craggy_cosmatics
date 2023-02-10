@@ -93,18 +93,22 @@ const ProductDetailScreen = ({ navigation, route }) => {
         setHeart(!heart);
     }
 
+
     return (
         <View>
             <SafeAreaView style={styles.safe_root}>
 
-                <ScrollView onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}>
+                <ScrollView
+                // onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}
+                // onScrollEndDrag={() => navigation.setOptions({ headerTitle: 'done' })}
+                >
                     {data.map((data, index) => {
                         return (
 
                             <View>
-                                <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
+                                {/* <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
                                     <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
-                                </View>
+                                </View> */}
                                 <SkeletonContainer isLoading={loading} key={index}>
                                     <View style={styles.swiperRoot}>
                                         <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
@@ -130,7 +134,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             </View>
 
                                             <View>
-                                                <TouchableOpacity onPress={wishlistHandler} >
+                                                <TouchableOpacity
+                                                    onPress={wishlistHandler}
+                                                    activeOpacity={0.5}
+                                                >
                                                     <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
                                                 </TouchableOpacity>
                                             </View>
@@ -149,6 +156,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     <View>
                                         <SkeletonContainer isLoading={loading}>
                                             <TouchableOpacity
+                                                activeOpacity={0.8}
                                                 onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
                                                 style={styles.buyNowButton}
                                             >
@@ -220,7 +228,11 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     <View style={styles.review_innerRoot}>
                                         <View style={styles.reviews_root} >
                                             <Text style={styles.review_MainHeading}>REVIEWS</Text>
-                                            <TouchableOpacity style={styles.write_review} onPress={() => navigation.navigate('write_review')}>
+                                            <TouchableOpacity
+                                                activeOpacity={0.8}
+                                                onPress={() => navigation.navigate('write_review')}
+                                                style={styles.write_review}
+                                            >
                                                 <Text style={styles.review_heading}> WRITE A REVIEW </Text>
                                             </TouchableOpacity>
                                         </View>
@@ -261,7 +273,11 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             }
                                         })}
 
-                                        <TouchableOpacity style={styles.allreview_root} onPress={() => navigation.navigate('reviews')} >
+                                        <TouchableOpacity
+                                            activeOpacity={0.8}
+                                            onPress={() => navigation.navigate('offers')}
+                                            style={styles.allreview_root}
+                                        >
                                             <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
                                             <Ionicons
                                                 name="chevron-forward-outline"
@@ -273,8 +289,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
                                         <View style={styles.youMayAlso}>
                                             <Heading title=' YOU MAY ALSO LIKE ' />
-                                            <TouchableOpacity style={styles.viewLatestProduct}
+                                            <TouchableOpacity
+                                                activeOpacity={0.8}
                                                 onPress={() => console.log("first")}
+                                                style={styles.viewLatestProduct}
                                             >
                                                 <Text style={styles.latestProductText}>
                                                     View All

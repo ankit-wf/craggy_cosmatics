@@ -120,6 +120,27 @@ const AccountScreen = ({ navigation }) => {
 
         <View style={styles.baseLine} />
 
+        {/* <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('payment')} >
+          <View style={{ flexDirection: 'row' }}>
+            <Ionicons
+              name="heart-circle-outline"
+              color='#666666'
+              size={35}
+              style={styles.icon_style}
+            />
+            <Text style={styles.profileText}>Payment Methods</Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            color='#666666'
+            size={25}
+            style={styles.icon_lineHieght}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.baseLine} /> */}
+
         <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons

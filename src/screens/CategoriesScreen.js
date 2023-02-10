@@ -7,7 +7,7 @@ import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const CategoriesScreen = ({ navigation }) => {
   const styles = useStyles()
-  let imageData = BackgroundImageService();
+  const imageData = BackgroundImageService();
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true);
 
@@ -42,13 +42,11 @@ const CategoriesScreen = ({ navigation }) => {
           if (data.count > 0)
             return (
               <SkeletonContainer isLoading={loading} key={i} >
-                <TouchableOpacity style={{
-                  backgroundColor: ['#e1e1e1', '#f2f2f2', '#e1e1e1'],
-                  width: '100%',
-                  height: 95,
-                  marginBottom: 8
-                }}
-                  onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  style={styles1.touchable_style}
+                  onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }}
+                  key={i}
                 >
                   <View style={styles.catMainSec}>
                     <Text style={styles.mens_text}> {data.name} </Text>
@@ -72,5 +70,11 @@ const styles1 = StyleSheet.create({
   img_style: {
     width: '100%',
     height: 95
+  },
+  touchable_style: {
+    backgroundColor: ['#e1e1e1', '#f2f2f2', '#e1e1e1'],
+    width: '100%',
+    height: 95,
+    marginBottom: 8
   }
 })

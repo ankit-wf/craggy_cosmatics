@@ -18,6 +18,14 @@ const BackgroundImage = () => {
             name: 'skin',
             image: require('../../assets/images/skin.png'),
         },
+        {
+            name: 'hair-oil',
+            image: require('../../assets/images/hair-oil.png')
+        },
+        {
+            name: 'shampoo',
+            image: require('../../assets/images/shampoo.png')
+        }
     ];
 
     return images;

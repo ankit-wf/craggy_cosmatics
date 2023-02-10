@@ -80,6 +80,8 @@ const MyCartScreen = ({ navigation, route }) => {
     }
     return sum;
   }
+  const TAmount = totalAmount();
+  // console.log("Amount", TAmount)
 
   const totalOldAmount = () => {
     let sum = 0;
@@ -103,12 +105,9 @@ const MyCartScreen = ({ navigation, route }) => {
 
       </View>
       {storeData.length < 1 ?
-
         <Text style={styles.emptyCart}>This Cart Is Empty</Text>
-
         : <ScrollView>
           {storeData.map((i, e) => {
-            // console.log("price", i.price, i.quantity)
             return (
               <View key={e}>
 
@@ -189,14 +188,14 @@ const MyCartScreen = ({ navigation, route }) => {
 
             <View style={styles.subtotalRoot}>
               <Text style={styles.maintotal}>Total</Text>
-              <Text style={styles.mainprice}>₹{totalAmount()}</Text>
+              <Text style={styles.mainprice}>₹{TAmount}</Text>
             </View>
           </View>
 
           <View style={styles.baseLine2} ></View>
 
           <View style={styles.checkoutbuttonRoot} >
-            <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut')}>
+            <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', TAmount)}>
               <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
             </Button>
             <Button style={styles.countinueButton} onPress={() => navigation.navigate('Home')}>

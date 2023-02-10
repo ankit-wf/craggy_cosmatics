@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView, Keyboard, RefreshControl, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Keyboard, RefreshControl, StyleSheet, Pressable } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Heading from '../components/Heading'
 import Header from '../components/Header'
@@ -14,17 +14,13 @@ import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/responsiveStyle'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
-
-
 const bannerImg = require('../../Data/bannerSlider.json')
-// const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const latestProductImg = require('../../Data/latestProduct.json')
 
 const HomeScreen = ({ navigation }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const imageFooter = FooterImage();
-  // const reviewData = useSelector(state => state.reviewData.review);
   const storeData = useSelector(state => state.cartData.cart);
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
@@ -40,6 +36,14 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+    Category_Api()
+    BestSelling_Api()
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000);
+  }, [])
+
+  const Category_Api = () => {
     axios.get(
       `https://craggycosmetic.com/api/products/category/`,
       {
@@ -50,26 +54,25 @@ const HomeScreen = ({ navigation }) => {
     ).then((res) => {
       if (res.data.status = "success") {
         setData(res.data.response)
-        setTimeout(() => {
-          setLoading(false)
-        }, 2000);
       }
-    }),
+    })
+  }
 
-      axios.get(
-        `https://craggycosmetic.com/api/products/best-selling/`,
-        {
-          headers: {
-            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-          }
+  const BestSelling_Api = () => {
+    axios.get(
+      `https://craggycosmetic.com/api/products/best-selling/`,
+      {
+        headers: {
+          'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
         }
-      ).then((res) => {
-        // console.log("resss", res.data)
-        if (res.data.status = "success") {
-          setBestData(res.data.response)
-        }
-      })
-  }, [])
+      }
+    ).then((res) => {
+      // console.log("resss", res.data)
+      if (res.data.status = "success") {
+        setBestData(res.data.response)
+      }
+    })
+  }
 
   const bestSellingHolder = (description, product_id, image, sale_price, regular_price,) => {
     let Data = [...storeData, {
@@ -134,7 +137,10 @@ const HomeScreen = ({ navigation }) => {
                         <Image source={require('../../assets/CodeImg.png')} />
                       </View>
 
-                      <TouchableOpacity style={styles.bannerButton}>
+                      <TouchableOpacity
+                        activeOpacity={0.8}
+                        style={styles.bannerButton}
+                      >
                         <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
                       </TouchableOpacity>
                     </View>
@@ -153,6 +159,7 @@ const HomeScreen = ({ navigation }) => {
                 return (
                   <SkeletonContainer isLoading={loading} key={i}>
                     <TouchableOpacity
+                      activeOpacity={0.8}
                       onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
                       style={{ height: 80, width: 80, marginLeft: 8, marginTop: 30, borderRadius: 50 }}
                     >
@@ -180,9 +187,9 @@ const HomeScreen = ({ navigation }) => {
             <Heading title=' best selling ' />
 
             <TouchableOpacity
+              activeOpacity={0.8}
               style={styles.viewLatestProduct}
               onPress={() => navigation.navigate("AllBestseller")}
-
             >
               <Text style={styles.latestProductText}>
                 View All
@@ -195,10 +202,15 @@ const HomeScreen = ({ navigation }) => {
         <View style={bsP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
             {bestData.map((e, i) => {
-              // console.log("eeeeee", e.category)
+              // console.log("eeeeee", e)
               return (
                 <SkeletonContainer isLoading={loading} key={i}>
-                  <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.product_id)} >
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={bsP.touchable}
+                    onPress={() => navigation.navigate('Product', e.product_id)}
+                    key={i}
+                  >
                     <View style={bsP.imgRoot} >
                       <Image source={{ uri: e.image }} style={bsP.productImg} />
                     </View>
@@ -218,7 +230,9 @@ const HomeScreen = ({ navigation }) => {
                     </View>
 
                     {/* Buy Now Button  */}
-                    <TouchableOpacity style={bsP.buyNowButton}
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      style={bsP.buyNowButton}
                       onPress={() => bestSellingHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
                     >
                       <Text style={bsP.buttonText}>BUY NOW</Text>
@@ -236,6 +250,7 @@ const HomeScreen = ({ navigation }) => {
             <Heading title=' latest product ' />
 
             <TouchableOpacity
+              activeOpacity={0.8}
               style={styles.viewLatestProduct}
               onPress={() => navigation.navigate("AllLatestProduct")}
             >
@@ -251,7 +266,12 @@ const HomeScreen = ({ navigation }) => {
             {latestProductImg.map((e, i) => {
               return (
                 <SkeletonContainer isLoading={loading} key={i} >
-                  <TouchableOpacity style={lP.touchable} key={i} onPress={() => navigation.navigate('Product', e.latestProduct_id)}>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={lP.touchable}
+                    onPress={() => navigation.navigate('Product', e.latestProduct_id)}
+                    key={i}
+                  >
                     <View style={lP.imgRoot} >
                       <Image source={{ uri: e.images }} style={lP.productImg} />
                     </View>
@@ -271,7 +291,7 @@ const HomeScreen = ({ navigation }) => {
                     </View>
 
                     {/* Buy Now Button  */}
-                    <TouchableOpacity style={lP.buyNowButton}
+                    <TouchableOpacity activeOpacity={0.8} style={lP.buyNowButton}
                       onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
                     >
                       <Text style={lP.buttonText}>BUY NOW</Text>
@@ -316,7 +336,10 @@ const HomeScreen = ({ navigation }) => {
 
             {/* View all Product  */}
 
-            <TouchableOpacity style={styles.ViewProduct} onPress={() => navigation.navigate('ViewProduct')} >
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.ViewProduct}
+              onPress={() => navigation.navigate('ViewProduct')} >
               <Text style={styles.viewProductText}>VIEW ALL PRODUCT</Text>
             </TouchableOpacity>
 

@@ -69,16 +69,28 @@ const ProductListingScreen = ({ navigation, route }) => {
             <View style={{ alignItems: 'center' }}>
                 <Text style={styles1.panelTitle}>Sort By</Text>
             </View>
-            <TouchableOpacity style={styles1.panelButton} >
+            <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles1.panelButton}
+            >
                 <Text style={styles1.panelButtonTitle}>Latest</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles1.panelButton} >
+            <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles1.panelButton}
+            >
                 <Text style={styles1.panelButtonTitle}>Popularity</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles1.panelButton}>
+            <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles1.panelButton}
+            >
                 <Text style={styles1.panelButtonTitle}>Price - Low to High</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles1.panelButton}>
+            <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles1.panelButton}
+            >
                 <Text style={styles1.panelButtonTitle}>Price - High to Low</Text>
             </TouchableOpacity>
         </View>
@@ -120,7 +132,10 @@ const ProductListingScreen = ({ navigation, route }) => {
                                             <View style={styles.bannerCode} >
                                                 <Image source={require('../../assets/CodeImg.png')} />
                                             </View>
-                                            <TouchableOpacity style={styles.bannerButton}>
+                                            <TouchableOpacity
+                                                activeOpacity={0.8}
+                                                style={styles.bannerButton}
+                                            >
                                                 <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
                                             </TouchableOpacity>
                                         </View>
@@ -133,7 +148,11 @@ const ProductListingScreen = ({ navigation, route }) => {
                 <SkeletonContainer isLoading={loading}>
                     <View style={styles1.shorting_root}>
                         <Text style={styles1.name_text}>{name}</Text>
-                        <TouchableOpacity onPress={bottomSheetHandler} style={styles1.sort_text_root}>
+                        <TouchableOpacity
+                            onPress={bottomSheetHandler}
+                            activeOpacity={0.8}
+                            style={styles1.sort_text_root}
+                        >
                             <Text style={styles1.sort_text}>Sort</Text>
                             <Ionicons name="swap-vertical" size={25} style={styles1.sort_icon} />
                         </TouchableOpacity>
@@ -146,7 +165,11 @@ const ProductListingScreen = ({ navigation, route }) => {
                         data={data}
                         renderItem={({ item }) => (
                             <SkeletonContainer isLoading={loading}>
-                                < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
+                                < TouchableOpacity
+                                    style={sS.product109}
+                                    activeOpacity={0.8}
+                                    onPress={() => navigation.navigate("Product", item.product_id)}
+                                >
                                     <View style={sS.imgRoot} >
                                         <Image source={{ uri: item.image }} style={sS.productImg} />
                                     </View>

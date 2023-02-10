@@ -13,10 +13,8 @@ const ReviewsScreen = ({ navigation }) => {
 
                 <Text style={styles.deliveryText}>REVIEWS</Text>
             </View> */}
-
             {newData.map((value, k) => {
                 // console.log("rewviewData", newData)
-
                 let ending = parseInt(page) * 3;
                 let starting = ending - 2;
                 if (k >= starting && k <= ending) {
@@ -27,9 +25,7 @@ const ReviewsScreen = ({ navigation }) => {
                                     <Text style={styles.review_Name}>{value.title}</Text>
                                     <Text style={styles.review_Date}>{value.date}</Text>
                                 </View>
-
                                 <View style={{ flexDirection: 'row', marginLeft: -8 }} >
-
                                     <Rating
                                         readonly={true}
                                         ratingCount={5}
@@ -37,27 +33,21 @@ const ReviewsScreen = ({ navigation }) => {
                                         imageSize={28}
                                         style={{ padding: 10 }}
                                     // tintColor="white"
-
                                     />
                                     <Text style={styles.starReviws}>{value.star}</Text>
                                 </View>
-
                                 <Text style={styles.review_Title}>{value.title}</Text>
                                 <Text style={styles.review_Review}>{value.description}</Text>
                                 <View style={pDs.baseLine} />
                             </View>
                         </View>
-
                     )
                 }
             })}
-
         </View>
     )
 }
-
 export default ReviewsScreen;
-
 const styles = StyleSheet.create({
     deliveryText: {
         fontSize: 20,
@@ -98,5 +88,4 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontFamily: 'Lato700'
     },
-
 })
