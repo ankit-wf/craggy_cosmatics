@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 import BackButton from '../components/BackButton'
+import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const WishListScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -61,58 +62,62 @@ const WishListScreen = ({ navigation }) => {
             </View> */}
 
             <View style={sS.productsListRoot}>
-                {
-                    loading ?
-                        <ActivityIndicator size="large" color="#00ff00" style={{ marginTop: 200 }} />
-                        :
-                        <FlatList
-                            data={data}
-                            renderItem={({ item }) => (
-                                < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
-                                    <View style={sS.imgRoot} >
-                                        <Image source={{ uri: item.image }} style={sS.productImg} />
-                                        <TouchableOpacity style={styles.img_icon_root} >
-                                            <Ionicons
-                                                name="close-outline"
-                                                color={'#000'}
-                                                size={20}
-                                                style={styles.icon_style}
-                                            //   onPress={() => removeHandler(e)}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-
-                                    <View style={sS.contentRoot}>
-                                        <View style={sS.textRoot}>
-                                            <Text style={sS.contentText}>{item.product_title}</Text>
-                                        </View>
-                                        <View style={sS.baseLine}></View>
-                                        <View style={sS.priceRoot}>
-                                            <Text style={sS.price}>₹{item.sale_price}</Text>
-                                            <Text style={sS.spaceRoot}>/ </Text>
-                                            <Text style={sS.oldprice}>₹{item.regular_price}</Text>
-                                        </View>
-                                    </View>
-
-                                    {/* {/ Buy Now Button  /} */}
-                                    <TouchableOpacity style={sS.buyNowButton}
-                                        onPress={() => buyNowHanlder(item.description, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                <SkeletonContainer isLoading={loading}>
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                style={sS.product109}
+                                onPress={() => navigation.navigate("Product", item.product_id)}
+                            >
+                                <View style={sS.imgRoot} >
+                                    <Image source={{ uri: item.image }} style={sS.productImg} />
+                                    <TouchableOpacity
+                                        activeOpacity={0.5}
+                                        style={styles.img_icon_root}
                                     >
-                                        <Text style={sS.buttonText}>BUY NOW</Text>
+                                        <Ionicons
+                                            name="close-outline"
+                                            color={'#000'}
+                                            size={20}
+                                            style={styles.icon_style}
+                                        //   onPress={() => removeHandler(e)}
+                                        />
                                     </TouchableOpacity>
+                                </View>
+
+                                <View style={sS.contentRoot}>
+                                    <View style={sS.textRoot}>
+                                        <Text style={sS.contentText}>{item.product_title}</Text>
+                                    </View>
+                                    <View style={sS.baseLine}></View>
+                                    <View style={sS.priceRoot}>
+                                        <Text style={sS.price}>₹{item.sale_price}</Text>
+                                        <Text style={sS.spaceRoot}>/ </Text>
+                                        <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                    </View>
+                                </View>
+
+                                {/* Buy Now Button  */}
+                                <TouchableOpacity
+                                    activeOpacity={0.6}
+                                    style={sS.buyNowButton}
+                                    onPress={() => buyNowHanlder(item.description, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                >
+                                    <Text style={sS.buttonText}>BUY NOW</Text>
                                 </TouchableOpacity>
-                            )}
-                            numColumns={2}
-                            keyExtractor={(item, index) => index}
-                        />
-                }
+                            </TouchableOpacity>
+                        )}
+                        numColumns={2}
+                        keyExtractor={(item, index) => index}
+                    />
+                </SkeletonContainer>
             </View>
         </View>
     )
 }
-
 export default WishListScreen;
-
 const styles = StyleSheet.create({
     deliveryText: {
         fontSize: 20,

@@ -22,8 +22,8 @@ export const useStyles = CreateResponsiveStyle(
             alignItems: 'center',
         },
         container: {
-            paddingLeft: 20,
-            paddingRight: 20,
+            // paddingLeft: 20,
+            // paddingRight: 20,
         },
         headerHamburger: {
             width: 32,

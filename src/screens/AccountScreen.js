@@ -57,7 +57,11 @@ const AccountScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.CraggyTextRoot}>
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_order')}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.myProfileRoot}
+          onPress={() => navigation.navigate('my_order')}
+        >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="newspaper-outline"
@@ -78,7 +82,11 @@ const AccountScreen = ({ navigation }) => {
 
         <View style={styles.baseLine} />
 
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('Addresses')}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.myProfileRoot}
+          onPress={() => navigation.navigate('Addresses')}
+        >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="location-outline"
@@ -99,7 +107,11 @@ const AccountScreen = ({ navigation }) => {
 
         <View style={styles.baseLine} />
 
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('my_wishlist')} >
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.myProfileRoot}
+          onPress={() => navigation.navigate('my_wishlist')}
+        >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle-outline"
@@ -141,7 +153,11 @@ const AccountScreen = ({ navigation }) => {
 
         <View style={styles.baseLine} /> */}
 
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.myProfileRoot}
+          onPress={() => navigation.navigate('offer_coupan')}
+        >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="headset-outline"
@@ -162,7 +178,11 @@ const AccountScreen = ({ navigation }) => {
         <View style={styles.baseLine} />
 
 
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.myProfileRoot}
+          onPress={() => navigation.navigate('offer_coupan')}
+        >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="md-document-text-outline"
@@ -183,7 +203,11 @@ const AccountScreen = ({ navigation }) => {
         <View style={styles.baseLine} />
 
 
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offer_coupan')} >
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.myProfileRoot}
+          onPress={() => navigation.navigate('offer_coupan')}
+        >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle"
@@ -203,7 +227,11 @@ const AccountScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         <View style={styles.baseLine} />
-        <TouchableOpacity style={styles.myProfileRoot} onPress={() => navigation.navigate('offers')} >
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.myProfileRoot}
+          onPress={() => navigation.navigate('offers')}
+        >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle"
@@ -222,7 +250,11 @@ const AccountScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
         <View style={styles.baseLine} />
-        <TouchableOpacity style={styles.myProfileRoot} onPress={LogoutUserHandler} >
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.myProfileRoot}
+          onPress={LogoutUserHandler}
+        >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="exit-outline"

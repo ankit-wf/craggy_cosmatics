@@ -27,7 +27,14 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const [heart, setHeart] = useState(false);
     const id = route.params;
 
+
     useEffect(() => {
+        Single_Product()
+    }, [id])
+
+
+    const Single_Product = () => {
+        // useEffect(() => {
         axios.get(`https://craggycosmetic.com/api/products/`,
             {
                 params: {
@@ -44,7 +51,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 setLoading(false);
             }, 2000);
         })
-    }, [id])
+        // }, [id])
+    }
 
     const ratingCompleted = (rating) => {
         setStar(rating);
@@ -104,7 +112,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 >
                     {data.map((data, index) => {
                         return (
-
                             <View>
                                 {/* <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
                                     <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
@@ -274,7 +281,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         })}
 
                                         <TouchableOpacity
-                                            activeOpacity={0.8}
+                                            activeOpacity={0.5}
                                             onPress={() => navigation.navigate('offers')}
                                             style={styles.allreview_root}
                                         >
@@ -290,7 +297,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <View style={styles.youMayAlso}>
                                             <Heading title=' YOU MAY ALSO LIKE ' />
                                             <TouchableOpacity
-                                                activeOpacity={0.8}
+                                                activeOpacity={0.6}
                                                 onPress={() => console.log("first")}
                                                 style={styles.viewLatestProduct}
                                             >
@@ -304,7 +311,12 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             <ScrollView horizontal showsHorizontalScrollIndicator={false} >
                                                 {bestSellingProduct.map((e, i) => {
                                                     return (
-                                                        <TouchableOpacity style={pDs.product109} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
+                                                        <TouchableOpacity
+                                                            activeOpacity={0.8}
+                                                            style={pDs.product109}
+                                                            onPress={() => navigation.navigate('Product', e.sellingProduct_id)}
+                                                            key={i}
+                                                        >
                                                             <View style={pDs.imgRoot}>
                                                                 <Image source={{ uri: e.images }} style={pDs.productImg} />
                                                             </View>
@@ -323,7 +335,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                             </View>
 
                                                             {/* {/ Buy Now Button  /} */}
-                                                            <TouchableOpacity style={pDs.buyNowButton1}
+                                                            <TouchableOpacity
+                                                                activeOpacity={0.8}
+                                                                style={pDs.buyNowButton1}
                                                                 onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
                                                             >
                                                                 <Text style={pDs.buttonText1}>BUY NOW</Text>
@@ -336,18 +350,14 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     </View>
                                 </View>
                             </View>
-
                         )
                     })}
                 </ScrollView >
-
             </SafeAreaView>
         </View>
     )
 }
-
-export default ProductDetailScreen
-
+export default ProductDetailScreen;
 const styles = StyleSheet.create({
     safe_root: {
         height: '100%',

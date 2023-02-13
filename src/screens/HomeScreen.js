@@ -109,9 +109,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={ds.appContainer}>
-
       <Header onPress={openDrawer} search={searchHandler} CartHandler={CartHandler} />
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled={true}
@@ -127,7 +125,6 @@ const HomeScreen = ({ navigation }) => {
                 return (
                   <View key={i} >
                     <Image source={{ uri: e.images }} style={styles1.bannerImgHight} />
-
                     <View style={styles.sliderContent}>
                       <View style={styles.bannerTextRoot}>
                         <Text style={styles.bannerText}>{e.line}</Text>
@@ -183,9 +180,7 @@ const HomeScreen = ({ navigation }) => {
 
         <SkeletonContainer isLoading={loading}>
           <View style={styles1.bestSellerRoot}>
-
             <Heading title=' best selling ' />
-
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.viewLatestProduct}
@@ -195,14 +190,12 @@ const HomeScreen = ({ navigation }) => {
                 View All
               </Text>
             </TouchableOpacity>
-
           </View>
         </SkeletonContainer>
 
         <View style={bsP.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
             {bestData.map((e, i) => {
-              // console.log("eeeeee", e)
               return (
                 <SkeletonContainer isLoading={loading} key={i}>
                   <TouchableOpacity
@@ -237,6 +230,7 @@ const HomeScreen = ({ navigation }) => {
                     >
                       <Text style={bsP.buttonText}>BUY NOW</Text>
                     </TouchableOpacity>
+
                   </TouchableOpacity>
                 </SkeletonContainer>
               )
@@ -248,7 +242,6 @@ const HomeScreen = ({ navigation }) => {
         <SkeletonContainer isLoading={loading} >
           <View style={styles1.bestSellerRoot}>
             <Heading title=' latest product ' />
-
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.viewLatestProduct}
@@ -335,17 +328,14 @@ const HomeScreen = ({ navigation }) => {
             </View>
 
             {/* View all Product  */}
-
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.ViewProduct}
               onPress={() => navigation.navigate('ViewProduct')} >
               <Text style={styles.viewProductText}>VIEW ALL PRODUCT</Text>
             </TouchableOpacity>
-
           </View>
         </View>
-
       </ScrollView >
     </View >
   )
