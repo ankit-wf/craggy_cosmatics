@@ -1,17 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView } from 'react-native'
 import React from 'react'
 import { FAB } from 'react-native-paper';
-import { Ionicons } from '@expo/vector-icons'
-import BackButton from '../components/BackButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginActions } from '../store/UserSlice'
 
 const AddressesScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const AddData = useSelector(state => state.userData.userAddress);
-  // console.log("datataaaaa", AddData)
   const removeHandler = (index) => {
-
     dispatch(loginActions.remove(
       {
         index: index
@@ -50,7 +46,11 @@ const AddressesScreen = ({ navigation }) => {
       {AddData.length < 1 ?
         <View>
           <View style={styles.root_defaultImg}>
-            <Image source={(require('../../assets/images/dummy_location.png'))} resizeMode="cover" />
+            <Image source={(require('../../assets/images/maprm.png'))} resizeMode="cover" />
+            <View style={{ alignSelf: 'center' }}>
+              <Text style={{ fontSize: 16 }} >We can't seem to locate you</Text>
+              <Text style={{ fontSize: 16 }} >Please add in your address</Text>
+            </View>
           </View>
           <TouchableOpacity style={styles.add_Btn} onPress={() => navigation.navigate('AddAddress')}>
             <Text style={styles.btn_text}> + </Text>
@@ -105,7 +105,6 @@ export default AddressesScreen
 
 const styles = StyleSheet.create({
   root_container: {
-    // flex: 1,
     marginTop: '10%',
     justifyContent: 'center',
     alignItems: 'center'
@@ -114,9 +113,8 @@ const styles = StyleSheet.create({
     height: 300,
     width: '100%',
     alignSelf: 'center',
-    marginTop: '10%'
-    // flex: 1,
-    // justifyContent: 'center',
+    // marginTop: '10%'
+    justifyContent: 'center'
   },
 
   add_Btn: {

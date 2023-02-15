@@ -9,11 +9,12 @@ import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
-const productImg = require('../../Data/productDetail.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
-const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+
+const Tab = createMaterialTopTabNavigator();
 
 const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -56,15 +57,15 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const handlePress = (gg) => {
         setExpanded(gg);
     };
-    const addOne = () => {
-        setOne(one + 1)
-    }
-    const subOne = () => {
-        if (one <= 1) {
-        } else {
-            setOne(one - 1)
-        }
-    }
+    // const addOne = () => {
+    //     setOne(one + 1)
+    // }
+    // const subOne = () => {
+    //     if (one <= 1) {
+    //     } else {
+    //         setOne(one - 1)
+    //     }
+    // }
 
     const CartHolder = (description, product_id, image, regular_price, sale_price) => {
         let Data = [...storeData, {
@@ -95,6 +96,41 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const wishlistHandler = () => {
         setHeart(!heart);
     }
+
+    function ProDescription() {
+        const dd = data.map((data, index) => {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} key={index}>
+                    <Text>{data.description}  </Text>
+                </View>
+            );
+        })
+        return dd
+
+    }
+
+    function ProFeatures() {
+        const dd = data.map((data, index) => {
+            return (
+                <View key={index}>
+                    <Text>{data.key_feature}  </Text>
+                </View>
+            );
+        })
+        return dd
+    }
+
+    function ProUses() {
+        const dd = data.map((data, index) => {
+            return (
+                <View key={index} >
+                    <Text>{data.how_to_use}  </Text>
+                </View>
+            );
+        })
+        return dd
+    }
+
 
     return (
         <View>
@@ -138,16 +174,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 </TouchableOpacity>
                                             </View>
                                         </SkeletonContainer>
-
-                                        {/* <View style={styles.productButtonRoot}>
-                                                    <TouchableOpacity onPress={subOne} style={(one < 1) ? styles.blackButton : styles.whiteButton} >
-                                                        <Text style={styles.blackText}>-</Text>
-                                                    </TouchableOpacity>
-                                                    <Text style={styles.Textone}>{one < 1 ? 1 : one}</Text>
-                                                    <TouchableOpacity onPress={addOne} style={(one >= 1) ? styles.blackButton : styles.whiteButton} >
-                                                        <Text style={(one >= 1) ? styles.whiteText : styles.blackText} >+</Text>
-                                                    </TouchableOpacity>
-                                                </View> */}
                                     </View>
                                     <View>
                                         <SkeletonContainer isLoading={loading}>
@@ -155,7 +181,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
                                                 style={styles.buyNowButton}
                                             >
-                                                <Text style={styles.buttonText}>ADD TO CART </Text>
+                                                <Text style={styles.buttonText}>ADD TO CART</Text>
                                             </TouchableOpacity>
                                         </SkeletonContainer>
                                         <Snackbar
@@ -170,6 +196,15 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                 </View>
 
                                 <View style={pDs.baseLine2} />
+
+                                {/* tab view */}
+                                <Tab.Navigator style={{ height: 200 }}>
+                                    <Tab.Screen name="DESCRIPTION" component={ProDescription} />
+                                    <Tab.Screen name="KEY FEATURES" component={ProUses} />
+                                    <Tab.Screen name="HOW TO APPLY" component={ProFeatures} />
+                                </Tab.Navigator>
+
+
 
                                 <View style={styles.Accordion_Root}>
                                     <List.Section >

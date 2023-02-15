@@ -10,6 +10,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { View } from 'react-native';
 import SkeletonTestScreen from './src/screens/SkeletonTestScreen';
+import PayUTest from './PayUTest';
 
 
 export default function App() {
@@ -58,7 +59,7 @@ export default function App() {
     </NavigationContainer >
 
     // <View>
-    //   <SkeletonTestScreen />
+    //   <PayUTest />
     // </View>
 
   );

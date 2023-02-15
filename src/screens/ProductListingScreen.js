@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, RefreshControl, } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, RefreshControl, TouchableWithoutFeedback, } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Swiper from 'react-native-swiper'
@@ -194,16 +194,17 @@ const ProductListingScreen = ({ navigation, route }) => {
                     />
                 </View>
             </ScrollView>
-            <View style={{ marginTop: 300 }}>
-                <BottomSheet
-                    ref={bs}
-                    snapPoints={[340, 0]}
-                    renderContent={renderInner}
-                    initialSnap={1}
-                    // callbackNode={fall}
-                    enabledGestureInteraction={true}
-                />
-            </View>
+
+            {/* <View style={{ marginTop: 300 }}> */}
+            <BottomSheet
+                ref={bs}
+                snapPoints={[340, 0]}
+                renderContent={renderInner}
+                initialSnap={1}
+                // callbackNode={fall}
+                enabledGestureInteraction={true}
+            />
+            {/* </View> */}
         </View >
     )
 }
