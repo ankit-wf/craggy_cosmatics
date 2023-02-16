@@ -5,78 +5,48 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BackButton from '../components/BackButton'
 import { Ionicons } from '@expo/vector-icons'
 import { useSelector, useDispatch } from 'react-redux';
-const imgData = require('../../imgData.json');
 import { submitActions } from '../store/dataSlice'
 
 const MyCartScreen = ({ navigation, route }) => {
 
   const storeData = useSelector(state => state.cartData.cart);
-  // console.log("storeData", storeData);
-  const id = route.params;
-  // console.log("idddd", id);
+  // console.log("storeDataCart", storeData);
 
   const dispatch = useDispatch();
   const totalPrice = useRef()
   const totaloldPrice = useRef()
-  // console.log("TotalPrice", totalPrice)
-  // const [test, setTest] = useState();
-
-  // useEffect(() => {
-  //   console.log("fffffff");
-  //   imgData.map((e, i) => {
-  //     // console.log("eeee", e.id)
-  //     if (id === e.id) {
-  //       let Data = [...reduxData, {
-  //         images: e.images,
-  //         id: e.id,
-  //         description: e.description,
-  //         price: e.price,
-  //         oldprice: e.oldprice,
-  //         quantity: e.quantity
-  //       }];
-  //       dispatch(submitActions.price(
-  //         {
-  //           cart: Data
-  //         }
-  //       ));
-  //     }
-  //   })
-  // }, [])
-
 
   const addOne = (id, quant) => {
 
     dispatch(submitActions.quantity(
       {
-        id: id,
-        quantity: quant + 1
+        itemId: id,
+        itemQuantity: quant + 1
       }
     ));
   }
   const subOne = (id, quant) => {
     if (quant > 1)
-
       dispatch(submitActions.quantity(
         {
-          id: id,
-          quantity: quant - 1
+          itemId: id,
+          itemQuantity: quant - 1
         }
       ));
   }
 
   const removeHandler = (index) => {
-
     dispatch(submitActions.remove(
       {
         index: index
       }
     ))
-  }
+  };
 
   const totalAmount = () => {
     let sum = 0;
     for (let i = 0; i < storeData.length; i++) {
-      sum = sum + storeData[i].oldprice * storeData[i].quantity
+      sum = sum + storeData[i].itemOldprice * storeData[i].itemQuantity
     }
     return sum;
   }
@@ -84,7 +54,7 @@ const MyCartScreen = ({ navigation, route }) => {
   const totalOldAmount = () => {
     let sum = 0;
     for (let i = 0; i < storeData.length; i++) {
-      sum = sum + storeData[i].price * storeData[i].quantity
+      sum = sum + storeData[i].itemPrice * storeData[i].itemQuantity
     }
     return sum;
   }
@@ -103,22 +73,19 @@ const MyCartScreen = ({ navigation, route }) => {
 
       </View>
       {storeData.length < 1 ?
-
         <Text style={styles.emptyCart}>This Cart Is Empty</Text>
-
         : <ScrollView>
           {storeData.map((i, e) => {
-            // console.log("price", i.price, i.quantity)
             return (
               <View key={e}>
 
                 <View key={e} style={styles.dataRoot}>
                   <View style={styles.dataImgRoot}>
-                    <Image source={{ uri: i.images }} style={styles.dataImg} />
+                    <Image source={{ uri: i.itemImages }} style={styles.dataImg} />
                   </View>
 
                   <View style={styles.textRoot} >
-                    <Text numberOfLines={2} style={styles.textDescription}>{i.description}</Text>
+                    <Text numberOfLines={2} style={styles.textDescription}>{i.itemDescription}</Text>
                   </View>
 
                   <View>
@@ -131,24 +98,23 @@ const MyCartScreen = ({ navigation, route }) => {
                     />
 
                     <View style={styles.buttonRoot}>
-                      <TouchableOpacity onPress={() => subOne(e, i.quantity)} style={(i.quantity < 1) ? styles.blackButton : styles.whiteButton} >
+                      <TouchableOpacity onPress={() => subOne(e, i.itemQuantity)} style={(i.itemQuantity < 1) ? styles.blackButton : styles.whiteButton} >
                         <Text style={styles.blackText}>-</Text>
                       </TouchableOpacity>
 
-                      <Text style={styles.blackText}>{i.quantity}</Text>
+                      <Text style={styles.blackText}>{i.itemQuantity}</Text>
 
-                      <TouchableOpacity onPress={() => addOne(e, i.quantity)} style={(i.quantity >= 1) ? styles.blackButton : styles.whiteButton} >
-                        <Text style={(i.quantity >= 1) ? styles.whiteText : styles.blackText} >+</Text>
+                      <TouchableOpacity onPress={() => addOne(e, i.itemQuantity)} style={(i.itemQuantity >= 1) ? styles.blackButton : styles.whiteButton} >
+                        <Text style={(i.itemQuantity >= 1) ? styles.whiteText : styles.blackText} >+</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
 
                   <View style={styles.textPriceRoot} key={e}>
-                    <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
+                    <Text style={styles.price}>₹{totalPrice.current = i.itemOldprice * i.itemQuantity}</Text>
                     <Text style={styles.slace} > / </Text>
-                    <Text style={styles.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
+                    <Text style={styles.oldprice}>₹{totaloldPrice.current = i.itemPrice * i.itemQuantity}</Text>
                   </View>
-
                 </View>
 
                 <View style={styles.baseLine}></View>

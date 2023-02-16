@@ -20,10 +20,11 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const newData = useSelector(state => state.reviewData.review);
     const storeData = useSelector(state => state.cartData.cart);
+    const [cartItems, setCartItems] = useState([])
     const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
-    const [data, setData] = useState([])
+    const [item, setItem] = useState([])
     const [loading, setLoading] = useState(true);
     const [heart, setHeart] = useState(false);
     const id = route.params;
@@ -40,7 +41,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 }
             }
         ).then((res) => {
-            setData(res.data)
+            setItem(res.data)
             setTimeout(() => {
                 setLoading(false);
             }, 2000);
@@ -57,32 +58,24 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const handlePress = (gg) => {
         setExpanded(gg);
     };
-    // const addOne = () => {
-    //     setOne(one + 1)
-    // }
-    // const subOne = () => {
-    //     if (one <= 1) {
-    //     } else {
-    //         setOne(one - 1)
-    //     }
-    // }
 
-    const CartHolder = (description, product_id, image, regular_price, sale_price) => {
+    const AddToCart = (item) => {
+
         let Data = [...storeData, {
-            description: description,
-            categoriesDetail_id: product_id,
-            images: image,
-            oldprice: regular_price,
-            price: sale_price,
-            quantity: 1
+            itemDescription: item[0].description,
+            itemId: item[0].product_id,
+            itemImages: item[0].image,
+            itemOldprice: item[0].regular_price,
+            itemPrice: item[0].sale_price,
+            itemQuantity: 1
         }];
         dispatch(submitActions.price(
             {
                 cart: Data
             }
         ));
-        onToggleSnackBar();
-        // navigation.navigate("Cart", product_id);
+        // onToggleSnackBar();
+        navigation.navigate("Cart");
     }
     const onToggleSnackBar = () => {
         setVisible(!visible)
@@ -97,39 +90,39 @@ const ProductDetailScreen = ({ navigation, route }) => {
         setHeart(!heart);
     }
 
-    function ProDescription() {
-        const dd = data.map((data, index) => {
-            return (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} key={index}>
-                    <Text>{data.description}  </Text>
-                </View>
-            );
-        })
-        return dd
+    // function ProDescription() {
+    //     const dd = data.map((data, index) => {
+    //         return (
+    //             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} key={index}>
+    //                 <Text>{data.description}  </Text>
+    //             </View>
+    //         );
+    //     })
+    //     return dd
 
-    }
+    // }
 
-    function ProFeatures() {
-        const dd = data.map((data, index) => {
-            return (
-                <View key={index}>
-                    <Text>{data.key_feature}  </Text>
-                </View>
-            );
-        })
-        return dd
-    }
+    // function ProFeatures() {
+    //     const dd = data.map((data, index) => {
+    //         return (
+    //             <View key={index}>
+    //                 <Text>{data.key_feature}  </Text>
+    //             </View>
+    //         );
+    //     })
+    //     return dd
+    // }
 
-    function ProUses() {
-        const dd = data.map((data, index) => {
-            return (
-                <View key={index} >
-                    <Text>{data.how_to_use}  </Text>
-                </View>
-            );
-        })
-        return dd
-    }
+    // function ProUses() {
+    //     const dd = data.map((data, index) => {
+    //         return (
+    //             <View key={index} >
+    //                 <Text>{data.how_to_use}  </Text>
+    //             </View>
+    //         );
+    //     })
+    //     return dd
+    // }
 
 
     return (
@@ -137,10 +130,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
             <SafeAreaView style={styles.safe_root}>
 
                 <ScrollView onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}>
-                    {data.map((data, index) => {
+                    {item.map((data, index) => {
                         return (
-
-                            <View>
+                            <View key={index}>
                                 <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
                                     <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
                                 </View>
@@ -178,7 +170,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     <View>
                                         <SkeletonContainer isLoading={loading}>
                                             <TouchableOpacity
-                                                onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
+                                                onPress={() => AddToCart(item)}
                                                 style={styles.buyNowButton}
                                             >
                                                 <Text style={styles.buttonText}>ADD TO CART</Text>
@@ -196,15 +188,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                 </View>
 
                                 <View style={pDs.baseLine2} />
-
-                                {/* tab view */}
-                                <Tab.Navigator style={{ height: 200 }}>
-                                    <Tab.Screen name="DESCRIPTION" component={ProDescription} />
-                                    <Tab.Screen name="KEY FEATURES" component={ProUses} />
-                                    <Tab.Screen name="HOW TO APPLY" component={ProFeatures} />
-                                </Tab.Navigator>
-
-
 
                                 <View style={styles.Accordion_Root}>
                                     <List.Section >

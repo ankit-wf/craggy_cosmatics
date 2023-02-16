@@ -196,14 +196,14 @@ const ProductListingScreen = ({ navigation, route }) => {
             </ScrollView>
 
             {/* <View style={{ marginTop: 300 }}> */}
-            <BottomSheet
+            {/* <BottomSheet
                 ref={bs}
                 snapPoints={[340, 0]}
                 renderContent={renderInner}
                 initialSnap={1}
                 // callbackNode={fall}
                 enabledGestureInteraction={true}
-            />
+            /> */}
             {/* </View> */}
         </View >
     )

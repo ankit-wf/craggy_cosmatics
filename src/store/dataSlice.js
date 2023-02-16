@@ -17,7 +17,7 @@ const dataSlice = createSlice({
         },
         quantity(state, action) {
             // storeData
-            state.cart[action.payload.id].quantity = action.payload.quantity
+            state.cart[action.payload.itemId].itemQuantity = action.payload.itemQuantity
             // console.log('state.cart', state.cart)storeData
         },
         remove(state, action) {
