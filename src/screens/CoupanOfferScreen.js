@@ -6,7 +6,6 @@ const CoupanOfferScreen = ({ navigation }) => {
     return (
         <View>
             {/* <View style={{ flexDirection: 'row', }}>
-
                 <BackButton goBack={navigation.goBack} Color={'#666666'} />
                 <Text style={styles.deliveryText}>OFFERS AND COUPAN</Text>
             </View> */}

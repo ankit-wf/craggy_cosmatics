@@ -49,13 +49,15 @@ const MainNavigator = () => {
         },
         headerTintColor: '#C68625', //Set Header text color
         headerBackTitleVisible: false,
-        headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
+        headerTitle: () => <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
+
+        // headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
         headerRight: () => (
           <View style={gs.headerNotification}>
             {BadgeData.length > 0 ?
               <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }}>
                 <Ionicons name='cart-outline' color='#CC933B' size={25} />
-                <Badge style={{ position: 'absolute', marginTop: -10, }}><Text style={{ color: '#000' }}>{BadgeData.length}</Text></Badge>
+                <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}><Text style={{ color: '#000' }}>{BadgeData.length}</Text></Badge>
               </TouchableOpacity>
               :
               <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }} >

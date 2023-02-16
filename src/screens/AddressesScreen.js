@@ -70,7 +70,6 @@ const AddressesScreen = ({ navigation }) => {
           {AddData.map((data, i) => {
             return (
               <View style={styles.default_address} key={i}>
-
                 <View style={{ width: '90%', alignSelf: 'center' }}>
                   <View style={styles.default_color} >
                     <Text style={{ color: '#fff', alignSelf: 'center', }}>DEFAULT</Text>
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
   },
   default_address: {
     height: 200,
-    // width: "90%",
+    width: 300,
     backgroundColor: '#fff',
     borderRadius: 10,
     marginTop: 10

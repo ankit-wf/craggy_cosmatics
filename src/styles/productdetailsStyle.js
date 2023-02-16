@@ -5,7 +5,8 @@ export const productDetailsStyle = StyleSheet.create({
     productsListRoot: {
         height: 252,
         width: '95%',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginBottom: "10%"
     },
     product109: {
         height: 252,

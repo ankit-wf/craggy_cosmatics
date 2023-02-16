@@ -20,7 +20,8 @@ const ProductListingScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true);
     const [bottomSheet, setBottomSheet] = useState(false);
     const [data, setData] = useState([])
-    const name = route.params.name
+    // console.log("dDDDDD", data)
+    const name = route.params.name;
     const id = route.params.id;
     const [checked, setChecked] = useState('ok');
     const bs = useRef();
@@ -54,6 +55,7 @@ const ProductListingScreen = ({ navigation, route }) => {
             oldprice: sale_price,
             quantity: 1
         }];
+
         dispatch(submitActions.price(
             {
                 cart: Data
@@ -155,8 +157,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                     </SafeAreaView>
                 </SkeletonContainer>
 
-                <View style={sS.productsListRoot} sheetRef>
-
+                <View style={sS.productsListRoot}>
                     <FlatList
                         data={data}
                         renderItem={({ item }) => (
