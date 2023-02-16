@@ -14,11 +14,15 @@ const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 // const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import { FAB } from 'react-native-paper';
 
 const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const newData = useSelector(state => state.reviewData.review);
     const storeData = useSelector(state => state.cartData.cart);
+    // const cart = useSelector(state => state.cartData.cart);
+    // console.log("carttttt", cart[2].categoriesDetail_id)
+
     const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
@@ -26,8 +30,26 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true);
     const [heart, setHeart] = useState(false);
     const id = route.params;
+    const [test, setTest] = useState(false);
+    // console.log("tessssstttt", storeData,)
+    // const idd = route.params;
+
+    // useEffect(() => {
+    //     for (let i = 0; i < cart.length; i++) {
+    //         if (cart[i].categoriesDetail_id == idd) {
+    //             // console.log(reduxData[i].id, "hj")
+    //             // console.log("idd", idd)
+    //             setTest(true)
+    //         }
+    //     }
+    // }, [test])
 
     useEffect(() => {
+        Single_Product();
+    }, [id])
+
+    const Single_Product = () => {
+        // useEffect(() => {
         axios.get(`https://craggycosmetic.com/api/products/`,
             {
                 params: {
@@ -44,7 +66,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 setLoading(false);
             }, 2000);
         })
-    }, [id])
+        // }, [id])
+    }
 
     const ratingCompleted = (rating) => {
         setStar(rating);
@@ -66,45 +89,140 @@ const ProductDetailScreen = ({ navigation, route }) => {
         }
     }
 
-    const CartHolder = (description, product_id, image, regular_price, sale_price) => {
-        let Data = [...storeData, {
-            description: description,
-            categoriesDetail_id: product_id,
-            images: image,
-            oldprice: regular_price,
-            price: sale_price,
-            quantity: 1
-        }];
-        dispatch(submitActions.price(
-            {
-                cart: Data
+    const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
+        // setTest(true)
+        for (let i = 0; i < storeData.length; i++) {
+            const element = storeData[i];
+            //     // console.log("ppppppp", element.categoriesDetail_id)
+            //     let Data = [...storeData,
+            //     (product_id === element.categoriesDetail_id),
+            //     {
+            //         description: description,
+            //         categoriesDetail_id: product_id,
+            //         images: image,
+            //         oldprice: regular_price,
+            //         price: sale_price,
+            //         quantity: element.quantity + 1
+
+            //     }];
+            //     dispatch(submitActions.price(
+            //         {
+            //             cart: Data
+            //         }
+            //     ));
+            //     navigation.navigate("Cart", product_id);
+
+            if (id === element.categoriesDetail_id) {
+                let Data = [{
+                    description: description,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    oldprice: regular_price,
+                    price: sale_price,
+                    quantity: element.quantity + 1
+                }];
+                dispatch(submitActions.price(
+                    {
+                        cart: Data
+                    }
+                ));
+                navigation.navigate("Cart", product_id);
             }
-        ));
-        onToggleSnackBar();
-        // navigation.navigate("Cart", product_id);
+            else {
+                let Data = [...storeData, {
+                    description: description,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    oldprice: regular_price,
+                    price: sale_price,
+                    quantity: 1
+                }];
+                dispatch(submitActions.price(
+                    {
+                        cart: Data
+                    }
+                ));
+                navigation.navigate("Cart", product_id);
+            }
+        }
+
+        // onToggleSnackBar();
+        // let quant = 1;
+        // let Data = [...storeData,{
+        //    storeData.map((e) => {
+        //         if (id === e.categoriesDetail_id) {
+        //             description = description,
+        //                 categoriesDetail_id = product_id,
+        //                 image = image,
+        //                 oldprice = regular_price,
+        //                 price = sale_price,
+        //                 quantity = quant + 1
+        //         }
+        //     })
+        // }
+        // ];
     }
-    const onToggleSnackBar = () => {
-        setVisible(!visible)
-    }
-    const onDismissSnackBar = () => {
-        setVisible(false)
-    }
+    // const onToggleSnackBar = () => {
+    //     setVisible(!visible)
+    // }
+    // const onDismissSnackBar = () => {
+    //     setVisible(false)
+    // }
     const wishlistHandler = () => {
         setHeart(!heart);
     }
 
+    // for (let index = 0; index < array.length; index++) {
+    //     const element = array[index];
+
+    // }
+    // for (let i = 0; i < cart.length; i++) {
+    //     setTest(cart[i]);
+    //     if (test.categoriesDetail_id == cart[i].categoriesDetail_id) {
+    //         return test;
+    //     }
+    //     console.log("PPPPPP", test)
+    // }
+
+    // {
+    //     cart.map((e, i) => {
+    //         setTest(e);
+    //         if (data.categoriesDetail_id == cart[i].categoriesDetail_id) {
+    //             return test;
+    //         }
+    //         console.log("PPPPPP", test)
+    //     })
+    // }
+
     return (
         <View>
             <SafeAreaView style={styles.safe_root}>
-
-                <ScrollView onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}>
-                    {data.map((data, index) => {
-                        return (
-
-                            <View>
-                                <View style={{ position: 'absolute', zIndex: 1, marginLeft: '5%', }}>
-                                    <BackButton goBack={navigation.goBack} Color={'#E2AB57'} />
+                {data.map((data, i) => {
+                    return (
+                        <SkeletonContainer isLoading={loading} key={i}>
+                            <View style={styles.sticky_Btn} key={i}>
+                                <View style={styles.bottomView1} >
+                                    <Text style={[styles.textStyle, styles.color]}>₹{data.regular_price}</Text>
                                 </View>
+                                <TouchableOpacity
+                                    activeOpacity={0.2}
+                                    style={styles.bottomView}
+                                    onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
+                                >
+                                    <Text style={styles.textStyle}>Add</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </SkeletonContainer>
+                    )
+                })}
+                <ScrollView
+                // onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}
+                // onScrollEndDrag={() => navigation.setOptions({ headerTitle: 'done' })}
+                >
+                    {data.map((data, index) => {
+                        // console.log("ashdajhahd", data)
+                        return (
+                            <View key={index}>
                                 <SkeletonContainer isLoading={loading} key={index}>
                                     <View style={styles.swiperRoot}>
                                         <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
@@ -112,6 +230,24 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
                                             </View>
                                         </Swiper>
+                                        <View style={styles.shadow_Box} elevation={7}>
+                                            <TouchableOpacity
+                                                onPress={wishlistHandler}
+                                                activeOpacity={0.5}
+                                                style={styles.fabOne}
+                                            >
+                                                <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={23} style={{ alignSelf: 'center' }} />
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={styles.shadow_Box1} elevation={7}>
+                                            <TouchableOpacity
+                                                onPress={() => console.log("share")}
+                                                activeOpacity={0.5}
+                                                style={styles.fabOne}
+                                            >
+                                                <Ionicons name="md-share-social-outline" size={23} style={{ alignSelf: 'center' }} />
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
 
                                     <View style={styles.CraggyTextRoot}>
@@ -120,7 +256,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         </View>
                                     </View>
                                 </SkeletonContainer>
-                                <View style={{ width: '100%' }}>
+                                {/* <View style={{ width: '100%' }}>
                                     <View style={pDs.productRoot}>
                                         <SkeletonContainer isLoading={loading} key={index}>
                                             <View style={pDs.priceRoot}>
@@ -130,97 +266,105 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             </View>
 
                                             <View>
-                                                <TouchableOpacity onPress={wishlistHandler} >
+                                                <TouchableOpacity
+                                                    onPress={wishlistHandler}
+                                                    activeOpacity={0.5}
+                                                >
                                                     <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
                                                 </TouchableOpacity>
                                             </View>
                                         </SkeletonContainer>
-
-                                        {/* <View style={styles.productButtonRoot}>
-                                                    <TouchableOpacity onPress={subOne} style={(one < 1) ? styles.blackButton : styles.whiteButton} >
-                                                        <Text style={styles.blackText}>-</Text>
-                                                    </TouchableOpacity>
-                                                    <Text style={styles.Textone}>{one < 1 ? 1 : one}</Text>
-                                                    <TouchableOpacity onPress={addOne} style={(one >= 1) ? styles.blackButton : styles.whiteButton} >
-                                                        <Text style={(one >= 1) ? styles.whiteText : styles.blackText} >+</Text>
-                                                    </TouchableOpacity>
-                                                </View> */}
                                     </View>
                                     <View>
+
                                         <SkeletonContainer isLoading={loading}>
                                             <TouchableOpacity
+                                                activeOpacity={0.8}
                                                 onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
                                                 style={styles.buyNowButton}
                                             >
                                                 <Text style={styles.buttonText}>ADD TO CART </Text>
                                             </TouchableOpacity>
                                         </SkeletonContainer>
-                                        <Snackbar
+
+                                        {/* <Snackbar
                                             visible={visible}
                                             onDismiss={onDismissSnackBar}
                                             duration={2000}
                                             wrapperStyle={{ maxWidth: 170, alignSelf: 'center', }}
                                         >
                                             Item Added to Cart
-                                        </Snackbar>
-                                    </View>
-                                </View>
+                                        </Snackbar> */}
+                                {/* </View> */}
+                                {/* </View> */}
 
-                                <View style={pDs.baseLine2} />
+                                {/* <View style={pDs.baseLine2} /> */}
 
                                 <View style={styles.Accordion_Root}>
-                                    <List.Section >
-                                        <List.Accordion
+                                    {/* <List.Section> */}
+                                    <View style={styles.description_heading}>
+                                        <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
+                                    </View>
+                                    {/* <List.Accordion
                                             id='1'
                                             title="DESCRIPTION"
-                                            titleStyle={styles.titleStyle_description}
-                                            expanded={((expanded === "1") ? true : false)}
-                                            onPress={() => handlePress("1")}
-                                            right={() => <List.Icon icon={(expanded === "1") ? 'minus' : 'plus'} />}>
-                                            <View style={styles.li_text_root} >
-                                                <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                                <Text style={styles.li_text}>{data.description}</Text>
-                                            </View>
-                                        </List.Accordion>
+                                        titleStyle={styles.titleStyle_description}
+                                        expanded={((expanded === "1") ? true : false)}
+                                        onPress={() => handlePress("1")}
+                                        right={() => <List.Icon icon={(expanded === "1") ? 'minus' : 'plus'} />}
+                                        > */}
+                                    <View style={styles.li_text_root} >
+                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
+                                        <Text style={styles.li_text}>{data.description}</Text>
+                                    </View>
+                                    {/* </List.Accordion> */}
 
-                                        <View style={pDs.baseLine} />
-
-                                        <List.Accordion
+                                    <View style={pDs.baseLine} />
+                                    <View style={styles.description_heading}>
+                                        <Text style={styles.titleStyle_description}>KEY FEATURES</Text>
+                                    </View>
+                                    {/* <List.Accordion
                                             id='2'
                                             title="KEY FEATURES"
                                             titleStyle={styles.titleStyle_description}
                                             expanded={(expanded === "2") ? true : false}
                                             onPress={() => handlePress("2")}
-                                            right={() => <List.Icon icon={(expanded === "2") ? 'minus' : 'plus'} />}>
-                                            <View style={styles.li_text_root} >
-                                                <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                                <Text style={styles.li_text}>{data.key_feature}</Text>
-                                            </View>
-                                        </List.Accordion>
+                                            right={() => <List.Icon icon={(expanded === "2") ? 'minus' : 'plus'} />}> */}
+                                    <View style={styles.li_text_root} >
+                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
+                                        <Text style={styles.li_text}>{data.key_feature}</Text>
+                                    </View>
+                                    {/* </List.Accordion> */}
 
-                                        <View style={pDs.baseLine} />
-
-                                        <List.Accordion
+                                    <View style={pDs.baseLine} />
+                                    <View style={styles.description_heading}>
+                                        <Text style={styles.titleStyle_description}>HOW TO USE</Text>
+                                    </View>
+                                    {/* <List.Accordion
                                             id='3'
                                             title="HOW TO USE"
                                             titleStyle={styles.titleStyle_description}
                                             expanded={(expanded === "3") ? true : false}
                                             onPress={() => handlePress("3")}
-                                            right={() => <List.Icon icon={(expanded === "3") ? 'minus' : 'plus'} />}>
-                                            <View style={styles.li_text_root}>
-                                                <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                                <Text style={styles.li_text}>{data.how_to_use}</Text>
-                                            </View>
-                                        </List.Accordion>
-                                        <View style={pDs.baseLine} />
-                                    </List.Section>
+                                            right={() => <List.Icon icon={(expanded === "3") ? 'minus' : 'plus'} />}> */}
+                                    <View style={styles.li_text_root}>
+                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
+                                        <Text style={styles.li_text}>{data.how_to_use}</Text>
+                                    </View>
+                                    {/* </List.Accordion> */}
+                                    {/* <View style={pDs.baseLine} /> */}
+                                    {/* </List.Section> */}
                                 </View>
 
                                 <View style={styles.review_outerRoot}>
                                     <View style={styles.review_innerRoot}>
                                         <View style={styles.reviews_root} >
                                             <Text style={styles.review_MainHeading}>REVIEWS</Text>
-                                            <TouchableOpacity style={styles.write_review} onPress={() => navigation.navigate('write_review')}>
+                                            <TouchableOpacity
+                                                activeOpacity={0.8}
+                                                onPress={() => navigation.navigate('write_review')}
+                                                style={styles.write_review}
+                                            >
                                                 <Text style={styles.review_heading}> WRITE A REVIEW </Text>
                                             </TouchableOpacity>
                                         </View>
@@ -261,7 +405,11 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             }
                                         })}
 
-                                        <TouchableOpacity style={styles.allreview_root} onPress={() => navigation.navigate('reviews')} >
+                                        <TouchableOpacity
+                                            activeOpacity={0.5}
+                                            onPress={() => navigation.navigate('offers')}
+                                            style={styles.allreview_root}
+                                        >
                                             <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
                                             <Ionicons
                                                 name="chevron-forward-outline"
@@ -273,8 +421,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
                                         <View style={styles.youMayAlso}>
                                             <Heading title=' YOU MAY ALSO LIKE ' />
-                                            <TouchableOpacity style={styles.viewLatestProduct}
+                                            <TouchableOpacity
+                                                activeOpacity={0.6}
                                                 onPress={() => console.log("first")}
+                                                style={styles.viewLatestProduct}
                                             >
                                                 <Text style={styles.latestProductText}>
                                                     View All
@@ -286,7 +436,12 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             <ScrollView horizontal showsHorizontalScrollIndicator={false} >
                                                 {bestSellingProduct.map((e, i) => {
                                                     return (
-                                                        <TouchableOpacity style={pDs.product109} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
+                                                        <TouchableOpacity
+                                                            activeOpacity={0.8}
+                                                            style={pDs.product109}
+                                                            onPress={() => navigation.navigate('Product', e.sellingProduct_id)}
+                                                            key={i}
+                                                        >
                                                             <View style={pDs.imgRoot}>
                                                                 <Image source={{ uri: e.images }} style={pDs.productImg} />
                                                             </View>
@@ -304,8 +459,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                 </View>
                                                             </View>
 
-                                                            {/*  Buy Now Button  */}
-                                                            <TouchableOpacity style={pDs.buyNowButton1}
+                                                            {/* {/ Buy Now Button  /} */}
+                                                            <TouchableOpacity
+                                                                activeOpacity={0.8}
+                                                                style={pDs.buyNowButton1}
                                                                 onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
                                                             >
                                                                 <Text style={pDs.buttonText1}>BUY NOW</Text>
@@ -318,18 +475,14 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     </View>
                                 </View>
                             </View>
-
                         )
                     })}
                 </ScrollView >
-
             </SafeAreaView>
         </View>
     )
 }
-
-export default ProductDetailScreen
-
+export default ProductDetailScreen;
 const styles = StyleSheet.create({
     safe_root: {
         height: '100%',
@@ -369,9 +522,9 @@ const styles = StyleSheet.create({
     CraggyTextRoot: {
         // height: 130,
         padding: 15,
-        backgroundColor: '#ffffff',
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        backgroundColor: '#fff',
+        // borderTopLeftRadius: 50,
+        // borderTopRightRadius: 50,
         marginTop: '-12%'
     },
     textRoot: {
@@ -381,6 +534,7 @@ const styles = StyleSheet.create({
         width: "90%"
     },
     craggyText: {
+        color: '#CC933B',
         fontSize: 16,
         fontWeight: '600',
         fontFamily: 'Raleway500',
@@ -435,12 +589,18 @@ const styles = StyleSheet.create({
         lineHeight: 20,
         marginTop: 6,
     },
+    description_heading: {
+        height: 50,
+        width: '100%',
+        justifyContent: 'center'
+    },
     titleStyle_description: {
         color: '#222222',
         fontFamily: 'Raleway500',
         fontWeight: '500',
         fontSize: 14,
-        lineHeight: 17
+        lineHeight: 17,
+        padding: 10
     },
     li_text_root: {
         flexDirection: 'row',
@@ -592,6 +752,89 @@ const styles = StyleSheet.create({
     paginationStyle: {
         marginTop: 15,
         alignSelf: 'center'
-    }
+    },
+    shadow_Box: {
+        flex: 1,
+        justifyContent: 'center',
+        height: 50,
+        width: 50,
+        borderRadius: 100,
+        // backgroundColor: '#171717',
+        // opacity: 0.5,
+        position: 'absolute',
+        bottom: '15%',
+        left: '8%'
+    },
+    shadow_Box1: {
+        flex: 1,
+        justifyContent: 'center',
+        height: 50,
+        width: 50,
+        borderRadius: 100,
+        // backgroundColor: '#171717',
+        // opacity: 0.5,
+        position: 'absolute',
+        bottom: '15%',
+        right: '8%'
+    },
+    fabOne: {
+        flex: 1,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        height: 40,
+        width: 40,
+        borderRadius: 100,
+        backgroundColor: '#7aebda',
+        position: 'absolute',
+        // bottom: '15%',
+        // left: '8%'
+    },
+    // fabOne1: {
+    //     flex: 1,
+    //     justifyContent: 'center',
+    //     height: 40,
+    //     width: 40,
+    //     borderRadius: 100,
+    //     backgroundColor: '#7aebda',
+    //     position: 'absolute',
+    //     // bottom: '15%',
+    //     // right: '8%',
+    // },
+    sticky_Btn: {
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 0,
+        zIndex: 2,
+        backgroundColor: '#fff',
+
+    },
+    bottomView: {
+        height: 60,
+        width: '50%',
+        backgroundColor: '#FF9800',
+        justifyContent: 'center',
+        alignItems: 'center',
+        // position: 'absolute',
+        // bottom: 0,
+        // zIndex: 99,
+    },
+    bottomView1: {
+        height: 60,
+        width: '50%',
+        // borderWidth: 1,
+        // backgroundColor: 'blue',
+        justifyContent: 'center',
+        alignItems: 'center',
+        // position: 'absolute',
+        // bottom: 0,
+        // zIndex: 99,
+    },
+    textStyle: {
+        color: '#000',
+        fontSize: 22
+    },
+    // color: {
+    //     color: '#000'
+    // }
 
 })

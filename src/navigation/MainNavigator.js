@@ -26,6 +26,7 @@ import ResetPassword from '../screens/ResetPassword';
 import AddAddress from '../screens/AddAdress';
 import EditAddress from '../screens/EditAddress';
 import MyCartScreen from '../screens/MyCartScreen';
+// import PaymentScreen from '../screens/PaymentScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -42,27 +43,21 @@ const MainNavigator = () => {
 
   return (
     <Stack.Navigator initialRouteName='HomeScreen'
-      // screenOptions={{
-      //   headerStyle: {
-      //     backgroundColor: 'black', //Set Header color 
-      //   },
-      //   headerTintColor: '#C68625', //Set Header text color
-      //   headerBackTitleVisible: false,
-      // }}
       screenOptions={({ navigation, route }) => ({
         headerStyle: {
           backgroundColor: 'black', //Set Header color 
         },
         headerTintColor: '#C68625', //Set Header text color
         headerBackTitleVisible: false,
-        headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
+        headerTitle: () => <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
+
+        // headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
         headerRight: () => (
           <View style={gs.headerNotification}>
-
             {BadgeData.length > 0 ?
               <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }}>
                 <Ionicons name='cart-outline' color='#CC933B' size={25} />
-                <Badge style={{ position: 'absolute', marginTop: -10, }}><Text style={{ color: '#000' }}>{BadgeData.length}</Text></Badge>
+                <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}><Text style={{ color: '#000' }}>{BadgeData.length}</Text></Badge>
               </TouchableOpacity>
               :
               <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }} >
@@ -80,7 +75,7 @@ const MainNavigator = () => {
       })}
     >
       <Stack.Screen name='HomeScreen' component={DrawerScreen} options={{ headerShown: false, headerShadowVisible: false }} />
-      <Stack.Screen name="Product" component={ProductDetailScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Product" component={ProductDetailScreen} />
       {/* <Stack.Screen name="billingaddressDetails" component={BillingAdressDetails} options={{ headerShown: true, headerTitle: 'Billing Address' }} />
       <Stack.Screen name='shippingaddressDetails' component={ShippingAddressDetails} options={{ headerShown: true, headerTitle: 'Shipping Address' }} /> */}
       <Stack.Screen name='PasswordScreen' component={PasswordScreen} options={{ headerShown: false }} />
@@ -88,7 +83,7 @@ const MainNavigator = () => {
       <Stack.Screen name='SignupOtpScreen' component={SignupOtpScreen} options={{ headerShown: false }} />
       <Stack.Screen name='forgetPassword' component={ForgetPasswordScreen} options={{ headerShown: false }} />
       <Stack.Screen name='reset_password' component={ResetPassword} options={{ headerShown: false }} />
-      <Stack.Screen name='checkOut' component={CheckOutScreen} options={{ headerTitle: 'Pyment' }} />
+      <Stack.Screen name='checkOut' component={CheckOutScreen} options={{ headerTitle: 'Check-Out' }} />
       <Stack.Screen name='my_order' component={OrderScreen} options={{ headerShown: true, headerTitle: 'ORDERS' }} />
       <Stack.Screen name='my_wishlist' component={WishListScreen} options={{ headerShown: true, headerTitle: 'My Wishlist' }} />
       <Stack.Screen name='my_profile' component={MyProfileScreen} options={{ headerShown: true, headerTitle: "MY PROFILE" }} />
@@ -99,7 +94,7 @@ const MainNavigator = () => {
       <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} />
       <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerTitle: 'All Product' }} />
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />
-      <Stack.Screen name='skinCare_product' component={SkinCareProduct} options={{ headerShown: true }} />
+      {/* <Stack.Screen name='skinCare_product' component={SkinCareProduct} options={{ headerShown: true }} /> */}
       <Stack.Screen name='NotificationScreen' component={NotificationScreen} options={{ headerTitle: 'Notification' }} />
       <Stack.Screen name='Reward' component={RewardScreen} options={{ headerTitle: 'Reward' }} />
       <Stack.Screen name='SearchPage' component={SearchScreen} options={{ headerShown: false }} />
@@ -121,7 +116,7 @@ const MainNavigator = () => {
       <Stack.Screen name='AddAddress' component={AddAddress} options={{ headerTitle: 'AddAddress' }} />
       <Stack.Screen name='editAddress' component={EditAddress} options={{ headerTitle: 'EditAdress' }} />
       <Stack.Screen name='Cart' component={MyCartScreen} options={{ headerShown: false, }} />
-
+      {/* <Stack.Screen name='payment' component={PaymentScreen} options={{ headerTitle: 'My Payments' }} /> */}
     </Stack.Navigator>
   );
 }
