@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native'
-import { Button } from 'react-native-paper';
+import { Button, Snackbar } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import BackButton from '../components/BackButton'
 import { Ionicons } from '@expo/vector-icons'
@@ -8,16 +8,38 @@ import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/dataSlice'
 
 const MyCartScreen = ({ navigation, route }) => {
-
   const storeData = useSelector(state => state.cartData.cart);
-  // console.log("storeDataCart", storeData);
-
+  // console.log("storeData", storeData);
   const dispatch = useDispatch();
   const totalPrice = useRef()
   const totaloldPrice = useRef()
+  // console.log("TotalPrice", totalPrice)
+  // const [test, setTest] = useState();
+
+  // useEffect(() => {
+  //   console.log("fffffff");
+  //   imgData.map((e, i) => {
+  //     // console.log("eeee", e.id)
+  //     if (id === e.id) {
+  //       let Data = [...reduxData, {
+  //         images: e.images,
+  //         id: e.id,
+  //         description: e.description,
+  //         price: e.price,
+  //         oldprice: e.oldprice,
+  //         quantity: e.quantity
+  //       }];
+  //       dispatch(submitActions.price(
+  //         {
+  //           cart: Data
+  //         }
+  //       ));
+  //     }
+  //   })
+  // }, [])
+
 
   const addOne = (id, quant) => {
-
     dispatch(submitActions.quantity(
       {
         itemId: id,
@@ -50,6 +72,8 @@ const MyCartScreen = ({ navigation, route }) => {
     }
     return sum;
   }
+  const TAmount = totalAmount();
+  // console.log("Amount", TAmount)
 
   const totalOldAmount = () => {
     let sum = 0;
@@ -58,7 +82,18 @@ const MyCartScreen = ({ navigation, route }) => {
     }
     return sum;
   }
-
+  // const Producthandler = () => {
+  //   navigation.navigate('Product')
+  // }
+  const aaa = totalOldAmount();
+  const fee = 50;
+  const [visible, setVisible] = useState(false);
+  const onToggleSnackBar = () => {
+    setVisible(!visible);
+  }
+  const onDismissSnackBar = () => {
+    setVisible(false);
+  }
   return (
     <View >
 
@@ -78,11 +113,13 @@ const MyCartScreen = ({ navigation, route }) => {
           {storeData.map((i, e) => {
             return (
               <View key={e}>
-
                 <View key={e} style={styles.dataRoot}>
-                  <View style={styles.dataImgRoot}>
-                    <Image source={{ uri: i.itemImages }} style={styles.dataImg} />
-                  </View>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Product", i.categoriesDetail_id)}
+                    style={styles.dataImgRoot}
+                  >
+                    <Image source={{ uri: i.images }} style={styles.dataImg} />
+                  </TouchableOpacity>
 
                   <View style={styles.textRoot} >
                     <Text numberOfLines={2} style={styles.textDescription}>{i.itemDescription}</Text>
@@ -102,7 +139,9 @@ const MyCartScreen = ({ navigation, route }) => {
                         <Text style={styles.blackText}>-</Text>
                       </TouchableOpacity>
 
-                      <Text style={styles.blackText}>{i.itemQuantity}</Text>
+
+                      <Text style={styles.blackText}>{i.quantity}</Text>
+
 
                       <TouchableOpacity onPress={() => addOne(e, i.itemQuantity)} style={(i.itemQuantity >= 1) ? styles.blackButton : styles.whiteButton} >
                         <Text style={(i.itemQuantity >= 1) ? styles.whiteText : styles.blackText} >+</Text>
@@ -120,33 +159,72 @@ const MyCartScreen = ({ navigation, route }) => {
                 <View style={styles.baseLine}></View>
               </View>
             )
+            // }
           })}
 
-          <View style={styles.TextInputRoot}>
+          <TouchableOpacity style={styles.TextInputRoot} onPress={() => navigation.navigate('offer_coupan')}>
 
-            <TextInput
+            {/* <TextInput
               // onChangeText={onChangeNumber}
               // value={number}
               placeholder="promo code"
               placeholderTextColor={'#999999'}
               style={styles.textInputStyle}
-
             />
             <Button style={styles.promoButton} onPress={() => console.log('first')}>
               <Text style={styles.promoText}>APPLY PROMO</Text>
-            </Button>
+            </Button> */}
+
+            <Ionicons
+              name="ios-pricetag"
+              color={'#C68625'}
+              size={25}
+              style={styles.coupon_icon}
+            />
+            <Text style={styles.coupon_text}>Use Coupons</Text>
+          </TouchableOpacity>
+          <View style={styles.TextInputRoot2} >
+            <Text style={styles.price_summary}>Price Summary</Text>
           </View>
 
           <View style={styles.totalRoot}>
             <View style={styles.subtotalRoot}>
-              <Text style={styles.subtotal}>Subtotal</Text>
+              <Text style={styles.subtotal}>Order Total</Text>
               <Text styles={styles.total}>₹{totalOldAmount()}</Text>
             </View>
 
             <View style={styles.subtotalRoot}>
-              <Text style={styles.subtotal}>Delivery Charges</Text>
-              <Text style={styles.total}> + Free</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.subtotal}>Shipping</Text>
+                <TouchableOpacity style={{ marginLeft: "5%" }}>
+                  <Ionicons
+                    name="information-circle-outline"
+                    color={'blue'}
+                    size={18}
+                    onPress={onToggleSnackBar}
+                  />
+                </TouchableOpacity>
+
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                {aaa < 499 ?
+                  <Text style={styles.oldprice}>₹{fee}</Text> :
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.oldprice1}>₹{fee}</Text>
+                    <Text style={styles.total}> Free</Text>
+                  </View>
+                }
+              </View>
             </View>
+
+            <Snackbar
+              visible={visible}
+              onDismiss={onDismissSnackBar}
+              duration={2000}
+            >
+              <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
+            </Snackbar>
+
 
             <View style={styles.subtotalRoot}>
               <Text style={styles.subtotal}>Promo Discount</Text>
@@ -155,14 +233,17 @@ const MyCartScreen = ({ navigation, route }) => {
 
             <View style={styles.subtotalRoot}>
               <Text style={styles.maintotal}>Total</Text>
-              <Text style={styles.mainprice}>₹{totalAmount()}</Text>
+              {aaa < 499 ?
+                <Text style={styles.mainprice}>₹{TAmount + fee}</Text>
+                : <Text style={styles.mainprice}>₹{TAmount}</Text>
+              }
             </View>
           </View>
 
           <View style={styles.baseLine2} ></View>
 
           <View style={styles.checkoutbuttonRoot} >
-            <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut')}>
+            <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', TAmount)}>
               <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
             </Button>
             <Button style={styles.countinueButton} onPress={() => navigation.navigate('Home')}>
@@ -285,8 +366,16 @@ const styles = StyleSheet.create({
   },
   oldprice: {
     fontSize: 14,
-    fontWeight: '300',
-    fontFamily: 'Lato300',
+    fontWeight: '400',
+    fontFamily: 'Lato400',
+    color: '#444444',
+    // textDecorationLine: 'line-through',
+    lineHeight: 17
+  },
+  oldprice1: {
+    fontSize: 14,
+    fontWeight: '400',
+    fontFamily: 'Lato400',
     color: '#444444',
     textDecorationLine: 'line-through',
     lineHeight: 17
@@ -350,10 +439,32 @@ const styles = StyleSheet.create({
     // marginLeft: '-78%',
   },
   TextInputRoot: {
-    height: 80,
-    width: '90%',
+    flexDirection: 'row',
+    height: 50,
+    width: '100%',
     alignSelf: 'center',
-    marginTop: 33
+    marginTop: 10,
+    backgroundColor: '#fff',
+    marginBottom: 10
+  },
+  coupon_icon: {
+    marginLeft: '5%',
+    padding: '3%'
+  },
+  coupon_text: {
+    fontSize: 20,
+    padding: '3%',
+    marginLeft: '-4%'
+  },
+  TextInputRoot2: {
+    flexDirection: 'row',
+    height: 50,
+    width: '100%',
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#D9D9D9'
   },
   textInputStyle: {
     height: 45,
@@ -367,6 +478,11 @@ const styles = StyleSheet.create({
     fontStyle: '700',
     lineHeight: 13,
     backgroundColor: '#E3E3E3'
+  },
+  price_summary: {
+    fontSize: 20,
+    fontWeight: '700',
+    padding: '3%',
   },
   promoButton: {
     position: 'absolute',
@@ -386,16 +502,23 @@ const styles = StyleSheet.create({
     lineHeight: 17,
   },
   totalRoot: {
-    height: 140,
+    height: 170,
     width: '85%',
     // borderWidth:1,
     // borderColor:'black',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: '3%'
+  },
+  Snackbar_text: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center'
   },
   subtotalRoot: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 35
+    height: 35,
+    marginTop: '3%'
   },
   subtotal: {
     fontSize: 14,
@@ -405,8 +528,8 @@ const styles = StyleSheet.create({
   },
   total: {
     fontSize: 14,
-    fontWeight: '400',
-    fontFamily: 'Lato400',
+    fontWeight: '500',
+    fontFamily: 'Lato500',
     lineHeight: 17
   },
   maintotal: {

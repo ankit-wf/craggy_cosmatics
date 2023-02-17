@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function Header({ navigation, onPress, notification, Gift, search, CartHandler }) {
     const styles = useStyles()
     const BadgeData = useSelector(state => state.cartData.cart);
+    // console.log("BadgeData", BadgeData)
     // const [toggle, setToggle] = useState(true)
     // const [text, setText] = useState("");
 
@@ -27,6 +28,14 @@ export default function Header({ navigation, onPress, notification, Gift, search
     // const PageHandler = () => {
     //     navigation.navigate('SearchPage')
     // }
+    // const BadgeData = useSelector(state => state.cartData.cart);
+    // for (let i = 0; i < BadgeData.length; i++) {
+    //     const data = BadgeData[i];
+    //     // console.log("gggggg", data.categoriesDetail_id)
+    //     if (data.categoriesDetail_id == BadgeData.categoriesDetail_id) {
+
+    //     }
+    // }
     return (
         <View style={styles.headerN}>
             <View style={styles.container}>
@@ -39,10 +48,11 @@ export default function Header({ navigation, onPress, notification, Gift, search
                         <ResponsiveImage style={styles.headerLogo} source={require('../../assets/logo1.png')} />
                     </View>
                     <View style={styles.headerNotification}>
+
                         {BadgeData.length > 0 ?
-                            <TouchableOpacity onPress={CartHandler} >
+                            <TouchableOpacity onPress={CartHandler} style={{ marginRight: 10, marginTop: 5 }} >
                                 <Ionicons name='cart-outline' color='#CC933B' size={25} />
-                                <Badge style={{ position: 'absolute', marginTop: -10, }}><Text style={{ color: '#000' }}>{BadgeData.length}</Text></Badge>
+                                <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}><Text style={{ color: '#000' }}>{BadgeData.length}</Text></Badge>
                             </TouchableOpacity>
                             :
                             <TouchableOpacity onPress={CartHandler} >
