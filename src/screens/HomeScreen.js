@@ -15,14 +15,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/responsiveStyle'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 const bannerImg = require('../../Data/bannerSlider.json')
-// const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const latestProductImg = require('../../Data/latestProduct.json')
 
 const HomeScreen = ({ navigation }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const imageFooter = FooterImage();
-  // const reviewData = useSelector(state => state.reviewData.review);
   const storeData = useSelector(state => state.cartData.cart);
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
@@ -69,6 +67,7 @@ const HomeScreen = ({ navigation }) => {
         }
       }
     ).then((res) => {
+      // console.log("resss", res.data)
       if (res.data.status = "success") {
         setBestData(res.data.response)
       }
@@ -118,7 +117,7 @@ const HomeScreen = ({ navigation }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {/* {/ Banner Swiper  /} */}
+        {/* Banner Swiper  */}
         <SkeletonContainer isLoading={loading}>
           <View style={styles.swiperRoot}>
             <Swiper style={styles.wrapper} autoplay >
@@ -149,8 +148,8 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </SkeletonContainer>
 
-        {/* {/ <catgories / > /} */}
-        < ScrollView horizontal>
+        {/* <catgories /> */}
+        <ScrollView horizontal>
           <View style={cS.categoriesRoot}>
             {data.map((data, i) => {
               if (data.count > 0)
@@ -239,7 +238,7 @@ const HomeScreen = ({ navigation }) => {
           </ScrollView>
         </View>
 
-        {/* {/ Latest Product  /} */}
+        {/* Latest Product  */}
         <SkeletonContainer isLoading={loading} >
           <View style={styles1.bestSellerRoot}>
             <Heading title=' latest product ' />
@@ -297,14 +296,14 @@ const HomeScreen = ({ navigation }) => {
           </ScrollView>
         </View>
 
-        {/* {/ Footer Banner  /} */}
+        {/* Footer Banner  */}
         <View style={styles.footerBannerRoot}>
           <SkeletonContainer isLoading={loading} >
             <Image source={require('../../assets/footer_banner.png')} style={styles.footerBannerImage} />
           </SkeletonContainer>
         </View>
 
-        {/* {/ We Promise You /} */}
+        {/* We Promise You */}
         <View >
           <View style={styles.promiseOuterRoot}>
             <View style={styles.promiseRoot}>

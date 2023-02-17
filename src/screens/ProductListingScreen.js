@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, RefreshControl, TouchableWithoutFeedback, } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Swiper from 'react-native-swiper'
@@ -20,8 +20,6 @@ const ProductListingScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true);
     const [bottomSheet, setBottomSheet] = useState(false);
     const [data, setData] = useState([])
-    const [refreshing, setRefreshing] = useState(false);
-
     // console.log("dDDDDD", data)
     const name = route.params.name;
     const id = route.params.id;
@@ -29,10 +27,6 @@ const ProductListingScreen = ({ navigation, route }) => {
     const bs = useRef();
 
     useEffect(() => {
-        getData()
-    }, [id])
-
-    const getData = () => {
         axios.get(
             `https://craggycosmetic.com/api/products/`,
             {
@@ -45,23 +39,12 @@ const ProductListingScreen = ({ navigation, route }) => {
                 }
             }
         ).then((res) => {
-            setRefreshing(false);
             setData(res.data)
             setTimeout(() => {
                 setLoading(false)
             }, 2000);
         })
-    }
-
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);;
-        setData([]);
-        getData();
-        setTimeout(() => {
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
+    }, [id])
 
     const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price) => {
         let Data = [...storeData, {
@@ -178,8 +161,12 @@ const ProductListingScreen = ({ navigation, route }) => {
                     <FlatList
                         data={data}
                         renderItem={({ item }) => (
-                            <SkeletonContainer>
-                                < TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
+                            <SkeletonContainer isLoading={loading}>
+                                < TouchableOpacity
+                                    style={sS.product109}
+                                    activeOpacity={0.8}
+                                    onPress={() => navigation.navigate("Product", item.product_id)}
+                                >
                                     <View style={sS.imgRoot} >
                                         <Image source={{ uri: item.image }} style={sS.productImg} />
                                     </View>
@@ -210,19 +197,8 @@ const ProductListingScreen = ({ navigation, route }) => {
                         keyExtractor={(item, index) => index}
                     />
                 </View>
-            </ScrollView>
-
-            {/* <View style={{ marginTop: 300 }}> */}
-            {/* <BottomSheet
-                ref={bs}
-                snapPoints={[340, 0]}
-                renderContent={renderInner}
-                initialSnap={1}
-                // callbackNode={fall}
-                enabledGestureInteraction={true}
-            /> */}
-            {/* </View> */}
-        </View >
+            </ScrollView >
+        </View>
     )
 }
 

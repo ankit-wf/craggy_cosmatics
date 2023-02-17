@@ -13,8 +13,7 @@ const dataSlice = createSlice({
             //   console.log('state.cart', state.cart) 
         },
         quantity(state, action) {
-            // storeData
-            state.cart[action.payload.itemId].itemQuantity = action.payload.itemQuantity
+            state.cart[action.payload.id].quantity = action.payload.quantity
             // console.log('state.cart', state.cart)storeData
             // const {id} = payload;
             // const doesItemExist = state.find((item) => item.id === id);
