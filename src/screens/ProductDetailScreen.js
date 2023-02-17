@@ -1,27 +1,21 @@
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Swiper from 'react-native-swiper'
-import { List, Snackbar } from 'react-native-paper';
-import BackButton from '../components/BackButton';
-import { Ionicons } from '@expo/vector-icons'
+import axios from 'axios'
 import Heading from '../components/Heading';
+import { List, Snackbar } from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons'
 import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
-// const productImg = require('../../Data/productDetail.json')
-const bestSellingProduct = require('../../Data/bestSellingProduct.json')
-// const productDes = require('../../Data/productDescription.json')
-import axios from 'axios'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
-import { FAB } from 'react-native-paper';
+const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 
 const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const newData = useSelector(state => state.reviewData.review);
     const storeData = useSelector(state => state.cartData.cart);
-    // const cart = useSelector(state => state.cartData.cart);
-    // console.log("carttttt", cart[2].categoriesDetail_id)
 
     const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
@@ -31,25 +25,12 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const [heart, setHeart] = useState(false);
     const id = route.params;
     const [test, setTest] = useState(false);
-    // console.log("tessssstttt", storeData,)
-    // const idd = route.params;
-
-    // useEffect(() => {
-    //     for (let i = 0; i < cart.length; i++) {
-    //         if (cart[i].categoriesDetail_id == idd) {
-    //             // console.log(reduxData[i].id, "hj")
-    //             // console.log("idd", idd)
-    //             setTest(true)
-    //         }
-    //     }
-    // }, [test])
 
     useEffect(() => {
         Single_Product();
     }, [id])
 
     const Single_Product = () => {
-        // useEffect(() => {
         axios.get(`https://craggycosmetic.com/api/products/`,
             {
                 params: {
@@ -66,67 +47,38 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 setLoading(false);
             }, 2000);
         })
-        // }, [id])
     }
 
     const ratingCompleted = (rating) => {
         setStar(rating);
     }
 
-    const [one, setOne] = useState(1);
     const [expanded, setExpanded] = useState("1");
 
     const handlePress = (gg) => {
         setExpanded(gg);
     };
-    const addOne = () => {
-        setOne(one + 1)
+
+    const onToggleSnackBar = () => {
+        setVisible(!visible);
     }
-    const subOne = () => {
-        if (one <= 1) {
-        } else {
-            setOne(one - 1)
-        }
+    const onDismissSnackBar = () => {
+        setVisible(false);
     }
+
 
     const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
-        // setTest(true)
-        for (let i = 0; i < storeData.length; i++) {
-            const element = storeData[i];
-            //     // console.log("ppppppp", element.categoriesDetail_id)
-            //     let Data = [...storeData,
-            //     (product_id === element.categoriesDetail_id),
-            //     {
-            //         description: description,
-            //         categoriesDetail_id: product_id,
-            //         images: image,
-            //         oldprice: regular_price,
-            //         price: sale_price,
-            //         quantity: element.quantity + 1
 
-            //     }];
-            //     dispatch(submitActions.price(
-            //         {
-            //             cart: Data
-            //         }
-            //     ));
-            //     navigation.navigate("Cart", product_id);
-
-            if (id === element.categoriesDetail_id) {
-                let Data = [{
-                    description: description,
-                    categoriesDetail_id: product_id,
-                    images: image,
-                    oldprice: regular_price,
-                    price: sale_price,
-                    quantity: element.quantity + 1
-                }];
-                dispatch(submitActions.price(
-                    {
-                        cart: Data
-                    }
-                ));
-                navigation.navigate("Cart", product_id);
+        if (storeData.length !== 0) {
+            let ss = false;
+            storeData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
+                setVisible(!visible);
             }
             else {
                 let Data = [...storeData, {
@@ -137,62 +89,29 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     price: sale_price,
                     quantity: 1
                 }];
-                dispatch(submitActions.price(
-                    {
-                        cart: Data
-                    }
-                ));
-                navigation.navigate("Cart", product_id);
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("Cart");
             }
         }
+        else {
+            let Data = [...storeData, {
+                description: description,
+                categoriesDetail_id: product_id,
+                images: image,
+                oldprice: regular_price,
+                price: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("Cart");
+        }
 
-        // onToggleSnackBar();
-        // let quant = 1;
-        // let Data = [...storeData,{
-        //    storeData.map((e) => {
-        //         if (id === e.categoriesDetail_id) {
-        //             description = description,
-        //                 categoriesDetail_id = product_id,
-        //                 image = image,
-        //                 oldprice = regular_price,
-        //                 price = sale_price,
-        //                 quantity = quant + 1
-        //         }
-        //     })
-        // }
-        // ];
     }
-    // const onToggleSnackBar = () => {
-    //     setVisible(!visible)
-    // }
-    // const onDismissSnackBar = () => {
-    //     setVisible(false)
-    // }
+
     const wishlistHandler = () => {
         setHeart(!heart);
     }
 
-    // for (let index = 0; index < array.length; index++) {
-    //     const element = array[index];
-
-    // }
-    // for (let i = 0; i < cart.length; i++) {
-    //     setTest(cart[i]);
-    //     if (test.categoriesDetail_id == cart[i].categoriesDetail_id) {
-    //         return test;
-    //     }
-    //     console.log("PPPPPP", test)
-    // }
-
-    // {
-    //     cart.map((e, i) => {
-    //         setTest(e);
-    //         if (data.categoriesDetail_id == cart[i].categoriesDetail_id) {
-    //             return test;
-    //         }
-    //         console.log("PPPPPP", test)
-    //     })
-    // }
 
     return (
         <View>
@@ -215,12 +134,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                         </SkeletonContainer>
                     )
                 })}
-                <ScrollView
-                // onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}
-                // onScrollEndDrag={() => navigation.setOptions({ headerTitle: 'done' })}
-                >
+                <ScrollView>
                     {data.map((data, index) => {
-                        // console.log("ashdajhahd", data)
                         return (
                             <View key={index}>
                                 <SkeletonContainer isLoading={loading} key={index}>
@@ -254,106 +169,46 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <View style={styles.textRoot}>
                                             <Text style={styles.craggyText}>{data.product_title}</Text>
                                         </View>
-                                    </View>
-                                </SkeletonContainer>
-                                {/* <View style={{ width: '100%' }}>
-                                    <View style={pDs.productRoot}>
-                                        <SkeletonContainer isLoading={loading} key={index}>
-                                            <View style={pDs.priceRoot}>
-                                                <Text style={pDs.price}>₹{data.sale_price}</Text>
-                                                <Text style={pDs.spaceRoot}>/ </Text>
-                                                <Text style={pDs.oldprice}>₹{data.regular_price}</Text>
-                                            </View>
-
-                                            <View>
-                                                <TouchableOpacity
-                                                    onPress={wishlistHandler}
-                                                    activeOpacity={0.5}
-                                                >
-                                                    <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
-                                                </TouchableOpacity>
-                                            </View>
-                                        </SkeletonContainer>
-                                    </View>
-                                    <View>
-
-                                        <SkeletonContainer isLoading={loading}>
-                                            <TouchableOpacity
-                                                activeOpacity={0.8}
-                                                onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
-                                                style={styles.buyNowButton}
-                                            >
-                                                <Text style={styles.buttonText}>ADD TO CART </Text>
-                                            </TouchableOpacity>
-                                        </SkeletonContainer>
-
-                                        {/* <Snackbar
+                                        <Snackbar
                                             visible={visible}
                                             onDismiss={onDismissSnackBar}
                                             duration={2000}
-                                            wrapperStyle={{ maxWidth: 170, alignSelf: 'center', }}
                                         >
-                                            Item Added to Cart
-                                        </Snackbar> */}
-                                {/* </View> */}
-                                {/* </View> */}
-
-                                {/* <View style={pDs.baseLine2} /> */}
+                                            <Text >Item is already added to the cart, Please chechout...</Text>
+                                        </Snackbar>
+                                    </View>
+                                </SkeletonContainer>
 
                                 <View style={styles.Accordion_Root}>
-                                    {/* <List.Section> */}
                                     <View style={styles.description_heading}>
                                         <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
                                     </View>
-                                    {/* <List.Accordion
-                                            id='1'
-                                            title="DESCRIPTION"
-                                        titleStyle={styles.titleStyle_description}
-                                        expanded={((expanded === "1") ? true : false)}
-                                        onPress={() => handlePress("1")}
-                                        right={() => <List.Icon icon={(expanded === "1") ? 'minus' : 'plus'} />}
-                                        > */}
+
                                     <View style={styles.li_text_root} >
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                         <Text style={styles.li_text}>{data.description}</Text>
                                     </View>
-                                    {/* </List.Accordion> */}
 
                                     <View style={pDs.baseLine} />
                                     <View style={styles.description_heading}>
                                         <Text style={styles.titleStyle_description}>KEY FEATURES</Text>
                                     </View>
-                                    {/* <List.Accordion
-                                            id='2'
-                                            title="KEY FEATURES"
-                                            titleStyle={styles.titleStyle_description}
-                                            expanded={(expanded === "2") ? true : false}
-                                            onPress={() => handlePress("2")}
-                                            right={() => <List.Icon icon={(expanded === "2") ? 'minus' : 'plus'} />}> */}
+
                                     <View style={styles.li_text_root} >
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                         <Text style={styles.li_text}>{data.key_feature}</Text>
                                     </View>
-                                    {/* </List.Accordion> */}
 
                                     <View style={pDs.baseLine} />
                                     <View style={styles.description_heading}>
                                         <Text style={styles.titleStyle_description}>HOW TO USE</Text>
                                     </View>
-                                    {/* <List.Accordion
-                                            id='3'
-                                            title="HOW TO USE"
-                                            titleStyle={styles.titleStyle_description}
-                                            expanded={(expanded === "3") ? true : false}
-                                            onPress={() => handlePress("3")}
-                                            right={() => <List.Icon icon={(expanded === "3") ? 'minus' : 'plus'} />}> */}
+
                                     <View style={styles.li_text_root}>
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                         <Text style={styles.li_text}>{data.how_to_use}</Text>
                                     </View>
-                                    {/* </List.Accordion> */}
-                                    {/* <View style={pDs.baseLine} /> */}
-                                    {/* </List.Section> */}
+
                                 </View>
 
                                 <View style={styles.review_outerRoot}>
@@ -459,7 +314,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                 </View>
                                                             </View>
 
-                                                            {/* {/ Buy Now Button  /} */}
                                                             <TouchableOpacity
                                                                 activeOpacity={0.8}
                                                                 style={pDs.buyNowButton1}

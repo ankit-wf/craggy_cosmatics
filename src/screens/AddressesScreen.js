@@ -51,6 +51,10 @@ const AddressesScreen = ({ navigation }) => {
         <View>
           <View style={styles.root_defaultImg}>
             <Image source={(require('../../assets/images/dummy_location.png'))} resizeMode="cover" />
+            <View style={{ alignItems: 'center' }}>
+              <Text style={{ fontSize: 18, fontWeight: '400' }}>We can't seem to locate you</Text>
+              <Text style={{ fontSize: 18, fontWeight: '400' }}>Please add in your address</Text>
+            </View>
           </View>
           <TouchableOpacity style={styles.add_Btn} onPress={() => navigation.navigate('AddAddress')}>
             <Text style={styles.btn_text}> + </Text>
