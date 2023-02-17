@@ -22,7 +22,6 @@ const ProductListingScreen = ({ navigation, route }) => {
     const [data, setData] = useState([])
     const [refreshing, setRefreshing] = useState(false);
 
-    const name = route.params.name
     // console.log("dDDDDD", data)
     const name = route.params.name;
     const id = route.params.id;
