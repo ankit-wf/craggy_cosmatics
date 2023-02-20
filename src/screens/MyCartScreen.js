@@ -10,67 +10,9 @@ import { submitActions } from '../store/dataSlice'
 
 const MyCartScreen = ({ navigation, route }) => {
   const storeData = useSelector(state => state.cartData.cart);
-  // console.log("storeData", storeData);
   const dispatch = useDispatch();
   const totalPrice = useRef()
   const totaloldPrice = useRef()
-  // console.log("TotalPrice", totalPrice)
-  // const [test, setTest] = useState();
-
-  // useEffect(() => {
-  //   console.log("fffffff");
-  //   imgData.map((e, i) => {
-  //     // console.log("eeee", e.id)
-  //     if (id === e.id) {
-  //       let Data = [...reduxData, {
-  //         images: e.images,
-  //         id: e.id,
-  //         description: e.description,
-  //         price: e.price,
-  //         oldprice: e.oldprice,
-  //         quantity: e.quantity
-  //       }];
-  //       dispatch(submitActions.price(
-  //         {
-  //           cart: Data
-  //         }
-  //       ));
-  //     }
-  //   })
-  // }, [])
-
-  const iddd = route.params;
-
-  // let Data = [...storeData, {
-  //           description: description,
-  //           categoriesDetail_id: product_id,
-  //           images: image,
-  //           oldprice: regular_price,
-  //           price: sale_price,
-  //           quantity: 1
-  //       }];
-  //       dispatch(submitActions.price(
-  //           {
-  //               cart: Data
-  //           }
-  //       ));
-  // console.log("iddddddd", iddd)
-
-  // useEffect(() => {
-  //   {
-  //     storeData.map((i) => {
-  //       console.log("iiiii", i.quantity)
-  //       if (iddd == i.categoriesDetail_id)
-  //         dispatch(submitActions.quantity(
-  //           {
-  //             id: i.categoriesDetail_id,
-  //             quantity: i.quantity + 1
-  //           }
-  //         ));
-  //       // addOne();
-  //     })
-  //   }
-  // }, [])
 
   const addOne = (id, quant) => {
     dispatch(submitActions.quantity(
@@ -105,9 +47,8 @@ const MyCartScreen = ({ navigation, route }) => {
     }
     return sum;
   }
-  const TAmount = totalAmount();
-  // console.log("Amount", TAmount)
 
+  const TAmount = totalAmount();
   const totalOldAmount = () => {
     let sum = 0;
     for (let i = 0; i < storeData.length; i++) {
@@ -260,10 +201,9 @@ const MyCartScreen = ({ navigation, route }) => {
               <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
             </Snackbar>
 
-
             <View style={styles.subtotalRoot}>
               <Text style={styles.subtotal}>Promo Discount</Text>
-              <Text style={styles.total}> +  n/a</Text>
+              <Text style={styles.total}> n/a</Text>
             </View>
 
             <View style={styles.subtotalRoot}>

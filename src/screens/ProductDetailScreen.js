@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Swiper from 'react-native-swiper'
+import axios from 'axios'
+import Heading from '../components/Heading';
 import { List, Snackbar } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons'
-import Heading from '../components/Heading';
 import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
@@ -31,7 +32,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
     }, [id])
 
     const Single_Product = () => {
-        // useEffect(() => {
         axios.get(`https://craggycosmetic.com/api/products/`,
             {
                 params: {
@@ -48,21 +48,20 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 setLoading(false);
             }, 2000);
         })
-        // }, [id])
     }
 
     const ratingCompleted = (rating) => {
         setStar(rating);
     }
 
-    const [one, setOne] = useState(1);
     const [expanded, setExpanded] = useState("1");
 
     const handlePress = (gg) => {
         setExpanded(gg);
     };
-    const addOne = () => {
-        setOne(one + 1)
+
+    const onToggleSnackBar = () => {
+        setVisible(!visible);
     }
     const subOne = () => {
         if (one <= 1) {
@@ -70,32 +69,19 @@ const ProductDetailScreen = ({ navigation, route }) => {
             setOne(one - 1)
         }
     }
-    const onToggleSnackBar = () => {
-        setVisible(!visible);
-    }
-    const onDismissSnackBar = () => {
-        setVisible(false);
-    }
 
     const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
-        for (let i = 0; i < storeData.length; i++) {
-            const element = storeData[i];
-            if (product_id === element.categoriesDetail_id) {
+
+        if (storeData.length !== 0) {
+            let ss = false;
+            storeData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
                 setVisible(!visible);
-                let Data = [{
-                    description: description,
-                    categoriesDetail_id: product_id,
-                    images: image,
-                    oldprice: regular_price,
-                    price: sale_price,
-                    quantity: element.quantity + 1
-                }];
-                dispatch(submitActions.price(
-                    {
-                        cart: Data
-                    }
-                ));
-                // navigation.navigate("Cart", product_id);
             }
             else {
                 let Data = [...storeData, {
@@ -106,14 +92,23 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     price: sale_price,
                     quantity: 1
                 }];
-                dispatch(submitActions.price(
-                    {
-                        cart: Data
-                    }
-                ));
-                navigation.navigate("Cart", product_id);
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("Cart");
             }
         }
+        else {
+            let Data = [...storeData, {
+                description: description,
+                categoriesDetail_id: product_id,
+                images: image,
+                oldprice: regular_price,
+                price: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("Cart");
+        }
+
     }
 
     const wishlistHandler = () => {
@@ -186,7 +181,13 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <View style={styles.textRoot}>
                                             <Text style={styles.craggyText}>{data.product_title}</Text>
                                         </View>
-
+                                        <Snackbar
+                                            visible={visible}
+                                            onDismiss={onDismissSnackBar}
+                                            duration={2000}
+                                        >
+                                            <Text >Item is already added to the cart, Please chechout...</Text>
+                                        </Snackbar>
                                     </View>
                                 </SkeletonContainer>
 
@@ -194,14 +195,17 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     <View style={styles.description_heading}>
                                         <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
                                     </View>
+
                                     <View style={styles.li_text_root} >
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                         <Text style={styles.li_text}>{data.description}</Text>
                                     </View>
+
                                     <View style={pDs.baseLine} />
                                     <View style={styles.description_heading}>
                                         <Text style={styles.titleStyle_description}>KEY FEATURES</Text>
                                     </View>
+
 
                                     <View style={styles.li_text_root} >
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
@@ -214,10 +218,12 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <Text style={styles.titleStyle_description}>HOW TO USE</Text>
                                     </View>
 
+
                                     <View style={styles.li_text_root}>
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                         <Text style={styles.li_text}>{data.how_to_use}</Text>
                                     </View>
+
                                 </View>
 
                                 <View style={styles.review_outerRoot}>
@@ -323,7 +329,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                 </View>
                                                             </View>
 
-                                                            {/* {/ Buy Now Button  /} */}
                                                             <TouchableOpacity
                                                                 activeOpacity={0.8}
                                                                 style={pDs.buyNowButton1}
