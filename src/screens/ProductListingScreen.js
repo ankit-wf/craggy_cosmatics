@@ -64,18 +64,9 @@ const ProductListingScreen = ({ navigation, route }) => {
         navigation.navigate('Cart', product_id);
     }
 
-    const onScrollHandle = (event) => {
-        const offsetY = event.nativeEvent.contentOffset.y;
-        if (offsetY > 265) {
-            navigation.setParams({ offsetYvalue: offsetY });
-        } else {
-            navigation.setParams({ offsetYvalue: 0 });
-        }
-    }
-
     return (
         <View>
-            <ScrollView onScroll={onScrollHandle} >
+            <ScrollView  >
                 <SkeletonContainer isLoading={loading}>
                     <View style={styles.swiperRoot}>
                         <Swiper style={styles.wrapper}  >
@@ -112,7 +103,8 @@ const ProductListingScreen = ({ navigation, route }) => {
                                 style={styles1.sort_text_root}
                             >
                                 <Text style={styles1.sort_text}>Sort</Text>
-                                <Ionicons name="swap-vertical" size={25} style={styles1.sort_icon} />
+                                <Text style={styles1.sort_text}>New</Text>
+                                {/* <Ionicons name="swap-vertical" size={25} style={styles1.sort_icon} /> */}
                             </TouchableOpacity>
                         </View>
                         <BottomSheet hasDraggableIcon ref={bs} height={220} >
@@ -263,7 +255,7 @@ const styles1 = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: 'black'
+        backgroundColor: '#fff'
     },
     name_text: {
         fontSize: 25,
@@ -271,7 +263,10 @@ const styles1 = StyleSheet.create({
     },
     sort_text_root: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderWidth: 1,
+        height: 40,
+        width: 100
     },
     sort_text: {
         fontSize: 22,

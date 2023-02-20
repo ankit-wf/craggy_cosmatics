@@ -11,9 +11,7 @@ const placeholderText = require('../../Data/Placeholder.json');
 const SearchScreen = ({ navigation }) => {
     const [back, setBack] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-
     const onChangeSearch = query => setSearchQuery(query);
-
     const [newName, setnewName] = useState("");
     const shuffle = useCallback(() => {
         const index = Math.floor(Math.random() * placeholderText.length);

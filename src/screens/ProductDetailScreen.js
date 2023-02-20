@@ -2,27 +2,20 @@ import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView, Sa
 import React, { useState, useEffect } from 'react'
 import Swiper from 'react-native-swiper'
 import { List, Snackbar } from 'react-native-paper';
-import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
 import Heading from '../components/Heading';
 import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
-// const productImg = require('../../Data/productDetail.json')
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
-// const productDes = require('../../Data/productDescription.json')
 import axios from 'axios'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
-import { FAB } from 'react-native-paper';
 
 const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const newData = useSelector(state => state.reviewData.review);
     const storeData = useSelector(state => state.cartData.cart);
-    // const cart = useSelector(state => state.cartData.cart);
-    // console.log("carttttt", cart[2].categoriesDetail_id)
-
     const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
@@ -33,17 +26,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const [test, setTest] = useState(false);
     // console.log("tessssstttt", storeData,)
     // const idd = route.params;
-
-    // useEffect(() => {
-    //     for (let i = 0; i < cart.length; i++) {
-    //         if (cart[i].categoriesDetail_id == idd) {
-    //             // console.log(reduxData[i].id, "hj")
-    //             // console.log("idd", idd)
-    //             setTest(true)
-    //         }
-    //     }
-    // }, [test])
-
     useEffect(() => {
         Single_Product();
     }, [id])
@@ -88,31 +70,18 @@ const ProductDetailScreen = ({ navigation, route }) => {
             setOne(one - 1)
         }
     }
+    const onToggleSnackBar = () => {
+        setVisible(!visible);
+    }
+    const onDismissSnackBar = () => {
+        setVisible(false);
+    }
 
     const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
-        // setTest(true)
         for (let i = 0; i < storeData.length; i++) {
             const element = storeData[i];
-            //     // console.log("ppppppp", element.categoriesDetail_id)
-            //     let Data = [...storeData,
-            //     (product_id === element.categoriesDetail_id),
-            //     {
-            //         description: description,
-            //         categoriesDetail_id: product_id,
-            //         images: image,
-            //         oldprice: regular_price,
-            //         price: sale_price,
-            //         quantity: element.quantity + 1
-
-            //     }];
-            //     dispatch(submitActions.price(
-            //         {
-            //             cart: Data
-            //         }
-            //     ));
-            //     navigation.navigate("Cart", product_id);
-
-            if (id === element.categoriesDetail_id) {
+            if (product_id === element.categoriesDetail_id) {
+                setVisible(!visible);
                 let Data = [{
                     description: description,
                     categoriesDetail_id: product_id,
@@ -126,7 +95,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                         cart: Data
                     }
                 ));
-                navigation.navigate("Cart", product_id);
+                // navigation.navigate("Cart", product_id);
             }
             else {
                 let Data = [...storeData, {
@@ -145,54 +114,11 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 navigation.navigate("Cart", product_id);
             }
         }
-
-        // onToggleSnackBar();
-        // let quant = 1;
-        // let Data = [...storeData,{
-        //    storeData.map((e) => {
-        //         if (id === e.categoriesDetail_id) {
-        //             description = description,
-        //                 categoriesDetail_id = product_id,
-        //                 image = image,
-        //                 oldprice = regular_price,
-        //                 price = sale_price,
-        //                 quantity = quant + 1
-        //         }
-        //     })
-        // }
-        // ];
     }
-    // const onToggleSnackBar = () => {
-    //     setVisible(!visible)
-    // }
-    // const onDismissSnackBar = () => {
-    //     setVisible(false)
-    // }
+
     const wishlistHandler = () => {
         setHeart(!heart);
     }
-
-    // for (let index = 0; index < array.length; index++) {
-    //     const element = array[index];
-
-    // }
-    // for (let i = 0; i < cart.length; i++) {
-    //     setTest(cart[i]);
-    //     if (test.categoriesDetail_id == cart[i].categoriesDetail_id) {
-    //         return test;
-    //     }
-    //     console.log("PPPPPP", test)
-    // }
-
-    // {
-    //     cart.map((e, i) => {
-    //         setTest(e);
-    //         if (data.categoriesDetail_id == cart[i].categoriesDetail_id) {
-    //             return test;
-    //         }
-    //         console.log("PPPPPP", test)
-    //     })
-    // }
 
     return (
         <View>
@@ -200,27 +126,33 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 {data.map((data, i) => {
                     return (
                         <SkeletonContainer isLoading={loading} key={i}>
+                            <Snackbar
+                                visible={visible}
+                                onDismiss={onDismissSnackBar}
+                                duration={2000}
+                                style={styles.Snackbar_style}
+                            >
+                                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                            </Snackbar>
                             <View style={styles.sticky_Btn} key={i}>
+
                                 <View style={styles.bottomView1} >
                                     <Text style={[styles.textStyle, styles.color]}>₹{data.regular_price}</Text>
                                 </View>
-                                <TouchableOpacity
-                                    activeOpacity={0.2}
-                                    style={styles.bottomView}
-                                    onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
-                                >
-                                    <Text style={styles.textStyle}>Add</Text>
-                                </TouchableOpacity>
+                                <View style={styles.bottomView} >
+                                    <View style={styles.inner_bottomView}>
+                                        <Button
+                                            title='Add'
+                                            onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
+                                        />
+                                    </View>
+                                </View>
                             </View>
                         </SkeletonContainer>
                     )
                 })}
-                <ScrollView
-                // onScroll={() => navigation.setOptions({ headerTitle: 'updated' })}
-                // onScrollEndDrag={() => navigation.setOptions({ headerTitle: 'done' })}
-                >
+                <ScrollView>
                     {data.map((data, index) => {
-                        // console.log("ashdajhahd", data)
                         return (
                             <View key={index}>
                                 <SkeletonContainer isLoading={loading} key={index}>
@@ -236,7 +168,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 activeOpacity={0.5}
                                                 style={styles.fabOne}
                                             >
-                                                <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={23} style={{ alignSelf: 'center' }} />
+                                                <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={22} style={{ alignSelf: 'center' }} />
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.shadow_Box1} elevation={7}>
@@ -245,7 +177,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 activeOpacity={0.5}
                                                 style={styles.fabOne}
                                             >
-                                                <Ionicons name="md-share-social-outline" size={23} style={{ alignSelf: 'center' }} />
+                                                <Ionicons name="md-share-social-outline" size={22} style={{ alignSelf: 'center' }} />
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -254,106 +186,38 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <View style={styles.textRoot}>
                                             <Text style={styles.craggyText}>{data.product_title}</Text>
                                         </View>
+
                                     </View>
                                 </SkeletonContainer>
-                                {/* <View style={{ width: '100%' }}>
-                                    <View style={pDs.productRoot}>
-                                        <SkeletonContainer isLoading={loading} key={index}>
-                                            <View style={pDs.priceRoot}>
-                                                <Text style={pDs.price}>₹{data.sale_price}</Text>
-                                                <Text style={pDs.spaceRoot}>/ </Text>
-                                                <Text style={pDs.oldprice}>₹{data.regular_price}</Text>
-                                            </View>
-
-                                            <View>
-                                                <TouchableOpacity
-                                                    onPress={wishlistHandler}
-                                                    activeOpacity={0.5}
-                                                >
-                                                    <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={25} />
-                                                </TouchableOpacity>
-                                            </View>
-                                        </SkeletonContainer>
-                                    </View>
-                                    <View>
-
-                                        <SkeletonContainer isLoading={loading}>
-                                            <TouchableOpacity
-                                                activeOpacity={0.8}
-                                                onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
-                                                style={styles.buyNowButton}
-                                            >
-                                                <Text style={styles.buttonText}>ADD TO CART </Text>
-                                            </TouchableOpacity>
-                                        </SkeletonContainer>
-
-                                        {/* <Snackbar
-                                            visible={visible}
-                                            onDismiss={onDismissSnackBar}
-                                            duration={2000}
-                                            wrapperStyle={{ maxWidth: 170, alignSelf: 'center', }}
-                                        >
-                                            Item Added to Cart
-                                        </Snackbar> */}
-                                {/* </View> */}
-                                {/* </View> */}
-
-                                {/* <View style={pDs.baseLine2} /> */}
 
                                 <View style={styles.Accordion_Root}>
-                                    {/* <List.Section> */}
                                     <View style={styles.description_heading}>
                                         <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
                                     </View>
-                                    {/* <List.Accordion
-                                            id='1'
-                                            title="DESCRIPTION"
-                                        titleStyle={styles.titleStyle_description}
-                                        expanded={((expanded === "1") ? true : false)}
-                                        onPress={() => handlePress("1")}
-                                        right={() => <List.Icon icon={(expanded === "1") ? 'minus' : 'plus'} />}
-                                        > */}
                                     <View style={styles.li_text_root} >
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                         <Text style={styles.li_text}>{data.description}</Text>
                                     </View>
-                                    {/* </List.Accordion> */}
-
                                     <View style={pDs.baseLine} />
                                     <View style={styles.description_heading}>
                                         <Text style={styles.titleStyle_description}>KEY FEATURES</Text>
                                     </View>
-                                    {/* <List.Accordion
-                                            id='2'
-                                            title="KEY FEATURES"
-                                            titleStyle={styles.titleStyle_description}
-                                            expanded={(expanded === "2") ? true : false}
-                                            onPress={() => handlePress("2")}
-                                            right={() => <List.Icon icon={(expanded === "2") ? 'minus' : 'plus'} />}> */}
+
                                     <View style={styles.li_text_root} >
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                         <Text style={styles.li_text}>{data.key_feature}</Text>
                                     </View>
-                                    {/* </List.Accordion> */}
 
                                     <View style={pDs.baseLine} />
+
                                     <View style={styles.description_heading}>
                                         <Text style={styles.titleStyle_description}>HOW TO USE</Text>
                                     </View>
-                                    {/* <List.Accordion
-                                            id='3'
-                                            title="HOW TO USE"
-                                            titleStyle={styles.titleStyle_description}
-                                            expanded={(expanded === "3") ? true : false}
-                                            onPress={() => handlePress("3")}
-                                            right={() => <List.Icon icon={(expanded === "3") ? 'minus' : 'plus'} />}> */}
+
                                     <View style={styles.li_text_root}>
                                         <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
                                         <Text style={styles.li_text}>{data.how_to_use}</Text>
                                     </View>
-                                    {/* </List.Accordion> */}
-                                    {/* <View style={pDs.baseLine} /> */}
-                                    {/* </List.Section> */}
                                 </View>
 
                                 <View style={styles.review_outerRoot}>
@@ -781,10 +645,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignSelf: 'center',
-        height: 40,
-        width: 40,
+        height: 35,
+        width: 35,
         borderRadius: 100,
-        backgroundColor: '#7aebda',
+        backgroundColor: '#fff',
         position: 'absolute',
         // bottom: '15%',
         // left: '8%'
@@ -800,6 +664,21 @@ const styles = StyleSheet.create({
     //     // bottom: '15%',
     //     // right: '8%',
     // },
+    Snackbar_style: {
+        width: "65%",
+        height: 55,
+        alignSelf: 'center',
+        position: 'absolute',
+        zIndex: 3,
+        bottom: 250,
+        opacity: 0.7
+    },
+    Snackbar_text: {
+        color: '#fff',
+        fontSize: 14,
+        lineHeight: 15,
+        textAlign: 'center'
+    },
     sticky_Btn: {
         flexDirection: 'row',
         position: 'absolute',
@@ -811,12 +690,21 @@ const styles = StyleSheet.create({
     bottomView: {
         height: 60,
         width: '50%',
-        backgroundColor: '#FF9800',
         justifyContent: 'center',
-        alignItems: 'center',
+        // backgroundColor: '#FF9800',
+        // alignItems: 'center',
         // position: 'absolute',
         // bottom: 0,
         // zIndex: 99,
+    },
+    inner_bottomView: {
+        height: 50,
+        width: '90%',
+        justifyContent: 'center'
+    },
+    add_btn: {
+        backgroundColor: '#blue',
+        alignSelf: 'center',
     },
     bottomView1: {
         height: 60,

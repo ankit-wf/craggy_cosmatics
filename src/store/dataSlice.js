@@ -10,7 +10,7 @@ const dataSlice = createSlice({
     reducers: {
         price(state, action) {
             state.cart = action.payload.cart
-            //   console.log('state.cart', state.cart) 
+            // console.log('state.cart', state.cart)
         },
         quantity(state, action) {
             state.cart[action.payload.id].quantity = action.payload.quantity

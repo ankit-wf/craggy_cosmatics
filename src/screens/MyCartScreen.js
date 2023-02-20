@@ -118,7 +118,7 @@ const MyCartScreen = ({ navigation, route }) => {
   // const Producthandler = () => {
   //   navigation.navigate('Product')
   // }
-  const aaa = totalOldAmount();
+  const Tprice = totalOldAmount();
   const fee = 50;
   const [visible, setVisible] = useState(false);
   const onToggleSnackBar = () => {
@@ -241,7 +241,7 @@ const MyCartScreen = ({ navigation, route }) => {
 
               </View>
               <View style={{ flexDirection: 'row' }}>
-                {aaa < 499 ?
+                {Tprice < 499 ?
                   <Text style={styles.oldprice}>₹{fee}</Text> :
                   <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.oldprice1}>₹{fee}</Text>
@@ -255,6 +255,7 @@ const MyCartScreen = ({ navigation, route }) => {
               visible={visible}
               onDismiss={onDismissSnackBar}
               duration={2000}
+              style={{ opacity: 0.7 }}
             >
               <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
             </Snackbar>
@@ -267,7 +268,7 @@ const MyCartScreen = ({ navigation, route }) => {
 
             <View style={styles.subtotalRoot}>
               <Text style={styles.maintotal}>Total</Text>
-              {aaa < 499 ?
+              {Tprice < 499 ?
                 <Text style={styles.mainprice}>₹{TAmount + fee}</Text>
                 : <Text style={styles.mainprice}>₹{TAmount}</Text>
               }
@@ -277,9 +278,14 @@ const MyCartScreen = ({ navigation, route }) => {
           <View style={styles.baseLine2} ></View>
 
           <View style={styles.checkoutbuttonRoot} >
-            <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', TAmount)}>
-              <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
-            </Button>
+            {Tprice < 499 ?
+              <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount, fee: fee })}>
+                <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
+              </Button>
+              : <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount })}>
+                <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
+              </Button>
+            }
             <Button style={styles.countinueButton} onPress={() => navigation.navigate('Home')}>
               <Text style={styles.checkoutText}>CONTINUE SHOPPING</Text>
             </Button>

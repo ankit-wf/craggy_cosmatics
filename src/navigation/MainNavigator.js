@@ -89,7 +89,7 @@ const MainNavigator = () => {
       <Stack.Screen name='my_profile' component={MyProfileScreen} options={{ headerShown: true, headerTitle: "MY PROFILE" }} />
       <Stack.Screen name='Addresses' component={AddressesScreen} options={{ headerShown: true, headerTitle: 'ADDRESS' }} />
       <Stack.Screen name='offers' component={ReviewsScreen} options={{ headerShown: true, headerTitle: 'REVIEWS' }} />
-      <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'OFFERS AND COUPAN' }} />
+      <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'Apply Offers', headerShadowVisible: false }} />
       <Stack.Screen name='AllBestseller' component={ViewAllBestsellers} options={{ headerShown: true, headerTitle: 'Bestsellers' }} />
       <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} />
       <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerTitle: 'All Product' }} />

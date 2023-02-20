@@ -5,12 +5,18 @@ import { RadioButton } from 'react-native-paper'
 const CheckOutScreen = ({ navigation, route }) => {
     const [checked, setChecked] = useState('ok');
     // console.log("dddddd", checked)
-    const Tm = route.params;
+    const Tm = route.params.Tm;
+    const fee = route.params.fee;
+    // console.log("ffff", Tm, fee)
+
     return (
         <View>
             <View style={styles.total_priceRoot}>
                 <Text style={styles.total_text}>Total</Text>
-                <Text style={styles.total_price}>₹{Tm}</Text>
+                {fee == 50 ?
+                    <Text style={styles.total_price}>₹{Tm + fee}</Text>
+                    : <Text style={styles.total_price}>₹{Tm}</Text>
+                }
             </View>
             <View style={styles.RadioButtonRoot}>
                 <Text style={styles.other_option}>Other Options</Text>
