@@ -26,6 +26,7 @@ const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([])
   const [bestData, setBestData] = useState([])
   const [loading, setLoading] = useState(true)
+  const [visible, setVisible] = useState(false);
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = React.useCallback(() => {
@@ -74,22 +75,52 @@ const HomeScreen = ({ navigation }) => {
     })
   }
 
-  const bestSellingHolder = (description, product_id, image, sale_price, regular_price,) => {
-    let Data = [...storeData, {
-      description: description,
-      sellingProduct_id: product_id,
-      images: image,
-      oldprice: sale_price,
-      price: regular_price,
-      quantity: 1
-    }];
-    dispatch(submitActions.price(
-      {
-        cart: Data
-      }
-    ));
-    navigation.navigate('Cart', product_id);
+  const onDismissSnackBar = () => {
+    setVisible(false);
   }
+
+  const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
+
+    if (storeData.length !== 0) {
+      let ss = false;
+      storeData.find(data => {
+        if (data.categoriesDetail_id == product_id) {
+          ss = true;
+        }
+      })
+      if (ss == true) {
+        // console.log("already in list")
+        setVisible(!visible);
+      }
+      else {
+        let Data = [...storeData, {
+          description: description,
+          categoriesDetail_id: product_id,
+          images: image,
+          oldprice: regular_price,
+          price: sale_price,
+          quantity: 1
+        }];
+        dispatch(submitActions.price({ cart: Data }));
+        navigation.navigate("Cart");
+      }
+    }
+    else {
+      let Data = [...storeData, {
+        description: description,
+        categoriesDetail_id: product_id,
+        images: image,
+        oldprice: regular_price,
+        price: sale_price,
+        quantity: 1
+      }];
+      dispatch(submitActions.price({ cart: Data }));
+      navigation.navigate("Cart");
+    }
+
+  }
+
+
   const openDrawer = () => {
     navigation.openDrawer();
   }
@@ -178,6 +209,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </ScrollView>
 
+        {/* Best selling  category */}
         <SkeletonContainer isLoading={loading}>
           <View style={styles1.bestSellerRoot}>
             <Heading title=' best selling ' />
@@ -226,7 +258,7 @@ const HomeScreen = ({ navigation }) => {
                     <TouchableOpacity
                       activeOpacity={0.8}
                       style={bsP.buyNowButton}
-                      onPress={() => bestSellingHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
+                      onPress={() => CartHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
                     >
                       <Text style={bsP.buttonText}>BUY NOW</Text>
                     </TouchableOpacity>
@@ -285,7 +317,7 @@ const HomeScreen = ({ navigation }) => {
 
                     {/* Buy Now Button  */}
                     <TouchableOpacity activeOpacity={0.8} style={lP.buyNowButton}
-                      onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
+                      onPress={() => CartHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
                     >
                       <Text style={lP.buttonText}>BUY NOW</Text>
                     </TouchableOpacity>

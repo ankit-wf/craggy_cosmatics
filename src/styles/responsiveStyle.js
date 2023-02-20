@@ -163,9 +163,9 @@ export const useStyles = CreateResponsiveStyle(
         },
         checkboxPassword: {
             display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: 'row-reverse',
+            // alignItems: 'center',
+            // justifyContent: 'space-between',
             width: '100%',
             paddingTop: 30,
             paddingBottom: 30,
