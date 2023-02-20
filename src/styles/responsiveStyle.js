@@ -464,19 +464,21 @@ export const useStyles = CreateResponsiveStyle(
 
         viewLatestProduct: {
             height: 25,
-            width: 70,
+            width: 80,
             borderRadius: 15,
             borderWidth: 1,
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: 10,
             marginRight: 20,
-            alignSelf: 'center'
+            alignSelf: 'center',
+            flexDirection: 'row'
         },
         latestProductText: {
             fontSize: 12,
             lineHeight: 14.09,
             fontWeight: '600',
+            paddingLeft: 5
         },
         latestProductImg: {
             marginLeft: 60

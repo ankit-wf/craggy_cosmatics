@@ -10,7 +10,6 @@ import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
-import axios from 'axios'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const ProductDetailScreen = ({ navigation, route }) => {
@@ -60,9 +59,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
         setExpanded(gg);
     };
 
-    const onToggleSnackBar = () => {
-        setVisible(!visible);
-    }
+    // const onToggleSnackBar = () => {
+    //     setVisible(!visible);
+    // }
+    const onDismissSnackBar = () => setVisible(false);
     const subOne = () => {
         if (one <= 1) {
         } else {
@@ -181,13 +181,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <View style={styles.textRoot}>
                                             <Text style={styles.craggyText}>{data.product_title}</Text>
                                         </View>
-                                        <Snackbar
-                                            visible={visible}
-                                            onDismiss={onDismissSnackBar}
-                                            duration={2000}
-                                        >
-                                            <Text >Item is already added to the cart, Please chechout...</Text>
-                                        </Snackbar>
                                     </View>
                                 </SkeletonContainer>
 

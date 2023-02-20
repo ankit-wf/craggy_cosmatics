@@ -23,7 +23,7 @@ const ProductListingScreen = ({ navigation, route }) => {
     // console.log("dDDDDD", data)
     const name = route.params.name;
     const id = route.params.id;
-    const [checked, setChecked] = useState('ok');
+    const [checked, setChecked] = useState('Latest');
     const bs = useRef();
 
     useEffect(() => {
@@ -96,17 +96,17 @@ const ProductListingScreen = ({ navigation, route }) => {
                 </SkeletonContainer>
                 <SkeletonContainer isLoading={loading}>
                     <SafeAreaView style={styles.container}>
-                        <View style={styles1.shorting_root}>
-                            <Text style={styles1.name_text}>{name}</Text>
-                            <TouchableOpacity
-                                onPress={() => bs.current.show()}
-                                style={styles1.sort_text_root}
-                            >
-                                <Text style={styles1.sort_text}>Sort</Text>
-                                <Text style={styles1.sort_text}>New</Text>
-                                {/* <Ionicons name="swap-vertical" size={25} style={styles1.sort_icon} /> */}
+                        <View style={styles1.bestSellerRoot}>
+                            <Text style={styles1.productListing_name}>{name}</Text>
+                            <TouchableOpacity style={styles1.viewLatestProduct} >
+                                <TouchableOpacity onPress={() => bs.current.show()}>
+                                    <Text style={styles1.latestProductText}>Sort</Text>
+                                </TouchableOpacity>
+                                <Text style={styles1.dots}>:</Text>
+                                <Text style={styles1.latestProductText}>{checked}</Text>
                             </TouchableOpacity>
                         </View>
+
                         <BottomSheet hasDraggableIcon ref={bs} height={220} >
                             <View style={styles1.panel}>
                                 <View style={{ alignItems: 'center' }}>
@@ -117,7 +117,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                                     <RadioButton
                                         value="one"
                                         status={checked === 'one' ? 'checked' : 'unchecked'}
-                                        onPress={() => navigation.navigate('AddAddress')}
+                                        onPress={() => setChecked('Latest')}
                                     />
                                 </View>
                                 <View style={styles1.btnTextRoot}>
@@ -125,7 +125,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                                     <RadioButton
                                         value="second"
                                         status={checked === 'second' ? 'checked' : 'unchecked'}
-                                        onPress={() => console.log("Popularity")}
+                                        onPress={() => setChecked('Popularity')}
                                     />
                                 </View>
                                 <View style={styles1.btnTextRoot}>
@@ -133,7 +133,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                                     <RadioButton
                                         value="third"
                                         status={checked === 'third' ? 'checked' : 'unchecked'}
-                                        onPress={() => console.log('Price - Low to High')}
+                                        onPress={() => setChecked('Price Low to High')}
                                     />
                                 </View>
                                 <View style={styles1.btnTextRoot}>
@@ -141,7 +141,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                                     <RadioButton
                                         value="fourth"
                                         status={checked === 'fourth' ? 'checked' : 'unchecked'}
-                                        onPress={() => console.log('Price - High to Low')}
+                                        onPress={() => setChecked('Price High to Low')}
                                     />
                                 </View>
                             </View>
@@ -250,6 +250,50 @@ const styles1 = StyleSheet.create({
         height: '100%',
         width: '100%'
     },
+    bestSellerRoot: {
+        height: 50,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        // marginTop: 20,
+        // marginBottom: 10,
+    },
+    productListing_name: {
+        paddingLeft: 20,
+        marginTop: 20,
+        marginBottom: 10,
+        fontFamily: 'Raleway600',
+        fontWeight: '600',
+        textTransform: "uppercase",
+        color: '#CC933B',
+        fontSize: 16,
+        lineHeight: 19,
+        textAlign: 'left'
+    },
+    viewLatestProduct: {
+        height: 30,
+        width: 120,
+        borderRadius: 15,
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
+        marginRight: 20,
+        alignSelf: 'center',
+        flexDirection: 'row'
+    },
+    latestProductText: {
+        fontSize: 10,
+        lineHeight: 14.09,
+        fontWeight: '600',
+        paddingLeft: 5
+    },
+    dots: {
+        fontSize: 12,
+        lineHeight: 14.09,
+        fontWeight: '600',
+        paddingLeft: 3,
+    },
     shorting_root: {
         height: 50,
         flexDirection: 'row',
@@ -260,13 +304,23 @@ const styles1 = StyleSheet.create({
     name_text: {
         fontSize: 25,
         color: '#C68625'
+        // fontFamily: 'Raleway600',
+        // fontWeight: '600',
+        // textTransform: "uppercase",
+        // color: '#CC933B',
+        // fontSize: 16,
+        // lineHeight: 19,
+        // textAlign: 'left'
     },
     sort_text_root: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
         borderWidth: 1,
-        height: 40,
-        width: 100
+        borderRadius: 10,
+        height: 3,
+        width: 120
     },
     sort_text: {
         fontSize: 22,

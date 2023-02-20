@@ -55,7 +55,8 @@ const EditAddress = ({ navigation }) => {
                 userAddress: AddData
             }
         ));
-        navigation.navigate('Addresses')
+        navigation.goBack();
+        // navigation.navigate('Addresses')
         // reset();
     }
     return (
@@ -67,7 +68,7 @@ const EditAddress = ({ navigation }) => {
 
                             <View key={i}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                                    <View style={{ width: '45%' }}>
+                                    <View style={{ width: '45%', height: 40 }}>
                                         <Controller
                                             control={control}
                                             rules={{
@@ -82,9 +83,9 @@ const EditAddress = ({ navigation }) => {
                                                     returnKeyType="next"
                                                     autoCapitalize="none"
                                                     autoCompleteType="firstname"
-                                                    textContentType="firstname"
+                                                    // textContentType="firstname"
                                                     keyboardType="text"
-                                                    State style={{ height: 40 }}
+                                                    style={styles.firstname_text}
                                                 />
                                             )}
                                             name="firstname"
@@ -109,7 +110,8 @@ const EditAddress = ({ navigation }) => {
                                                     autoCompleteType="Lastname"
                                                     textContentType="Lastname"
                                                     keyboardType="text"
-                                                    style={{ height: 40 }}
+                                                    // style={{ height: 40 }}
+                                                    style={styles.firstname_text}
                                                 />
                                             )}
                                             name="Lastname"
@@ -134,9 +136,10 @@ const EditAddress = ({ navigation }) => {
                                                 returnKeyType="next"
                                                 autoCapitalize="none"
                                                 autoCompleteType="phone"
-                                                textContentType="phone"
+                                                // textContentType="phone"
                                                 keyboardType="numeric"
-                                                style={{ height: 40 }}
+                                                // style={{ height: 40 }}
+                                                style={styles.firstname_text}
                                             />
                                         )}
                                         name="phone"
@@ -161,7 +164,8 @@ const EditAddress = ({ navigation }) => {
                                                 autoCapitalize="none"
                                                 autoCompleteType="flate"
                                                 textContentType="flate"
-                                                style={{ height: 40 }}
+                                                // style={{ height: 40 }}
+                                                style={styles.firstname_text}
                                             />
                                         )}
                                         name="flate"
@@ -186,7 +190,8 @@ const EditAddress = ({ navigation }) => {
                                                 autoCapitalize="none"
                                                 autoCompleteType="Apartment"
                                                 textContentType="Apartment"
-                                                style={{ height: 40 }}
+                                                // style={{ height: 40 }}
+                                                style={styles.firstname_text}
                                             />
                                         )}
                                         name="Apartment"
@@ -211,7 +216,8 @@ const EditAddress = ({ navigation }) => {
                                                 autoCapitalize="none"
                                                 autoCompleteType="Pincode"
                                                 keyboardType="numeric"
-                                                style={{ height: 40 }}
+                                                // style={{ height: 40 }}
+                                                style={styles.firstname_text}
                                             />
                                         )}
                                         name="Pincode"
@@ -236,7 +242,8 @@ const EditAddress = ({ navigation }) => {
                                                 autoCapitalize="none"
                                                 autoCompleteType="State"
                                                 textContentType="State"
-                                                style={{ height: 40 }}
+                                                // style={{ height: 40 }}
+                                                style={styles.firstname_text}
                                             />
                                         )}
                                         name="State"
@@ -261,7 +268,8 @@ const EditAddress = ({ navigation }) => {
                                                 autoCapitalize="none"
                                                 autoCompleteType="City"
                                                 textContentType="City"
-                                                style={{ height: 40 }}
+                                                // style={{ height: 40 }}
+                                                style={styles.firstname_text}
                                             />
                                         )}
                                         name="City"
@@ -285,11 +293,11 @@ export default EditAddress
 
 const styles = StyleSheet.create({
     root_container: {
-        height: '85%',
+        height: '88%',
         width: '90%',
         borderWidth: 0.5,
         borderRadius: 15,
-        // marginTop: 15,
+        marginTop: 15,
         alignSelf: 'center',
         backgroundColor: '#fff'
     },
@@ -306,5 +314,12 @@ const styles = StyleSheet.create({
         color: '#fff',
         alignSelf: 'center',
         fontSize: 16
+    },
+    firstname: {
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderBottomWidth: 0,
+        padding: 0,
     }
 })
