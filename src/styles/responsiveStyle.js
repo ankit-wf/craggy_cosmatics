@@ -6,7 +6,7 @@ export const useStyles = CreateResponsiveStyle(
         wrapper: {},
 
         headerN: {
-            paddingTop: 30,
+            paddingTop: 10,
             paddingBottom: 20,
             backgroundColor: '#000',
         },
@@ -20,6 +20,11 @@ export const useStyles = CreateResponsiveStyle(
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
+        },
+        headerLogo: {
+            width: 115,
+            height: 30,
+            marginLeft: 1,
         },
         container: {
             // paddingLeft: 20,
@@ -413,6 +418,21 @@ export const useStyles = CreateResponsiveStyle(
         swiperRoot: {
             height: 350,
             position: 'relative',
+        },
+        Snackbar_style: {
+            width: "65%",
+            height: 55,
+            alignSelf: 'center',
+            position: 'absolute',
+            zIndex: 3,
+            bottom: 250,
+            opacity: 0.7
+        },
+        Snackbar_text: {
+            color: '#fff',
+            fontSize: 14,
+            lineHeight: 15,
+            textAlign: 'center'
         },
 
         header: {

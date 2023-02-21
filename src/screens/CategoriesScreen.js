@@ -9,6 +9,7 @@ const CategoriesScreen = ({ navigation }) => {
   const styles = useStyles()
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
+  // console.log("tttttttt", data)
   const [loading, setLoading] = useState(true);
 
   // console.log('category', loading);

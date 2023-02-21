@@ -13,7 +13,6 @@ export default function Header({ navigation, onPress, notification, Gift, search
     // console.log("BadgeData", BadgeData)
     // const [toggle, setToggle] = useState(true)
     // const [text, setText] = useState("");
-
     // const [searchQuery, setSearchQuery] = useState('');
 
     // const onChangeSearch = (query) => {
@@ -40,7 +39,7 @@ export default function Header({ navigation, onPress, notification, Gift, search
         <View style={styles.headerN}>
             <View style={styles.container}>
 
-                <View style={styles.containerI}>
+                {/* <View style={styles.containerI}>
                     <View style={styles.headerNotification}>
                         <TouchableOpacity onPress={onPress}>
                             <Ionicons style={styles.headerHamburger} name="menu-outline" color='#CC933B' size={30} />
@@ -48,7 +47,6 @@ export default function Header({ navigation, onPress, notification, Gift, search
                         <ResponsiveImage style={styles.headerLogo} source={require('../../assets/logo1.png')} />
                     </View>
                     <View style={styles.headerNotification}>
-
                         {BadgeData.length > 0 ?
                             <TouchableOpacity onPress={CartHandler} style={{ marginRight: 10, marginTop: 5 }} >
                                 <Ionicons name='cart-outline' color='#CC933B' size={25} />
@@ -63,13 +61,13 @@ export default function Header({ navigation, onPress, notification, Gift, search
                         {/* <TouchableOpacity onPress={notification}>
                             <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 8 }} />
                         </TouchableOpacity> */}
-                        {/* <TouchableOpacity onPress={Gift} >
+                {/* <TouchableOpacity onPress={Gift} >
                             <Ionicons name="gift-outline" color='#CC933B' size={20} />
                         </TouchableOpacity> */}
-                    </View>
-                </View>
+                {/* </View>
+                </View> */}
                 {/* <SearchBar onChangeText={onChangeSearch} value={searchQuery} onFocus={search} /> */}
-                <View style={{ width: "100%", flexDirection: 'row', backgroundColor: '#222222', marginTop: 20, borderRadius: 8, alignSelf: 'center' }}>
+                <View style={{ width: "100%", flexDirection: 'row', backgroundColor: '#222222', borderRadius: 8, alignSelf: 'center' }}>
                     <View style={{ width: '90%' }}>
                         <TextInput
                             caretHidden={true}

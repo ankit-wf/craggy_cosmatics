@@ -10,6 +10,7 @@ import { submitActions } from '../store/dataSlice'
 
 const MyCartScreen = ({ navigation, route }) => {
   const storeData = useSelector(state => state.cartData.cart);
+  // console.log("adadadadda", storeData)
   const dispatch = useDispatch();
   const totalPrice = useRef()
   const totaloldPrice = useRef()
@@ -113,9 +114,7 @@ const MyCartScreen = ({ navigation, route }) => {
                         <Text style={styles.blackText}>-</Text>
                       </TouchableOpacity>
 
-
                       <Text style={styles.blackText}>{i.quantity}</Text>
-
 
                       <TouchableOpacity onPress={() => addOne(e, i.quantity)} style={(i.quantity >= 1) ? styles.blackButton : styles.whiteButton} >
                         <Text style={(i.quantity >= 1) ? styles.whiteText : styles.blackText} >+</Text>
@@ -182,13 +181,12 @@ const MyCartScreen = ({ navigation, route }) => {
 
               </View>
               <View style={{ flexDirection: 'row' }}>
-                {Tprice < 499 ?
-                  <Text style={styles.oldprice}>₹{fee}</Text> :
-                  <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.oldprice1}>₹{fee}</Text>
+                <View style={{ flexDirection: 'row' }}>
+                  {Tprice < 499 ?
+                    <Text style={styles.free_price}>₹{fee}</Text> :
                     <Text style={styles.total}> Free</Text>
-                  </View>
-                }
+                  }
+                </View>
               </View>
             </View>
 
@@ -219,7 +217,7 @@ const MyCartScreen = ({ navigation, route }) => {
 
           <View style={styles.checkoutbuttonRoot} >
             {Tprice < 499 ?
-              <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount, fee: fee })}>
+              <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount, fee: fee, Tp: Tprice })}>
                 <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
               </Button>
               : <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount })}>
@@ -349,7 +347,14 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontFamily: 'Lato400',
     color: '#444444',
-    // textDecorationLine: 'line-through',
+    textDecorationLine: 'line-through',
+    lineHeight: 17
+  },
+  free_price: {
+    fontSize: 14,
+    fontWeight: '400',
+    fontFamily: 'Lato400',
+    color: '#444444',
     lineHeight: 17
   },
   oldprice1: {

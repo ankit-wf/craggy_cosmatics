@@ -20,10 +20,11 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
     const [data, setData] = useState([])
+    // console.log("wwwwwww", data)
     const [loading, setLoading] = useState(true);
     const [heart, setHeart] = useState(false);
     const id = route.params;
-    const [test, setTest] = useState(false);
+    // const [test, setTest] = useState(false);
     // console.log("tessssstttt", storeData,)
     // const idd = route.params;
     useEffect(() => {
@@ -118,17 +119,18 @@ const ProductDetailScreen = ({ navigation, route }) => {
     return (
         <View>
             <SafeAreaView style={styles.safe_root}>
+                <Snackbar
+                    visible={visible}
+                    onDismiss={onDismissSnackBar}
+                    duration={2000}
+                    style={styles.Snackbar_style}
+                >
+                    <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                </Snackbar>
                 {data.map((data, i) => {
                     return (
                         <SkeletonContainer isLoading={loading} key={i}>
-                            <Snackbar
-                                visible={visible}
-                                onDismiss={onDismissSnackBar}
-                                duration={2000}
-                                style={styles.Snackbar_style}
-                            >
-                                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
-                            </Snackbar>
+
                             <View style={styles.sticky_Btn} key={i}>
 
                                 <View style={styles.bottomView1} >

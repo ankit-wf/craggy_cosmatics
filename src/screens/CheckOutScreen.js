@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView, SafeAreaView, Button } from 'react-native'
 import React, { useRef, useState } from 'react'
-import { RadioButton } from 'react-native-paper'
+import { RadioButton, Snackbar } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'
 import { submitActions } from '../store/dataSlice'
@@ -8,34 +8,42 @@ import { submitActions } from '../store/dataSlice'
 const CheckOutScreen = ({ navigation, route }) => {
     const AddData = useSelector(state => state.userData.userAddress);
     const CartData = useSelector(state => state.cartData.cart);
-    // console.log("ffff", AddData[0].firstname)
+    // console.log("ffff", AddData)
     const [checked, setChecked] = useState('ok');
     // console.log("dddddd", checked)
     const Tm = route.params.Tm;
     const fee = route.params.fee;
-    // console.log("ffff", Tm, fee)
+    const Tp = route.params.Tp;
+    // console.log("ffff", Tp)
     const dispatch = useDispatch();
-    const totalPrice = useRef()
-    const totaloldPrice = useRef()
+    const totalPrice = useRef();
+    const totaloldPrice = useRef();
 
-    const addOne = (id, quant) => {
-        dispatch(submitActions.quantity(
-            {
-                id: id,
-                quantity: quant + 1
-            }
-        ));
+    const [visible, setVisible] = useState(false);
+    const onToggleSnackBar = () => {
+        setVisible(!visible);
     }
-    const subOne = (id, quant) => {
-        if (quant > 1)
-            dispatch(submitActions.quantity(
-                {
-                    id: id,
-                    quantity: quant - 1
-                }
-            ));
+    const onDismissSnackBar = () => {
+        setVisible(false);
     }
 
+    // const addOne = (id, quant) => {
+    //     dispatch(submitActions.quantity(
+    //         {
+    //             id: id,
+    //             quantity: quant + 1
+    //         }
+    //     ));
+    // }
+    // const subOne = (id, quant) => {
+    //     if (quant > 1)
+    //         dispatch(submitActions.quantity(
+    //             {
+    //                 id: id,
+    //                 quantity: quant - 1
+    //             }
+    //         ));
+    // }
     // const removeHandler = (index) => {
     //     dispatch(submitActions.remove(
     //         {
@@ -44,14 +52,13 @@ const CheckOutScreen = ({ navigation, route }) => {
     //     ))
     // }
 
-    const totalAmount = () => {
-        let sum = 0;
-        for (let i = 0; i < CartData.length; i++) {
-            sum = sum + CartData[i].oldprice * CartData[i].quantity
-        }
-        return sum;
-    }
-
+    // const totalAmount = () => {
+    //     let sum = 0;
+    //     for (let i = 0; i < CartData.length; i++) {
+    //         sum = sum + CartData[i].oldprice * CartData[i].quantity
+    //     }
+    //     return sum;
+    // }
 
     return (
         <View>
@@ -64,12 +71,11 @@ const CheckOutScreen = ({ navigation, route }) => {
                             : <Text style={styles.total_price}>₹{Tm}</Text>
                         }
                     </View>
-
-                    <View style={styles.user_nameRoot} >
+                    {/* <View style={styles.user_nameRoot} >
                         <Text style={styles.user_nameRoot_text}>
                             Hi {AddData[0].firstname} {AddData[0].Lastname}, Welcome to Craggy
                         </Text>
-                    </View>
+                    </View> */}
                     <View style={styles.address_root} >
                         <Text style={styles.delivert_address_text}>Delivery Address</Text>
                         <View style={styles.user_adrdress_root}>
@@ -110,17 +116,17 @@ const CheckOutScreen = ({ navigation, route }) => {
                                         <View style={styles.blank_div}></View>
 
                                         <View style={styles.buttonRoot}>
-                                            <TouchableOpacity onPress={() => subOne(e, i.quantity)} style={(i.quantity < 1) ? styles.blackButton : styles.whiteButton} >
+                                            {/* <TouchableOpacity onPress={() => subOne(e, i.quantity)} style={(i.quantity < 1) ? styles.blackButton : styles.whiteButton} >
                                                 <Text style={styles.blackText}>-</Text>
-                                            </TouchableOpacity>
-
-
+                                            </TouchableOpacity> */}
+                                            <Text style={{ fontSize: 12, fontWeight: '700' }} >Qnty</Text>
+                                            <Text style={{ fontSize: 12, fontWeight: '700' }} >:</Text>
                                             <Text style={styles.blackText}>{i.quantity}</Text>
 
-
+                                            {/* 
                                             <TouchableOpacity onPress={() => addOne(e, i.quantity)} style={(i.quantity >= 1) ? styles.blackButton : styles.whiteButton} >
                                                 <Text style={(i.quantity >= 1) ? styles.whiteText : styles.blackText} >+</Text>
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
                                         </View>
                                     </View>
 
@@ -139,10 +145,69 @@ const CheckOutScreen = ({ navigation, route }) => {
                         <Text style={styles.order_summary_text} >Price Summary </Text>
                     </View>
 
+                    <View style={styles.totalRoot}>
+                        <View style={styles.to_pay_root}>
+                            <View style={styles.inner_pay_root}>
+                                <Text style={styles.pay_text}>Order Total</Text>
+
+                                <Text style={styles.pay_text}>₹{totaloldPrice.current}</Text>
+                            </View>
+                        </View>
+                        {/* <View style={styles.subtotalRoot}>
+                            <Text style={styles.subtotal}>Order Total</Text>
+                            <Text styles={styles.total}>₹{totaloldPrice.current}</Text>
+                        </View> */}
+
+                        <View style={styles.to_pay_root}>
+                            <View style={styles.inner_pay_root}>
+                                <View style={{ flexDirection: 'row', }}>
+                                    <Text style={styles.pay_text}>Shipping</Text>
+                                    <TouchableOpacity style={{ marginLeft: "5%", marginTop: '19%' }}>
+                                        <Ionicons
+                                            name="information-circle-outline"
+                                            color={'blue'}
+                                            size={18}
+                                            onPress={onToggleSnackBar}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                                {Tp < 499 ?
+                                    <Text style={styles.pay_text}>₹{fee}</Text> :
+                                    <Text style={styles.pay_text}>Free</Text>
+                                }
+                            </View>
+                        </View>
+
+
+                        <Snackbar
+                            visible={visible}
+                            onDismiss={onDismissSnackBar}
+                            duration={2000}
+                            style={styles.Snackbar_style}
+                        >
+                            <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
+                        </Snackbar>
+                        <View style={styles.to_pay_root}>
+                            <View style={styles.inner_pay_root}>
+                                <Text style={styles.pay_text}>Promo Discount</Text>
+
+                                <Text style={styles.pay_text}>n/a</Text>
+                            </View>
+                        </View>
+                    </View>
+
+
+
+
+
                     <View style={styles.to_pay_root}>
                         <View style={styles.inner_pay_root}>
                             <Text style={styles.pay_text}>To Pay</Text>
-                            <Text style={styles.pay_text}>₹{totalAmount()}</Text>
+                            {fee == 50 ?
+                                <Text style={styles.pay_text}>₹{Tm + fee}</Text>
+                                : <Text style={styles.pay_text}>₹{Tm}</Text>
+                            }
+                            {/* <Text style={styles.pay_text}>₹{totalAmount()}</Text> */}
                         </View>
                     </View>
 
@@ -199,7 +264,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+
     },
     total_text: {
         fontSize: 16,
@@ -234,7 +300,7 @@ const styles = StyleSheet.create({
         color: 'grey'
     },
     address_root: {
-        marginTop: '2%',
+        marginTop: '1%',
         backgroundColor: '#fff'
     },
     delivert_address_text: {
@@ -243,7 +309,7 @@ const styles = StyleSheet.create({
         padding: '5%'
     },
     user_adrdress_root: {
-        height: 100,
+        height: 80,
         width: "90%",
         alignSelf: 'center',
         borderWidth: 1,
@@ -257,18 +323,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: '4%'
+        marginTop: '2%'
     },
     user_name: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: '700',
     },
-    user_name_default_text: {
-        fontSize: 18,
-        fontWeight: '700',
-        color: '#DDDDDD',
-        paddingLeft: 5,
-    },
+
     home_btn_root: {
         height: 25,
         width: 50,
@@ -305,13 +366,27 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         paddingLeft: '5%'
     },
+    Snackbar_style: {
+        width: "70%",
+        height: 70,
+        alignSelf: 'center',
+        position: 'absolute',
+        zIndex: 3,
+        bottom: 20,
+        opacity: 0.7
+    },
+    Snackbar_text: {
+        color: '#fff',
+        fontSize: 15,
+        textAlign: 'center'
+    },
     to_pay_root: {
         height: 60,
         width: '100%',
         // borderBottomWidth: 1,
         // borderBottomColor: '#DDDDDD',
         backgroundColor: '#fff',
-        marginTop: '1%',
+        marginTop: '0.5%',
         // justifyContent: 'space-between',
         // flexDirection: 'row'
     },
@@ -494,6 +569,7 @@ const styles = StyleSheet.create({
     buttonRoot: {
         flexDirection: 'row',
         justifyContent: 'space-around',
+        alignItems: 'center',
         borderColor: '#333333',
         borderWidth: 2,
         borderRadius: 50,
@@ -534,9 +610,8 @@ const styles = StyleSheet.create({
     blackText: {
         color: 'black',
         alignSelf: "center",
-        marginTop: -2,
-        fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontWeight: '700',
+        // fontFamily: 'Lato700',
         fontSize: 12,
         lineHeight: 19
     },

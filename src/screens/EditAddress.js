@@ -315,7 +315,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 16
     },
-    firstname: {
+    firstname_text: {
+        // height: 40,
         borderTopWidth: 0,
         borderLeftWidth: 0,
         borderRightWidth: 0,

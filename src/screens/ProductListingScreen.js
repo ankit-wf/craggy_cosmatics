@@ -98,10 +98,10 @@ const ProductListingScreen = ({ navigation, route }) => {
                     <SafeAreaView style={styles.container}>
                         <View style={styles1.bestSellerRoot}>
                             <Text style={styles1.productListing_name}>{name}</Text>
-                            <TouchableOpacity style={styles1.viewLatestProduct} >
-                                <TouchableOpacity onPress={() => bs.current.show()}>
-                                    <Text style={styles1.latestProductText}>Sort</Text>
-                                </TouchableOpacity>
+                            <TouchableOpacity style={styles1.viewLatestProduct} onPress={() => bs.current.show()} >
+                                {/* <TouchableOpacity onPress={() => bs.current.show()}> */}
+                                <Text style={styles1.latestProductText}>Sort</Text>
+                                {/* </TouchableOpacity> */}
                                 <Text style={styles1.dots}>:</Text>
                                 <Text style={styles1.latestProductText}>{checked}</Text>
                             </TouchableOpacity>
