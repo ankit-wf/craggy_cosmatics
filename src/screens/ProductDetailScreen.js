@@ -130,9 +130,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 {data.map((data, i) => {
                     return (
                         <SkeletonContainer isLoading={loading} key={i}>
-
                             <View style={styles.sticky_Btn} key={i}>
-
                                 <View style={styles.bottomView1} >
                                     <Text style={[styles.textStyle, styles.color]}>₹{data.regular_price}</Text>
                                 </View>
@@ -152,13 +150,15 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     {data.map((data, index) => {
                         return (
                             <View key={index}>
-                                <SkeletonContainer isLoading={loading} key={index}>
-                                    <View style={styles.swiperRoot}>
-                                        <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
-                                            <View key={index}>
+                                <View style={styles.swiperRoot}>
+                                    <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
+                                        <View key={index}>
+                                            <SkeletonContainer isLoading={loading} key={index}>
                                                 <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
-                                            </View>
-                                        </Swiper>
+                                            </SkeletonContainer>
+                                        </View>
+                                    </Swiper>
+                                    <SkeletonContainer isLoading={loading} >
                                         <View style={styles.shadow_Box} elevation={7}>
                                             <TouchableOpacity
                                                 onPress={wishlistHandler}
@@ -168,6 +168,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={22} style={{ alignSelf: 'center' }} />
                                             </TouchableOpacity>
                                         </View>
+                                    </SkeletonContainer>
+                                    <SkeletonContainer isLoading={loading} >
                                         <View style={styles.shadow_Box1} elevation={7}>
                                             <TouchableOpacity
                                                 onPress={() => console.log("share")}
@@ -177,49 +179,63 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 <Ionicons name="md-share-social-outline" size={22} style={{ alignSelf: 'center' }} />
                                             </TouchableOpacity>
                                         </View>
-                                    </View>
+                                    </SkeletonContainer>
+                                </View>
 
-                                    <View style={styles.CraggyTextRoot}>
+
+                                <View style={styles.CraggyTextRoot}>
+                                    <SkeletonContainer isLoading={loading} key={index} >
                                         <View style={styles.textRoot}>
                                             <Text style={styles.craggyText}>{data.product_title}</Text>
                                         </View>
-                                    </View>
-                                </SkeletonContainer>
+                                    </SkeletonContainer>
+                                </View>
 
                                 <View style={styles.Accordion_Root}>
                                     <View style={styles.description_heading}>
-                                        <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
+                                        <SkeletonContainer isLoading={loading} >
+                                            <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
+                                        </SkeletonContainer>
                                     </View>
+                                    <SkeletonContainer isLoading={loading} key={index} >
+                                        <View style={styles.li_text_root} >
+                                            <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
 
-                                    <View style={styles.li_text_root} >
-                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                        <Text style={styles.li_text}>{data.description}</Text>
-                                    </View>
+                                            <Text style={styles.li_text}>{data.description}</Text>
+                                        </View>
+                                    </SkeletonContainer>
 
                                     <View style={pDs.baseLine} />
                                     <View style={styles.description_heading}>
-                                        <Text style={styles.titleStyle_description}>KEY FEATURES</Text>
+                                        <SkeletonContainer isLoading={loading} >
+                                            <Text style={styles.titleStyle_description}>KEY FEATURES</Text>
+                                        </SkeletonContainer>
                                     </View>
 
-
-                                    <View style={styles.li_text_root} >
-                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                        <Text style={styles.li_text}>{data.key_feature}</Text>
-                                    </View>
+                                    <SkeletonContainer isLoading={loading}  >
+                                        <View style={styles.li_text_root} >
+                                            <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
+                                            <Text style={styles.li_text}>{data.key_feature}</Text>
+                                        </View>
+                                    </SkeletonContainer>
 
                                     <View style={pDs.baseLine} />
 
                                     <View style={styles.description_heading}>
-                                        <Text style={styles.titleStyle_description}>HOW TO USE</Text>
+                                        <SkeletonContainer isLoading={loading} >
+                                            <Text style={styles.titleStyle_description}>HOW TO USE</Text>
+                                        </SkeletonContainer>
                                     </View>
 
-
-                                    <View style={styles.li_text_root}>
-                                        <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                        <Text style={styles.li_text}>{data.how_to_use}</Text>
-                                    </View>
+                                    <SkeletonContainer isLoading={loading} >
+                                        <View style={styles.li_text_root}>
+                                            <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
+                                            <Text style={styles.li_text}>{data.how_to_use}</Text>
+                                        </View>
+                                    </SkeletonContainer>
 
                                 </View>
+
 
                                 <View style={styles.review_outerRoot}>
                                     <View style={styles.review_innerRoot}>
@@ -455,7 +471,7 @@ const styles = StyleSheet.create({
     },
     description_heading: {
         height: 50,
-        width: '100%',
+        width: '40%',
         justifyContent: 'center'
     },
     titleStyle_description: {

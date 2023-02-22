@@ -2,12 +2,12 @@ import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Swiper from 'react-native-swiper'
+import { List, Snackbar } from 'react-native-paper';
 import { shopStyle as sS } from '../styles/shopStyle'
 import { useStyles } from '../styles/responsiveStyle'
 import { useDispatch, useSelector } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 import { ScrollView } from 'react-native-virtualized-view';
-import { Ionicons } from '@expo/vector-icons'
 import BottomSheet from 'react-native-gesture-bottom-sheet'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { RadioButton } from 'react-native-paper'
@@ -24,48 +24,100 @@ const ProductListingScreen = ({ navigation, route }) => {
     const name = route.params.name;
     const id = route.params.id;
     const [checked, setChecked] = useState('Latest');
+    const [visible, setVisible] = useState(false);
     const bs = useRef();
 
     useEffect(() => {
-        axios.get(
-            `https://craggycosmetic.com/api/products/`,
-            {
-                params: {
-                    category_id: id
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-                }
-            }
-        ).then((res) => {
-            setData(res.data)
-            setTimeout(() => {
-                setLoading(false)
-            }, 2000);
-        })
+        {
+            id ?
+                axios.get(
+                    `https://craggycosmetic.com/api/products/`,
+                    {
+                        params: {
+                            category_id: id
+                        },
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                        }
+                    }
+                ).then((res) => {
+                    setData(res.data)
+                    setTimeout(() => {
+                        setLoading(false)
+                    }, 2000);
+                })
+                :
+                axios.get(
+                    `https://craggycosmetic.com/api/products/best-selling/`,
+                    {
+                        headers: {
+                            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                        }
+                    }
+                ).then((res) => {
+                    // console.log("resss", res.data)
+                    if (res.data.status = "success") {
+                        setData(res.data.response)
+                        setTimeout(() => {
+                            setLoading(false)
+                        }, 2000);
+                    }
+                })
+        }
     }, [id])
 
-    const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price) => {
-        let Data = [...storeData, {
-            description: product_title,
-            categoriesDetail_id: product_id,
-            images: image,
-            price: regular_price,
-            oldprice: sale_price,
-            quantity: 1
-        }];
-
-        dispatch(submitActions.price(
-            {
-                cart: Data
+    const onDismissSnackBar = () => setVisible(false);
+    const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
+        if (storeData.length !== 0) {
+            let ss = false;
+            storeData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
+                setVisible(!visible);
             }
-        ));
-        navigation.navigate('Cart', product_id);
+            else {
+                let Data = [...storeData, {
+                    description: description,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    oldprice: regular_price,
+                    price: sale_price,
+                    quantity: 1
+                }];
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("Cart");
+            }
+        }
+        else {
+            let Data = [...storeData, {
+                description: description,
+                categoriesDetail_id: product_id,
+                images: image,
+                oldprice: regular_price,
+                price: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("Cart");
+        }
+
     }
 
     return (
         <View>
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+                duration={2000}
+                style={styles.Snackbar_style}
+            >
+                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+            </Snackbar>
             <ScrollView  >
                 <SkeletonContainer isLoading={loading}>
                     <View style={styles.swiperRoot}>
@@ -99,9 +151,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                         <View style={styles1.bestSellerRoot}>
                             <Text style={styles1.productListing_name}>{name}</Text>
                             <TouchableOpacity style={styles1.viewLatestProduct} onPress={() => bs.current.show()} >
-                                {/* <TouchableOpacity onPress={() => bs.current.show()}> */}
                                 <Text style={styles1.latestProductText}>Sort</Text>
-                                {/* </TouchableOpacity> */}
                                 <Text style={styles1.dots}>:</Text>
                                 <Text style={styles1.latestProductText}>{checked}</Text>
                             </TouchableOpacity>
@@ -115,32 +165,32 @@ const ProductListingScreen = ({ navigation, route }) => {
                                 <View style={styles1.btnTextRoot}>
                                     <Text style={styles1.select_text}>Latest</Text>
                                     <RadioButton
-                                        value="one"
-                                        status={checked === 'one' ? 'checked' : 'unchecked'}
+                                        value="Latest"
+                                        status={checked === 'Latest' ? 'checked' : 'unchecked'}
                                         onPress={() => setChecked('Latest')}
                                     />
                                 </View>
                                 <View style={styles1.btnTextRoot}>
                                     <Text style={styles1.select_text}>Popularity</Text>
                                     <RadioButton
-                                        value="second"
-                                        status={checked === 'second' ? 'checked' : 'unchecked'}
+                                        value="Popularity"
+                                        status={checked === 'Popularity' ? 'checked' : 'unchecked'}
                                         onPress={() => setChecked('Popularity')}
                                     />
                                 </View>
                                 <View style={styles1.btnTextRoot}>
                                     <Text style={styles1.select_text}>Price - Low to High</Text>
                                     <RadioButton
-                                        value="third"
-                                        status={checked === 'third' ? 'checked' : 'unchecked'}
+                                        value="Low"
+                                        status={checked === 'Low' ? 'checked' : 'unchecked'}
                                         onPress={() => setChecked('Price Low to High')}
                                     />
                                 </View>
                                 <View style={styles1.btnTextRoot}>
                                     <Text style={styles1.select_text}>Price - High to Low</Text>
                                     <RadioButton
-                                        value="fourth"
-                                        status={checked === 'fourth' ? 'checked' : 'unchecked'}
+                                        value="High"
+                                        status={checked === 'High' ? 'checked' : 'unchecked'}
                                         onPress={() => setChecked('Price High to Low')}
                                     />
                                 </View>
@@ -177,13 +227,12 @@ const ProductListingScreen = ({ navigation, route }) => {
 
                                     {/*  Buy Now Button  */}
                                     <TouchableOpacity style={sS.buyNowButton}
-                                        onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                        onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                     >
                                         <Text style={sS.buttonText}>BUY NOW</Text>
                                     </TouchableOpacity>
                                 </TouchableOpacity>
                             </SkeletonContainer>
-
                         )}
                         numColumns={2}
                         keyExtractor={(item, index) => index}

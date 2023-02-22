@@ -26,9 +26,9 @@ const HomeScreen = ({ navigation }) => {
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
   const [bestData, setBestData] = useState([])
-  // console.log("bestData", bestData[0].product_id)
   const [loading, setLoading] = useState(true)
   const [visible, setVisible] = useState(false);
+  let bs = "BestSellers";
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = React.useCallback(() => {
@@ -219,22 +219,15 @@ const HomeScreen = ({ navigation }) => {
         <SkeletonContainer isLoading={loading}>
           <View style={styles1.bestSellerRoot}>
             <Heading title=' best selling ' />
-            {/* {bestData.map((e) => {
-              console.log("first", e)
-              return ( */}
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.viewLatestProduct}
-              // onPress={() => { navigation.navigate('ProductListing', { id: e.term_id, name: e.name }) }}
-              onPress={() => navigation.navigate("AllBestseller")}
+              onPress={() => { navigation.navigate('ProductListing', { name: bs }) }}
             >
               <Text style={styles.latestProductText}>
                 View All
               </Text>
             </TouchableOpacity>
-            {/* )
-            })} */}
-
           </View>
         </SkeletonContainer>
 

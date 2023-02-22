@@ -27,6 +27,8 @@ const CheckOutScreen = ({ navigation, route }) => {
         setVisible(false);
     }
 
+    let dataa = "Order Place  " + "₹" + JSON.stringify(Tm)
+
     // const addOne = (id, quant) => {
     //     dispatch(submitActions.quantity(
     //         {
@@ -59,6 +61,13 @@ const CheckOutScreen = ({ navigation, route }) => {
     //     }
     //     return sum;
     // }
+    const totalOldAmount = () => {
+        let sum = 0;
+        for (let i = 0; i < CartData.length; i++) {
+            sum = sum + CartData[i].price * CartData[i].quantity
+        }
+        return sum;
+    }
 
     return (
         <View>
@@ -150,7 +159,7 @@ const CheckOutScreen = ({ navigation, route }) => {
                             <View style={styles.inner_pay_root}>
                                 <Text style={styles.pay_text}>Order Total</Text>
 
-                                <Text style={styles.pay_text}>₹{totaloldPrice.current}</Text>
+                                <Text style={styles.pay_text}>₹{totalOldAmount()}</Text>
                             </View>
                         </View>
                         {/* <View style={styles.subtotalRoot}>
@@ -178,15 +187,6 @@ const CheckOutScreen = ({ navigation, route }) => {
                             </View>
                         </View>
 
-
-                        <Snackbar
-                            visible={visible}
-                            onDismiss={onDismissSnackBar}
-                            duration={2000}
-                            style={styles.Snackbar_style}
-                        >
-                            <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
-                        </Snackbar>
                         <View style={styles.to_pay_root}>
                             <View style={styles.inner_pay_root}>
                                 <Text style={styles.pay_text}>Promo Discount</Text>
@@ -233,11 +233,21 @@ const CheckOutScreen = ({ navigation, route }) => {
 
                 </SafeAreaView>
             </ScrollView>
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+                duration={2000}
+                style={styles.Snackbar_style}
+            >
+                <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
+            </Snackbar>
             <View style={styles.sticky_Btn}>
                 <View style={styles.bottomView} >
                     <View style={styles.inner_bottomView}>
+
                         <Button
-                            title='Order Place'
+                            title={dataa}
+
                         />
                     </View>
                 </View>
@@ -372,7 +382,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         position: 'absolute',
         zIndex: 3,
-        bottom: 20,
+        bottom: 150,
         opacity: 0.7
     },
     Snackbar_text: {
@@ -383,10 +393,10 @@ const styles = StyleSheet.create({
     to_pay_root: {
         height: 60,
         width: '100%',
-        // borderBottomWidth: 1,
-        // borderBottomColor: '#DDDDDD',
         backgroundColor: '#fff',
         marginTop: '0.5%',
+        // borderBottomWidth: 1,
+        // borderBottomColor: '#DDDDDD',
         // justifyContent: 'space-between',
         // flexDirection: 'row'
     },
@@ -398,8 +408,8 @@ const styles = StyleSheet.create({
     },
     pay_text: {
         fontSize: 18,
-        fontWeight: '600',
-        color: 'grey',
+        fontWeight: '400',
+        // color: 'grey',
         paddingTop: 15
     },
     RadioButtonRoot: {
@@ -555,7 +565,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontFamily: 'Lato400',
         color: '#444444',
-        // textDecorationLine: 'line-through',
+        textDecorationLine: 'line-through',
         lineHeight: 17
     },
     oldprice1: {
