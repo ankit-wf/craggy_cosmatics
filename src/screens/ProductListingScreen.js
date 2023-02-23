@@ -118,36 +118,39 @@ const ProductListingScreen = ({ navigation, route }) => {
             >
                 <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
             </Snackbar>
-            <ScrollView  >
-                <SkeletonContainer isLoading={loading}>
-                    <View style={styles.swiperRoot}>
-                        <Swiper style={styles.wrapper}  >
-                            {bannerImg.map((e, i) => {
-                                return (
-                                    <View key={i} >
-                                        <Image source={{ uri: e.images }} style={styles1.banner_img} />
-                                        <View style={styles.sliderContent}>
-                                            <View style={styles.bannerTextRoot}>
-                                                <Text style={styles.bannerText}>{e.line}</Text>
-                                            </View>
-                                            <View style={styles.bannerCode} >
-                                                <Image source={require('../../assets/CodeImg.png')} />
-                                            </View>
-                                            <TouchableOpacity
-                                                activeOpacity={0.8}
-                                                style={styles.bannerButton}
-                                            >
-                                                <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
-                                            </TouchableOpacity>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                nestedScrollEnabled={true}
+            >
+                {/* <SkeletonContainer isLoading={loading}> */}
+                <View style={styles.swiperRoot}>
+                    <Swiper style={styles.wrapper}  >
+                        {bannerImg.map((e, i) => {
+                            return (
+                                <View key={i} >
+                                    <Image source={{ uri: e.images }} style={styles1.banner_img} />
+                                    <View style={styles.sliderContent}>
+                                        <View style={styles.bannerTextRoot}>
+                                            <Text style={styles.bannerText}>{e.line}</Text>
                                         </View>
+                                        <View style={styles.bannerCode} >
+                                            <Image source={require('../../assets/CodeImg.png')} />
+                                        </View>
+                                        <TouchableOpacity
+                                            activeOpacity={0.8}
+                                            style={styles.bannerButton}
+                                        >
+                                            <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                )
-                            })}
-                        </Swiper>
-                    </View>
-                </SkeletonContainer>
-                <SkeletonContainer isLoading={loading}>
-                    <SafeAreaView style={styles.container}>
+                                </View>
+                            )
+                        })}
+                    </Swiper>
+                </View>
+                {/* </SkeletonContainer> */}
+                <SafeAreaView style={styles.container}>
+                    <SkeletonContainer isLoading={loading}>
                         <View style={styles1.bestSellerRoot}>
                             <Text style={styles1.productListing_name}>{name}</Text>
                             <TouchableOpacity style={styles1.viewLatestProduct} onPress={() => bs.current.show()} >
@@ -156,48 +159,49 @@ const ProductListingScreen = ({ navigation, route }) => {
                                 <Text style={styles1.latestProductText}>{checked}</Text>
                             </TouchableOpacity>
                         </View>
+                    </SkeletonContainer>
 
-                        <BottomSheet hasDraggableIcon ref={bs} height={220} >
-                            <View style={styles1.panel}>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Text style={styles1.panelTitle}>Sort By</Text>
-                                </View>
-                                <View style={styles1.btnTextRoot}>
-                                    <Text style={styles1.select_text}>Latest</Text>
-                                    <RadioButton
-                                        value="Latest"
-                                        status={checked === 'Latest' ? 'checked' : 'unchecked'}
-                                        onPress={() => setChecked('Latest')}
-                                    />
-                                </View>
-                                <View style={styles1.btnTextRoot}>
-                                    <Text style={styles1.select_text}>Popularity</Text>
-                                    <RadioButton
-                                        value="Popularity"
-                                        status={checked === 'Popularity' ? 'checked' : 'unchecked'}
-                                        onPress={() => setChecked('Popularity')}
-                                    />
-                                </View>
-                                <View style={styles1.btnTextRoot}>
-                                    <Text style={styles1.select_text}>Price - Low to High</Text>
-                                    <RadioButton
-                                        value="Low"
-                                        status={checked === 'Low' ? 'checked' : 'unchecked'}
-                                        onPress={() => setChecked('Price Low to High')}
-                                    />
-                                </View>
-                                <View style={styles1.btnTextRoot}>
-                                    <Text style={styles1.select_text}>Price - High to Low</Text>
-                                    <RadioButton
-                                        value="High"
-                                        status={checked === 'High' ? 'checked' : 'unchecked'}
-                                        onPress={() => setChecked('Price High to Low')}
-                                    />
-                                </View>
+                    <BottomSheet hasDraggableIcon ref={bs} height={220} >
+                        <View style={styles1.panel}>
+                            <View style={{ alignItems: 'center' }}>
+                                <Text style={styles1.panelTitle}>Sort By</Text>
                             </View>
-                        </BottomSheet>
-                    </SafeAreaView>
-                </SkeletonContainer>
+                            <View style={styles1.btnTextRoot}>
+                                <Text style={styles1.select_text}>Latest</Text>
+                                <RadioButton
+                                    value="Latest"
+                                    status={checked === 'Latest' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('Latest')}
+                                />
+                            </View>
+                            <View style={styles1.btnTextRoot}>
+                                <Text style={styles1.select_text}>Popularity</Text>
+                                <RadioButton
+                                    value="Popularity"
+                                    status={checked === 'Popularity' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('Popularity')}
+                                />
+                            </View>
+                            <View style={styles1.btnTextRoot}>
+                                <Text style={styles1.select_text}>Price - Low to High</Text>
+                                <RadioButton
+                                    value="Low"
+                                    status={checked === 'Low' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('Price Low to High')}
+                                />
+                            </View>
+                            <View style={styles1.btnTextRoot}>
+                                <Text style={styles1.select_text}>Price - High to Low</Text>
+                                <RadioButton
+                                    value="High"
+                                    status={checked === 'High' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('Price High to Low')}
+                                />
+                            </View>
+                        </View>
+                    </BottomSheet>
+                </SafeAreaView>
+
 
                 <View style={sS.productsListRoot}>
                     <FlatList
@@ -225,7 +229,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                                         </View>
                                     </View>
 
-                                    {/*  Buy Now Button  */}
+                                    {/* Buy Now Button  */}
                                     <TouchableOpacity style={sS.buyNowButton}
                                         onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                     >

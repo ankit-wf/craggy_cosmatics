@@ -12,7 +12,6 @@ import MyProfileScreen from '../screens/MyProfileScreen';
 import AddressesScreen from '../screens/AddressesScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
 import CoupanOfferScreen from '../screens/CoupanOfferScreen';
-import ViewAllBestsellers from '../screens/ViewAllBestsellers';
 import ViewAllLatestProduct from '../screens/ViewAllLatestProduct';
 import ViewProduct from '../screens/ViewProduct'
 import WriteReview from '../screens/WriteReview';
@@ -89,7 +88,6 @@ const MainNavigator = () => {
       <Stack.Screen name='Addresses' component={AddressesScreen} options={{ headerShown: true, headerTitle: 'ADDRESS' }} />
       <Stack.Screen name='offers' component={ReviewsScreen} options={{ headerShown: true, headerTitle: 'REVIEWS' }} />
       <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'Apply Offers', headerShadowVisible: false }} />
-      <Stack.Screen name='AllBestseller' component={ViewAllBestsellers} options={{ headerShown: true, headerTitle: 'Bestsellers' }} />
       <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} />
       <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerTitle: 'All Product' }} />
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />

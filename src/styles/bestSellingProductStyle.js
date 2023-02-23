@@ -11,7 +11,6 @@ export const bestSellingProductStyle = StyleSheet.create({
         height: 252,
         width: 145,
         marginRight: 15,
-        // backgroundColor: 'blue'
         position: 'relative'
     },
     imgRoot: {

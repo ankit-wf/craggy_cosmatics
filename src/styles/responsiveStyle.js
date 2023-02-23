@@ -375,7 +375,8 @@ export const useStyles = CreateResponsiveStyle(
             color: '#666666'
         },
         promiseOuterRoot: {
-            paddingBottom: 160,
+            paddingBottom: 90,
+            // paddingBottom: 160,
         },
         group115Root: {
             flexDirection: 'row',
@@ -550,12 +551,15 @@ export const useStyles = CreateResponsiveStyle(
         },
 
         categories_root: {
-            display: 'flex',
-            padding: 10,
-            paddingTop: 30,
-            justifyContent: 'center',
-            alignItems: 'center',
+            // display: 'flex',
+            // padding: 10,
+            // paddingTop: 10,
+            // justifyContent: 'center',
+            // alignItems: 'center',
             backgroundColor: '#fff',
+            height: 80,
+            justifyContent: 'center',
+            alignSelf: 'center'
         },
         catMainSec: {
             position: 'relative',
@@ -563,7 +567,7 @@ export const useStyles = CreateResponsiveStyle(
             // marginTop: 20
         },
         categories_text: {
-            fontSize: 20,
+            fontSize: 22,
             color: '#222222',
             fontWeight: '700',
         },
@@ -573,7 +577,6 @@ export const useStyles = CreateResponsiveStyle(
         },
         mens_text: {
             fontSize: 18,
-
             color: '#222222',
             textTransform: 'capitalize',
             fontWeight: '700',

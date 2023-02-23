@@ -35,15 +35,15 @@ const HomeScreen = ({ navigation }) => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
-    }, 2000);
+    }, 5000);
   }, []);
 
   useEffect(() => {
-    Category_Api()
-    BestSelling_Api()
-    setTimeout(() => {
-      setLoading(false)
-    }, 2000);
+    Category_Api();
+    BestSelling_Api();
+    // setTimeout(() => {
+    //   setLoading(false)
+    // }, 2000);
   }, [])
 
   const Category_Api = () => {
@@ -57,6 +57,9 @@ const HomeScreen = ({ navigation }) => {
     ).then((res) => {
       if (res.data.status = "success") {
         setData(res.data.response)
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000);
       }
     })
   }
@@ -73,10 +76,12 @@ const HomeScreen = ({ navigation }) => {
       // console.log("resss", res.data)
       if (res.data.status = "success") {
         setBestData(res.data.response)
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000);
       }
     })
   }
-
   const onDismissSnackBar = () => setVisible(false);
   const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
 
@@ -146,7 +151,9 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
       </Snackbar>
 
-      <Header search={SearchHandler} />
+      <SkeletonContainer isLoading={loading}>
+        <Header search={SearchHandler} />
+      </SkeletonContainer>
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -187,12 +194,12 @@ const HomeScreen = ({ navigation }) => {
         </SkeletonContainer>
 
         {/* <catgories /> */}
-        <ScrollView horizontal>
-          <View style={cS.categoriesRoot}>
-            {data.map((data, i) => {
-              if (data.count > 0)
-                return (
-                  <SkeletonContainer isLoading={loading} key={i}>
+        <SkeletonContainer isLoading={loading} >
+          <ScrollView horizontal>
+            <View style={cS.categoriesRoot}>
+              {data.map((data, i) => {
+                if (data.count > 0)
+                  return (
                     <TouchableOpacity
                       activeOpacity={0.8}
                       onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }} key={i}
@@ -210,11 +217,11 @@ const HomeScreen = ({ navigation }) => {
                         <Text style={cS.skinImgText}>{data.name}</Text>
                       </View>
                     </TouchableOpacity>
-                  </SkeletonContainer>
-                )
-            })}
-          </View>
-        </ScrollView>
+                  )
+              })}
+            </View>
+          </ScrollView>
+        </SkeletonContainer>
 
         <SkeletonContainer isLoading={loading}>
           <View style={styles1.bestSellerRoot}>
@@ -231,13 +238,13 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </SkeletonContainer>
 
-        <View style={bsP.productsListRoot}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-            {bestData.map((e, i) => {
-              return (
-                <SkeletonContainer isLoading={loading} key={i}>
+        <SkeletonContainer isLoading={loading} >
+          <View style={bsP.productsListRoot}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+              {bestData.map((e, i) => {
+                return (
                   <TouchableOpacity
-                    activeOpacity={0.8}
+                    // activeOpacity={0.8}
                     style={bsP.touchable}
                     onPress={() => navigation.navigate('Product', e.product_id)}
                     key={i}
@@ -270,11 +277,11 @@ const HomeScreen = ({ navigation }) => {
                     </TouchableOpacity>
 
                   </TouchableOpacity>
-                </SkeletonContainer>
-              )
-            })}
-          </ScrollView>
-        </View>
+                )
+              })}
+            </ScrollView>
+          </View>
+        </SkeletonContainer>
 
         {/* Latest Product  */}
         <SkeletonContainer isLoading={loading} >
@@ -344,34 +351,40 @@ const HomeScreen = ({ navigation }) => {
         {/* We Promise You */}
         <View >
           <View style={styles.promiseOuterRoot}>
-            <View style={styles.promiseRoot}>
-              <Text style={styles.promiseText}>We Promise You</Text>
-              <Image source={require('../../assets/divider.png')} />
-            </View>
+            <SkeletonContainer isLoading={loading} >
+              <View style={styles.promiseRoot}>
+                <Text style={styles.promiseText}>We Promise You</Text>
+                <Image source={require('../../assets/divider.png')} />
+              </View>
+            </SkeletonContainer>
 
-            <View style={styles.group115Root}>
-              {imageFooter.map((img, i) => {
-                return (
-                  <View style={styles.oilIconRoot} key={i}>
-                    <View style={styles.iconRoot} >
-                      <Image source={img.image} />
-                    </View>
+            <SkeletonContainer isLoading={loading} >
+              <View style={styles.group115Root}>
+                {imageFooter.map((img, i) => {
+                  return (
+                    <View style={styles.oilIconRoot} key={i}>
+                      <View style={styles.iconRoot} >
+                        <Image source={img.image} />
+                      </View>
 
-                    <View style={styles.essientialOilRoot}>
-                      <Text style={styles.essientialOilText} > {img.text} </Text>
+                      <View style={styles.essientialOilRoot}>
+                        <Text style={styles.essientialOilText} > {img.text} </Text>
+                      </View>
                     </View>
-                  </View>
-                )
-              })}
-            </View>
+                  )
+                })}
+              </View>
+            </SkeletonContainer>
 
             {/* View all Product  */}
-            <TouchableOpacity
-              activeOpacity={0.8}
-              style={styles.ViewProduct}
-              onPress={() => navigation.navigate('ViewProduct')} >
-              <Text style={styles.viewProductText}>VIEW ALL PRODUCT</Text>
-            </TouchableOpacity>
+            <SkeletonContainer isLoading={loading} >
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.ViewProduct}
+                onPress={() => navigation.navigate('ViewProduct')} >
+                <Text style={styles.viewProductText}>VIEW ALL PRODUCT</Text>
+              </TouchableOpacity>
+            </SkeletonContainer>
           </View>
         </View>
       </ScrollView >

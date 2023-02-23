@@ -7,13 +7,21 @@ import { Ionicons } from '@expo/vector-icons'
 import { useSelector, useDispatch } from 'react-redux';
 const imgData = require('../../imgData.json');
 import { submitActions } from '../store/dataSlice'
+import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const MyCartScreen = ({ navigation, route }) => {
   const storeData = useSelector(state => state.cartData.cart);
   // console.log("adadadadda", storeData)
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const totalPrice = useRef()
   const totaloldPrice = useRef()
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000);
+  }, [])
 
   const addOne = (id, quant) => {
     dispatch(submitActions.quantity(
@@ -93,40 +101,50 @@ const MyCartScreen = ({ navigation, route }) => {
                     onPress={() => navigation.navigate("Product", i.categoriesDetail_id)}
                     style={styles.dataImgRoot}
                   >
-                    <Image source={{ uri: i.images }} style={styles.dataImg} />
+                    <SkeletonContainer isLoading={loading}>
+                      <Image source={{ uri: i.images }} style={styles.dataImg} />
+                    </SkeletonContainer>
                   </TouchableOpacity>
 
-                  <View style={styles.textRoot} >
-                    <Text numberOfLines={2} style={styles.textDescription}>{i.description}</Text>
-                  </View>
+                  <SkeletonContainer isLoading={loading}>
+                    <View style={styles.textRoot} >
+                      <Text numberOfLines={2} style={styles.textDescription}>{i.description}</Text>
+                    </View>
+                  </SkeletonContainer>
 
                   <View>
-                    <Ionicons
-                      name="close-outline"
-                      color={'black'}
-                      size={20}
-                      style={{ alignSelf: 'flex-end' }}
-                      onPress={() => removeHandler(e)}
-                    />
+                    <SkeletonContainer isLoading={loading}>
+                      <Ionicons
+                        name="close-outline"
+                        color={'black'}
+                        size={20}
+                        style={{ alignSelf: 'flex-end' }}
+                        onPress={() => removeHandler(e)}
+                      />
+                    </SkeletonContainer>
 
-                    <View style={styles.buttonRoot}>
-                      <TouchableOpacity onPress={() => subOne(e, i.quantity)} style={(i.quantity < 1) ? styles.blackButton : styles.whiteButton} >
-                        <Text style={styles.blackText}>-</Text>
-                      </TouchableOpacity>
+                    <SkeletonContainer isLoading={loading}>
+                      <View style={styles.buttonRoot}>
+                        <TouchableOpacity onPress={() => subOne(e, i.quantity)} style={(i.quantity < 1) ? styles.blackButton : styles.whiteButton} >
+                          <Text style={styles.blackText}>-</Text>
+                        </TouchableOpacity>
 
-                      <Text style={styles.blackText}>{i.quantity}</Text>
+                        <Text style={styles.blackText}>{i.quantity}</Text>
 
-                      <TouchableOpacity onPress={() => addOne(e, i.quantity)} style={(i.quantity >= 1) ? styles.blackButton : styles.whiteButton} >
-                        <Text style={(i.quantity >= 1) ? styles.whiteText : styles.blackText} >+</Text>
-                      </TouchableOpacity>
+                        <TouchableOpacity onPress={() => addOne(e, i.quantity)} style={(i.quantity >= 1) ? styles.blackButton : styles.whiteButton} >
+                          <Text style={(i.quantity >= 1) ? styles.whiteText : styles.blackText} >+</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </SkeletonContainer>
+
+                  </View>
+                  <SkeletonContainer isLoading={loading}>
+                    <View style={styles.textPriceRoot} key={e}>
+                      <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
+                      <Text style={styles.slace} > / </Text>
+                      <Text style={styles.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
                     </View>
-                  </View>
-
-                  <View style={styles.textPriceRoot} key={e}>
-                    <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
-                    <Text style={styles.slace} > / </Text>
-                    <Text style={styles.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
-                  </View>
+                  </SkeletonContainer>
 
                 </View>
 
@@ -136,9 +154,9 @@ const MyCartScreen = ({ navigation, route }) => {
             // }
           })}
 
-          <TouchableOpacity style={styles.TextInputRoot} onPress={() => navigation.navigate('offer_coupan')}>
-
-            {/* <TextInput
+          <SkeletonContainer isLoading={loading}>
+            <TouchableOpacity style={styles.TextInputRoot} onPress={() => navigation.navigate('offer_coupan')}>
+              {/* <TextInput
               // onChangeText={onChangeNumber}
               // value={number}
               placeholder="promo code"
@@ -149,46 +167,52 @@ const MyCartScreen = ({ navigation, route }) => {
               <Text style={styles.promoText}>APPLY PROMO</Text>
             </Button> */}
 
-            <Ionicons
-              name="ios-pricetag"
-              color={'#C68625'}
-              size={25}
-              style={styles.coupon_icon}
-            />
-            <Text style={styles.coupon_text}>Use Coupons</Text>
-          </TouchableOpacity>
-          <View style={styles.TextInputRoot2} >
-            <Text style={styles.price_summary}>Price Summary</Text>
-          </View>
+              <Ionicons
+                name="ios-pricetag"
+                color={'#C68625'}
+                size={25}
+                style={styles.coupon_icon}
+              />
+              <Text style={styles.coupon_text}>Use Coupons</Text>
+            </TouchableOpacity>
+          </SkeletonContainer>
+          <SkeletonContainer isLoading={loading}>
+            <View style={styles.TextInputRoot2} >
+              <Text style={styles.price_summary}>Price Summary</Text>
+            </View>
+          </SkeletonContainer>
 
           <View style={styles.totalRoot}>
-            <View style={styles.subtotalRoot}>
-              <Text style={styles.subtotal}>Order Total</Text>
-              <Text styles={styles.total}>₹{totalOldAmount()}</Text>
-            </View>
-
-            <View style={styles.subtotalRoot}>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.subtotal}>Shipping</Text>
-                <TouchableOpacity style={{ marginLeft: "5%" }}>
-                  <Ionicons
-                    name="information-circle-outline"
-                    color={'blue'}
-                    size={18}
-                    onPress={onToggleSnackBar}
-                  />
-                </TouchableOpacity>
-
+            <SkeletonContainer isLoading={loading}>
+              <View style={styles.subtotalRoot}>
+                <Text style={styles.subtotal}>Order Total</Text>
+                <Text styles={styles.total}>₹{totalOldAmount()}</Text>
               </View>
-              <View style={{ flexDirection: 'row' }}>
+            </SkeletonContainer>
+            <SkeletonContainer isLoading={loading}>
+              <View style={styles.subtotalRoot}>
                 <View style={{ flexDirection: 'row' }}>
-                  {Tprice < 499 ?
-                    <Text style={styles.free_price}>₹{fee}</Text> :
-                    <Text style={styles.total}> Free</Text>
-                  }
+                  <Text style={styles.subtotal}>Shipping</Text>
+                  <TouchableOpacity style={{ marginLeft: "5%" }}>
+                    <Ionicons
+                      name="information-circle-outline"
+                      color={'blue'}
+                      size={18}
+                      onPress={onToggleSnackBar}
+                    />
+                  </TouchableOpacity>
+
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ flexDirection: 'row' }}>
+                    {Tprice < 499 ?
+                      <Text style={styles.free_price}>₹{fee}</Text> :
+                      <Text style={styles.total}> Free</Text>
+                    }
+                  </View>
                 </View>
               </View>
-            </View>
+            </SkeletonContainer>
 
             <Snackbar
               visible={visible}
@@ -198,35 +222,41 @@ const MyCartScreen = ({ navigation, route }) => {
             >
               <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
             </Snackbar>
-
-            <View style={styles.subtotalRoot}>
-              <Text style={styles.subtotal}>Promo Discount</Text>
-              <Text style={styles.total}> n/a</Text>
-            </View>
-
-            <View style={styles.subtotalRoot}>
-              <Text style={styles.maintotal}>Total</Text>
-              {Tprice < 499 ?
-                <Text style={styles.mainprice}>₹{TAmount + fee}</Text>
-                : <Text style={styles.mainprice}>₹{TAmount}</Text>
-              }
-            </View>
+            <SkeletonContainer isLoading={loading}>
+              <View style={styles.subtotalRoot}>
+                <Text style={styles.subtotal}>Promo Discount</Text>
+                <Text style={styles.total}> n/a</Text>
+              </View>
+            </SkeletonContainer>
+            <SkeletonContainer isLoading={loading}>
+              <View style={styles.subtotalRoot}>
+                <Text style={styles.maintotal}>Total</Text>
+                {Tprice < 499 ?
+                  <Text style={styles.mainprice}>₹{TAmount + fee}</Text>
+                  : <Text style={styles.mainprice}>₹{TAmount}</Text>
+                }
+              </View>
+            </SkeletonContainer>
           </View>
 
           <View style={styles.baseLine2} ></View>
 
           <View style={styles.checkoutbuttonRoot} >
-            {Tprice < 499 ?
-              <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount, fee: fee, Tp: Tprice })}>
-                <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
+            <SkeletonContainer isLoading={loading}>
+              {Tprice < 499 ?
+                <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount, fee: fee, Tp: Tprice })}>
+                  <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
+                </Button>
+                : <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount })}>
+                  <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
+                </Button>
+              }
+            </SkeletonContainer>
+            <SkeletonContainer isLoading={loading}>
+              <Button style={styles.countinueButton} onPress={() => navigation.navigate('Home')}>
+                <Text style={styles.checkoutText}>CONTINUE SHOPPING</Text>
               </Button>
-              : <Button style={styles.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount })}>
-                <Text style={styles.checkoutText}>PROCEED TO CHECKOUT</Text>
-              </Button>
-            }
-            <Button style={styles.countinueButton} onPress={() => navigation.navigate('Home')}>
-              <Text style={styles.checkoutText}>CONTINUE SHOPPING</Text>
-            </Button>
+            </SkeletonContainer>
           </View>
 
         </ScrollView>
@@ -307,10 +337,12 @@ const styles = StyleSheet.create({
   },
   textRoot: {
     height: 48,
-    width: '44%',
+    width: '42%',
     // borderRadius: 15,
     // borderColor: 'blue',
     // borderWidth: 1,
+    marginLeft: 5
+
   },
   textDescription: {
     fontSize: 12,
@@ -322,10 +354,13 @@ const styles = StyleSheet.create({
   },
   textPriceRoot: {
     height: 35,
-    width: '50%',
+    width: '41%',
     flexDirection: 'row',
-    marginLeft: '-72.5%',
-    marginTop: '16%'
+    marginLeft: '-76.5%',
+    marginTop: '16%',
+    // borderColor: 'blue',
+    // borderWidth: 1,
+    paddingLeft: 15
 
   },
   price: {

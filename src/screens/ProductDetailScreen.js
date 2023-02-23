@@ -46,7 +46,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
             setData(res.data)
             setTimeout(() => {
                 setLoading(false);
-            }, 2000);
+            }, 5000);
         })
     }
 
@@ -239,21 +239,24 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
                                 <View style={styles.review_outerRoot}>
                                     <View style={styles.review_innerRoot}>
-                                        <View style={styles.reviews_root} >
-                                            <Text style={styles.review_MainHeading}>REVIEWS</Text>
-                                            <TouchableOpacity
-                                                activeOpacity={0.8}
-                                                onPress={() => navigation.navigate('write_review')}
-                                                style={styles.write_review}
-                                            >
-                                                <Text style={styles.review_heading}> WRITE A REVIEW </Text>
-                                            </TouchableOpacity>
-                                        </View>
-
-                                        <View style={styles.reviews_root}>
-                                            <Text style={styles.reviews_length}>REVIEWS  ({newData.length - 1})</Text>
-                                            <Text style={styles.review_Short}>SHORT:</Text>
-                                        </View>
+                                        <SkeletonContainer isLoading={loading} >
+                                            <View style={styles.reviews_root} >
+                                                <Text style={styles.review_MainHeading}>REVIEWS</Text>
+                                                <TouchableOpacity
+                                                    activeOpacity={0.8}
+                                                    onPress={() => navigation.navigate('write_review')}
+                                                    style={styles.write_review}
+                                                >
+                                                    <Text style={styles.review_heading}> WRITE A REVIEW </Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                        </SkeletonContainer>
+                                        <SkeletonContainer isLoading={loading} >
+                                            <View style={styles.reviews_root}>
+                                                <Text style={styles.reviews_length}>REVIEWS  ({newData.length - 1})</Text>
+                                                <Text style={styles.review_Short}>SHORT:</Text>
+                                            </View>
+                                        </SkeletonContainer>
 
                                         <View style={[pDs.baseLine2, { height: 1, }]} />
 
@@ -285,73 +288,78 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 )
                                             }
                                         })}
-
-                                        <TouchableOpacity
-                                            activeOpacity={0.5}
-                                            onPress={() => navigation.navigate('offers')}
-                                            style={styles.allreview_root}
-                                        >
-                                            <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
-                                            <Ionicons
-                                                name="chevron-forward-outline"
-                                                color={'black'}
-                                                size={25}
-                                                style={{ marginRight: 20 }}
-                                            />
-                                        </TouchableOpacity>
-
-                                        <View style={styles.youMayAlso}>
-                                            <Heading title=' YOU MAY ALSO LIKE ' />
+                                        <SkeletonContainer isLoading={loading} >
                                             <TouchableOpacity
-                                                activeOpacity={0.6}
-                                                onPress={() => console.log("first")}
-                                                style={styles.viewLatestProduct}
+                                                activeOpacity={0.5}
+                                                onPress={() => navigation.navigate('offers')}
+                                                style={styles.allreview_root}
                                             >
-                                                <Text style={styles.latestProductText}>
-                                                    View All
-                                                </Text>
+                                                <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
+                                                <Ionicons
+                                                    name="chevron-forward-outline"
+                                                    color={'black'}
+                                                    size={25}
+                                                    style={{ marginRight: 20 }}
+                                                />
                                             </TouchableOpacity>
-                                        </View>
+                                        </SkeletonContainer>
+                                        <SkeletonContainer isLoading={loading} >
 
-                                        <View style={pDs.productsListRoot}>
-                                            <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-                                                {bestSellingProduct.map((e, i) => {
-                                                    return (
-                                                        <TouchableOpacity
-                                                            activeOpacity={0.8}
-                                                            style={pDs.product109}
-                                                            onPress={() => navigation.navigate('Product', e.sellingProduct_id)}
-                                                            key={i}
-                                                        >
-                                                            <View style={pDs.imgRoot}>
-                                                                <Image source={{ uri: e.images }} style={pDs.productImg} />
-                                                            </View>
-                                                            <View style={pDs.contentRoot}  >
-                                                                <View style={pDs.textRoot1}>
-                                                                    <Text style={pDs.contentText}>{e.description}</Text>
-                                                                </View>
+                                            <View style={styles.youMayAlso}>
+                                                <Heading title=' YOU MAY ALSO LIKE ' />
+                                                <TouchableOpacity
+                                                    activeOpacity={0.6}
+                                                    onPress={() => console.log("first")}
+                                                    style={styles.viewLatestProduct}
+                                                >
+                                                    <Text style={styles.latestProductText}>
+                                                        View All
+                                                    </Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                        </SkeletonContainer>
+                                        <SkeletonContainer isLoading={loading} >
 
-                                                                <View style={pDs.baseLine}></View>
-
-                                                                <View style={pDs.priceRoot}>
-                                                                    <Text style={pDs.price}>₹{e.price}</Text>
-                                                                    <Text style={pDs.spaceRoot}>/ </Text>
-                                                                    <Text style={pDs.oldprice}> ₹{e.oldprice}</Text>
-                                                                </View>
-                                                            </View>
-
+                                            <View style={pDs.productsListRoot}>
+                                                <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+                                                    {bestSellingProduct.map((e, i) => {
+                                                        return (
                                                             <TouchableOpacity
                                                                 activeOpacity={0.8}
-                                                                style={pDs.buyNowButton1}
-                                                                onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
+                                                                style={pDs.product109}
+                                                                onPress={() => navigation.navigate('Product', e.sellingProduct_id)}
+                                                                key={i}
                                                             >
-                                                                <Text style={pDs.buttonText1}>BUY NOW</Text>
+                                                                <View style={pDs.imgRoot}>
+                                                                    <Image source={{ uri: e.images }} style={pDs.productImg} />
+                                                                </View>
+                                                                <View style={pDs.contentRoot}  >
+                                                                    <View style={pDs.textRoot1}>
+                                                                        <Text style={pDs.contentText}>{e.description}</Text>
+                                                                    </View>
+
+                                                                    <View style={pDs.baseLine}></View>
+
+                                                                    <View style={pDs.priceRoot}>
+                                                                        <Text style={pDs.price}>₹{e.price}</Text>
+                                                                        <Text style={pDs.spaceRoot}>/ </Text>
+                                                                        <Text style={pDs.oldprice}> ₹{e.oldprice}</Text>
+                                                                    </View>
+                                                                </View>
+
+                                                                <TouchableOpacity
+                                                                    activeOpacity={0.8}
+                                                                    style={pDs.buyNowButton1}
+                                                                    onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
+                                                                >
+                                                                    <Text style={pDs.buttonText1}>BUY NOW</Text>
+                                                                </TouchableOpacity>
                                                             </TouchableOpacity>
-                                                        </TouchableOpacity>
-                                                    )
-                                                })}
-                                            </ScrollView>
-                                        </View>
+                                                        )
+                                                    })}
+                                                </ScrollView>
+                                            </View>
+                                        </SkeletonContainer>
                                     </View>
                                 </View>
                             </View>

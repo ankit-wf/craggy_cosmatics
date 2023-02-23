@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -17,6 +17,8 @@ import { useSelector } from 'react-redux';
 export default function DrawerScreen({ navigation }) {
     const gs = useStyles();
     const cart = useSelector(state => state.cartData.cart);
+
+
     return (
         <Drawer.Navigator initialRouteName="mainScreen"
             screenOptions={{

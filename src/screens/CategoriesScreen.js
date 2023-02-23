@@ -11,32 +11,36 @@ const CategoriesScreen = ({ navigation }) => {
   const [data, setData] = useState([])
   // console.log("tttttttt", data)
   const [loading, setLoading] = useState(true);
-
+  let Cat = "Categories";
   // console.log('category', loading);
-
   useEffect(() => {
-    axios.get(
-      `https://craggycosmetic.com/api/products/category/`,
-      {
-        headers: {
-          'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+    const sF = navigation.addListener('focus', () => {
+      axios.get(
+        `https://craggycosmetic.com/api/products/category/`,
+        {
+          headers: {
+            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+          }
         }
-      }
-    ).then((res) => {
-      if (res.data.status = "success") {
-        setData(res.data.response)
-      }
-      setTimeout(() => {
-        setLoading(false)
-      }, 5000);
-    })
+      ).then((res) => {
+        if (res.data.status = "success") {
+          setData(res.data.response)
+          setTimeout(() => {
+            setLoading(false)
+          }, 2000);
+        }
+
+      })
+    });
+    return sF;
   }, [])
 
   return (
     <View>
       <View style={styles.categories_root}>
-        <Text style={styles.categories_text}>Categories</Text>
+        <Text style={styles.categories_text}>{Cat}</Text>
       </View>
+
 
       <View style={styles.categoryMainDiv}>
         {data.map((data, i) => {

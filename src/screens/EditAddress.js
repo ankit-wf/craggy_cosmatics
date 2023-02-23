@@ -68,7 +68,7 @@ const EditAddress = ({ navigation }) => {
 
                             <View key={i}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                                    <View style={{ width: '45%', height: 40 }}>
+                                    <View style={{ width: '45%' }}>
                                         <Controller
                                             control={control}
                                             rules={{

@@ -1,14 +1,16 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView, SafeAreaView, Button } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { RadioButton, Snackbar } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'
 import { submitActions } from '../store/dataSlice'
+import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const CheckOutScreen = ({ navigation, route }) => {
     const AddData = useSelector(state => state.userData.userAddress);
     const CartData = useSelector(state => state.cartData.cart);
     // console.log("ffff", AddData)
+    const [loading, setLoading] = useState(true);
     const [checked, setChecked] = useState('ok');
     // console.log("dddddd", checked)
     const Tm = route.params.Tm;
@@ -27,7 +29,20 @@ const CheckOutScreen = ({ navigation, route }) => {
         setVisible(false);
     }
 
-    let dataa = "Order Place  " + "₹" + JSON.stringify(Tm)
+    let widthS = "Order Place  " + "₹" + JSON.stringify(Tm + fee)
+    let widthOutS = "Order Place  " + "₹" + JSON.stringify(Tm)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000);
+    }, [])
+
+
+    // {fee == 50 ?
+    //     <Text style={styles.pay_text}>₹{Tm + fee}</Text>
+    //     : <Text style={styles.pay_text}>₹{Tm}</Text>
+    // }
 
     // const addOne = (id, quant) => {
     //     dispatch(submitActions.quantity(
@@ -73,38 +88,47 @@ const CheckOutScreen = ({ navigation, route }) => {
         <View>
             <ScrollView>
                 <SafeAreaView>
-                    <View style={styles.total_priceRoot}>
-                        <Text style={styles.total_text}>Total</Text>
-                        {fee == 50 ?
-                            <Text style={styles.total_price}>₹{Tm + fee}</Text>
-                            : <Text style={styles.total_price}>₹{Tm}</Text>
-                        }
-                    </View>
+                    <SkeletonContainer isLoading={loading}>
+                        <View style={styles.total_priceRoot}>
+                            <Text style={styles.total_text}>Total</Text>
+                            {fee ?
+                                <Text style={styles.total_price}>₹{Tm + fee}</Text>
+                                : <Text style={styles.total_price}>₹{Tm}</Text>
+                            }
+                        </View>
+                    </SkeletonContainer>
                     {/* <View style={styles.user_nameRoot} >
                         <Text style={styles.user_nameRoot_text}>
                             Hi {AddData[0].firstname} {AddData[0].Lastname}, Welcome to Craggy
                         </Text>
                     </View> */}
                     <View style={styles.address_root} >
-                        <Text style={styles.delivert_address_text}>Delivery Address</Text>
-                        <View style={styles.user_adrdress_root}>
-                            <View style={styles.user_name_default_root}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={styles.user_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
+                        <SkeletonContainer isLoading={loading}>
+                            <Text style={styles.delivert_address_text}>Delivery Address</Text>
+                        </SkeletonContainer>
+                        <SkeletonContainer isLoading={loading}>
+                            <View style={styles.user_adrdress_root}>
+                                <View style={styles.user_name_default_root}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Text style={styles.user_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
+                                    </View>
+                                    <TouchableOpacity style={styles.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
+                                        <Text style={{ color: '#fff' }}>Edit</Text>
+                                    </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity style={styles.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
-                                    <Text style={{ color: '#fff' }}>Edit</Text>
-                                </TouchableOpacity>
+                                <View style={styles.user_address_text_root}>
+                                    <Text style={styles.user_address_text}>{AddData[0].flate}, {AddData[0].Apartment}, {AddData[0].City}, {AddData[0].State} {AddData[0].Pincode}</Text>
+                                    <Text style={styles.user_phone}> {AddData[0].phone} </Text>
+                                </View>
                             </View>
-                            <View style={styles.user_address_text_root}>
-                                <Text style={styles.user_address_text}>{AddData[0].flate}, {AddData[0].Apartment}, {AddData[0].City}, {AddData[0].State} {AddData[0].Pincode}</Text>
-                                <Text style={styles.user_phone}> {AddData[0].phone} </Text>
-                            </View>
+                        </SkeletonContainer>
+                    </View>
+
+                    <SkeletonContainer isLoading={loading}>
+                        <View style={styles.order_summary_root}>
+                            <Text style={styles.order_summary_text} >Order Summary ({CartData.length} Item)</Text>
                         </View>
-                    </View>
-                    <View style={styles.order_summary_root}>
-                        <Text style={styles.order_summary_text} >Order Summary ({CartData.length} Item)</Text>
-                    </View>
+                    </SkeletonContainer>
 
                     {CartData.map((i, e) => {
                         return (
@@ -114,122 +138,135 @@ const CheckOutScreen = ({ navigation, route }) => {
                                         onPress={() => navigation.navigate("Product", i.categoriesDetail_id)}
                                         style={styles.dataImgRoot}
                                     >
-                                        <Image source={{ uri: i.images }} style={styles.dataImg} />
+                                        <SkeletonContainer isLoading={loading}>
+                                            <Image source={{ uri: i.images }} style={styles.dataImg} />
+                                        </SkeletonContainer>
                                     </TouchableOpacity>
 
-                                    <View style={styles.textRoot} >
-                                        <Text numberOfLines={2} style={styles.textDescription}>{i.description}</Text>
-                                    </View>
+                                    <SkeletonContainer isLoading={loading}>
+                                        <View style={styles.textRoot} >
+                                            <Text numberOfLines={2} style={styles.textDescription}>{i.description}</Text>
+                                        </View>
+                                    </SkeletonContainer>
 
                                     <View>
                                         <View style={styles.blank_div}></View>
 
-                                        <View style={styles.buttonRoot}>
-                                            {/* <TouchableOpacity onPress={() => subOne(e, i.quantity)} style={(i.quantity < 1) ? styles.blackButton : styles.whiteButton} >
+                                        <SkeletonContainer isLoading={loading}>
+                                            <View style={styles.buttonRoot}>
+                                                {/* <TouchableOpacity onPress={() => subOne(e, i.quantity)} style={(i.quantity < 1) ? styles.blackButton : styles.whiteButton} >
                                                 <Text style={styles.blackText}>-</Text>
                                             </TouchableOpacity> */}
-                                            <Text style={{ fontSize: 12, fontWeight: '700' }} >Qnty</Text>
-                                            <Text style={{ fontSize: 12, fontWeight: '700' }} >:</Text>
-                                            <Text style={styles.blackText}>{i.quantity}</Text>
+                                                <Text style={{ fontSize: 12, fontWeight: '700' }} >Qnty</Text>
+                                                <Text style={{ fontSize: 12, fontWeight: '700' }} >:</Text>
+                                                <Text style={styles.blackText}>{i.quantity}</Text>
 
-                                            {/* 
+                                                {/* 
                                             <TouchableOpacity onPress={() => addOne(e, i.quantity)} style={(i.quantity >= 1) ? styles.blackButton : styles.whiteButton} >
                                                 <Text style={(i.quantity >= 1) ? styles.whiteText : styles.blackText} >+</Text>
                                             </TouchableOpacity> */}
+                                            </View>
+                                        </SkeletonContainer>
+                                    </View>
+                                    <SkeletonContainer isLoading={loading}>
+                                        <View style={styles.textPriceRoot} key={e}>
+                                            <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
+                                            <Text style={styles.slace} > / </Text>
+                                            <Text style={styles.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
                                         </View>
-                                    </View>
-
-                                    <View style={styles.textPriceRoot} key={e}>
-                                        <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
-                                        <Text style={styles.slace} > / </Text>
-                                        <Text style={styles.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
-                                    </View>
-
+                                    </SkeletonContainer>
                                 </View>
                             </View>
                         )
                     })}
 
-                    <View style={styles.order_summary_root}>
-                        <Text style={styles.order_summary_text} >Price Summary </Text>
-                    </View>
-
-                    <View style={styles.totalRoot}>
-                        <View style={styles.to_pay_root}>
-                            <View style={styles.inner_pay_root}>
-                                <Text style={styles.pay_text}>Order Total</Text>
-
-                                <Text style={styles.pay_text}>₹{totalOldAmount()}</Text>
-                            </View>
+                    <SkeletonContainer isLoading={loading}>
+                        <View style={styles.order_summary_root}>
+                            <Text style={styles.order_summary_text} >Price Summary </Text>
                         </View>
+                    </SkeletonContainer>
+                    <View style={styles.totalRoot}>
+                        <SkeletonContainer isLoading={loading}>
+                            <View style={styles.to_pay_root}>
+                                <View style={styles.inner_pay_root}>
+                                    <Text style={styles.pay_text}>Order Total</Text>
+
+                                    <Text style={styles.pay_text}>₹{totalOldAmount()}</Text>
+                                </View>
+                            </View>
+                        </SkeletonContainer>
                         {/* <View style={styles.subtotalRoot}>
                             <Text style={styles.subtotal}>Order Total</Text>
                             <Text styles={styles.total}>₹{totaloldPrice.current}</Text>
                         </View> */}
 
-                        <View style={styles.to_pay_root}>
-                            <View style={styles.inner_pay_root}>
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={styles.pay_text}>Shipping</Text>
-                                    <TouchableOpacity style={{ marginLeft: "5%", marginTop: '19%' }}>
-                                        <Ionicons
-                                            name="information-circle-outline"
-                                            color={'blue'}
-                                            size={18}
-                                            onPress={onToggleSnackBar}
-                                        />
-                                    </TouchableOpacity>
+                        <SkeletonContainer isLoading={loading}>
+                            <View style={styles.to_pay_root}>
+                                <View style={styles.inner_pay_root}>
+                                    <View style={{ flexDirection: 'row', }}>
+                                        <Text style={styles.pay_text}>Shipping</Text>
+                                        <TouchableOpacity style={{ marginLeft: "5%", marginTop: '19%' }}>
+                                            <Ionicons
+                                                name="information-circle-outline"
+                                                color={'blue'}
+                                                size={18}
+                                                onPress={onToggleSnackBar}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                    {Tp < 499 ?
+                                        <Text style={styles.pay_text}>₹{fee}</Text> :
+                                        <Text style={styles.pay_text}>Free</Text>
+                                    }
                                 </View>
-                                {Tp < 499 ?
-                                    <Text style={styles.pay_text}>₹{fee}</Text> :
-                                    <Text style={styles.pay_text}>Free</Text>
-                                }
                             </View>
-                        </View>
+                        </SkeletonContainer>
+                        <SkeletonContainer isLoading={loading}>
+                            <View style={styles.to_pay_root}>
+                                <View style={styles.inner_pay_root}>
+                                    <Text style={styles.pay_text}>Promo Discount</Text>
 
+                                    <Text style={styles.pay_text}>n/a</Text>
+                                </View>
+                            </View>
+                        </SkeletonContainer>
+                    </View>
+                    <SkeletonContainer isLoading={loading}>
                         <View style={styles.to_pay_root}>
                             <View style={styles.inner_pay_root}>
-                                <Text style={styles.pay_text}>Promo Discount</Text>
-
-                                <Text style={styles.pay_text}>n/a</Text>
+                                <Text style={styles.pay_text}>To Pay</Text>
+                                {fee ?
+                                    <Text style={styles.pay_text}>₹{Tm + fee}</Text>
+                                    : <Text style={styles.pay_text}>₹{Tm}</Text>
+                                }
+                                {/* <Text style={styles.pay_text}>₹{totalAmount()}</Text> */}
                             </View>
                         </View>
-                    </View>
+                    </SkeletonContainer>
 
+                    <SkeletonContainer isLoading={loading}>
+                        <View style={styles.RadioButtonRoot}>
+                            <Text style={styles.other_option}>Other Options</Text>
 
+                            <View style={styles.btnTextRoot}>
+                                <Text style={styles.select_text}>Cash On Delivery</Text>
+                                <RadioButton
+                                    value="first"
+                                    status={checked === 'first' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('first')}
+                                />
+                            </View>
 
-
-
-                    <View style={styles.to_pay_root}>
-                        <View style={styles.inner_pay_root}>
-                            <Text style={styles.pay_text}>To Pay</Text>
-                            {fee == 50 ?
-                                <Text style={styles.pay_text}>₹{Tm + fee}</Text>
-                                : <Text style={styles.pay_text}>₹{Tm}</Text>
-                            }
-                            {/* <Text style={styles.pay_text}>₹{totalAmount()}</Text> */}
+                            <View style={styles.btnTextRoot}>
+                                <Text style={styles.select_text}>Pay-U Money</Text>
+                                <RadioButton
+                                    value="second"
+                                    status={checked === 'second' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('second')}
+                                />
+                            </View>
                         </View>
-                    </View>
-
-                    <View style={styles.RadioButtonRoot}>
-                        <Text style={styles.other_option}>Other Options</Text>
-                        <View style={styles.btnTextRoot}>
-                            <Text style={styles.select_text}>Cash On Delivery</Text>
-                            <RadioButton
-                                value="first"
-                                status={checked === 'first' ? 'checked' : 'unchecked'}
-                                onPress={() => setChecked('first')}
-                            />
-                        </View>
-                        <View style={styles.btnTextRoot}>
-                            <Text style={styles.select_text}>Pay-U Money</Text>
-                            <RadioButton
-                                value="second"
-                                status={checked === 'second' ? 'checked' : 'unchecked'}
-                                onPress={() => setChecked('second')}
-                            />
-                        </View>
-                    </View>
+                    </SkeletonContainer>
 
                 </SafeAreaView>
             </ScrollView>
@@ -241,17 +278,20 @@ const CheckOutScreen = ({ navigation, route }) => {
             >
                 <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
             </Snackbar>
-            <View style={styles.sticky_Btn}>
-                <View style={styles.bottomView} >
-                    <View style={styles.inner_bottomView}>
 
-                        <Button
-                            title={dataa}
+            <SkeletonContainer isLoading={loading}>
+                <View style={styles.sticky_Btn}>
+                    <View style={styles.bottomView} >
+                        <View style={styles.inner_bottomView}>
+                            {fee ?
+                                <Button title={widthS} />
+                                : <Button title={widthOutS} />
+                            }
 
-                        />
+                        </View>
                     </View>
                 </View>
-            </View>
+            </SkeletonContainer>
 
         </View >
     )
@@ -325,7 +365,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         borderColor: '#DDDDDD',
-        marginBottom: '5%'
+        marginBottom: '5%',
+        marginTop: 5
     },
     user_name_default_root: {
         width: '90%',
@@ -368,7 +409,7 @@ const styles = StyleSheet.create({
         // borderBottomWidth: 1,
         // borderBottomColor: '#DDDDDD',
         backgroundColor: '#fff',
-        marginTop: '2%',
+        marginTop: '1%',
         justifyContent: 'center',
     },
     order_summary_text: {
@@ -540,9 +581,9 @@ const styles = StyleSheet.create({
     },
     textPriceRoot: {
         height: 35,
-        width: '50%',
+        width: '40%',
         flexDirection: 'row',
-        marginLeft: '-72.5%',
+        marginLeft: '-75%',
         marginTop: '16%'
 
     },
