@@ -11,6 +11,7 @@ import { ScrollView } from 'react-native-virtualized-view';
 import BottomSheet from 'react-native-gesture-bottom-sheet'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { RadioButton } from 'react-native-paper'
+import SocialIcon from '../components/SocialIcon'
 const bannerImg = require('../../Data/bannerSlider.json')
 
 const ProductListingScreen = ({ navigation, route }) => {
@@ -241,6 +242,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                         numColumns={2}
                         keyExtractor={(item, index) => index}
                     />
+                    <SocialIcon />
                 </View>
             </ScrollView >
         </View>

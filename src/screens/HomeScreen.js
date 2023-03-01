@@ -15,6 +15,7 @@ import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/responsiveStyle'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import SocialIcon from '../components/SocialIcon'
 const bannerImg = require('../../Data/bannerSlider.json')
 const latestProductImg = require('../../Data/latestProduct.json')
 

@@ -31,7 +31,39 @@ const ProductDetailScreen = ({ navigation, route }) => {
     // const idd = route.params;
     useEffect(() => {
         Single_Product();
+
+        const handleDeepLink = () => {
+            // console.log('url', url)
+            let url = 'myapp://HomeScreen'
+            if (url && url.startsWith('myapp://HomeScreen')) {
+                navigation.navigate('HomeScreen');
+            }
+        };
+
+        handleDeepLink();
+
+        Linking.addEventListener('url', ({ url }) => handleDeepLink(url));
+
+        return () => {
+            remove('url', ({ url }) => handleDeepLink(url));
+        };
+
     }, [id])
+
+    // useEffect(() => {
+    //     const handleDeepLink = (url) => {
+    //         console.log('url', url)
+    //         if (url && url.startsWith('myapp://HomeScreen')) {
+    //             navigation.navigate('HomeScreen');
+    //         }
+    //     };
+
+    //     Linking.addEventListener('url', ({ url }) => handleDeepLink(url));
+
+    //     return () => {
+    //         // Linking.removeEventListener('url', ({ url }) => handleDeepLink(url));
+    //     };
+    // }, []);
 
     const Single_Product = () => {
         axios.get(`https://craggycosmetic.com/api/products/`,
