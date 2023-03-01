@@ -137,8 +137,10 @@ const LoginScreen = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={styles.loginBottom}>
-                    <Text style={styles.needHelpBottom}>Need Help?</Text>
-                    <TouchableOpacity><Text style={styles.contactUsBottom}> Contact us</Text></TouchableOpacity>
+                    <Text style={styles.needHelpBottom}>Don't have an account ?</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("signup")}>
+                        <Text style={styles.contactUsBottom}> SignUp</Text>
+                    </TouchableOpacity>
                 </View>
             </ImageBackground>
         </View>

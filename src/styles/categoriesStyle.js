@@ -4,9 +4,9 @@ import { StyleSheet } from "react-native";
 export const categoriesStyle = StyleSheet.create({
     categoriesRoot: {
         height: 150,
+        width: "100%",
         backgroundColor: '#050505',
         flexDirection: 'row',
-        width: "100%",
         alignContent: 'center',
         justifyContent: 'space-around'
     },

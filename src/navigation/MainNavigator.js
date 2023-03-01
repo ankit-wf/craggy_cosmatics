@@ -12,7 +12,6 @@ import MyProfileScreen from '../screens/MyProfileScreen';
 import AddressesScreen from '../screens/AddressesScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
 import CoupanOfferScreen from '../screens/CoupanOfferScreen';
-import ViewAllBestsellers from '../screens/ViewAllBestsellers';
 import ViewAllLatestProduct from '../screens/ViewAllLatestProduct';
 import ViewProduct from '../screens/ViewProduct'
 import WriteReview from '../screens/WriteReview';
@@ -38,7 +37,7 @@ const Stack = createStackNavigator();
 
 const MainNavigator = () => {
   const gs = useStyles();
-  const BadgeData = useSelector(state => state.cartData.cart);
+  const cart = useSelector(state => state.cartData.cart);
 
 
   return (
@@ -54,16 +53,15 @@ const MainNavigator = () => {
         // headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
         headerRight: () => (
           <View style={gs.headerNotification}>
-            {BadgeData.length > 0 ?
-              <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }}>
-                <Ionicons name='cart-outline' color='#CC933B' size={25} />
-                <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}><Text style={{ color: '#000' }}>{BadgeData.length}</Text></Badge>
-              </TouchableOpacity>
-              :
-              <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }} >
-                <Ionicons name='cart-outline' color='#CC933B' size={25} />
-              </TouchableOpacity>
-            }
+            <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }}>
+              <Ionicons name='cart-outline' color='#CC933B' size={25} />
+              {cart.length > 0 ?
+                <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}>
+                  <Text style={{ color: '#000' }}>{cart.length}</Text></Badge>
+                : ""
+              }
+            </TouchableOpacity>
+
             {/* <TouchableOpacity onPress={() => navigation.navigate('NotificationScreen')}>
               <Ionicons name="notifications-outline" color='#CC933B' size={20} style={{ marginRight: 10 }} />
             </TouchableOpacity>
@@ -89,8 +87,7 @@ const MainNavigator = () => {
       <Stack.Screen name='my_profile' component={MyProfileScreen} options={{ headerShown: true, headerTitle: "MY PROFILE" }} />
       <Stack.Screen name='Addresses' component={AddressesScreen} options={{ headerShown: true, headerTitle: 'ADDRESS' }} />
       <Stack.Screen name='offers' component={ReviewsScreen} options={{ headerShown: true, headerTitle: 'REVIEWS' }} />
-      <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'OFFERS AND COUPAN' }} />
-      <Stack.Screen name='AllBestseller' component={ViewAllBestsellers} options={{ headerShown: true, headerTitle: 'Bestsellers' }} />
+      <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'Apply Offers', headerShadowVisible: false }} />
       <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} />
       <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerTitle: 'All Product' }} />
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />

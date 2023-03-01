@@ -40,7 +40,7 @@ const AddAddress = ({ navigation }) => {
             <View style={styles.root_container}>
                 <ScrollView>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                        <View style={{ width: '45%' }}>
+                        <View style={{ width: '45%', height: 40 }}>
                             <Controller
                                 control={control}
                                 rules={{
@@ -57,7 +57,7 @@ const AddAddress = ({ navigation }) => {
                                         autoCompleteType="firstname"
                                         textContentType="firstname"
                                         keyboardType="text"
-                                        State style={{ height: 40 }}
+                                        style={styles.firstname_text}
                                     />
                                 )}
                                 name="firstname"
@@ -82,7 +82,7 @@ const AddAddress = ({ navigation }) => {
                                         autoCompleteType="Lastname"
                                         textContentType="Lastname"
                                         keyboardType="text"
-                                        style={{ height: 40 }}
+                                        style={styles.firstname_text}
                                     />
                                 )}
                                 name="Lastname"
@@ -109,7 +109,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCompleteType="phone"
                                     textContentType="phone"
                                     keyboardType="numeric"
-                                    style={{ height: 40 }}
+                                    style={styles.firstname_text}
                                 />
                             )}
                             name="phone"
@@ -134,7 +134,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="flate"
                                     textContentType="flate"
-                                    style={{ height: 40 }}
+                                    style={styles.firstname_text}
                                 />
                             )}
                             name="flate"
@@ -159,7 +159,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="Apartment"
                                     textContentType="Apartment"
-                                    style={{ height: 40 }}
+                                    style={styles.firstname_text}
                                 />
                             )}
                             name="Apartment"
@@ -184,7 +184,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="Pincode"
                                     keyboardType="numeric"
-                                    style={{ height: 40 }}
+                                    style={styles.firstname_text}
                                 />
                             )}
                             name="Pincode"
@@ -209,7 +209,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="State"
                                     textContentType="State"
-                                    style={{ height: 40 }}
+                                    style={styles.firstname_text}
                                 />
                             )}
                             name="State"
@@ -234,7 +234,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="City"
                                     textContentType="City"
-                                    style={{ height: 40 }}
+                                    style={styles.firstname_text}
                                 />
                             )}
                             name="City"
@@ -279,5 +279,13 @@ const styles = StyleSheet.create({
         color: '#fff',
         alignSelf: 'center',
         fontSize: 16
+    },
+    firstname_text: {
+        // height: 40,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderBottomWidth: 0,
+        padding: 0,
     }
 })

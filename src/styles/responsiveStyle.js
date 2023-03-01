@@ -6,7 +6,7 @@ export const useStyles = CreateResponsiveStyle(
         wrapper: {},
 
         headerN: {
-            paddingTop: 30,
+            paddingTop: 10,
             paddingBottom: 20,
             backgroundColor: '#000',
         },
@@ -20,6 +20,11 @@ export const useStyles = CreateResponsiveStyle(
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
+        },
+        headerLogo: {
+            width: 115,
+            height: 30,
+            marginLeft: 1,
         },
         container: {
             // paddingLeft: 20,
@@ -370,7 +375,8 @@ export const useStyles = CreateResponsiveStyle(
             color: '#666666'
         },
         promiseOuterRoot: {
-            paddingBottom: 160,
+            paddingBottom: 90,
+            // paddingBottom: 160,
         },
         group115Root: {
             flexDirection: 'row',
@@ -413,6 +419,21 @@ export const useStyles = CreateResponsiveStyle(
         swiperRoot: {
             height: 350,
             position: 'relative',
+        },
+        Snackbar_style: {
+            width: "65%",
+            height: 55,
+            alignSelf: 'center',
+            position: 'absolute',
+            zIndex: 3,
+            bottom: 250,
+            opacity: 0.7
+        },
+        Snackbar_text: {
+            color: '#fff',
+            fontSize: 14,
+            lineHeight: 15,
+            textAlign: 'center'
         },
 
         header: {
@@ -464,19 +485,21 @@ export const useStyles = CreateResponsiveStyle(
 
         viewLatestProduct: {
             height: 25,
-            width: 70,
+            width: 80,
             borderRadius: 15,
             borderWidth: 1,
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: 10,
             marginRight: 20,
-            alignSelf: 'center'
+            alignSelf: 'center',
+            flexDirection: 'row'
         },
         latestProductText: {
             fontSize: 12,
             lineHeight: 14.09,
             fontWeight: '600',
+            paddingLeft: 5
         },
         latestProductImg: {
             marginLeft: 60
@@ -524,16 +547,19 @@ export const useStyles = CreateResponsiveStyle(
         categoryMainDiv: {
             // paddingTop: 30,
             // backgroundColor: '#f2f2f2',
-            height: 95,
+            height: "100%",
         },
 
         categories_root: {
-            display: 'flex',
-            padding: 10,
-            paddingTop: 30,
-            justifyContent: 'center',
-            alignItems: 'center',
+            // display: 'flex',
+            // padding: 10,
+            // paddingTop: 10,
+            // justifyContent: 'center',
+            // alignItems: 'center',
             backgroundColor: '#fff',
+            height: 80,
+            justifyContent: 'center',
+            alignSelf: 'center'
         },
         catMainSec: {
             position: 'relative',
@@ -541,7 +567,7 @@ export const useStyles = CreateResponsiveStyle(
             // marginTop: 20
         },
         categories_text: {
-            fontSize: 20,
+            fontSize: 22,
             color: '#222222',
             fontWeight: '700',
         },
@@ -551,7 +577,6 @@ export const useStyles = CreateResponsiveStyle(
         },
         mens_text: {
             fontSize: 18,
-
             color: '#222222',
             textTransform: 'capitalize',
             fontWeight: '700',

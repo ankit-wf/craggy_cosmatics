@@ -280,7 +280,7 @@ const AccountScreen = ({ navigation }) => {
 export default AccountScreen;
 const styles = StyleSheet.create({
   Root: {
-    height: 320,
+    height: 270,
     // backgroundColor: 'black',
     // position: 'relative'
   },
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     width: "80%",
     // borderRadius: 50,
     alignSelf: 'center',
-    marginVertical: '18%',
+    marginVertical: '7%',
     marginHorizontal: '10%',
     flexDirection: 'row'
   },
