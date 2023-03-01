@@ -8,7 +8,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
 import { useStyles } from '../styles/responsiveStyle';
 import { Ionicons } from '@expo/vector-icons'
-const otp = require("../../Data/otp.json")
 import BackButton from '../components/BackButton';
 
 const SignupOtpScreen = ({ navigation }) => {

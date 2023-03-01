@@ -9,7 +9,18 @@ import { PersistGate } from "redux-persist/integration/react";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { View } from 'react-native';
-import SkeletonTestScreen from './src/screens/SkeletonTestScreen';
+import LinkingTest from './LinkingTest';
+import * as Linking from 'expo-linking';
+
+
+const linking = {
+  prefixes: [Linking.makeUrl('/')],
+  config: {
+    screens: {
+      Product: 'product/:productId',
+    },
+  },
+};
 
 
 export default function App() {
@@ -48,7 +59,7 @@ export default function App() {
 
 
   return (
-    <NavigationContainer >
+    <NavigationContainer linking={linking} >
       <StatusBar />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -58,7 +69,7 @@ export default function App() {
     </NavigationContainer >
 
     // <View>
-    //   <SkeletonTestScreen />
+    //   <LinkingTest />
     // </View>
 
   );

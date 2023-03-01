@@ -12,12 +12,6 @@ const CheckOutScreen = ({ navigation, route }) => {
                 <Text style={styles.total_text}>Total</Text>
                 <Text style={styles.total_price}>₹{Tm}</Text>
             </View>
-
-            <View style={{ borderWidth: 1, borderRadius: 1, height: 80, marginTop: '5%', }} >
-
-            </View>
-
-
             <View style={styles.RadioButtonRoot}>
                 <Text style={styles.other_option}>Other Options</Text>
                 <View style={styles.btnTextRoot}>

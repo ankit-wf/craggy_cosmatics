@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons'
 import BottomSheet from 'react-native-gesture-bottom-sheet'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { RadioButton } from 'react-native-paper'
+import SocialIcon from '../components/SocialIcon'
 const bannerImg = require('../../Data/bannerSlider.json')
 
 const ProductListingScreen = ({ navigation, route }) => {
@@ -46,36 +47,50 @@ const ProductListingScreen = ({ navigation, route }) => {
         })
     }, [id])
 
-    const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price) => {
-        let Data = [...storeData, {
-            description: product_title,
-            categoriesDetail_id: product_id,
-            images: image,
-            price: regular_price,
-            oldprice: sale_price,
-            quantity: 1
-        }];
+    const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
 
-        dispatch(submitActions.price(
-            {
-                cart: Data
+        if (storeData.length !== 0) {
+            let ss = false;
+            storeData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
+                setVisible(!visible);
             }
-        ));
-        navigation.navigate('Cart', product_id);
-    }
-
-    const onScrollHandle = (event) => {
-        const offsetY = event.nativeEvent.contentOffset.y;
-        if (offsetY > 265) {
-            navigation.setParams({ offsetYvalue: offsetY });
-        } else {
-            navigation.setParams({ offsetYvalue: 0 });
+            else {
+                let Data = [...storeData, {
+                    description: description,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    oldprice: regular_price,
+                    price: sale_price,
+                    quantity: 1
+                }];
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("Cart");
+            }
         }
+        else {
+            let Data = [...storeData, {
+                description: description,
+                categoriesDetail_id: product_id,
+                images: image,
+                oldprice: regular_price,
+                price: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("Cart");
+        }
+
     }
 
     return (
         <View>
-            <ScrollView onScroll={onScrollHandle} >
+            <ScrollView >
                 <SkeletonContainer isLoading={loading}>
                     <View style={styles.swiperRoot}>
                         <Swiper style={styles.wrapper}  >
@@ -185,7 +200,7 @@ const ProductListingScreen = ({ navigation, route }) => {
 
                                     {/*  Buy Now Button  */}
                                     <TouchableOpacity style={sS.buyNowButton}
-                                        onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                        onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                     >
                                         <Text style={sS.buttonText}>BUY NOW</Text>
                                     </TouchableOpacity>
@@ -196,6 +211,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                         numColumns={2}
                         keyExtractor={(item, index) => index}
                     />
+                    <SocialIcon />
                 </View>
             </ScrollView >
         </View>

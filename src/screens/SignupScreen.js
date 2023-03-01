@@ -6,11 +6,13 @@ import { useDispatch, useSelector, } from 'react-redux';
 import { loginActions } from '../store/UserSlice';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
-import Checkbox from 'expo-checkbox';
 import { useStyles } from '../styles/responsiveStyle';
 import BackButton from '../components/BackButton';
+import useMailer from '../utilFunctions/useMailer';
+import { otpTemp } from '../../Data/mailTemplate/Mailer';
 
 const SignupScreen = ({ navigation }) => {
+    const otpTemplate = otpTemp();
     const styles = useStyles()
     // const [isChecked, setChecked] = useState(false);
     // const dispatch = useDispatch();
@@ -31,15 +33,13 @@ const SignupScreen = ({ navigation }) => {
     })
 
     const onSubmit = (data) => {
-        // console.log("dataaaaaaaaaaaaa", data);
-        navigation.navigate('SignupOtpScreen')
-        reset();
-    }
-    const skipHandler = () => {
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'HomeScreen' }],
-        });
+
+        useMailer({ to: data.email, from: "moneymakkar@gmail.com", sub: otpTemplate.sub, body: otpTemplate.body })
+
+        // console.log("cccccc ", otpTemplate)
+        // navigation.navigate('SignupOtpScreen')
+        // reset();
+
     }
 
     return (

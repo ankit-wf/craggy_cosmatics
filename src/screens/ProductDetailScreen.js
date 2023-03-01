@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
+import * as Linking from 'expo-linking';
 
 const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -28,7 +29,39 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
     useEffect(() => {
         Single_Product();
+
+        const handleDeepLink = () => {
+            // console.log('url', url)
+            let url = 'myapp://HomeScreen'
+            if (url && url.startsWith('myapp://HomeScreen')) {
+                navigation.navigate('HomeScreen');
+            }
+        };
+
+        handleDeepLink();
+
+        Linking.addEventListener('url', ({ url }) => handleDeepLink(url));
+
+        return () => {
+            remove('url', ({ url }) => handleDeepLink(url));
+        };
+
     }, [id])
+
+    // useEffect(() => {
+    //     const handleDeepLink = (url) => {
+    //         console.log('url', url)
+    //         if (url && url.startsWith('myapp://HomeScreen')) {
+    //             navigation.navigate('HomeScreen');
+    //         }
+    //     };
+
+    //     Linking.addEventListener('url', ({ url }) => handleDeepLink(url));
+
+    //     return () => {
+    //         // Linking.removeEventListener('url', ({ url }) => handleDeepLink(url));
+    //     };
+    // }, []);
 
     const Single_Product = () => {
         axios.get(`https://craggycosmetic.com/api/products/`,
