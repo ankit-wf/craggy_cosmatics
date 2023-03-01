@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import ImageView from "react-native-image-viewing"
 
 const ProductDetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
-    const [data, setData] = useState([])
+    const [singleProduct, setSingleProduct] = useState([])
+    const [isVisible, setIsVisible] = useState(false);
     // console.log("wwwwwww", data)
     const [loading, setLoading] = useState(true);
     const [heart, setHeart] = useState(false);
@@ -43,10 +45,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 }
             }
         ).then((res) => {
-            setData(res.data)
+            setSingleProduct(res.data)
             setTimeout(() => {
                 setLoading(false);
-            }, 5000);
+            }, 2000);
         })
     }
 
@@ -116,6 +118,17 @@ const ProductDetailScreen = ({ navigation, route }) => {
         setHeart(!heart);
     }
 
+    const images = [
+        {
+            uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+        },
+        {
+            uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
+        },
+        {
+            uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
+        },
+    ];
     return (
         <View>
             <SafeAreaView style={styles.safe_root}>
@@ -127,7 +140,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 >
                     <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
                 </Snackbar>
-                {data.map((data, i) => {
+                {singleProduct.map((data, i) => {
+
                     return (
                         <SkeletonContainer isLoading={loading} key={i}>
                             <View style={styles.sticky_Btn} key={i}>
@@ -147,17 +161,42 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     )
                 })}
                 <ScrollView>
-                    {data.map((data, index) => {
+                    {singleProduct.map((data, i) => {
+                        console.log("gallery_images", data)
+                        let gaelleryImg = data.gallery_images;
                         return (
-                            <View key={index}>
+                            <View key={i}>
                                 <View style={styles.swiperRoot}>
-                                    <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }}>
-                                        <View key={index}>
-                                            <SkeletonContainer isLoading={loading} key={index}>
-                                                <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
-                                            </SkeletonContainer>
-                                        </View>
+                                    <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }} style={styles.wrapper} >
+                                        {gaelleryImg.map((i, e) => {
+                                            return (
+                                                <View key={e}>
+                                                    {/* <SkeletonContainer isLoading={loading} key={index}> */}
+                                                    <TouchableOpacity onPress={() => setIsVisible(true)}>
+                                                        <Image source={{ uri: i }} style={{ height: '100%', width: '100%' }} />
+                                                    </TouchableOpacity>
+                                                    {/* </SkeletonContainer> */}
+                                                </View>
+                                            )
+                                        })}
                                     </Swiper>
+                                    {/* <ImageView
+                                        images={images}
+                                        imageIndex={0}
+                                        visible={isVisible}
+                                        onRequestClose={() => setIsVisible(false)}
+                                    /> */}
+                                    {/* {gaelleryImg.map((item, k) => {
+                                        return (
+                                            <ImageView
+                                                images={item}
+                                                imageIndex={0}
+                                                visible={isVisible}
+                                                onRequestClose={() => setIsVisible(false)}
+                                            />
+                                        )
+                                    })} */}
+
                                     <SkeletonContainer isLoading={loading} >
                                         <View style={styles.shadow_Box} elevation={7}>
                                             <TouchableOpacity
@@ -184,7 +223,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
 
                                 <View style={styles.CraggyTextRoot}>
-                                    <SkeletonContainer isLoading={loading} key={index} >
+                                    <SkeletonContainer isLoading={loading} key={i} >
                                         <View style={styles.textRoot}>
                                             <Text style={styles.craggyText}>{data.product_title}</Text>
                                         </View>
@@ -197,7 +236,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
                                         </SkeletonContainer>
                                     </View>
-                                    <SkeletonContainer isLoading={loading} key={index} >
+                                    <SkeletonContainer isLoading={loading} key={i} >
                                         <View style={styles.li_text_root} >
                                             <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
 
@@ -377,6 +416,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignSelf: 'center',
     },
+    wrapper: {},
     swiperRoot: {
         height: 400,
         position: 'relative'

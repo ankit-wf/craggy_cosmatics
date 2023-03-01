@@ -8,17 +8,21 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
 import { useStyles } from '../styles/responsiveStyle';
 import { Ionicons } from '@expo/vector-icons'
-const otp = require("../../Data/otp.json")
 import BackButton from '../components/BackButton';
+import axios from 'axios';
 
-const SignupOtpScreen = ({ navigation }) => {
+const SignupOtpScreen = ({ navigation, route }) => {
+
+    const email = route.params.email;
     const styles = useStyles()
     // const [isChecked, setChecked] = useState(false);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const logindata = useSelector(state => state.userData.user);
     // const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
     // const [login, setLogin] = useState(false)
     // const [passwordVisible, setPasswordVisible] = useState(true);
+    const otp = useSelector(state => state.userData.otp);
+    // console.log('topval', otp)
     const [value1, setValue1] = useState();
     const [value2, setValue2] = useState();
     const [value3, setValue3] = useState();
@@ -27,23 +31,87 @@ const SignupOtpScreen = ({ navigation }) => {
     const seconInput = useRef();
     const thirdInput = useRef();
     const fourthInput = useRef();
+    const [seconds, setSeconds] = useState(15);
 
     const otpInput = (value1 + value2 + value3 + value4)
     // console.log('otp', otp.otp)
     // console.log('otpInput', otpInput)
 
-
     const verifyHandler = () => {
-        if (otpInput == otp.otp) {
-            // navigation.reset({
-            //     index: 0,
-            //     routes: [{ name: 'HomeScreen' }],
-            // });
-            alert("correct OTP");
+        if (otpInput == otp) {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'HomeScreen' }],
+            });
+            // alert("correct OTP");
         } else {
             alert("Incorrect OTP");
         }
+        // timeout()
     }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (seconds > 0) {
+                setSeconds(seconds - 1);
+            }
+
+        }, 1000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [seconds]);
+
+    const timeout = () => {
+        setTimeout(() => {
+            dispatch(loginActions.otp(
+                {
+                    otp: ''
+                }
+            ));
+            // Timeout Logic
+            console.log('otp expired')
+        }, (1000 * 60) * 10);
+    }
+
+    const onSubmit = () => {
+        var otpVal = Math.floor(1000 + Math.random() * 9000);
+        dispatch(loginActions.otp(
+            {
+                otp: otpVal
+            }
+        ));
+
+        axios({
+            method: 'post',
+            url: 'https://craggycosmetic.com/api/user/auth/',
+            data: {
+                to: email,
+                otp: otpVal
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629'
+            }
+        }).then((res) => {
+            console.log(res.status)
+            if (res.status === 200) {
+                setSeconds(15);
+            }
+            timeout()
+        })
+    }
+
+
+
+
+
+
+
+
+
+
 
     return (
         <View style={styles.rootContainter}>
@@ -57,7 +125,6 @@ const SignupOtpScreen = ({ navigation }) => {
                             <TextInput
                                 ref={firstInput}
                                 onChangeText={(text) => {
-
                                     if (text !== '') { seconInput.current.focus(), setValue1(text) }
                                 }}
                                 maxLength={1}
@@ -97,21 +164,45 @@ const SignupOtpScreen = ({ navigation }) => {
                             />
                         </View>
                     </View>
+                    <View >
+
+                        {seconds > 0 ?
+                            <View style={styles1.fill_root}>
+                                <View style={styles1.Fill_counter_root}>
+                                    <Text style={styles1.Fill_counter_text}> Timing Remaining: 00:{seconds}</Text>
+                                </View>
+                                <View style={styles1.fill_resend_root}>
+                                    <Text style={styles1.fill_resend_text}>Resend OTP</Text>
+                                </View>
+                            </View>
+                            :
+                            <View style={styles1.empty_root}>
+                                <View style={styles1.empty_counter_root}>
+
+                                </View>
+                                <View style={styles1.empty_resend_root}>
+                                    <TouchableOpacity onPress={onSubmit}>
+                                        <Text style={styles1.empty_resend_text}>Resend OTP</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        }
+                    </View>
                     <View style={styles.LoginButtong}>
                         <TouchableOpacity style={styles.buttonStyle} onPress={verifyHandler}>
                             <Title style={styles.LoginButtongTittle}>SAVE</Title>
                         </TouchableOpacity>
                     </View>
 
-                </View>
-            </ImageBackground>
-        </View>
+                </View >
+            </ImageBackground >
+        </View >
     )
 }
 
 export default SignupOtpScreen;
 
-const styles = StyleSheet.create({
+const styles1 = StyleSheet.create({
     borderStyleBase: {
         width: 30,
         height: 45
@@ -150,6 +241,51 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         textAlign: 'center',
         backgroundColor: '#f5f4f2',
+    },
+    fill_root: {
+        width: "100%",
+        flexDirection: 'row'
+    },
+    Fill_counter_root: {
+        width: "60%",
+        justifyContent: 'center',
+        alignItems: 'flex-start'
+    },
+    Fill_counter_text: {
+        color: 'grey',
+        textAlign: 'left'
+    },
+    fill_resend_root: {
+        width: "40%",
+        justifyContent: 'center',
+        alignItems: 'flex-end'
+    },
+    fill_resend_text: {
+        color: 'grey',
+        textAlign: 'right',
+        fontWeight: '600',
+        textDecorationLine: 'underline',
+        textDecorationColor: 'grey'
+    },
+    empty_root: {
+        width: "100%",
+        flexDirection: 'row'
+    },
+    empty_counter_root: {
+        width: "60%",
+        justifyContent: 'center',
+        alignItems: 'flex-end'
+    }, empty_resend_root: {
+        width: "40%",
+        justifyContent: 'center',
+        alignItems: 'flex-end'
+    },
+    empty_resend_text: {
+        color: 'blue',
+        textAlign: 'right',
+        fontWeight: '600',
+        textDecorationColor: 'blue',
+        textDecorationLine: 'underline'
     }
 });
 

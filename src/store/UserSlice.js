@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     isLoggedIn: false,
     user_data: {},
-    userAddress: []
+    userAddress: [],
+    otp: ''
 }
 const UserSlice = createSlice({
     name: "userData",
@@ -26,6 +27,10 @@ const UserSlice = createSlice({
         remove(state, action) {
             state.userAddress.splice(action.payload.index, 1);
         },
+        otp(state, action) {
+            state.otp = action.payload.otp;
+            // console.log('action', action)
+        }
     }
 
 })

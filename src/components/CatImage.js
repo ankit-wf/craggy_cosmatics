@@ -2,28 +2,28 @@
 const BackgroundImage = () => {
     let images = [
         {
-            name: 'hair',
+            cat_name: 'hair',
             image: require('../../assets/images/hair.png'),
         },
         {
-            name: 'for-mens',
+            cat_name: 'For Mens',
             image: require('../../assets/images/for-mens.png'),
         },
 
         {
-            name: 'hair-care',
+            cat_name: 'Hair Care',
             image: require('../../assets/images/hair-care.png'),
         },
         {
-            name: 'skin',
+            cat_name: 'Skin',
             image: require('../../assets/images/skin.png'),
         },
         {
-            name: 'hair-oil',
+            cat_name: 'Hair Oil',
             image: require('../../assets/images/hair-oil.png')
         },
         {
-            name: 'shampoo',
+            cat_name: 'Shampoo',
             image: require('../../assets/images/shampoo.png')
         }
     ];

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, Dimensions, FlatList, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Dimensions, FlatList, StyleSheet, ScrollView } from 'react-native'
 import axios from 'axios'
 import { useStyles } from '../styles/responsiveStyle';
 import BackgroundImageService from '../components/CatImage'
@@ -40,33 +40,33 @@ const CategoriesScreen = ({ navigation }) => {
       <View style={styles.categories_root}>
         <Text style={styles.categories_text}>{Cat}</Text>
       </View>
-
-
-      <View style={styles.categoryMainDiv}>
-        {data.map((data, i) => {
-          if (data.count > 0)
-            return (
-              <SkeletonContainer isLoading={loading} key={i} >
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={styles1.touchable_style}
-                  onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }}
-                  key={i}
-                >
-                  <View style={styles.catMainSec}>
-                    <Text style={styles.mens_text}> {data.name} </Text>
-                    {imageData.map((item, id) => {
-                      return (
-                        (item.name === data.slug) &&
-                        <Image style={{ width: '100%', height: 95, }} source={item.image} key={id} />
-                      )
-                    })}
-                  </View>
-                </TouchableOpacity>
-              </SkeletonContainer>
-            )
-        })}
-      </View>
+      <ScrollView>
+        <View style={styles.categoryMainDiv}>
+          {data.map((data, i) => {
+            if (data.count > 0)
+              return (
+                <SkeletonContainer isLoading={loading} key={i} >
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={styles1.touchable_style}
+                    onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }}
+                    key={i}
+                  >
+                    <View style={styles.catMainSec}>
+                      <Text style={styles.mens_text}> {data.name} </Text>
+                      {imageData.map((item, id) => {
+                        return (
+                          (item.name === data.slug) &&
+                          <Image style={{ width: '100%', height: 95, }} source={item.image} key={id} />
+                        )
+                      })}
+                    </View>
+                  </TouchableOpacity>
+                </SkeletonContainer>
+              )
+          })}
+        </View>
+      </ScrollView>
     </View >
   );
 };

@@ -107,20 +107,22 @@ const CheckOutScreen = ({ navigation, route }) => {
                             <Text style={styles.delivert_address_text}>Delivery Address</Text>
                         </SkeletonContainer>
                         <SkeletonContainer isLoading={loading}>
-                            <View style={styles.user_adrdress_root}>
-                                <View style={styles.user_name_default_root}>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <Text style={styles.user_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
+                            {AddData.length > 0 ?
+                                <View style={styles.user_adrdress_root}>
+                                    <View style={styles.user_name_default_root}>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text style={styles.user_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
+                                        </View>
+                                        <TouchableOpacity style={styles.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
+                                            <Text style={{ color: '#fff' }}>Edit</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                    <TouchableOpacity style={styles.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
-                                        <Text style={{ color: '#fff' }}>Edit</Text>
-                                    </TouchableOpacity>
+                                    <View style={styles.user_address_text_root}>
+                                        <Text style={styles.user_address_text}>{AddData[0].flate}, {AddData[0].Apartment}, {AddData[0].City}, {AddData[0].State} {AddData[0].Pincode}</Text>
+                                        <Text style={styles.user_phone}> {AddData[0].phone} </Text>
+                                    </View>
                                 </View>
-                                <View style={styles.user_address_text_root}>
-                                    <Text style={styles.user_address_text}>{AddData[0].flate}, {AddData[0].Apartment}, {AddData[0].City}, {AddData[0].State} {AddData[0].Pincode}</Text>
-                                    <Text style={styles.user_phone}> {AddData[0].phone} </Text>
-                                </View>
-                            </View>
+                                : <View style={styles.user_adrdress_root}></View>}
                         </SkeletonContainer>
                     </View>
 

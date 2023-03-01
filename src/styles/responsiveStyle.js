@@ -547,7 +547,7 @@ export const useStyles = CreateResponsiveStyle(
         categoryMainDiv: {
             // paddingTop: 30,
             // backgroundColor: '#f2f2f2',
-            height: 95,
+            height: "100%",
         },
 
         categories_root: {
