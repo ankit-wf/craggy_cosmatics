@@ -15,27 +15,22 @@ import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/responsiveStyle'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
-const bannerImg = require('../../Data/bannerSlider.json')
-const latestProductImg = require('../../Data/latestProduct.json')
 
 const HomeScreen = ({ navigation }) => {
+  let bs = "BestSellers";
+  let lp = "latest Product";
   const styles = useStyles();
   const dispatch = useDispatch();
   const imageFooter = FooterImage();
   const storeData = useSelector(state => state.cartData.cart);
-  const imageData = BackgroundImageService();
-  // const [data, setData] = useState([])
-  // const [bestData, setBestData] = useState([])
   const [loading, setLoading] = useState(true)
   const [visible, setVisible] = useState(false);
-  let bs = "BestSellers";
-  let lp = "latestProduct";
   const [refreshing, setRefreshing] = useState(false);
-
   const [bannerImage, setBannerImage] = useState([]);
   const [bestSelling, setBestSelling] = useState([]);
   const [category, setCategory] = useState([]);
   const [latestProduct, setLatestProduct] = useState([]);
+
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
@@ -57,7 +52,6 @@ const HomeScreen = ({ navigation }) => {
       setBestSelling(res.data.best_selling_products)
       setCategory(res.data.category)
       setLatestProduct(res.data.latest_products)
-
       // Category_Api();
       // BestSelling_Api();
       // setTimeout(() => {
@@ -101,11 +95,8 @@ const HomeScreen = ({ navigation }) => {
       }
     })
   }
-
-
   const onDismissSnackBar = () => setVisible(false);
   const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
-
     if (storeData.length !== 0) {
       let ss = false;
       storeData.find(data => {
@@ -219,8 +210,7 @@ const HomeScreen = ({ navigation }) => {
         <ScrollView horizontal>
           <View style={cS.categoriesRoot}>
             {category.map((data, i) => {
-              // console.log("kkkkkk", data)
-              // if (data.count > 0)
+              // if (data.cat_name > 0)
               return (
                 <TouchableOpacity
                   activeOpacity={0.8}

@@ -73,7 +73,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
         }
     }
 
-    const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
+    const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
 
         if (storeData.length !== 0) {
             let ss = false;
@@ -88,7 +88,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
             }
             else {
                 let Data = [...storeData, {
-                    description: description,
+                    description: product_title,
                     categoriesDetail_id: product_id,
                     images: image,
                     oldprice: regular_price,
@@ -101,7 +101,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
         }
         else {
             let Data = [...storeData, {
-                description: description,
+                description: product_title,
                 categoriesDetail_id: product_id,
                 images: image,
                 oldprice: regular_price,
@@ -118,17 +118,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
         setHeart(!heart);
     }
 
-    const images = [
-        {
-            uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-        },
-        {
-            uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
-        },
-        {
-            uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
-        },
-    ];
     return (
         <View>
             <SafeAreaView style={styles.safe_root}>
@@ -141,7 +130,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
                 </Snackbar>
                 {singleProduct.map((data, i) => {
-
                     return (
                         <SkeletonContainer isLoading={loading} key={i}>
                             <View style={styles.sticky_Btn} key={i}>
@@ -152,7 +140,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     <View style={styles.inner_bottomView}>
                                         <Button
                                             title='Add'
-                                            onPress={() => CartHolder(data.description, data.product_id, data.image, data.sale_price, data.regular_price,)}
+                                            onPress={() => CartHolder(data.product_title, data.product_id, data.image, data.sale_price, data.regular_price,)}
                                         />
                                     </View>
                                 </View>
@@ -162,41 +150,42 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 })}
                 <ScrollView>
                     {singleProduct.map((data, i) => {
-                        console.log("gallery_images", data)
-                        let gaelleryImg = data.gallery_images;
+                        // console.log("gallery_images", data)
+                        // let gaelleryImg = data.gallery_images;
+                        // let image = data.image;
                         return (
                             <View key={i}>
                                 <View style={styles.swiperRoot}>
                                     <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }} style={styles.wrapper} >
-                                        {gaelleryImg.map((i, e) => {
-                                            return (
-                                                <View key={e}>
-                                                    {/* <SkeletonContainer isLoading={loading} key={index}> */}
-                                                    <TouchableOpacity onPress={() => setIsVisible(true)}>
-                                                        <Image source={{ uri: i }} style={{ height: '100%', width: '100%' }} />
-                                                    </TouchableOpacity>
-                                                    {/* </SkeletonContainer> */}
-                                                </View>
-                                            )
-                                        })}
+
+
+                                        {data.gallery_images == "" ?
+                                            <View key={i}>
+                                                <SkeletonContainer isLoading={loading} key={i}>
+                                                    <View>
+                                                        <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
+                                                    </View>
+                                                </SkeletonContainer>
+                                            </View>
+                                            :
+                                            data.gallery_images.map((i, e) => {
+                                                return (
+                                                    <View key={i}>
+                                                        <SkeletonContainer isLoading={loading} key={i}>
+                                                            <TouchableOpacity onPress={() => setIsVisible(true)}>
+                                                                <Image source={{ uri: i.uri }} style={{ height: '100%', width: '100%' }} />
+                                                            </TouchableOpacity>
+                                                        </SkeletonContainer>
+                                                    </View>
+                                                )
+                                            })}
                                     </Swiper>
-                                    {/* <ImageView
-                                        images={images}
+                                    <ImageView
+                                        images={data.gallery_images}
                                         imageIndex={0}
                                         visible={isVisible}
                                         onRequestClose={() => setIsVisible(false)}
-                                    /> */}
-                                    {/* {gaelleryImg.map((item, k) => {
-                                        return (
-                                            <ImageView
-                                                images={item}
-                                                imageIndex={0}
-                                                visible={isVisible}
-                                                onRequestClose={() => setIsVisible(false)}
-                                            />
-                                        )
-                                    })} */}
-
+                                    />
                                     <SkeletonContainer isLoading={loading} >
                                         <View style={styles.shadow_Box} elevation={7}>
                                             <TouchableOpacity

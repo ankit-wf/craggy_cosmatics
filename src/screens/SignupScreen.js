@@ -82,7 +82,7 @@ const SignupScreen = ({ navigation }) => {
 
     return (
         <View style={styles.rootContainter}>
-            <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
+            <ImageBackground source={require('../../assets/images/login-bg.jpg')} style={styles.loginBg}>
                 <BackButton goBack={navigation.goBack} />
                 <Image source={require('../../assets/images/logo-image.jpg')} style={styles.logoBackground} />
                 <View style={styles.Containterlogin}>
@@ -100,9 +100,9 @@ const SignupScreen = ({ navigation }) => {
                                     label="First Name"
                                     returnKeyType="next"
                                     autoCapitalize="none"
-                                    autoCompleteType="email"
-                                    textContentType="emailAddress"
-                                    keyboardType="text"
+                                    autoCompleteType="firstName"
+                                    textContentType="firstName"
+                                    keyboardType="default"
                                 />
                             )}
                             name="FirstName"
@@ -121,9 +121,9 @@ const SignupScreen = ({ navigation }) => {
                                     label="Last Name"
                                     returnKeyType="next"
                                     autoCapitalize="none"
-                                    autoCompleteType="email"
-                                    textContentType="emailAddress"
-                                    keyboardType="text"
+                                    autoCompleteType="lastName"
+                                    textContentType="lastName"
+                                    keyboardType="default"
                                 />
                             )}
                             name="LastName"
@@ -144,7 +144,7 @@ const SignupScreen = ({ navigation }) => {
                                     returnKeyType="next"
                                     autoCapitalize="none"
                                     autoCompleteType="email"
-                                    textContentType="emailAddress"
+                                    textContentType="email"
                                     keyboardType="email-address"
                                 />
                             )}

@@ -9,10 +9,9 @@ const CategoriesScreen = ({ navigation }) => {
   const styles = useStyles()
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
-  // console.log("tttttttt", data)
   const [loading, setLoading] = useState(true);
   let Cat = "Categories";
-  // console.log('category', loading);
+
   useEffect(() => {
     const sF = navigation.addListener('focus', () => {
       axios.get(
@@ -29,7 +28,6 @@ const CategoriesScreen = ({ navigation }) => {
             setLoading(false)
           }, 2000);
         }
-
       })
     });
     return sF;
@@ -37,9 +35,11 @@ const CategoriesScreen = ({ navigation }) => {
 
   return (
     <View>
+
       <View style={styles.categories_root}>
         <Text style={styles.categories_text}>{Cat}</Text>
       </View>
+
       <ScrollView>
         <View style={styles.categoryMainDiv}>
           {data.map((data, i) => {

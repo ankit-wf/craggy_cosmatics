@@ -18,9 +18,10 @@ const ProductListingScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const storeData = useSelector(state => state.cartData.cart);
     const [loading, setLoading] = useState(true);
-    const [bottomSheet, setBottomSheet] = useState(false);
-    const [data, setData] = useState([])
-    // console.log("dDDDDD", data)
+    const [bottomSheet, setBottomSheet] = useState(true);
+    const [data, setData] = useState([]);
+    const [bannerData, setBannerData] = useState([]);
+    // console.log("dDDDDD", bannerData)
     const name = route.params.name;
     const id = route.params.id;
     const [checked, setChecked] = useState('Latest');
@@ -28,47 +29,91 @@ const ProductListingScreen = ({ navigation, route }) => {
     const bs = useRef();
 
     useEffect(() => {
-        {
-            id ?
-                axios.get(
-                    `https://craggycosmetic.com/api/products/`,
-                    {
-                        params: {
-                            category_id: id
-                        },
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-                        }
-                    }
-                ).then((res) => {
-                    setData(res.data)
-                    setTimeout(() => {
-                        setLoading(false)
-                    }, 2000);
-                })
-                :
-                axios.get(
-                    `https://craggycosmetic.com/api/products/best-selling/`,
-                    {
-                        headers: {
-                            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-                        }
-                    }
-                ).then((res) => {
-                    // console.log("resss", res.data)
-                    if (res.data.status = "success") {
-                        setData(res.data.response)
-                        setTimeout(() => {
-                            setLoading(false)
-                        }, 2000);
-                    }
-                })
+
+        if (id) {
+            allProductsApi()
         }
+        if (name == "BestSellers") {
+            bestSellingApi()
+        }
+        if (name == "latest Product") {
+            latestProductApi()
+        }
+        bannerApi();
     }, [id])
 
+    const allProductsApi = () => {
+        axios.get(
+            `https://craggycosmetic.com/api/products/`,
+            {
+                params: {
+                    category_id: id
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                }
+            }
+        ).then((res) => {
+            setData(res.data)
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000);
+        })
+    }
+    const bestSellingApi = () => {
+        axios.get(
+            `https://craggycosmetic.com/api/products/best-selling/`,
+            {
+                headers: {
+                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                }
+            }
+        ).then((res) => {
+            // console.log("resss", res.data)
+            if (res.data.status = "success") {
+                setData(res.data.response)
+                setTimeout(() => {
+                    setLoading(false)
+                },);
+            }
+        })
+    }
+
+    const latestProductApi = () => {
+        axios.get(
+            `https://craggycosmetic.com/api/home/`,
+            {
+                headers: {
+                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                }
+            }
+        ).then((res) => {
+            setData(res.data.latest_products)
+            setTimeout(() => {
+                setLoading(false)
+            },);
+        })
+    }
+    const bannerApi = () => {
+        axios.get(
+            ` https://craggycosmetic.com/api/banner/`,
+            {
+                headers: {
+                    // 'Content-Type': 'application/json',
+                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                }
+            }
+        ).then((res) => {
+            setBannerData(res.data.response)
+            setTimeout(() => {
+                setLoading(false)
+            }, 3000);
+        })
+    }
+
     const onDismissSnackBar = () => setVisible(false);
-    const CartHolder = (description, product_id, image, regular_price, sale_price,) => {
+    const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
         if (storeData.length !== 0) {
             let ss = false;
             storeData.find(data => {
@@ -82,7 +127,7 @@ const ProductListingScreen = ({ navigation, route }) => {
             }
             else {
                 let Data = [...storeData, {
-                    description: description,
+                    description: product_title,
                     categoriesDetail_id: product_id,
                     images: image,
                     oldprice: regular_price,
@@ -95,7 +140,7 @@ const ProductListingScreen = ({ navigation, route }) => {
         }
         else {
             let Data = [...storeData, {
-                description: description,
+                description: product_title,
                 categoriesDetail_id: product_id,
                 images: image,
                 oldprice: regular_price,
@@ -125,11 +170,11 @@ const ProductListingScreen = ({ navigation, route }) => {
                 {/* <SkeletonContainer isLoading={loading}> */}
                 <View style={styles.swiperRoot}>
                     <Swiper style={styles.wrapper}  >
-                        {bannerImg.map((e, i) => {
+                        {bannerData.map((e, i) => {
                             return (
                                 <View key={i} >
-                                    <Image source={{ uri: e.images }} style={styles1.banner_img} />
-                                    <View style={styles.sliderContent}>
+                                    <Image source={{ uri: e }} style={styles1.banner_img} />
+                                    {/* <View style={styles.sliderContent}>
                                         <View style={styles.bannerTextRoot}>
                                             <Text style={styles.bannerText}>{e.line}</Text>
                                         </View>
@@ -142,7 +187,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                                         >
                                             <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
                                         </TouchableOpacity>
-                                    </View>
+                                    </View> */}
                                 </View>
                             )
                         })}
