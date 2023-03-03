@@ -3,23 +3,24 @@ import React, { useState, useEffect } from 'react'
 import Swiper from 'react-native-swiper'
 import axios from 'axios'
 import Heading from '../components/Heading';
-import { List, Snackbar } from 'react-native-paper';
+import { Snackbar } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons'
-import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
+import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
-const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import ImageView from "react-native-image-viewing"
 
 const ProductDetailScreen = ({ navigation, route }) => {
+    let bs = "BestSellers";
     const dispatch = useDispatch();
     const newData = useSelector(state => state.reviewData.review);
-    const storeData = useSelector(state => state.cartData.cart);
+    const cartData = useSelector(state => state.cartData.cart);
     const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
+    const [bestSelData, setBestSeldata] = useState([])
     const [singleProduct, setSingleProduct] = useState([])
     const [isVisible, setIsVisible] = useState(false);
     // console.log("wwwwwww", data)
@@ -30,7 +31,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
     // console.log("tessssstttt", storeData,)
     // const idd = route.params;
     useEffect(() => {
-        Single_Product();
+        Single_Product()
+        bestSellingApi()
     }, [id])
 
     const Single_Product = () => {
@@ -75,9 +77,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
     const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
 
-        if (storeData.length !== 0) {
+        if (cartData.length !== 0) {
             let ss = false;
-            storeData.find(data => {
+            cartData.find(data => {
                 if (data.categoriesDetail_id == product_id) {
                     ss = true;
                 }
@@ -87,7 +89,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 setVisible(!visible);
             }
             else {
-                let Data = [...storeData, {
+                let Data = [...cartData, {
                     description: product_title,
                     categoriesDetail_id: product_id,
                     images: image,
@@ -100,7 +102,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
             }
         }
         else {
-            let Data = [...storeData, {
+            let Data = [...cartData, {
                 description: product_title,
                 categoriesDetail_id: product_id,
                 images: image,
@@ -113,6 +115,26 @@ const ProductDetailScreen = ({ navigation, route }) => {
         }
 
     }
+
+    const bestSellingApi = () => {
+        axios.get(
+            `https://craggycosmetic.com/api/products/best-selling/`,
+            {
+                headers: {
+                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                }
+            }
+        ).then((res) => {
+            // console.log("resss", res.data)
+            if (res.data.status = "success") {
+                setBestSeldata(res.data.response)
+                // setTimeout(() => {
+                //     setLoading(false)
+                // },);
+            }
+        })
+    }
+
 
     const wishlistHandler = () => {
         setHeart(!heart);
@@ -151,14 +173,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 <ScrollView>
                     {singleProduct.map((data, i) => {
                         // console.log("gallery_images", data)
-                        // let gaelleryImg = data.gallery_images;
-                        // let image = data.image;
                         return (
                             <View key={i}>
                                 <View style={styles.swiperRoot}>
                                     <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }} style={styles.wrapper} >
-
-
                                         {data.gallery_images == "" ?
                                             <View key={i}>
                                                 <SkeletonContainer isLoading={loading} key={i}>
@@ -170,8 +188,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             :
                                             data.gallery_images.map((i, e) => {
                                                 return (
-                                                    <View key={i}>
-                                                        <SkeletonContainer isLoading={loading} key={i}>
+                                                    <View key={e}>
+                                                        <SkeletonContainer isLoading={loading} key={e}>
                                                             <TouchableOpacity onPress={() => setIsVisible(true)}>
                                                                 <Image source={{ uri: i.uri }} style={{ height: '100%', width: '100%' }} />
                                                             </TouchableOpacity>
@@ -225,7 +243,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
                                         </SkeletonContainer>
                                     </View>
-                                    <SkeletonContainer isLoading={loading} key={i} >
+                                    <SkeletonContainer isLoading={loading}  >
                                         <View style={styles.li_text_root} >
                                             <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
 
@@ -233,7 +251,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         </View>
                                     </SkeletonContainer>
 
-                                    <View style={pDs.baseLine} />
+                                    <View style={styles.baseLine} />
                                     <View style={styles.description_heading}>
                                         <SkeletonContainer isLoading={loading} >
                                             <Text style={styles.titleStyle_description}>KEY FEATURES</Text>
@@ -247,7 +265,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         </View>
                                     </SkeletonContainer>
 
-                                    <View style={pDs.baseLine} />
+                                    <View style={styles.baseLine} />
 
                                     <View style={styles.description_heading}>
                                         <SkeletonContainer isLoading={loading} >
@@ -286,7 +304,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             </View>
                                         </SkeletonContainer>
 
-                                        <View style={[pDs.baseLine2, { height: 1, }]} />
+                                        <View style={[styles.baseLine2, { height: 1, }]} />
 
                                         {newData.map((value, k) => {
                                             let ending = parseInt(page) * 3;
@@ -311,7 +329,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                         </View>
                                                         <Text style={styles.review_Title}>{value.title}</Text>
                                                         <Text style={styles.review_Review}>{value.description}</Text>
-                                                        <View style={pDs.baseLine} />
+                                                        <View style={styles.baseLine} />
                                                     </View>
                                                 )
                                             }
@@ -337,7 +355,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 <Heading title=' YOU MAY ALSO LIKE ' />
                                                 <TouchableOpacity
                                                     activeOpacity={0.6}
-                                                    onPress={() => console.log("first")}
+                                                    onPress={() => { navigation.navigate('ProductListing', { name: bs }) }}
+                                                    // onPress={() => console.log("first")}
                                                     style={styles.viewLatestProduct}
                                                 >
                                                     <Text style={styles.latestProductText}>
@@ -348,43 +367,47 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         </SkeletonContainer>
                                         <SkeletonContainer isLoading={loading} >
 
-                                            <View style={pDs.productsListRoot}>
+                                            <View style={styles.productsListRoot}>
                                                 <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-                                                    {bestSellingProduct.map((e, i) => {
+                                                    {bestSelData.map((e, i) => {
                                                         return (
                                                             <TouchableOpacity
-                                                                activeOpacity={0.8}
-                                                                style={pDs.product109}
-                                                                onPress={() => navigation.navigate('Product', e.sellingProduct_id)}
+                                                                // activeOpacity={0.8}
+                                                                style={bsP.touchable}
+                                                                onPress={() => navigation.navigate('Product', e.product_id)}
                                                                 key={i}
                                                             >
-                                                                <View style={pDs.imgRoot}>
-                                                                    <Image source={{ uri: e.images }} style={pDs.productImg} />
-                                                                </View>
-                                                                <View style={pDs.contentRoot}  >
-                                                                    <View style={pDs.textRoot1}>
-                                                                        <Text style={pDs.contentText}>{e.description}</Text>
-                                                                    </View>
-
-                                                                    <View style={pDs.baseLine}></View>
-
-                                                                    <View style={pDs.priceRoot}>
-                                                                        <Text style={pDs.price}>₹{e.price}</Text>
-                                                                        <Text style={pDs.spaceRoot}>/ </Text>
-                                                                        <Text style={pDs.oldprice}> ₹{e.oldprice}</Text>
-                                                                    </View>
+                                                                <View style={bsP.imgRoot} >
+                                                                    <Image source={{ uri: e.image }} style={bsP.productImg} />
                                                                 </View>
 
+                                                                <View style={bsP.contentRoot}>
+                                                                    <View style={bsP.descriptionRoot}>
+                                                                        <Text style={bsP.descriptionText}>{e.product_title}</Text>
+                                                                    </View>
+
+                                                                    <View style={styles.baseLine}></View>
+
+                                                                    <View style={bsP.priceRoot}>
+                                                                        <Text style={bsP.price}>₹{e.sale_price}</Text>
+                                                                        <Text style={bsP.spaceRoot}>/ </Text>
+                                                                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                                                                    </View>
+                                                                </View>
+
+                                                                {/* Buy Now Button  */}
                                                                 <TouchableOpacity
                                                                     activeOpacity={0.8}
-                                                                    style={pDs.buyNowButton1}
-                                                                    onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
+                                                                    style={bsP.buyNowButton}
+                                                                    onPress={() => CartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
                                                                 >
-                                                                    <Text style={pDs.buttonText1}>BUY NOW</Text>
+                                                                    <Text style={bsP.buttonText}>BUY NOW</Text>
                                                                 </TouchableOpacity>
+
                                                             </TouchableOpacity>
                                                         )
                                                     })}
+
                                                 </ScrollView>
                                             </View>
                                         </SkeletonContainer>
@@ -536,6 +559,20 @@ const styles = StyleSheet.create({
         width: '85%',
         color: '#444444'
     },
+    baseLine2: {
+        height: 1,
+        width: '100%',
+        alignSelf: 'center',
+        backgroundColor: '#C4C4C4',
+        marginTop: 20
+    },
+    baseLine: {
+        height: 1,
+        // width: '100%',
+        // alignSelf: 'center',
+        backgroundColor: '#C4C4C4',
+        marginTop: 5
+    },
     review_MainHeading: {
         fontSize: 16,
         fontWeight: '500',
@@ -626,6 +663,12 @@ const styles = StyleSheet.create({
         fontSize: 12,
         lineHeight: 14.09,
         fontWeight: '600',
+    },
+    productsListRoot: {
+        height: 252,
+        width: '95%',
+        alignSelf: 'center',
+        marginBottom: "10%"
     },
     review_Name: {
         fontSize: 16,

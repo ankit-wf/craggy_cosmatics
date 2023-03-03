@@ -29,7 +29,6 @@ const ProductListingScreen = ({ navigation, route }) => {
     const bs = useRef();
 
     useEffect(() => {
-
         if (id) {
             allProductsApi()
         }

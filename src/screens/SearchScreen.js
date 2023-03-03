@@ -1,50 +1,50 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, FlatList, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState, useCallback } from 'react'
-import { Appbar, Searchbar, } from 'react-native-paper';
+import { useSelector, useDispatch } from 'react-redux'
+import { submitActions } from '../store/dataSlice'
+import { Appbar, Searchbar, Snackbar } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import axios from 'axios'
 import Heading from '../components/Heading'
 import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
-const bestSellingProduct = require('../../Data/bestSellingProduct.json')
 const placeholderText = require('../../Data/Placeholder.json');
-import axios from 'axios'
 import { shopStyle as sS } from '../styles/shopStyle'
+import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const SearchScreen = ({ navigation }) => {
-    // const [back, setBack] = useState(false);
+    let bs = "BestSellers";
+    let nodata = "Data not Match.."
+    const dispatch = useDispatch();
+    const cartData = useSelector(state => state.cartData.cart);
+    const [loading, setLoading] = useState(true)
+    const [visible, setVisible] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const onChangeSearch = query => setSearchQuery(query);
 
+    const [dataload, setDataload] = useState(true)
     const [searchData, setSearchData] = useState([]);
     // console.log("gggggggg", searchQuery)
+    const [bestSeldata, setBestSeldata] = useState([])
     const [newName, setnewName] = useState("");
     const shuffle = useCallback(() => {
         const index = Math.floor(Math.random() * placeholderText.length);
         setnewName(placeholderText[index]);
     }, []);
 
+    setTimeout(() => {
+        setDataload(false)
+    }, 1000);
+
     useEffect(() => {
         const intervalID = setInterval(shuffle, 5000);
 
         setSearchData()
+        onSubmit()
+        bestSellingApi()
+        setTimeout(() => {
+            setLoading(false)
 
-        axios.get(
-            `https://craggycosmetic.com/api/products/search/`,
-            {
-                params: {
-                    s: searchQuery
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-                }
-            }
-        ).then((res) => {
-            // console.log("resssffffhfdshf", res.data)
-            if (res.data.status = "success") {
-                setSearchData(res.data.response)
-            }
-        })
-        // setSearchQuery("")
+        }, 2000);
         return () => clearInterval(intervalID);
     }, [shuffle, searchQuery])
 
@@ -62,18 +62,84 @@ const SearchScreen = ({ navigation }) => {
                 }
             }
         ).then((res) => {
-            // console.log("resssffffhfdshf", res.data)
             if (res.data.status = "success") {
                 setSearchData(res.data.response)
             }
         })
     }
+    const bestSellingApi = () => {
+        axios.get(
+            `https://craggycosmetic.com/api/products/best-selling/`,
+            {
+                headers: {
+                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                }
+            }
+        ).then((res) => {
+            // console.log("resss", res.data)
+            if (res.data.status = "success") {
+                setBestSeldata(res.data.response)
+                // setTimeout(() => {
+                //     setLoading(false)
+                // },);
+            }
+        })
+    }
+    const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
+
+        if (cartData.length !== 0) {
+            let ss = false;
+            cartData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
+                setVisible(!visible);
+            }
+            else {
+                let Data = [...cartData, {
+                    description: product_title,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    oldprice: regular_price,
+                    price: sale_price,
+                    quantity: 1
+                }];
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("Cart");
+            }
+        }
+        else {
+            let Data = [...cartData, {
+                description: product_title,
+                categoriesDetail_id: product_id,
+                images: image,
+                oldprice: regular_price,
+                price: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("Cart");
+        }
+
+    }
+    const onDismissSnackBar = () => setVisible(false);
     const SearchHandler = (data) => {
         setSearchQuery(data)
     }
 
     return (
         <View>
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+                duration={2000}
+                style={styles.Snackbar_style}
+            >
+                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+            </Snackbar>
             <Appbar.Header style={{ backgroundColor: 'white', }}>
                 <Appbar.BackAction onPress={navigation.goBack} color="blue" />
                 <Searchbar
@@ -88,136 +154,158 @@ const SearchScreen = ({ navigation }) => {
             {searchQuery == "" ?
                 <View>
                     <View style={{ backgroundColor: 'white', marginTop: 1 }}>
-                        <View style={styles.trending_container}>
-                            <View style={styles.trending_icon}>
-                                <Ionicons name="trending-up-sharp" color='blue' size={26} />
+                        <SkeletonContainer isLoading={loading}>
+                            <View style={styles.trending_container}>
+                                <View style={styles.trending_icon}>
+                                    <Ionicons name="trending-up-sharp" color='blue' size={26} />
+                                </View>
+                                <View style={styles.trending_Text_Container}>
+                                    <Text style={styles.trending_Text}>Trending Searches</Text>
+                                </View>
                             </View>
-                            <View style={styles.trending_Text_Container}>
-                                <Text style={styles.trending_Text}>Trending Searches</Text>
-                            </View>
-                        </View>
+                        </SkeletonContainer>
 
                         <View>
                             <View style={styles.trending_View_container}>
-                                <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Hair care")}>
-                                    <Text style={styles.view_container_text}>Hair Care</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Onion")}>
-                                    <Text style={styles.view_container_text}>Onion</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Skin Care")}>
-                                    <Text style={styles.view_container_text}>Skin Care</Text>
-                                </TouchableOpacity>
+                                <SkeletonContainer isLoading={loading}>
+                                    <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Hair care")}>
+                                        <Text style={styles.view_container_text}>Hair Care</Text>
+                                    </TouchableOpacity>
+                                </SkeletonContainer>
+                                <SkeletonContainer isLoading={loading}>
+                                    <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Onion")}>
+                                        <Text style={styles.view_container_text}>Onion</Text>
+                                    </TouchableOpacity>
+                                </SkeletonContainer>
+                                <SkeletonContainer isLoading={loading}>
+                                    <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Skin Care")}>
+                                        <Text style={styles.view_container_text}>Skin Care</Text>
+                                    </TouchableOpacity>
+                                </SkeletonContainer>
                             </View>
                             <View style={styles.trending_View_container}>
-                                <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("oil")}>
-                                    <Text style={styles.view_container_text}>Oil</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Keratin")}>
-                                    <Text style={styles.view_container_text}>Karetin</Text>
-                                </TouchableOpacity>
-
+                                <SkeletonContainer isLoading={loading}>
+                                    <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Face Care")}>
+                                        <Text style={styles.view_container_text}>Face Care</Text>
+                                    </TouchableOpacity>
+                                </SkeletonContainer>
+                                <SkeletonContainer isLoading={loading}>
+                                    <TouchableOpacity style={styles.View_Container} onPress={() => SearchHandler("Keratin")}>
+                                        <Text style={styles.view_container_text}>Karetin</Text>
+                                    </TouchableOpacity>
+                                </SkeletonContainer>
                             </View>
 
                         </View>
                     </View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 10, }}>
-                        <Heading title=' best selling ' />
+                    <SkeletonContainer isLoading={loading}>
+                        <View style={styles.bestSellerRoot}>
+                            <Heading title=' best selling ' />
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                style={styles.viewLatestProduct}
+                                onPress={() => { navigation.navigate('ProductListing', { name: bs }) }}
+                            >
+                                <Text style={styles.latestProductText}>
+                                    View All
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </SkeletonContainer>
 
-                        <TouchableOpacity
-                            style={styles.viewLatestProduct}
-                            onPress={() => navigation.navigate("AllBestseller")}
-                        >
-                            <Text style={styles.latestProductText} >
-                                View All
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={bsP.productsListRoot}>
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+                    <SkeletonContainer isLoading={loading} >
+                        <View style={bsP.productsListRoot}>
+                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+                                {bestSeldata.map((e, i) => {
+                                    return (
+                                        <TouchableOpacity
+                                            // activeOpacity={0.8}
+                                            style={bsP.touchable}
+                                            onPress={() => navigation.navigate('Product', e.product_id)}
+                                            key={i}
+                                        >
+                                            <View style={bsP.imgRoot} >
+                                                <Image source={{ uri: e.image }} style={bsP.productImg} />
+                                            </View>
 
-                            {bestSellingProduct.map((e, i) => {
-                                return (
-                                    <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('Product', e.sellingProduct_id)} >
-                                        <View style={bsP.imgRoot} >
-                                            <Image source={{ uri: e.images }} style={bsP.productImg} />
+                                            <View style={bsP.contentRoot}>
+                                                <View style={bsP.descriptionRoot}>
+                                                    <Text style={bsP.descriptionText}>{e.product_title}</Text>
+                                                </View>
+
+                                                <View style={bsP.baseLine}></View>
+
+                                                <View style={bsP.priceRoot}>
+                                                    <Text style={bsP.price}>₹{e.sale_price}</Text>
+                                                    <Text style={bsP.spaceRoot}>/ </Text>
+                                                    <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                                                </View>
+                                            </View>
+
+                                            {/* Buy Now Button  */}
+                                            <TouchableOpacity
+                                                activeOpacity={0.8}
+                                                style={bsP.buyNowButton}
+                                                onPress={() => CartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
+                                            >
+                                                <Text style={bsP.buttonText}>BUY NOW</Text>
+                                            </TouchableOpacity>
+
+                                        </TouchableOpacity>
+                                    )
+                                })}
+                            </ScrollView>
+                        </View>
+                    </SkeletonContainer>
+                </View>
+                :
+                <View style={styles.productsListRoot}>
+                    {/* <ActivityIndicator size="large" isLoading={dataload} /> */}
+                    {searchData != "" ?
+                        <FlatList
+                            data={searchData}
+                            renderItem={({ item }) => (
+                                <SkeletonContainer isLoading={loading}>
+                                    < TouchableOpacity
+                                        style={sS.product109}
+                                        activeOpacity={0.8}
+                                        onPress={() => navigation.navigate("Product", item.product_id)}
+                                    >
+                                        <View style={sS.imgRoot} >
+                                            <Image source={{ uri: item.image }} style={sS.productImg} />
                                         </View>
 
-                                        <View style={bsP.contentRoot}>
-
-                                            <View style={bsP.descriptionRoot}>
-                                                <Text style={bsP.descriptionText}>{e.description}</Text>
+                                        <View style={sS.contentRoot}>
+                                            <View style={sS.textRoot}>
+                                                <Text style={sS.contentText}>{item.product_title}</Text>
                                             </View>
-
-                                            <View style={bsP.baseLine}></View>
-
-                                            <View style={bsP.priceRoot}>
-                                                <Text style={bsP.price}>₹{e.price}</Text>
-                                                <Text style={bsP.spaceRoot}>/ </Text>
-                                                <Text style={bsP.oldprice}>₹{e.oldprice}</Text>
+                                            <View style={sS.baseLine}></View>
+                                            <View style={sS.priceRoot}>
+                                                <Text style={sS.price}>₹{item.sale_price}</Text>
+                                                <Text style={sS.spaceRoot}>/ </Text>
+                                                <Text style={sS.oldprice}>₹{item.regular_price}</Text>
                                             </View>
-
                                         </View>
 
                                         {/* Buy Now Button  */}
-
-                                        <TouchableOpacity style={bsP.buyNowButton}
-                                            onPress={() => bestSellingHolder(e.description, e.sellingProduct_id, e.images, e.price, e.oldprice, e.quantity)}
+                                        <TouchableOpacity style={sS.buyNowButton}
+                                            onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                         >
-                                            <Text style={bsP.buttonText}>BUY NOW</Text>
+                                            <Text style={sS.buttonText}>BUY NOW</Text>
                                         </TouchableOpacity>
                                     </TouchableOpacity>
-                                )
-                            })}
-                        </ScrollView>
-                    </View>
-                </View>
-
-                :
-                <View style={styles.productsListRoot}>
-                    <FlatList
-                        data={searchData}
-                        renderItem={({ item }) => (
-                            // <SkeletonContainer isLoading={loading}>
-                            < TouchableOpacity
-                                style={sS.product109}
-                                activeOpacity={0.8}
-                                onPress={() => navigation.navigate("Product", item.product_id)}
-                            >
-                                <View style={sS.imgRoot} >
-                                    <Image source={{ uri: item.image }} style={sS.productImg} />
-                                </View>
-
-                                <View style={sS.contentRoot}>
-                                    <View style={sS.textRoot}>
-                                        <Text style={sS.contentText}>{item.product_title}</Text>
-                                    </View>
-                                    <View style={sS.baseLine}></View>
-                                    <View style={sS.priceRoot}>
-                                        <Text style={sS.price}>₹{item.sale_price}</Text>
-                                        <Text style={sS.spaceRoot}>/ </Text>
-                                        <Text style={sS.oldprice}>₹{item.regular_price}</Text>
-                                    </View>
-                                </View>
-
-                                {/* Buy Now Button  */}
-                                <TouchableOpacity style={sS.buyNowButton}
-                                    onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                >
-                                    <Text style={sS.buttonText}>BUY NOW</Text>
-                                </TouchableOpacity>
-                            </TouchableOpacity>
-                            // </SkeletonContainer>
-                        )}
-                        numColumns={2}
-                        keyExtractor={(item, index) => index}
-                    />
+                                </SkeletonContainer>
+                            )}
+                            numColumns={2}
+                            keyExtractor={(item, index) => index}
+                        />
+                        :
+                        <View style={styles.noData_root}>
+                            <Text style={styles.noData_text}>{nodata}</Text>
+                        </View>
+                    }
                 </View>
             }
-
         </View>
     )
 }
@@ -225,6 +313,21 @@ const SearchScreen = ({ navigation }) => {
 export default SearchScreen;
 
 const styles = StyleSheet.create({
+    Snackbar_style: {
+        width: "65%",
+        height: 55,
+        alignSelf: 'center',
+        position: 'absolute',
+        zIndex: 3,
+        bottom: 250,
+        opacity: 0.7
+    },
+    Snackbar_text: {
+        color: '#fff',
+        fontSize: 14,
+        lineHeight: 15,
+        textAlign: 'center'
+    },
     trending_container: {
         flexDirection: 'row'
     },
@@ -271,11 +374,29 @@ const styles = StyleSheet.create({
         marginRight: 20,
         alignSelf: 'center'
     },
+    bestSellerRoot: {
+        height: 50,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+        marginBottom: 10,
+    },
     latestProductText: {
         fontSize: 12,
         lineHeight: 14.09,
         fontWeight: '600',
         // color: '#00000',
+        // paddingLeft: 5
+    },
+    noData_root: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '50%'
+    },
+    noData_text: {
+        fontSize: 18
     },
     productsListRoot: {
         height: '90%',

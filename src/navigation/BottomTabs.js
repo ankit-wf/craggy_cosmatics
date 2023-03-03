@@ -13,7 +13,7 @@ export default function BottomTabs() {
         <Tab.Navigator
             tabBarPosition='bottom'
             initialRouteName="Home"
-            headerMode='screen'
+
             screenOptions={{
                 swipeEnabled: false,
                 tabBarActiveTintColor: '#C68625',
@@ -26,6 +26,7 @@ export default function BottomTabs() {
                     alignSelf: 'center'
                 },
             }}
+
         >
             <Tab.Screen
                 name="Home"
@@ -41,9 +42,7 @@ export default function BottomTabs() {
             <Tab.Screen
                 name="Categories"
                 component={CategoriesScreen}
-                screenOptions={{
-                    headerShown: true,
-                }}
+
                 options={{
                     tabBarLabel: 'Categories',
                     tabBarIcon: ({ focused }) => (

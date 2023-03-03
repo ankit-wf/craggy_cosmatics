@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import ProductDetailScreen from '../screens/ProductDetailScreen';
-import BillingAdressDetails from '../screens/BillingAdressDetails';
-import ShippingAddressDetails from '../screens/ShippingAddressDetails';
+// import BillingAdressDetails from '../screens/BillingAdressDetails';
+// import ShippingAddressDetails from '../screens/ShippingAddressDetails';
 import PasswordScreen from '../screens/PasswordScreen';
 import OtpScreen from '../screens/LoginOtpScreen';
 import SignupOtpScreen from '../screens/SignupOtpScreen';
@@ -12,10 +12,9 @@ import MyProfileScreen from '../screens/MyProfileScreen';
 import AddressesScreen from '../screens/AddressesScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
 import CoupanOfferScreen from '../screens/CoupanOfferScreen';
-import ViewAllLatestProduct from '../screens/ViewAllLatestProduct';
+// import ViewAllLatestProduct from '../screens/ViewAllLatestProduct';
 import ViewProduct from '../screens/ViewProduct'
 import WriteReview from '../screens/WriteReview';
-import SkinCareProduct from '../screens/SkinCareProduct';
 import DrawerScreen from './Drawer';
 import NotificationScreen from '../screens/NotificationScreen';
 import RewardScreen from '../screens/RewardScreen';
@@ -88,7 +87,7 @@ const MainNavigator = () => {
       <Stack.Screen name='Addresses' component={AddressesScreen} options={{ headerShown: true, headerTitle: 'ADDRESS' }} />
       <Stack.Screen name='offers' component={ReviewsScreen} options={{ headerShown: true, headerTitle: 'REVIEWS' }} />
       <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'Apply Offers', headerShadowVisible: false }} />
-      <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} />
+      {/* <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} /> */}
       <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerTitle: 'All Product' }} />
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />
       {/* <Stack.Screen name='skinCare_product' component={SkinCareProduct} options={{ headerShown: true }} /> */}
