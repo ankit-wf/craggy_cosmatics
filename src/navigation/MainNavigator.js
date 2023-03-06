@@ -16,14 +16,14 @@ import CoupanOfferScreen from '../screens/CoupanOfferScreen';
 import ViewProduct from '../screens/ViewProduct'
 import WriteReview from '../screens/WriteReview';
 import DrawerScreen from './Drawer';
-import NotificationScreen from '../screens/NotificationScreen';
-import RewardScreen from '../screens/RewardScreen';
+import HotOfferScreen from '../screens/HotOfferScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import ResetPassword from '../screens/ResetPassword';
 import AddAddress from '../screens/AddAdress';
 import EditAddress from '../screens/EditAddress';
 import MyCartScreen from '../screens/MyCartScreen';
+import OrderPlacedScreen from '../screens/OrderPlacedScreen';
 // import PaymentScreen from '../screens/PaymentScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
 import { View, TouchableOpacity, Text, Image, } from 'react-native'
@@ -48,10 +48,12 @@ const MainNavigator = () => {
         headerTintColor: '#C68625', //Set Header text color
         headerBackTitleVisible: false,
         headerTitle: () => <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
-
         // headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
         headerRight: () => (
           <View style={gs.headerNotification}>
+            <TouchableOpacity onPress={() => navigation.navigate('SearchPage')} style={{ marginRight: 20, }}>
+              <Ionicons name='search' color='#CC933B' size={25} />
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }}>
               <Ionicons name='cart-outline' color='#CC933B' size={25} />
               {cart.length > 0 ?
@@ -87,12 +89,9 @@ const MainNavigator = () => {
       <Stack.Screen name='Addresses' component={AddressesScreen} options={{ headerShown: true, headerTitle: 'ADDRESS' }} />
       <Stack.Screen name='offers' component={ReviewsScreen} options={{ headerShown: true, headerTitle: 'REVIEWS' }} />
       <Stack.Screen name='offer_coupan' component={CoupanOfferScreen} options={{ headerShown: true, headerTitle: 'Apply Offers', headerShadowVisible: false }} />
-      {/* <Stack.Screen name='AllLatestProduct' component={ViewAllLatestProduct} options={{ headerShown: true, }} /> */}
       <Stack.Screen name='ViewProduct' component={ViewProduct} options={{ headerTitle: 'All Product' }} />
       <Stack.Screen name='write_review' component={WriteReview} options={{ headerShown: false }} />
-      {/* <Stack.Screen name='skinCare_product' component={SkinCareProduct} options={{ headerShown: true }} /> */}
-      <Stack.Screen name='NotificationScreen' component={NotificationScreen} options={{ headerTitle: 'Notification' }} />
-      <Stack.Screen name='Reward' component={RewardScreen} options={{ headerTitle: 'Reward' }} />
+      <Stack.Screen name='hotOffer' component={HotOfferScreen} options={{ headerTitle: 'Reward' }} />
       <Stack.Screen name='SearchPage' component={SearchScreen} options={{ headerShown: false }} />
       <Stack.Screen name='ProductListing' component={ProductListingScreen}
       // options={({ navigation, route }) => ({
@@ -112,6 +111,7 @@ const MainNavigator = () => {
       <Stack.Screen name='AddAddress' component={AddAddress} options={{ headerTitle: 'AddAddress' }} />
       <Stack.Screen name='editAddress' component={EditAddress} options={{ headerTitle: 'EditAdress' }} />
       <Stack.Screen name='Cart' component={MyCartScreen} options={{ headerShown: false, }} />
+      <Stack.Screen name='OrderPlaced' component={OrderPlacedScreen} options={{ headerShown: false }} />
       {/* <Stack.Screen name='payment' component={PaymentScreen} options={{ headerTitle: 'My Payments' }} /> */}
     </Stack.Navigator>
   );

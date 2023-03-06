@@ -260,12 +260,11 @@ const SearchScreen = ({ navigation }) => {
                 </View>
                 :
                 <View style={styles.productsListRoot}>
-                    {/* <ActivityIndicator size="large" isLoading={dataload} /> */}
                     {searchData != "" ?
-                        <FlatList
-                            data={searchData}
-                            renderItem={({ item }) => (
-                                <SkeletonContainer isLoading={loading}>
+                        <SkeletonContainer isLoading={loading}>
+                            <FlatList
+                                data={searchData}
+                                renderItem={({ item }) => (
                                     < TouchableOpacity
                                         style={sS.product109}
                                         activeOpacity={0.8}
@@ -294,11 +293,11 @@ const SearchScreen = ({ navigation }) => {
                                             <Text style={sS.buttonText}>BUY NOW</Text>
                                         </TouchableOpacity>
                                     </TouchableOpacity>
-                                </SkeletonContainer>
-                            )}
-                            numColumns={2}
-                            keyExtractor={(item, index) => index}
-                        />
+                                )}
+                                numColumns={2}
+                                keyExtractor={(item, index) => index}
+                            />
+                        </SkeletonContainer>
                         :
                         <View style={styles.noData_root}>
                             <Text style={styles.noData_text}>{nodata}</Text>

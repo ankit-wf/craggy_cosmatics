@@ -29,15 +29,14 @@ const CheckOutScreen = ({ navigation, route }) => {
         setVisible(false);
     }
 
-    let widthS = "Order Place  " + "₹" + JSON.stringify(Tm + fee)
-    let widthOutS = "Order Place  " + "₹" + JSON.stringify(Tm)
+    let withS = "Pay Now  " + "₹" + JSON.stringify(Tm + fee)
+    let withOutS = "Pay Now  " + "₹" + JSON.stringify(Tm)
 
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
         }, 2000);
     }, [])
-
 
     // {fee == 50 ?
     //     <Text style={styles.pay_text}>₹{Tm + fee}</Text>
@@ -248,8 +247,9 @@ const CheckOutScreen = ({ navigation, route }) => {
                         </View>
                     </SkeletonContainer>
 
-                    <SkeletonContainer isLoading={loading}>
-                        <View style={styles.RadioButtonRoot}>
+                    <View style={styles.RadioButtonRoot}></View>
+                    {/* <SkeletonContainer isLoading={loading}> 
+                    <View style={styles.RadioButtonRoot}>
                             <Text style={styles.other_option}>Other Options</Text>
 
                             <View style={styles.btnTextRoot}>
@@ -268,9 +268,9 @@ const CheckOutScreen = ({ navigation, route }) => {
                                     status={checked === 'second' ? 'checked' : 'unchecked'}
                                     onPress={() => setChecked('second')}
                                 />
-                            </View>
-                        </View>
-                    </SkeletonContainer>
+                            </View> 
+                    </View> 
+                   </SkeletonContainer> */}
 
                 </SafeAreaView>
             </ScrollView>
@@ -284,14 +284,13 @@ const CheckOutScreen = ({ navigation, route }) => {
             </Snackbar>
 
             <SkeletonContainer isLoading={loading}>
-                <View style={styles.sticky_Btn}>
+                <View style={styles.sticky_Btn} >
                     <View style={styles.bottomView} >
                         <View style={styles.inner_bottomView}>
                             {fee ?
-                                <Button title={widthS} />
-                                : <Button title={widthOutS} />
+                                <Button title={withS} onPress={() => navigation.navigate("OrderPlaced", { wf: Tm + fee })} />
+                                : <Button title={withOutS} onPress={() => navigation.navigate("OrderPlaced", { wof: Tm })} />
                             }
-
                         </View>
                     </View>
                 </View>
@@ -458,8 +457,9 @@ const styles = StyleSheet.create({
         paddingTop: 15
     },
     RadioButtonRoot: {
-        marginTop: "5%",
-        height: 225
+        marginTop: "1%",
+        height: 57,
+        // height: 225
         // bottom:'5%'
     },
     btnTextRoot: {

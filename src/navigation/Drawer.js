@@ -13,14 +13,16 @@ const Drawer = createDrawerNavigator();
 import { useStyles } from '../styles/responsiveStyle';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
+import HomeScreen from '../screens/HomeScreen';
 
 export default function DrawerScreen({ navigation }) {
     const gs = useStyles();
     const cart = useSelector(state => state.cartData.cart);
-
+    // const [test, setTest] = useState(true);
 
     return (
         <Drawer.Navigator initialRouteName="mainScreen"
+
             screenOptions={{
                 headerStyle: {
                     height: 80,
@@ -28,8 +30,12 @@ export default function DrawerScreen({ navigation }) {
                     borderBottomColor: 'black',
                 },
                 headerTintColor: '#CC933B',
+                headerTitle: Logo,
                 headerRight: () => (
                     <View style={gs.headerNotification}>
+                        <TouchableOpacity onPress={() => navigation.navigate('SearchPage')} style={{ marginRight: 20, }}>
+                            <Ionicons name='search' color='#CC933B' size={25} />
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }}>
                             <Ionicons name='cart-outline' color='#CC933B' size={25} />
                             {cart.length > 0 ?
@@ -40,9 +46,10 @@ export default function DrawerScreen({ navigation }) {
                         </TouchableOpacity>
                     </View>
                 ),
+
             }}
         >
-            <Drawer.Screen name='mainScreen' component={BottomTabs} options={{ headerShown: true, headerTitle: Logo, title: 'Home', headerShadowVisible: false }} />
+            <Drawer.Screen name='mainScreen' component={BottomTabs} options={{ headerShown: true, headerShadowVisible: false }} />
             <Drawer.Screen name='login' component={LoginScreen} options={{ headerShown: false, title: 'Login' }} />
             <Drawer.Screen name='signup' component={SignupScreen} options={{ headerShown: false, title: 'Signup' }} />
             <Drawer.Screen name='terms' component={TermAndCondition} options={{ headerShown: false, title: 'Term And Condition' }} />

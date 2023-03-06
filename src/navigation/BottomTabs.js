@@ -3,7 +3,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import MyCartScreen from '../screens/MyCartScreen';
 import AccountScreen from '../screens/AccountScreen';
-import RewardScreen from '../screens/RewardScreen';
+import HotOfferScreen from '../screens/HotOfferScreen';
 import { Image } from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
@@ -42,19 +42,17 @@ export default function BottomTabs() {
             <Tab.Screen
                 name="Categories"
                 component={CategoriesScreen}
-
                 options={{
                     tabBarLabel: 'Categories',
                     tabBarIcon: ({ focused }) => (
                         focused ? <Image source={require('../../assets/categories_color.png')} style={{ padding: 2, marginTop: -5 }} />
                             : <Image source={require('../../assets/categories.png')} style={{ padding: 2, marginTop: -5 }} />
-
                     ),
                 }}
             />
             <Tab.Screen
-                name="offers"
-                component={RewardScreen}
+                name="hotOffer`"
+                component={HotOfferScreen}
                 options={{
                     tabBarLabel: 'Hot-Offers',
                     tabBarIcon: ({ focused }) => (

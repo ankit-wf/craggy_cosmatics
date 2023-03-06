@@ -53,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
       setLatestProduct(res.data.latest_products)
       setTimeout(() => {
         setLoading(false)
-      }, 2000);
+      },);
     },);
   }, [])
 
@@ -68,9 +68,6 @@ const HomeScreen = ({ navigation }) => {
     ).then((res) => {
       if (res.data.status = "success") {
         setData(res.data.response)
-        // setTimeout(() => {
-        //   setLoading(false)
-        // }, 2000);
       }
     })
   }

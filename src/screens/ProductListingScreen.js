@@ -31,14 +31,26 @@ const ProductListingScreen = ({ navigation, route }) => {
     useEffect(() => {
         if (id) {
             allProductsApi()
+            setTimeout(() => {
+                setLoading(false)
+            },);
         }
         if (name == "BestSellers") {
             bestSellingApi()
+            setTimeout(() => {
+                setLoading(false)
+            },);
         }
         if (name == "latest Product") {
             latestProductApi()
+            setTimeout(() => {
+                setLoading(false)
+            },);
         }
         bannerApi();
+        setTimeout(() => {
+            setLoading(false)
+        },);
     }, [id])
 
     const allProductsApi = () => {
@@ -55,9 +67,9 @@ const ProductListingScreen = ({ navigation, route }) => {
             }
         ).then((res) => {
             setData(res.data)
-            setTimeout(() => {
-                setLoading(false)
-            }, 1000);
+            // setTimeout(() => {
+            //     setLoading(false)
+            // },);
         })
     }
     const bestSellingApi = () => {
@@ -72,9 +84,9 @@ const ProductListingScreen = ({ navigation, route }) => {
             // console.log("resss", res.data)
             if (res.data.status = "success") {
                 setData(res.data.response)
-                setTimeout(() => {
-                    setLoading(false)
-                },);
+                // setTimeout(() => {
+                //     setLoading(false)
+                // },);
             }
         })
     }
@@ -89,9 +101,9 @@ const ProductListingScreen = ({ navigation, route }) => {
             }
         ).then((res) => {
             setData(res.data.latest_products)
-            setTimeout(() => {
-                setLoading(false)
-            },);
+            // setTimeout(() => {
+            //     setLoading(false)
+            // },);
         })
     }
     const bannerApi = () => {
@@ -105,9 +117,9 @@ const ProductListingScreen = ({ navigation, route }) => {
             }
         ).then((res) => {
             setBannerData(res.data.response)
-            setTimeout(() => {
-                setLoading(false)
-            }, 3000);
+            // setTimeout(() => {
+            //     setLoading(false)
+            // },);
         })
     }
 
