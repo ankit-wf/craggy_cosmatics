@@ -33,7 +33,7 @@ const AddAddress = ({ navigation }) => {
             }
         ));
         reset();
-        navigation.navigate('Addresses')
+        navigation.navigate('address')
     }
     return (
         <View>

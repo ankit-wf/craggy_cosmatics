@@ -13,7 +13,6 @@ export default function BottomTabs() {
         <Tab.Navigator
             tabBarPosition='bottom'
             initialRouteName="Home"
-
             screenOptions={{
                 swipeEnabled: false,
                 tabBarActiveTintColor: '#C68625',
@@ -26,7 +25,6 @@ export default function BottomTabs() {
                     alignSelf: 'center'
                 },
             }}
-
         >
             <Tab.Screen
                 name="Home"

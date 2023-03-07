@@ -24,7 +24,7 @@ const ResetPassword = ({ navigation }) => {
         if (isLoggedIn == true) {
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'HomeScreen' }],
+                routes: [{ name: 'homeScreen' }],
             });
             // console.log("first:", isLoggedIn)
             setLogin(true);
@@ -43,7 +43,7 @@ const ResetPassword = ({ navigation }) => {
         if (data.password == data.confirm_password) {
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'HomeScreen' }],
+                routes: [{ name: 'homeScreen' }],
             });
         }
         dispatch(loginActions.loginform({ isLoggedIn: true }));

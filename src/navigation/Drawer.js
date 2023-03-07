@@ -33,10 +33,10 @@ export default function DrawerScreen({ navigation }) {
                 headerTitle: Logo,
                 headerRight: () => (
                     <View style={gs.headerNotification}>
-                        <TouchableOpacity onPress={() => navigation.navigate('SearchPage')} style={{ marginRight: 20, }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('searchPage')} activeOpacity={0.8} style={{ marginRight: 20, }}>
                             <Ionicons name='search' color='#CC933B' size={25} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={{ marginRight: 20, }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('cart')} activeOpacity={0.8} style={{ marginRight: 20, }}>
                             <Ionicons name='cart-outline' color='#CC933B' size={25} />
                             {cart.length > 0 ?
                                 <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}>

@@ -38,7 +38,7 @@ const ShopScreen = ({ navigation }) => {
         cart: Data
       }
     ));
-    navigation.navigate('Cart', product_id);
+    navigation.navigate('cart', product_id);
   }
   return (
     <View>
@@ -78,7 +78,7 @@ const ShopScreen = ({ navigation }) => {
           data={allProduct}
           renderItem={({ item }) => (
 
-            <TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("Product", item.product_id)} >
+            <TouchableOpacity style={sS.product109} onPress={() => navigation.navigate("productDetail", item.product_id)} >
               <View style={sS.imgRoot} >
                 <Image source={{ uri: item.images }} style={sS.productImg} />
               </View>

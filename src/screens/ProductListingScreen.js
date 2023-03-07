@@ -11,12 +11,11 @@ import { ScrollView } from 'react-native-virtualized-view';
 import BottomSheet from 'react-native-gesture-bottom-sheet'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { RadioButton } from 'react-native-paper'
-const bannerImg = require('../../Data/bannerSlider.json')
 
 const ProductListingScreen = ({ navigation, route }) => {
     const styles = useStyles()
     const dispatch = useDispatch();
-    const storeData = useSelector(state => state.cartData.cart);
+    const cartData = useSelector(state => state.cartData.cart);
     const [loading, setLoading] = useState(true);
     const [bottomSheet, setBottomSheet] = useState(true);
     const [data, setData] = useState([]);
@@ -24,6 +23,7 @@ const ProductListingScreen = ({ navigation, route }) => {
     // console.log("dDDDDD", bannerData)
     const name = route.params.name;
     const id = route.params.id;
+    const banner = route.params.banner;
     const [checked, setChecked] = useState('Latest');
     const [visible, setVisible] = useState(false);
     const bs = useRef();
@@ -125,9 +125,9 @@ const ProductListingScreen = ({ navigation, route }) => {
 
     const onDismissSnackBar = () => setVisible(false);
     const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
-        if (storeData.length !== 0) {
+        if (cartData.length !== 0) {
             let ss = false;
-            storeData.find(data => {
+            cartData.find(data => {
                 if (data.categoriesDetail_id == product_id) {
                     ss = true;
                 }
@@ -137,7 +137,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                 setVisible(!visible);
             }
             else {
-                let Data = [...storeData, {
+                let Data = [...cartData, {
                     description: product_title,
                     categoriesDetail_id: product_id,
                     images: image,
@@ -146,11 +146,11 @@ const ProductListingScreen = ({ navigation, route }) => {
                     quantity: 1
                 }];
                 dispatch(submitActions.price({ cart: Data }));
-                navigation.navigate("Cart");
+                navigation.navigate("cart");
             }
         }
         else {
-            let Data = [...storeData, {
+            let Data = [...cartData, {
                 description: product_title,
                 categoriesDetail_id: product_id,
                 images: image,
@@ -159,7 +159,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                 quantity: 1
             }];
             dispatch(submitActions.price({ cart: Data }));
-            navigation.navigate("Cart");
+            navigation.navigate("cart");
         }
 
     }
@@ -180,6 +180,7 @@ const ProductListingScreen = ({ navigation, route }) => {
             >
                 {/* <SkeletonContainer isLoading={loading}> */}
                 <View style={styles.swiperRoot}>
+
                     <Swiper style={styles.wrapper}  >
                         {bannerData.map((e, i) => {
                             return (
@@ -267,7 +268,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                                 < TouchableOpacity
                                     style={sS.product109}
                                     activeOpacity={0.8}
-                                    onPress={() => navigation.navigate("Product", item.product_id)}
+                                    onPress={() => navigation.navigate("productDetail", item.product_id)}
                                 >
                                     <View style={sS.imgRoot} >
                                         <Image source={{ uri: item.image }} style={sS.productImg} />
@@ -279,9 +280,9 @@ const ProductListingScreen = ({ navigation, route }) => {
                                         </View>
                                         <View style={sS.baseLine}></View>
                                         <View style={sS.priceRoot}>
-                                            <Text style={sS.price}>₹{item.sale_price}</Text>
-                                            <Text style={sS.spaceRoot}>/ </Text>
                                             <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                            <Text style={sS.spaceRoot}>/ </Text>
+                                            <Text style={sS.price}>₹{item.sale_price}</Text>
                                         </View>
                                     </View>
 

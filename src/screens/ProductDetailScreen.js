@@ -50,7 +50,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
             setSingleProduct(res.data)
             setTimeout(() => {
                 setLoading(false);
-            }, 2000);
+            },);
         })
     }
 
@@ -98,7 +98,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     quantity: 1
                 }];
                 dispatch(submitActions.price({ cart: Data }));
-                navigation.navigate("Cart");
+                navigation.navigate("cart");
             }
         }
         else {
@@ -111,7 +111,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 quantity: 1
             }];
             dispatch(submitActions.price({ cart: Data }));
-            navigation.navigate("Cart");
+            navigation.navigate("cart");
         }
 
     }
@@ -134,7 +134,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
             }
         })
     }
-
 
     const wishlistHandler = () => {
         setHeart(!heart);
@@ -184,6 +183,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                         <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
                                                     </View>
                                                 </SkeletonContainer>
+
                                             </View>
                                             :
                                             data.gallery_images.map((i, e) => {
@@ -198,12 +198,14 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 )
                                             })}
                                     </Swiper>
+
                                     <ImageView
                                         images={data.gallery_images}
                                         imageIndex={0}
                                         visible={isVisible}
                                         onRequestClose={() => setIsVisible(false)}
                                     />
+
                                     <SkeletonContainer isLoading={loading} >
                                         <View style={styles.shadow_Box} elevation={7}>
                                             <TouchableOpacity
@@ -290,7 +292,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 <Text style={styles.review_MainHeading}>REVIEWS</Text>
                                                 <TouchableOpacity
                                                     activeOpacity={0.8}
-                                                    onPress={() => navigation.navigate('write_review')}
+                                                    onPress={() => navigation.navigate('writeReview')}
                                                     style={styles.write_review}
                                                 >
                                                     <Text style={styles.review_heading}> WRITE A REVIEW </Text>
@@ -337,7 +339,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <SkeletonContainer isLoading={loading} >
                                             <TouchableOpacity
                                                 activeOpacity={0.5}
-                                                onPress={() => navigation.navigate('offers')}
+                                                onPress={() => navigation.navigate('reviews')}
                                                 style={styles.allreview_root}
                                             >
                                                 <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
@@ -355,7 +357,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 <Heading title=' YOU MAY ALSO LIKE ' />
                                                 <TouchableOpacity
                                                     activeOpacity={0.6}
-                                                    onPress={() => { navigation.navigate('ProductListing', { name: bs }) }}
+                                                    onPress={() => { navigation.navigate('productListing', { name: bs }) }}
                                                     // onPress={() => console.log("first")}
                                                     style={styles.viewLatestProduct}
                                                 >
@@ -374,7 +376,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                             <TouchableOpacity
                                                                 // activeOpacity={0.8}
                                                                 style={bsP.touchable}
-                                                                onPress={() => navigation.navigate('Product', e.product_id)}
+                                                                onPress={() => navigation.navigate('productDetail', e.product_id)}
                                                                 key={i}
                                                             >
                                                                 <View style={bsP.imgRoot} >
@@ -389,9 +391,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                     <View style={styles.baseLine}></View>
 
                                                                     <View style={bsP.priceRoot}>
-                                                                        <Text style={bsP.price}>₹{e.sale_price}</Text>
-                                                                        <Text style={bsP.spaceRoot}>/ </Text>
                                                                         <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                                                                        <Text style={bsP.spaceRoot}>/ </Text>
+                                                                        <Text style={bsP.price}>₹{e.sale_price}</Text>
                                                                     </View>
                                                                 </View>
 

@@ -1,10 +1,15 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { useSelector } from 'react-redux';
+
 
 const OrderPlacedScreen = ({ navigation, route }) => {
+    const AddData = useSelector(state => state.userData.userAddress);
     const wf = route.params.wf;
     const wof = route.params.wof;
-    // console.log("fffffffghhhhh", wf, wof)
+    const fee = route.params.fee;
+    const item = route.params.item;
+    // console.log("fffffffghhhhh", item)
     return (
         <View>
             <View style={styles.root}>
@@ -15,8 +20,12 @@ const OrderPlacedScreen = ({ navigation, route }) => {
                     <Text style={styles.order_placed_text}>Order Placed</Text>
                 </View>
                 <View style={styles.price_root}>
-                    <Text style={styles.price_text}>Total price for 1 item ₹{wof}</Text>
+                    {fee ?
+                        <Text style={styles.price_text}>Total price for {item} item ₹{wf}</Text>
+                        : <Text style={styles.price_text}>Total price for {item} item ₹{wof}</Text>
+                    }
                 </View>
+
                 <View style={styles.detail_root}>
                     <Text style={styles.detail_text}>View Details</Text>
                 </View>
@@ -30,17 +39,17 @@ const OrderPlacedScreen = ({ navigation, route }) => {
             <View style={styles.address_root}>
                 <View style={styles.address_inner_root}>
                     <View style={styles.flex_root}>
-                        <Text>Karan Kumar</Text>
+                        <Text style={styles.full_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
                         {/* <View style={styles.change_root}>
                             <Text style={{ color: 'blue' }}>Change</Text>
                         </View> */}
                     </View>
 
-                    <Text>plot 209</Text>
-                    <Text>om sai interprises, shahi mazra,</Text>
-                    <Text>Mohali</Text>
-                    <Text>Punjab - 160059</Text>
-                    <Text>Phone number - 1234567890</Text>
+                    <Text style={styles.full_address}>{AddData[0].flate}</Text>
+                    <Text style={styles.full_address}>{AddData[0].Apartment}</Text>
+                    <Text style={styles.full_address}>{AddData[0].City}</Text>
+                    <Text style={styles.full_address}>{AddData[0].State} - {AddData[0].Pincode}</Text>
+                    <Text style={styles.full_address}>Phone number - {AddData[0].phone}</Text>
                 </View>
             </View>
             <View style={styles.btn_root}>
@@ -123,6 +132,14 @@ const styles = StyleSheet.create({
     flex_root: {
         flexDirection: 'row',
         justifyContent: 'space-between'
+    },
+    full_name: {
+        fontSize: 16,
+        fontWeight: '700'
+    },
+    full_address: {
+        fontSize: 15,
+        fontWeight: '500'
     },
     change_root: {
         height: 30,

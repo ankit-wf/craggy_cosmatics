@@ -98,7 +98,7 @@ const MyCartScreen = ({ navigation, route }) => {
               <View key={e}>
                 <View key={e} style={styles.dataRoot}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("Product", i.categoriesDetail_id)}
+                    onPress={() => navigation.navigate("productDetail", i.categoriesDetail_id)}
                     style={styles.dataImgRoot}
                   >
                     <SkeletonContainer isLoading={loading}>
@@ -140,9 +140,9 @@ const MyCartScreen = ({ navigation, route }) => {
                   </View>
                   <SkeletonContainer isLoading={loading}>
                     <View style={styles.textPriceRoot} key={e}>
-                      <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
-                      <Text style={styles.slace} > / </Text>
                       <Text style={styles.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
+                      <Text style={styles.slace} > / </Text>
+                      <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
                     </View>
                   </SkeletonContainer>
 
@@ -155,7 +155,7 @@ const MyCartScreen = ({ navigation, route }) => {
           })}
 
           <SkeletonContainer isLoading={loading}>
-            <TouchableOpacity style={styles.TextInputRoot} onPress={() => navigation.navigate('offer_coupan')}>
+            <TouchableOpacity style={styles.TextInputRoot} onPress={() => navigation.navigate('coupan')}>
               {/* <TextInput
               // onChangeText={onChangeNumber}
               // value={number}

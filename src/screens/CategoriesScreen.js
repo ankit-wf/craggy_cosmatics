@@ -49,7 +49,7 @@ const CategoriesScreen = ({ navigation }) => {
                 <TouchableOpacity
                   activeOpacity={0.8}
                   style={styles1.touchable_style}
-                  onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }}
+                  onPress={() => { navigation.navigate('productListing', { id: data.term_id, name: data.name, banner: data.app_banner_image }) }}
                   key={i}
                 >
                   <View style={styles.catMainSec}>

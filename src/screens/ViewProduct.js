@@ -58,7 +58,7 @@ const ViewProduct = ({ navigation }) => {
                     quantity: 1
                 }];
                 dispatch(submitActions.price({ cart: Data }));
-                navigation.navigate("Cart");
+                navigation.navigate("cart");
             }
         }
         else {
@@ -71,7 +71,7 @@ const ViewProduct = ({ navigation }) => {
                 quantity: 1
             }];
             dispatch(submitActions.price({ cart: Data }));
-            navigation.navigate("Cart");
+            navigation.navigate("cart");
         }
 
     }
@@ -117,7 +117,7 @@ const ViewProduct = ({ navigation }) => {
                                 marginTop: 20,
                                 marginBottom: 20,
                             }}
-                                onPress={() => navigation.navigate("Product", item.product_id)} >
+                                onPress={() => navigation.navigate("productDetail", item.product_id)} >
                                 <View style={sS.imgRoot} >
                                     <Image source={{ uri: item.image }} style={sS.productImg} />
                                 </View>
@@ -130,9 +130,9 @@ const ViewProduct = ({ navigation }) => {
                                     <View style={sS.baseLine}></View>
 
                                     <View style={sS.priceRoot}>
-                                        <Text style={sS.price}>₹{item.sale_price}</Text>
-                                        <Text style={sS.spaceRoot}>/ </Text>
                                         <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                        <Text style={sS.spaceRoot}>/ </Text>
+                                        <Text style={sS.price}>₹{item.sale_price}</Text>
                                     </View>
 
                                 </View>

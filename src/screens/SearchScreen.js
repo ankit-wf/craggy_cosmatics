@@ -108,7 +108,7 @@ const SearchScreen = ({ navigation }) => {
                     quantity: 1
                 }];
                 dispatch(submitActions.price({ cart: Data }));
-                navigation.navigate("Cart");
+                navigation.navigate("cart");
             }
         }
         else {
@@ -121,7 +121,7 @@ const SearchScreen = ({ navigation }) => {
                 quantity: 1
             }];
             dispatch(submitActions.price({ cart: Data }));
-            navigation.navigate("Cart");
+            navigation.navigate("cart");
         }
 
     }
@@ -204,7 +204,7 @@ const SearchScreen = ({ navigation }) => {
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 style={styles.viewLatestProduct}
-                                onPress={() => { navigation.navigate('ProductListing', { name: bs }) }}
+                                onPress={() => { navigation.navigate('productListing', { name: bs }) }}
                             >
                                 <Text style={styles.latestProductText}>
                                     View All
@@ -221,7 +221,7 @@ const SearchScreen = ({ navigation }) => {
                                         <TouchableOpacity
                                             // activeOpacity={0.8}
                                             style={bsP.touchable}
-                                            onPress={() => navigation.navigate('Product', e.product_id)}
+                                            onPress={() => navigation.navigate('productDetail', e.product_id)}
                                             key={i}
                                         >
                                             <View style={bsP.imgRoot} >
@@ -268,7 +268,7 @@ const SearchScreen = ({ navigation }) => {
                                     < TouchableOpacity
                                         style={sS.product109}
                                         activeOpacity={0.8}
-                                        onPress={() => navigation.navigate("Product", item.product_id)}
+                                        onPress={() => navigation.navigate("productDetail", item.product_id)}
                                     >
                                         <View style={sS.imgRoot} >
                                             <Image source={{ uri: item.image }} style={sS.productImg} />

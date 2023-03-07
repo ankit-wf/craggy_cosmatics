@@ -2,9 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
 const HotOfferScreen = () => {
-
     const [details, setDetails] = useState(false)
-
     const detailsHandle = () => {
         setDetails(!details);
     }

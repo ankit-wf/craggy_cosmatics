@@ -48,7 +48,7 @@ const WriteReview = ({ navigation }) => {
                 review: Data
             }
         ));
-        navigation.navigate('Product')
+        navigation.navigate('productDetail')
         reset();
     }
 

@@ -138,7 +138,7 @@ const CheckOutScreen = ({ navigation, route }) => {
                             <View style={{ backgroundColor: '#fff', marginTop: '1%' }} key={e}>
                                 <View key={e} style={styles.dataRoot}>
                                     <TouchableOpacity
-                                        onPress={() => navigation.navigate("Product", i.categoriesDetail_id)}
+                                        onPress={() => navigation.navigate("productDetail", i.categoriesDetail_id)}
                                         style={styles.dataImgRoot}
                                     >
                                         <SkeletonContainer isLoading={loading}>
@@ -173,9 +173,9 @@ const CheckOutScreen = ({ navigation, route }) => {
                                     </View>
                                     <SkeletonContainer isLoading={loading}>
                                         <View style={styles.textPriceRoot} key={e}>
-                                            <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
-                                            <Text style={styles.slace} > / </Text>
                                             <Text style={styles.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
+                                            <Text style={styles.slace} > / </Text>
+                                            <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
                                         </View>
                                     </SkeletonContainer>
                                 </View>
@@ -288,8 +288,8 @@ const CheckOutScreen = ({ navigation, route }) => {
                     <View style={styles.bottomView} >
                         <View style={styles.inner_bottomView}>
                             {fee ?
-                                <Button title={withS} onPress={() => navigation.navigate("OrderPlaced", { wf: Tm + fee })} />
-                                : <Button title={withOutS} onPress={() => navigation.navigate("OrderPlaced", { wof: Tm })} />
+                                <Button title={withS} onPress={() => navigation.navigate("orderPlaced", { wf: Tm + fee, fee: fee, item: CartData.length })} />
+                                : <Button title={withOutS} onPress={() => navigation.navigate("orderPlaced", { wof: Tm, fee: fee, item: CartData.length })} />
                             }
                         </View>
                     </View>

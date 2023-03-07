@@ -13,6 +13,7 @@ const AccountScreen = ({ navigation }) => {
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
   const userData = useSelector(state => state.userData.user_data);
 
+
   useFocusEffect(
     React.useCallback(() => {
       if (isLoggedIn === false) {
@@ -27,9 +28,10 @@ const AccountScreen = ({ navigation }) => {
 
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
+    dispatch(loginActions.userlogin({ user_data: "" }));
     navigation.reset({
       index: 0,
-      routes: [{ name: 'HomeScreen' }],
+      routes: [{ name: 'homeScreen' }],
     });
     // navigation.navigate('login');
   }
@@ -60,7 +62,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('my_order')}
+          onPress={() => navigation.navigate('order')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -85,7 +87,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('Addresses')}
+          onPress={() => navigation.navigate('address')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -110,7 +112,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('my_wishlist')}
+          onPress={() => navigation.navigate('wishlist')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -156,7 +158,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('offer_coupan')}
+          onPress={() => navigation.navigate('coupan')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -181,7 +183,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('offer_coupan')}
+          onPress={() => navigation.navigate('coupan')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -206,7 +208,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('offer_coupan')}
+          onPress={() => navigation.navigate('coupan')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -230,7 +232,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('offers')}
+          onPress={() => navigation.navigate('hotOffer')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons

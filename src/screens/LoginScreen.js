@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
         if (isLoggedIn == true) {
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'HomeScreen' }],
+                routes: [{ name: 'homeScreen' }],
             });
             setLogin(true);
         };
@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
                 dispatch(loginActions.loginform({ isLoggedIn: true }));
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: 'HomeScreen' }],
+                    routes: [{ name: 'homeScreen' }],
                 });
             }
         })

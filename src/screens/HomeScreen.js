@@ -8,7 +8,6 @@ import { List, Snackbar } from 'react-native-paper';
 import FooterImage from '../components/FooterImage'
 import { defaultStyles as ds } from '../styles/defaultStyle'
 import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
-import { letestProductStyle as lP } from '../styles/letestProductStyle'
 import { categoriesStyle as cS } from '../styles/categoriesStyle'
 import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const imageFooter = FooterImage();
-  const storeData = useSelector(state => state.cartData.cart);
+  const cartData = useSelector(state => state.cartData.cart);
   const [loading, setLoading] = useState(true)
   const [visible, setVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -29,7 +28,6 @@ const HomeScreen = ({ navigation }) => {
   const [bestSelling, setBestSelling] = useState([]);
   const [category, setCategory] = useState([]);
   const [latestProduct, setLatestProduct] = useState([]);
-
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
@@ -57,44 +55,44 @@ const HomeScreen = ({ navigation }) => {
     },);
   }, [])
 
-  const Category_Api = () => {
-    axios.get(
-      `https://craggycosmetic.com/api/products/category/`,
-      {
-        headers: {
-          'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-        }
-      }
-    ).then((res) => {
-      if (res.data.status = "success") {
-        setData(res.data.response)
-      }
-    })
-  }
+  // const Category_Api = () => {
+  //   axios.get(
+  //     `https://craggycosmetic.com/api/products/category/`,
+  //     {
+  //       headers: {
+  //         'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+  //       }
+  //     }
+  //   ).then((res) => {
+  //     if (res.data.status = "success") {
+  //       setData(res.data.response)
+  //     }
+  //   })
+  // }
 
-  const BestSelling_Api = () => {
-    axios.get(
-      `https://craggycosmetic.com/api/products/best-selling/`,
-      {
-        headers: {
-          'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-        }
-      }
-    ).then((res) => {
-      // console.log("resss", res.data)
-      if (res.data.status = "success") {
-        setBestData(res.data.response)
-        // setTimeout(() => {
-        //   setLoading(false)
-        // }, 2000);
-      }
-    })
-  }
+  // const BestSelling_Api = () => {
+  //   axios.get(
+  //     `https://craggycosmetic.com/api/products/best-selling/`,
+  //     {
+  //       headers: {
+  //         'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+  //       }
+  //     }
+  //   ).then((res) => {
+  //     // console.log("resss", res.data)
+  //     if (res.data.status = "success") {
+  //       setBestData(res.data.response)
+  //       // setTimeout(() => {
+  //       //   setLoading(false)
+  //       // }, 2000);
+  //     }
+  //   })
+  // }
   const onDismissSnackBar = () => setVisible(false);
   const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
-    if (storeData.length !== 0) {
+    if (cartData.length !== 0) {
       let ss = false;
-      storeData.find(data => {
+      cartData.find(data => {
         if (data.categoriesDetail_id == product_id) {
           ss = true;
         }
@@ -104,7 +102,7 @@ const HomeScreen = ({ navigation }) => {
         setVisible(!visible);
       }
       else {
-        let Data = [...storeData, {
+        let Data = [...cartData, {
           description: product_title,
           categoriesDetail_id: product_id,
           images: image,
@@ -113,11 +111,11 @@ const HomeScreen = ({ navigation }) => {
           quantity: 1
         }];
         dispatch(submitActions.price({ cart: Data }));
-        navigation.navigate("Cart");
+        navigation.navigate("cart");
       }
     }
     else {
-      let Data = [...storeData, {
+      let Data = [...cartData, {
         description: product_title,
         categoriesDetail_id: product_id,
         images: image,
@@ -126,12 +124,11 @@ const HomeScreen = ({ navigation }) => {
         quantity: 1
       }];
       dispatch(submitActions.price({ cart: Data }));
-      navigation.navigate("Cart");
+      navigation.navigate("cart");
     }
-
   }
   const SearchHandler = () => {
-    navigation.navigate('SearchPage')
+    navigation.navigate('searchPage')
     Keyboard.dismiss()
   }
 
@@ -145,9 +142,7 @@ const HomeScreen = ({ navigation }) => {
       >
         <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
       </Snackbar>
-
       <Header search={SearchHandler} />
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled={true}
@@ -175,11 +170,12 @@ const HomeScreen = ({ navigation }) => {
           <ScrollView horizontal>
             <View style={cS.categoriesRoot}>
               {category.map((data, i) => {
+                // console.log("kkdkddkdk", data)
                 if (data.cat_name != "Uncategorized")
                   return (
                     <TouchableOpacity
                       activeOpacity={0.8}
-                      onPress={() => { navigation.navigate('ProductListing', { id: data.id, name: data.cat_name }) }} key={i}
+                      onPress={() => { navigation.navigate('productListing', { id: data.id, name: data.cat_name }) }} key={i}
                       style={styles1.category_root}
                     >
                       <View style={cS.skinImgRoot}>
@@ -201,7 +197,7 @@ const HomeScreen = ({ navigation }) => {
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.viewLatestProduct}
-              onPress={() => { navigation.navigate('ProductListing', { name: bs }) }}
+              onPress={() => { navigation.navigate('productListing', { name: bs }) }}
             >
               <Text style={styles.latestProductText}>
                 View All
@@ -216,26 +212,24 @@ const HomeScreen = ({ navigation }) => {
               {bestSelling.map((e, i) => {
                 return (
                   <TouchableOpacity
-                    // activeOpacity={0.8}
+                    activeOpacity={0.8}
                     style={bsP.touchable}
-                    onPress={() => navigation.navigate('Product', e.product_id)}
+                    onPress={() => navigation.navigate('productDetail', e.product_id)}
                     key={i}
                   >
                     <View style={bsP.imgRoot} >
                       <Image source={{ uri: e.image }} style={bsP.productImg} />
                     </View>
-
                     <View style={bsP.contentRoot}>
                       <View style={bsP.descriptionRoot}>
                         <Text style={bsP.descriptionText}>{e.product_title}</Text>
                       </View>
-
                       <View style={bsP.baseLine}></View>
-
                       <View style={bsP.priceRoot}>
-                        <Text style={bsP.price}>₹{e.sale_price}</Text>
-                        <Text style={bsP.spaceRoot}>/ </Text>
                         <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                        <Text style={bsP.spaceRoot}>/ </Text>
+                        <Text style={bsP.price}>₹{e.sale_price}</Text>
+
                       </View>
                     </View>
 
@@ -262,7 +256,7 @@ const HomeScreen = ({ navigation }) => {
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.viewLatestProduct}
-              onPress={() => navigation.navigate("ProductListing", { name: lp })}
+              onPress={() => navigation.navigate("productListing", { name: lp })}
             >
               <Text style={styles.latestProductText}>
                 View All
@@ -279,7 +273,7 @@ const HomeScreen = ({ navigation }) => {
                   <TouchableOpacity
                     activeOpacity={0.8}
                     style={bsP.touchable}
-                    onPress={() => navigation.navigate('Product', e.product_id)}
+                    onPress={() => navigation.navigate('productDetail', e.product_id)}
                     key={i}
                   >
                     <View style={bsP.imgRoot} >
@@ -294,9 +288,9 @@ const HomeScreen = ({ navigation }) => {
                       <View style={bsP.baseLine}></View>
 
                       <View style={bsP.priceRoot}>
-                        <Text style={bsP.price}>₹{e.sale_price}</Text>
-                        <Text style={bsP.spaceRoot}>/ </Text>
                         <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                        <Text style={bsP.spaceRoot}>/ </Text>
+                        <Text style={bsP.price}>₹{e.sale_price}</Text>
                       </View>
                     </View>
 
@@ -340,7 +334,7 @@ const HomeScreen = ({ navigation }) => {
                       </View>
 
                       <View style={styles.essientialOilRoot}>
-                        <Text style={styles.essientialOilText} > {img.text} </Text>
+                        <Text style={styles.essientialOilText}> {img.text} </Text>
                       </View>
                     </View>
                   )
@@ -353,7 +347,7 @@ const HomeScreen = ({ navigation }) => {
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.ViewProduct}
-                onPress={() => navigation.navigate('ViewProduct')} >
+                onPress={() => navigation.navigate('viewProduct')} >
                 <Text style={styles.viewProductText}>VIEW ALL PRODUCT</Text>
               </TouchableOpacity>
             </SkeletonContainer>
