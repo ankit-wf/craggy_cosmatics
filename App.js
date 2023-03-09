@@ -22,7 +22,6 @@ const linking = {
   },
 };
 
-
 export default function App() {
   const { store, persistor } = Index();
   const [fontsLoaded] = useFonts({
@@ -41,7 +40,6 @@ export default function App() {
     'Lato400': require('./assets/fonts/Lato/Lato-Regular.ttf'),
     'Lato300': require('./assets/fonts/Lato/Lato-Light.ttf'),
     'Baskervville400': require('./assets/fonts/Baskervville/Baskervville-Regular.ttf'),
-
   });
 
   useEffect(() => {

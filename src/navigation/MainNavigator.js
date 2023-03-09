@@ -15,7 +15,6 @@ import CoupanOfferScreen from '../screens/CoupanOfferScreen';
 import ViewAllLatestProduct from '../screens/ViewAllLatestProduct';
 import ViewProduct from '../screens/ViewProduct'
 import WriteReview from '../screens/WriteReview';
-import SkinCareProduct from '../screens/SkinCareProduct';
 import DrawerScreen from './Drawer';
 import NotificationScreen from '../screens/NotificationScreen';
 import RewardScreen from '../screens/RewardScreen';
