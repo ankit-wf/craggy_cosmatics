@@ -10,21 +10,23 @@ import { submitActions } from '../store/dataSlice'
 import { ScrollView } from 'react-native-virtualized-view';
 import BottomSheet from 'react-native-gesture-bottom-sheet'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
-import { RadioButton } from 'react-native-paper'
+import { RadioButton } from 'react-native-paper';
+import { CONSUMER_KEY, ALL_PRODUCT_API, BEST_SELLING_API, HOME_API } from "@env";
+
 
 const ProductListingScreen = ({ navigation, route }) => {
     const styles = useStyles()
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.cartData.cart);
     const [loading, setLoading] = useState(true);
-    const [bottomSheet, setBottomSheet] = useState(true);
     const [data, setData] = useState([]);
-    const [bannerData, setBannerData] = useState([]);
-    // console.log("dDDDDD", bannerData)
+    // const [bannerData, setBannerData] = useState([]);
+    console.log("dDDDDD", data)
     const name = route.params.name;
     const id = route.params.id;
     const banner = route.params.banner;
-    const [checked, setChecked] = useState('Latest');
+    const [checked, setChecked] = useState('Popularity');
+    // console.log("chchchch", checked)
     const [visible, setVisible] = useState(false);
     const bs = useRef();
 
@@ -47,81 +49,70 @@ const ProductListingScreen = ({ navigation, route }) => {
                 setLoading(false)
             },);
         }
-        bannerApi();
-        setTimeout(() => {
-            setLoading(false)
-        },);
+        // bannerApi();
+        // setTimeout(() => {
+        //     setLoading(false)
+        // },);
+
     }, [id])
 
     const allProductsApi = () => {
         axios.get(
-            `https://craggycosmetic.com/api/products/`,
+            ALL_PRODUCT_API,
             {
                 params: {
                     category_id: id
                 },
                 headers: {
                     'Content-Type': 'application/json',
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {
             setData(res.data)
-            // setTimeout(() => {
-            //     setLoading(false)
-            // },);
         })
     }
     const bestSellingApi = () => {
         axios.get(
-            `https://craggycosmetic.com/api/products/best-selling/`,
+            BEST_SELLING_API,
             {
                 headers: {
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {
             // console.log("resss", res.data)
             if (res.data.status = "success") {
                 setData(res.data.response)
-                // setTimeout(() => {
-                //     setLoading(false)
-                // },);
             }
         })
     }
 
     const latestProductApi = () => {
         axios.get(
-            `https://craggycosmetic.com/api/home/`,
+            HOME_API,
             {
                 headers: {
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {
             setData(res.data.latest_products)
-            // setTimeout(() => {
-            //     setLoading(false)
-            // },);
         })
     }
-    const bannerApi = () => {
-        axios.get(
-            ` https://craggycosmetic.com/api/banner/`,
-            {
-                headers: {
-                    // 'Content-Type': 'application/json',
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-                }
-            }
-        ).then((res) => {
-            setBannerData(res.data.response)
-            // setTimeout(() => {
-            //     setLoading(false)
-            // },);
-        })
-    }
+    // const bannerApi = () => {
+    //     axios.get(
+    //         ` https://craggycosmetic.com/api/banner/`,
+    //         {
+    //             headers: {
+    //                 // 'Content-Type': 'application/json',
+    //                 'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+    //             }
+    //         }
+    //     ).then((res) => {
+    //         setBannerData(res.data.response)
+    //     })
+    // }
 
     const onDismissSnackBar = () => setVisible(false);
     const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
@@ -164,6 +155,23 @@ const ProductListingScreen = ({ navigation, route }) => {
 
     }
 
+    const latestData = () => {
+        setChecked('Latest')
+        data.sort((a, b) => b.publish_data.localeCompare(a.publish_data));
+        // console.log(data)
+        setData(data)
+    }
+    const LowestData = () => {
+        setChecked('Low to High')
+        data.sort((a, b) => a.sale_price.localeCompare(b.sale_price));
+        setData(data)
+    }
+    const HighestData = () => {
+        setChecked("High to Low")
+        data.sort((a, b) => b.sale_price.localeCompare(a.sale_price));
+        setData(data)
+    }
+
     return (
         <View>
             <Snackbar
@@ -179,31 +187,8 @@ const ProductListingScreen = ({ navigation, route }) => {
                 nestedScrollEnabled={true}
             >
                 {/* <SkeletonContainer isLoading={loading}> */}
-                <View style={styles.swiperRoot}>
-
-                    <Swiper style={styles.wrapper}  >
-                        {bannerData.map((e, i) => {
-                            return (
-                                <View key={i} >
-                                    <Image source={{ uri: e }} style={styles1.banner_img} />
-                                    {/* <View style={styles.sliderContent}>
-                                        <View style={styles.bannerTextRoot}>
-                                            <Text style={styles.bannerText}>{e.line}</Text>
-                                        </View>
-                                        <View style={styles.bannerCode} >
-                                            <Image source={require('../../assets/CodeImg.png')} />
-                                        </View>
-                                        <TouchableOpacity
-                                            activeOpacity={0.8}
-                                            style={styles.bannerButton}
-                                        >
-                                            <Text style={styles.bannerShopNow}>{e.buttonText}</Text>
-                                        </TouchableOpacity>
-                                    </View> */}
-                                </View>
-                            )
-                        })}
-                    </Swiper>
+                <View style={styles1.banner_img_root}>
+                    <Image source={{ uri: banner }} style={styles1.banner_img} />
                 </View>
                 {/* </SkeletonContainer> */}
                 <SafeAreaView style={styles.container}>
@@ -223,14 +208,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                             <View style={{ alignItems: 'center' }}>
                                 <Text style={styles1.panelTitle}>Sort By</Text>
                             </View>
-                            <View style={styles1.btnTextRoot}>
-                                <Text style={styles1.select_text}>Latest</Text>
-                                <RadioButton
-                                    value="Latest"
-                                    status={checked === 'Latest' ? 'checked' : 'unchecked'}
-                                    onPress={() => setChecked('Latest')}
-                                />
-                            </View>
+
                             <View style={styles1.btnTextRoot}>
                                 <Text style={styles1.select_text}>Popularity</Text>
                                 <RadioButton
@@ -240,11 +218,19 @@ const ProductListingScreen = ({ navigation, route }) => {
                                 />
                             </View>
                             <View style={styles1.btnTextRoot}>
+                                <Text style={styles1.select_text}>Latest</Text>
+                                <RadioButton
+                                    value="Latest"
+                                    status={checked === 'Latest' ? 'checked' : 'unchecked'}
+                                    onPress={latestData}
+                                />
+                            </View>
+                            <View style={styles1.btnTextRoot}>
                                 <Text style={styles1.select_text}>Price - Low to High</Text>
                                 <RadioButton
                                     value="Low"
                                     status={checked === 'Low' ? 'checked' : 'unchecked'}
-                                    onPress={() => setChecked('Price Low to High')}
+                                    onPress={LowestData}
                                 />
                             </View>
                             <View style={styles1.btnTextRoot}>
@@ -252,13 +238,12 @@ const ProductListingScreen = ({ navigation, route }) => {
                                 <RadioButton
                                     value="High"
                                     status={checked === 'High' ? 'checked' : 'unchecked'}
-                                    onPress={() => setChecked('Price High to Low')}
+                                    onPress={HighestData}
                                 />
                             </View>
                         </View>
                     </BottomSheet>
                 </SafeAreaView>
-
 
                 <View style={sS.productsListRoot}>
                     <FlatList
@@ -355,6 +340,9 @@ const styles1 = StyleSheet.create({
         fontSize: 15,
         // fontWeight: 'bolt',
         // color: 'white',
+    },
+    banner_img_root: {
+        height: 200,
     },
     banner_img: {
         height: '100%',

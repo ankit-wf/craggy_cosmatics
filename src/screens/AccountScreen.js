@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
 import { loginActions } from '../store/UserSlice'
+import { submitActions } from '../store/dataSlice'
 import { useFocusEffect } from '@react-navigation/native';
 
 
@@ -29,6 +30,7 @@ const AccountScreen = ({ navigation }) => {
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
     dispatch(loginActions.userlogin({ user_data: "" }));
+    // dispatch(submitActions.price({ cart: "" }));
     navigation.reset({
       index: 0,
       routes: [{ name: 'homeScreen' }],
@@ -48,7 +50,7 @@ const AccountScreen = ({ navigation }) => {
                 <Text style={styles.redTextName}>{userData.display_name}</Text>
               </View>
               <View style={styles.user_phone}>
-                <Text style={styles.redText}>+91{userData.user_phone}</Text>
+                <Text style={styles.redText}>{userData.user_phone}</Text>
               </View>
               <View style={styles.display_name}>
                 <Text style={styles.redText}>{userData.user_email}</Text>

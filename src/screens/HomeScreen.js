@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, Image, TouchableOpacity, ScrollView, Keyboard, RefreshControl, StyleSheet, Pressable } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Heading from '../components/Heading'
@@ -13,6 +13,7 @@ import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/responsiveStyle'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import { HOME_API, CONSUMER_KEY } from "@env";
 
 const HomeScreen = ({ navigation }) => {
   let bs = "BestSellers";
@@ -28,7 +29,7 @@ const HomeScreen = ({ navigation }) => {
   const [bestSelling, setBestSelling] = useState([]);
   const [category, setCategory] = useState([]);
   const [latestProduct, setLatestProduct] = useState([]);
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
@@ -37,10 +38,10 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     axios.get(
-      `https://craggycosmetic.com/api/home/`,
+      HOME_API,
       {
         headers: {
-          'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+          'consumer_key': CONSUMER_KEY,
         }
       }
     ).then((res) => {

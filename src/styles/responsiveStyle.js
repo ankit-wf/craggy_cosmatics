@@ -420,6 +420,9 @@ export const useStyles = CreateResponsiveStyle(
         swiperRoot: {
             height: 350,
             position: 'relative',
+            // display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
         },
         Snackbar_style: {
             width: "65%",
