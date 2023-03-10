@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ImageBackground, Image } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import TextInput from '../components/InputHook';
