@@ -1,10 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
-const RewardScreen = () => {
-
+const HotOfferScreen = () => {
     const [details, setDetails] = useState(false)
-
     const detailsHandle = () => {
         setDetails(!details);
     }
@@ -49,7 +47,7 @@ const RewardScreen = () => {
     )
 }
 
-export default RewardScreen
+export default HotOfferScreen
 
 const styles = StyleSheet.create({
     root_container: {

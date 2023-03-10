@@ -85,15 +85,17 @@ export const shopStyle = StyleSheet.create({
         height: 95,
         width: '100%',
         backgroundColor: '#0D0D0D',
+        display: 'flex'
         // borderWidth: 1
     },
     textRoot: {
         height: 36,
         width: 130,
         alignSelf: 'center',
+        justifyContent: 'center',
         // borderColor: 'red', 
         // borderWidth: 1,
-        marginTop: 5
+        // marginTop: 5
     },
     contentText: {
         fontSize: 10,
@@ -112,18 +114,19 @@ export const shopStyle = StyleSheet.create({
     priceRoot: {
         flexDirection: 'row',
         height: 17,
-        width: 103,
+        width: "99%",
+        justifyContent: 'center',
         alignSelf: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1, 
         marginTop: 7,
+        // borderColor: 'red',
+        // borderWidth: 1,
     },
     price: {
         color: 'white',
         fontSize: 12,
         fontFamily: 'Lato600',
         fontWeight: '600',
-        lineHeight: 15
+        lineHeight: 15,
     },
     spaceRoot: {
         color: 'white',

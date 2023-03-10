@@ -79,13 +79,13 @@ export default function Header({ navigation, onPress, notification, Gift, search
                             style={{ height: 48, padding: 15 }}
                         />
                     </View>
-                    <TouchableOpacity onPress={search} style={{ justifyContent: 'center', alignItems: 'center' }} >
+                    {/* <TouchableOpacity onPress={search} style={{ justifyContent: 'center', alignItems: 'center' }} >
                         <Ionicons
                             name="search-outline"
                             color='#CC933B'
                             size={25}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
 
             </View>

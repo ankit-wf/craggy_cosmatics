@@ -33,9 +33,10 @@ export const bestSellingProductStyle = StyleSheet.create({
         height: 36,
         width: 130,
         alignSelf: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1,
-        marginTop: 5
+        justifyContent: 'center'
+        // borderColor: 'red',
+        // borderWidth: 5,
+        // marginTop: 5
     },
     descriptionText: {
         fontSize: 10,
@@ -53,18 +54,21 @@ export const bestSellingProductStyle = StyleSheet.create({
     },
     priceRoot: {
         flexDirection: 'row',
+        display: 'flex',
         height: 17,
         width: 103,
+        justifyContent: 'center',
         alignSelf: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1, 
         marginTop: 7,
+        // borderColor: 'red',
+        // borderWidth: 1,
     },
     price: {
         color: 'white',
         fontSize: 12,
         fontWeight: '600',
-        fontFamily: 'Lato600'
+        fontFamily: 'Lato600',
+        textAlign: 'center'
     },
     spaceRoot: {
         color: 'white',

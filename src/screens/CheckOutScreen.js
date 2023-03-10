@@ -29,15 +29,14 @@ const CheckOutScreen = ({ navigation, route }) => {
         setVisible(false);
     }
 
-    let widthS = "Order Place  " + "₹" + JSON.stringify(Tm + fee)
-    let widthOutS = "Order Place  " + "₹" + JSON.stringify(Tm)
+    let withS = "Pay Now  " + "₹" + JSON.stringify(Tm + fee)
+    let withOutS = "Pay Now  " + "₹" + JSON.stringify(Tm)
 
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
         }, 2000);
     }, [])
-
 
     // {fee == 50 ?
     //     <Text style={styles.pay_text}>₹{Tm + fee}</Text>
@@ -103,27 +102,29 @@ const CheckOutScreen = ({ navigation, route }) => {
                         </Text>
                     </View> */}
                     <View style={styles.address_root} >
-                        <SkeletonContainer isLoading={loading}>
-                            <Text style={styles.delivert_address_text}>Delivery Address</Text>
-                        </SkeletonContainer>
-                        <SkeletonContainer isLoading={loading}>
-                            {AddData.length > 0 ?
-                                <View style={styles.user_adrdress_root}>
-                                    <View style={styles.user_name_default_root}>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text style={styles.user_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
+                        {AddData.length > 0 ?
+                            <View>
+                                <SkeletonContainer isLoading={loading}>
+                                    <Text style={styles.delivert_address_text}>Delivery Address</Text>
+                                </SkeletonContainer>
+                                <SkeletonContainer isLoading={loading}>
+                                    <View style={styles.user_adrdress_root}>
+                                        <View style={styles.user_name_default_root}>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <Text style={styles.user_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
+                                            </View>
+                                            <TouchableOpacity style={styles.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
+                                                <Text style={{ color: '#fff' }}>Edit</Text>
+                                            </TouchableOpacity>
                                         </View>
-                                        <TouchableOpacity style={styles.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
-                                            <Text style={{ color: '#fff' }}>Edit</Text>
-                                        </TouchableOpacity>
+                                        <View style={styles.user_address_text_root}>
+                                            <Text style={styles.user_address_text}>{AddData[0].flate}, {AddData[0].Apartment}, {AddData[0].City}, {AddData[0].State} {AddData[0].Pincode}</Text>
+                                            <Text style={styles.user_phone}> {AddData[0].phone} </Text>
+                                        </View>
                                     </View>
-                                    <View style={styles.user_address_text_root}>
-                                        <Text style={styles.user_address_text}>{AddData[0].flate}, {AddData[0].Apartment}, {AddData[0].City}, {AddData[0].State} {AddData[0].Pincode}</Text>
-                                        <Text style={styles.user_phone}> {AddData[0].phone} </Text>
-                                    </View>
-                                </View>
-                                : <View style={styles.user_adrdress_root}></View>}
-                        </SkeletonContainer>
+                                </SkeletonContainer>
+                            </View>
+                            : ""}
                     </View>
 
                     <SkeletonContainer isLoading={loading}>
@@ -137,7 +138,7 @@ const CheckOutScreen = ({ navigation, route }) => {
                             <View style={{ backgroundColor: '#fff', marginTop: '1%' }} key={e}>
                                 <View key={e} style={styles.dataRoot}>
                                     <TouchableOpacity
-                                        onPress={() => navigation.navigate("Product", i.categoriesDetail_id)}
+                                        onPress={() => navigation.navigate("productDetail", i.categoriesDetail_id)}
                                         style={styles.dataImgRoot}
                                     >
                                         <SkeletonContainer isLoading={loading}>
@@ -172,9 +173,9 @@ const CheckOutScreen = ({ navigation, route }) => {
                                     </View>
                                     <SkeletonContainer isLoading={loading}>
                                         <View style={styles.textPriceRoot} key={e}>
-                                            <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
-                                            <Text style={styles.slace} > / </Text>
                                             <Text style={styles.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
+                                            <Text style={styles.slace} > / </Text>
+                                            <Text style={styles.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
                                         </View>
                                     </SkeletonContainer>
                                 </View>
@@ -246,8 +247,9 @@ const CheckOutScreen = ({ navigation, route }) => {
                         </View>
                     </SkeletonContainer>
 
-                    <SkeletonContainer isLoading={loading}>
-                        <View style={styles.RadioButtonRoot}>
+                    <View style={styles.RadioButtonRoot}></View>
+                    {/* <SkeletonContainer isLoading={loading}> 
+                    <View style={styles.RadioButtonRoot}>
                             <Text style={styles.other_option}>Other Options</Text>
 
                             <View style={styles.btnTextRoot}>
@@ -266,9 +268,9 @@ const CheckOutScreen = ({ navigation, route }) => {
                                     status={checked === 'second' ? 'checked' : 'unchecked'}
                                     onPress={() => setChecked('second')}
                                 />
-                            </View>
-                        </View>
-                    </SkeletonContainer>
+                            </View> 
+                    </View> 
+                   </SkeletonContainer> */}
 
                 </SafeAreaView>
             </ScrollView>
@@ -282,14 +284,13 @@ const CheckOutScreen = ({ navigation, route }) => {
             </Snackbar>
 
             <SkeletonContainer isLoading={loading}>
-                <View style={styles.sticky_Btn}>
+                <View style={styles.sticky_Btn} >
                     <View style={styles.bottomView} >
                         <View style={styles.inner_bottomView}>
                             {fee ?
-                                <Button title={widthS} />
-                                : <Button title={widthOutS} />
+                                <Button title={withS} onPress={() => navigation.navigate("orderPlaced", { wf: Tm + fee, fee: fee, item: CartData.length })} />
+                                : <Button title={withOutS} onPress={() => navigation.navigate("orderPlaced", { wof: Tm, fee: fee, item: CartData.length })} />
                             }
-
                         </View>
                     </View>
                 </View>
@@ -456,8 +457,9 @@ const styles = StyleSheet.create({
         paddingTop: 15
     },
     RadioButtonRoot: {
-        marginTop: "5%",
-        height: 225
+        marginTop: "1%",
+        height: 57,
+        // height: 225
         // bottom:'5%'
     },
     btnTextRoot: {

@@ -10,7 +10,6 @@ const ReviewsScreen = ({ navigation }) => {
     return (
         <View>
             {/* <View style={{ backgroundColor: 'white' }}>
-
                 <Text style={styles.deliveryText}>REVIEWS</Text>
             </View> */}
             {newData.map((value, k) => {

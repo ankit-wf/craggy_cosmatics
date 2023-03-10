@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // import BackButton from '../components/BackButton';
 import { Ionicons } from '@expo/vector-icons'
 import { loginActions } from '../store/UserSlice'
+import { submitActions } from '../store/dataSlice'
 import { useFocusEffect } from '@react-navigation/native';
 
 
@@ -12,6 +13,7 @@ const AccountScreen = ({ navigation }) => {
   // const storeData = useSelector(state => state.cartData.cart);
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
   const userData = useSelector(state => state.userData.user_data);
+
 
   useFocusEffect(
     React.useCallback(() => {
@@ -27,9 +29,11 @@ const AccountScreen = ({ navigation }) => {
 
   const LogoutUserHandler = () => {
     dispatch(loginActions.loginform({ isLoggedIn: false }));
+    dispatch(loginActions.userlogin({ user_data: "" }));
+    // dispatch(submitActions.price({ cart: "" }));
     navigation.reset({
       index: 0,
-      routes: [{ name: 'HomeScreen' }],
+      routes: [{ name: 'homeScreen' }],
     });
     // navigation.navigate('login');
   }
@@ -46,7 +50,7 @@ const AccountScreen = ({ navigation }) => {
                 <Text style={styles.redTextName}>{userData.display_name}</Text>
               </View>
               <View style={styles.user_phone}>
-                <Text style={styles.redText}>+91{userData.user_phone}</Text>
+                <Text style={styles.redText}>{userData.user_phone}</Text>
               </View>
               <View style={styles.display_name}>
                 <Text style={styles.redText}>{userData.user_email}</Text>
@@ -60,7 +64,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('my_order')}
+          onPress={() => navigation.navigate('order')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -85,7 +89,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('Addresses')}
+          onPress={() => navigation.navigate('address')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -110,7 +114,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('my_wishlist')}
+          onPress={() => navigation.navigate('wishlist')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -156,7 +160,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('offer_coupan')}
+          onPress={() => navigation.navigate('coupan')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -181,7 +185,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('offer_coupan')}
+          onPress={() => navigation.navigate('coupan')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -206,7 +210,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('offer_coupan')}
+          onPress={() => navigation.navigate('coupan')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
@@ -230,7 +234,7 @@ const AccountScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.myProfileRoot}
-          onPress={() => navigation.navigate('offers')}
+          onPress={() => navigation.navigate('hotOffer')}
         >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons

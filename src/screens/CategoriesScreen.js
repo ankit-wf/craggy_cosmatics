@@ -9,10 +9,9 @@ const CategoriesScreen = ({ navigation }) => {
   const styles = useStyles()
   const imageData = BackgroundImageService();
   const [data, setData] = useState([])
-  // console.log("tttttttt", data)
   const [loading, setLoading] = useState(true);
   let Cat = "Categories";
-  // console.log('category', loading);
+
   useEffect(() => {
     const sF = navigation.addListener('focus', () => {
       axios.get(
@@ -27,9 +26,8 @@ const CategoriesScreen = ({ navigation }) => {
           setData(res.data.response)
           setTimeout(() => {
             setLoading(false)
-          }, 2000);
+          },);
         }
-
       })
     });
     return sF;
@@ -37,33 +35,30 @@ const CategoriesScreen = ({ navigation }) => {
 
   return (
     <View>
+
       <View style={styles.categories_root}>
         <Text style={styles.categories_text}>{Cat}</Text>
       </View>
+
       <ScrollView>
         <View style={styles.categoryMainDiv}>
           {data.map((data, i) => {
-            if (data.count > 0)
-              return (
-                <SkeletonContainer isLoading={loading} key={i} >
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    style={styles1.touchable_style}
-                    onPress={() => { navigation.navigate('ProductListing', { id: data.term_id, name: data.name }) }}
-                    key={i}
-                  >
-                    <View style={styles.catMainSec}>
-                      <Text style={styles.mens_text}> {data.name} </Text>
-                      {imageData.map((item, id) => {
-                        return (
-                          (item.name === data.slug) &&
-                          <Image style={{ width: '100%', height: 95, }} source={item.image} key={id} />
-                        )
-                      })}
-                    </View>
-                  </TouchableOpacity>
-                </SkeletonContainer>
-              )
+            // if (data.count > 0)
+            return (
+              <SkeletonContainer isLoading={loading} key={i} >
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  style={styles1.touchable_style}
+                  onPress={() => { navigation.navigate('productListing', { id: data.term_id, name: data.name, banner: data.app_banner_image }) }}
+                  key={i}
+                >
+                  <View style={styles.catMainSec}>
+                    <Text style={styles.mens_text}> {data.name} </Text>
+                    <Image style={{ width: '100%', height: 95, }} source={{ uri: data.app_banner_image }} />
+                  </View>
+                </TouchableOpacity>
+              </SkeletonContainer>
+            )
           })}
         </View>
       </ScrollView>

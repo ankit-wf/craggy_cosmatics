@@ -46,7 +46,7 @@ const WishListScreen = ({ navigation }) => {
                 cart: Data
             }
         ));
-        navigation.navigate("Cart", product_id);
+        navigation.navigate("cart", product_id);
     }
 
     return (
@@ -69,7 +69,7 @@ const WishListScreen = ({ navigation }) => {
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 style={sS.product109}
-                                onPress={() => navigation.navigate("Product", item.product_id)}
+                                onPress={() => navigation.navigate("productDetail", item.product_id)}
                             >
                                 <View style={sS.imgRoot} >
                                     <Image source={{ uri: item.image }} style={sS.productImg} />

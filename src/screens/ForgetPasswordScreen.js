@@ -24,7 +24,7 @@ const ForgetPasswordScreen = ({ navigation }) => {
         if (isLoggedIn == true) {
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'HomeScreen' }],
+                routes: [{ name: 'homeScreen' }],
             });
             setLogin(true);
 
@@ -38,7 +38,7 @@ const ForgetPasswordScreen = ({ navigation }) => {
         }
     })
     const onSubmit = (data) => {
-        navigation.navigate('OtpScreen');
+        navigation.navigate('otpScreen');
         reset();
     }
     return (
@@ -46,37 +46,37 @@ const ForgetPasswordScreen = ({ navigation }) => {
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
                 <BackButton goBack={navigation.goBack} />
                 <Image source={require('../../assets/images/logo-image.jpg')} style={styles.logoBackground} />
-                    <View style={styles.Containterlogin}>
-                        <View style={styles.inputWidth}>
-                            <Controller
-                                control={control}
-                                rules={{
-                                    required: true,
-                                }}
-                                render={({ field: { onChange, onBlur, value } }) => (
-                                    <TextInput
-                                        style={styles.loginInput}
-                                        onChangeText={onChange}
-                                        value={value}
-                                        label="Email / Phone"
-                                        returnKeyType="next"
-                                        autoCapitalize="none"
-                                        autoCompleteType="email"
-                                        textContentType="emailAddress"
-                                        keyboardType="email-address"
-                                    />
-                                )}
-                                name="email"
-                            />
-                            {errors.email && <Text style={styles.inputError}>This field is required.</Text>}
-                        </View>
-                        <View style={styles.LoginButtong}>
-                            <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonStyle}>
-                                <Title style={styles.LoginButtongTittle}>Send OTP</Title>
-                            </TouchableOpacity>
-                        </View>
+                <View style={styles.Containterlogin}>
+                    <View style={styles.inputWidth}>
+                        <Controller
+                            control={control}
+                            rules={{
+                                required: true,
+                            }}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <TextInput
+                                    style={styles.loginInput}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    label="Email / Phone"
+                                    returnKeyType="next"
+                                    autoCapitalize="none"
+                                    autoCompleteType="email"
+                                    textContentType="emailAddress"
+                                    keyboardType="email-address"
+                                />
+                            )}
+                            name="email"
+                        />
+                        {errors.email && <Text style={styles.inputError}>This field is required.</Text>}
                     </View>
-                    <View style={styles.loginBottom}>
+                    <View style={styles.LoginButtong}>
+                        <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonStyle}>
+                            <Title style={styles.LoginButtongTittle}>Send OTP</Title>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={styles.loginBottom}>
                     <Text style={styles.needHelpBottom}>Need Help?</Text>
                     <TouchableOpacity><Text style={styles.contactUsBottom}> Contact us</Text></TouchableOpacity>
                 </View>

@@ -7,7 +7,6 @@ import BackButton from '../components/BackButton';
 
 const MyProfileScreen = ({ navigation }) => {
     const [passwordVisible, setPasswordVisible] = useState(true);
-
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
             firstname: '',
@@ -22,7 +21,6 @@ const MyProfileScreen = ({ navigation }) => {
 
     const onSubmit = (data) => {
         console.log("accountData", data);
-
         reset();
     }
 
@@ -30,16 +28,12 @@ const MyProfileScreen = ({ navigation }) => {
         <View>
             {/* <View style={styles.searchRoot}>
                 <BackButton goBack={navigation.goBack} Color={'#666666'} />
-
                 <View style={styles.searchImgRoot}>
                     <Text style={styles.mycartText}>MY PROFILE</Text>
                 </View>
-
             </View> */}
-
             <ScrollView>
                 <View style={styles.controllerRoot}>
-
                     <Controller
                         control={control}
                         rules={{
@@ -83,8 +77,6 @@ const MyProfileScreen = ({ navigation }) => {
                     />
                     {errors.lastname && errors.lastname.type === 'required' && <Text> this is required !</Text>}
                     {errors.lastname && errors.lastname.type === 'pattern' && <Text> please enter correct last name!</Text>}
-
-
                     <Controller
                         control={control}
                         rules={{
@@ -106,7 +98,6 @@ const MyProfileScreen = ({ navigation }) => {
                         name="displayname"
                     />
                     <Text>This will be how your name will be displayed in the account section and in reviews</Text>
-
                     <Controller
                         control={control}
                         rules={{
@@ -127,10 +118,8 @@ const MyProfileScreen = ({ navigation }) => {
                         )}
                         name="email"
                     />
-
                     {errors.email && errors.email.type === 'required' && <Text> this is required !</Text>}
                     {errors.email && errors.email.type === 'pattern' && <Text> please enter valid email!</Text>}
-
                     <Text style={styles.changePassword}>Password change</Text>
                     <Controller
                         control={control}
@@ -155,7 +144,6 @@ const MyProfileScreen = ({ navigation }) => {
                         )}
                         name="passwordchange"
                     />
-
                     <Text style={styles.changePassword}>New Password</Text>
                     <Controller
                         control={control}
@@ -180,7 +168,6 @@ const MyProfileScreen = ({ navigation }) => {
                         )}
                         name="newpassword"
                     />
-
                     <Text style={styles.changePassword}>Confirm New Password</Text>
                     <Controller
                         control={control}
@@ -205,7 +192,6 @@ const MyProfileScreen = ({ navigation }) => {
                         )}
                         name="confirmNewPassword"
                     />
-
                     <View style={styles.btnRoot}>
                         <Button
                             title="Save changes"

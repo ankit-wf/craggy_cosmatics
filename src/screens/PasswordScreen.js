@@ -23,7 +23,7 @@ const PasswordScreen = ({ navigation }) => {
         if (isLoggedIn == true) {
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'HomeScreen' }],
+                routes: [{ name: 'homeScreen' }],
             });
             // console.log("first:", isLoggedIn)
             setLogin(true);
@@ -46,7 +46,7 @@ const PasswordScreen = ({ navigation }) => {
                 if (data.password == item.password) {
                     navigation.reset({
                         index: 0,
-                        routes: [{ name: 'HomeScreen' }],
+                        routes: [{ name: 'homeScreen' }],
                     });
                 }
 

@@ -5,6 +5,7 @@ import { shopStyle as sS } from '../styles/shopStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/dataSlice';
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import { Snackbar } from 'react-native-paper';
 
 
 
@@ -12,8 +13,8 @@ const ViewProduct = ({ navigation }) => {
     const dispatch = useDispatch();
     const [allData, setAllData] = useState([])
     const [loading, setLoading] = useState(true);
-    const storeData = useSelector(state => state.cartData.cart);
-
+    const cartData = useSelector(state => state.cartData.cart);
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         axios.get(
@@ -34,26 +35,75 @@ const ViewProduct = ({ navigation }) => {
         })
     }, [])
 
-    const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price) => {
-        let Data = [...storeData, {
-            description: product_title,
-            categoriesDetail_id: product_id,
-            images: image,
-            price: regular_price,
-            oldprice: sale_price,
-            quantity: 1
-        }];
-        dispatch(submitActions.price(
-            {
-                cart: Data
+    const onDismissSnackBar = () => setVisible(false);
+    const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
+        if (cartData.length !== 0) {
+            let ss = false;
+            cartData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
+                setVisible(!visible);
             }
-        ));
-        navigation.navigate('Cart', product_id);
+            else {
+                let Data = [...cartData, {
+                    description: product_title,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    oldprice: regular_price,
+                    price: sale_price,
+                    quantity: 1
+                }];
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("cart");
+            }
+        }
+        else {
+            let Data = [...cartData, {
+                description: product_title,
+                categoriesDetail_id: product_id,
+                images: image,
+                oldprice: regular_price,
+                price: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("cart");
+        }
+
     }
+
+    // const AddToCartHolder = (product_title, product_id, image, regular_price, sale_price) => {
+    //     let Data = [...cartData, {
+    //         description: product_title,
+    //         categoriesDetail_id: product_id,
+    //         images: image,
+    //         price: regular_price,
+    //         oldprice: sale_price,
+    //         quantity: 1
+    //     }];
+    //     dispatch(submitActions.price(
+    //         {
+    //             cart: Data
+    //         }
+    //     ));
+    //     navigation.navigate('Cart', product_id);
+    // }
 
 
     return (
         <View>
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+                duration={2000}
+                style={styles.Snackbar_style}
+            >
+                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+            </Snackbar>
             <SafeAreaView style={sS.productsListRoot}>
                 <FlatList
                     data={allData}
@@ -67,7 +117,7 @@ const ViewProduct = ({ navigation }) => {
                                 marginTop: 20,
                                 marginBottom: 20,
                             }}
-                                onPress={() => navigation.navigate("Product", item.product_id)} >
+                                onPress={() => navigation.navigate("productDetail", item.product_id)} >
                                 <View style={sS.imgRoot} >
                                     <Image source={{ uri: item.image }} style={sS.productImg} />
                                 </View>
@@ -80,9 +130,9 @@ const ViewProduct = ({ navigation }) => {
                                     <View style={sS.baseLine}></View>
 
                                     <View style={sS.priceRoot}>
-                                        <Text style={sS.price}>₹{item.sale_price}</Text>
-                                        <Text style={sS.spaceRoot}>/ </Text>
                                         <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                        <Text style={sS.spaceRoot}>/ </Text>
+                                        <Text style={sS.price}>₹{item.sale_price}</Text>
                                     </View>
 
                                 </View>
@@ -113,5 +163,20 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         paddingTop: 35,
         paddingLeft: 20
+    },
+    Snackbar_style: {
+        width: "65%",
+        height: 55,
+        alignSelf: 'center',
+        position: 'absolute',
+        zIndex: 3,
+        bottom: 250,
+        opacity: 0.7
+    },
+    Snackbar_text: {
+        color: '#fff',
+        fontSize: 14,
+        lineHeight: 15,
+        textAlign: 'center'
     },
 })

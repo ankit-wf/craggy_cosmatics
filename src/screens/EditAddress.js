@@ -56,7 +56,7 @@ const EditAddress = ({ navigation }) => {
             }
         ));
         navigation.goBack();
-        // navigation.navigate('Addresses')
+        // navigation.navigate('address')
         // reset();
     }
     return (

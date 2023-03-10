@@ -88,6 +88,7 @@ export const useStyles = CreateResponsiveStyle(
             bottom: '15%',
         },
         logoBackground: {
+            // height: '40%',
             height: '50%',
             width: '100%',
         },
@@ -419,6 +420,9 @@ export const useStyles = CreateResponsiveStyle(
         swiperRoot: {
             height: 350,
             position: 'relative',
+            // display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
         },
         Snackbar_style: {
             width: "65%",
@@ -556,7 +560,7 @@ export const useStyles = CreateResponsiveStyle(
             // paddingTop: 10,
             // justifyContent: 'center',
             // alignItems: 'center',
-            backgroundColor: '#fff',
+            // backgroundColor: '#fff',
             height: 80,
             justifyContent: 'center',
             alignSelf: 'center'

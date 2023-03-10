@@ -56,7 +56,7 @@ const AddressesScreen = ({ navigation }) => {
               <Text style={{ fontSize: 18, fontWeight: '400' }}>Please add in your address</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.add_Btn} onPress={() => navigation.navigate('AddAddress')}>
+          <TouchableOpacity style={styles.add_Btn} onPress={() => navigation.navigate('addAddress')}>
             <Text style={styles.btn_text}> + </Text>
           </TouchableOpacity>
         </View>
@@ -65,9 +65,9 @@ const AddressesScreen = ({ navigation }) => {
           <FAB
             icon="plus"
             style={styles.fab}
-            onPress={() => navigation.navigate('AddAddress')}
+            onPress={() => navigation.navigate('addAddress')}
           />
-          {/* <TouchableOpacity onPress={() => navigation.navigate('AddAddress')} style={styles.btn_btn}>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('addAddress')} style={styles.btn_btn}>
             <Text style={styles.add_Add}>+ Add</Text>
           </TouchableOpacity> */}
 

@@ -41,7 +41,7 @@ const SignupOtpScreen = ({ navigation, route }) => {
         if (otpInput == otp) {
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'HomeScreen' }],
+                routes: [{ name: 'homeScreen' }],
             });
             // alert("correct OTP");
         } else {

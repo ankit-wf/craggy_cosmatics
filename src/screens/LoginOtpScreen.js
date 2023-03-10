@@ -13,70 +13,67 @@ import BackButton from '../components/BackButton';
 // import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 const OtpScreen = ({ navigation }) => {
-
     const styles = useStyles()
     // const [isChecked, setChecked] = useState(false);
     // const dispatch = useDispatch();
     // const logindata = useSelector(state => state.userData.user);
     // const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
-    // // console.log("logged-in ", isLoggedIn)
+    // console.log("logged-in ", isLoggedIn)
     // const [login, setLogin] = useState(false)
     // const [passwordVisible, setPasswordVisible] = useState(true);
-
     const firstInput = useRef();
     const seconInput = useRef();
     const thirdInput = useRef();
     const fourthInput = useRef();
-
     const verifyHandler = () => {
-        navigation.navigate('reset_password')
+        navigation.navigate('resetPassword')
     }
 
     return (
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
-            <BackButton goBack={navigation.goBack} />
+                <BackButton goBack={navigation.goBack} />
                 <Image source={require('../../assets/images/logo-image.jpg')} style={styles.logoBackground} />
                 <View style={styles.Containterlogin}>
-                        <View style={styles.checkboxPassword}>
-                            <View style={styles.Textinput_root}>
-                                <TextInput
-                                    ref={firstInput}
-                                    onChangeText={text => { text && seconInput.current.focus() }}
-                                    maxLength={1}
-                                    keyboardType="number-pad"
-                                    style={styles.input_Style}
-                                />
-                                <TextInput
-                                    ref={seconInput}
-                                    onChangeText={text => { text ? thirdInput.current.focus() : firstInput.current.focus() }}
-                                    maxLength={1}
-                                    keyboardType="number-pad"
-                                    style={styles.input_Style}
-                                />
-                                <TextInput
-                                    ref={thirdInput}
-                                    onChangeText={text => { text ? fourthInput.current.focus() : seconInput.current.focus() }}
-                                    maxLength={1}
-                                    keyboardType="number-pad"
-                                    style={styles.input_Style}
-                                />
-                                <TextInput
-                                    ref={fourthInput}
-                                    onChangeText={text => { text ? fourthInput.current.focus() : thirdInput.current.focus() }}
-                                    maxLength={1}
-                                    keyboardType="number-pad"
-                                    style={styles.input_Style}
-                                />
-                            </View>
-                        </View>
-                        <View style={styles.LoginButtong}>
-                            <TouchableOpacity style={styles.buttonStyle} onPress={verifyHandler}>
-                                <Title style={styles.LoginButtongTittle}>VERIFY OTP</Title>
-                            </TouchableOpacity>
+                    <View style={styles.checkboxPassword}>
+                        <View style={styles.Textinput_root}>
+                            <TextInput
+                                ref={firstInput}
+                                onChangeText={text => { text && seconInput.current.focus() }}
+                                maxLength={1}
+                                keyboardType="number-pad"
+                                style={styles.input_Style}
+                            />
+                            <TextInput
+                                ref={seconInput}
+                                onChangeText={text => { text ? thirdInput.current.focus() : firstInput.current.focus() }}
+                                maxLength={1}
+                                keyboardType="number-pad"
+                                style={styles.input_Style}
+                            />
+                            <TextInput
+                                ref={thirdInput}
+                                onChangeText={text => { text ? fourthInput.current.focus() : seconInput.current.focus() }}
+                                maxLength={1}
+                                keyboardType="number-pad"
+                                style={styles.input_Style}
+                            />
+                            <TextInput
+                                ref={fourthInput}
+                                onChangeText={text => { text ? fourthInput.current.focus() : thirdInput.current.focus() }}
+                                maxLength={1}
+                                keyboardType="number-pad"
+                                style={styles.input_Style}
+                            />
                         </View>
                     </View>
-                    <View style={styles.loginBottom}>
+                    <View style={styles.LoginButtong}>
+                        <TouchableOpacity style={styles.buttonStyle} onPress={verifyHandler}>
+                            <Title style={styles.LoginButtongTittle}>VERIFY OTP</Title>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={styles.loginBottom}>
                     <Text style={styles.needHelpBottom}>Need Help?</Text>
                     <TouchableOpacity><Text style={styles.contactUsBottom}> Contact us</Text></TouchableOpacity>
                 </View>

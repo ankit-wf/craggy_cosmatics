@@ -84,32 +84,28 @@ export const productDetailsStyle = StyleSheet.create({
     },
     priceRoot: {
         flexDirection: 'row',
+        height: 17,
+        width: 103,
+        alignSelf: 'center',
+        marginTop: 7,
     },
     price: {
-        color: '#444444',
-        fontSize: 18,
-        fontWeight: "700",
-        fontFamily: 'Lato700',
-        lineHeight: 22
+        color: 'white',
+        fontSize: 12,
+        fontWeight: '600',
+        fontFamily: 'Lato600'
     },
     spaceRoot: {
-        color: '#444444',
+        color: 'white',
         marginLeft: 5,
-        fontSize: 12,
-        marginTop: 2,
-        fontFamily: 'Lato300',
-        fontWeight: '300',
-        lineHeight: 17,
-        letterSpacing: 1
+        fontSize: 12
     },
     oldprice: {
         color: '#666666',
         textDecorationLine: 'line-through',
-        fontSize: 14,
-        marginTop: 3,
-        fontFamily: 'Lato300',
-        fontWeight: '300',
-        lineHeight: 17
+        fontSize: 12,
+        fontWeight: '600',
+        fontFamily: 'Lato600',
     },
     baseLine2: {
         height: 1,
