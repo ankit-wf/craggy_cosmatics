@@ -5,7 +5,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BackButton from '../components/BackButton'
 import { Ionicons } from '@expo/vector-icons'
 import { useSelector, useDispatch } from 'react-redux';
-const imgData = require('../../imgData.json');
 import { submitActions } from '../store/dataSlice'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 

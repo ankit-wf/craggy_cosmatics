@@ -13,6 +13,7 @@ import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/responsiveStyle'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import SocialIcon from '../components/SocialIcon'
 import { HOME_API, CONSUMER_KEY } from "@env";
 
 const HomeScreen = ({ navigation }) => {

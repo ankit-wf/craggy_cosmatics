@@ -14,6 +14,9 @@ import { RadioButton } from 'react-native-paper';
 import { CONSUMER_KEY, ALL_PRODUCT_API, BEST_SELLING_API, HOME_API } from "@env";
 
 
+import SocialIcon from '../components/SocialIcon'
+const bannerImg = require('../../Data/bannerSlider.json')
+
 const ProductListingScreen = ({ navigation, route }) => {
     const styles = useStyles()
     const dispatch = useDispatch();
@@ -283,6 +286,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                         numColumns={2}
                         keyExtractor={(item, index) => index}
                     />
+                    <SocialIcon />
                 </View>
             </ScrollView >
         </View>

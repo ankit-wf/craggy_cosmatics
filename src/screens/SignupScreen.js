@@ -6,7 +6,6 @@ import { useDispatch, } from 'react-redux';
 import { loginActions } from '../store/UserSlice';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
-import Checkbox from 'expo-checkbox';
 import { useStyles } from '../styles/responsiveStyle';
 import BackButton from '../components/BackButton';
 import axios from 'axios';
@@ -161,6 +160,7 @@ const SignupScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
+
         </View>
     )
 }

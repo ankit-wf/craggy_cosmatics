@@ -6,14 +6,12 @@ import { useDispatch, useSelector, } from 'react-redux';
 import { loginActions } from '../store/UserSlice';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
-import Checkbox from 'expo-checkbox';
 import axios from 'axios';
 import { useStyles } from '../styles/responsiveStyle';
 import BackButton from '../components/BackButton';
 
 const LoginScreen = ({ navigation }) => {
     const styles = useStyles()
-    const [isChecked, setChecked] = useState(false);
     const dispatch = useDispatch();
     const logindata = useSelector(state => state.userData.user);
     const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
@@ -47,7 +45,6 @@ const LoginScreen = ({ navigation }) => {
                 'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629'
             }
         }).then((response) => {
-            // console.log(response.data, "response2");
             if (response.data.login == true) {
                 dispatch(loginActions.userlogin({ user_data: response.data.user_data }));
                 dispatch(loginActions.loginform({ isLoggedIn: true }));
@@ -116,7 +113,7 @@ const LoginScreen = ({ navigation }) => {
                         {errors.password && <Text style={styles.inputError}>This field is required.</Text>}
                     </View>
                     <View style={styles.checkboxPassword}>
-                        <View style={styles.checkboxInput}>
+                        {/* <View style={styles.checkboxInput}>
                             <Checkbox
                                 style={styles.checkboxField}
                                 uncheckedColor="#222"
@@ -125,7 +122,7 @@ const LoginScreen = ({ navigation }) => {
                                 color={isChecked ? '#cc933b' : '#222'}
                             />
                             <Text style={styles.checkboxLabel}>Remember me</Text>
-                        </View>
+                        </View> */}
                         <TouchableOpacity onPress={forgetHandler} style={styles.forgotPassword}>
                             <Title style={styles.forgetLabel}>Forgot Password?</Title>
                         </TouchableOpacity>
