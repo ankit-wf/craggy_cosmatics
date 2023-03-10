@@ -7,9 +7,10 @@ import { useStyles } from '../styles/responsiveStyle'
 import axios from 'axios'
 import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
-
+import { BEST_SELLING_API, CONSUMER_KEY } from "@env";
 
 const OrderScreen = ({ navigation }) => {
+    let bs = "BestSellers";
     const gs = useStyles();
     const [bestData, setBestData] = useState([])
     const cartData = useSelector(state => state.cartData.cart);
@@ -18,10 +19,10 @@ const OrderScreen = ({ navigation }) => {
 
     useEffect(() => {
         axios.get(
-            `https://craggycosmetic.com/api/products/best-selling/`,
+            BEST_SELLING_API,
             {
                 headers: {
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {
@@ -33,9 +34,9 @@ const OrderScreen = ({ navigation }) => {
         })
     }, [])
 
-    const bestSellingHolder = (description, product_id, image, sale_price, regular_price,) => {
+    const bestSellingHolder = (product_title, product_id, image, sale_price, regular_price,) => {
         let Data = [...cartData, {
-            description: description,
+            description: product_title,
             sellingProduct_id: product_id,
             images: image,
             oldprice: sale_price,
@@ -53,7 +54,6 @@ const OrderScreen = ({ navigation }) => {
     return (
 
         <View style={{ flex: 1, justifyContent: 'space-around' }} >
-
             {/* <View style={{ flexDirection: 'row', }}>
         <BackButton goBack={navigation.goBack} Color={'#666666'} />
         <Text style={styles.deliveryText}>MY ORDERS</Text>
@@ -82,7 +82,7 @@ const OrderScreen = ({ navigation }) => {
 
                                 <TouchableOpacity
                                     style={gs.viewLatestProduct}
-                                    onPress={() => navigation.navigate("AllBestseller")}
+                                    onPress={() => { navigation.navigate('productListing', { name: bs }) }}
                                 >
                                     <Text style={gs.latestProductText} >
                                         View All
@@ -92,7 +92,7 @@ const OrderScreen = ({ navigation }) => {
                             <View style={bsP.productsListRoot}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {bestData.map((e, i) => {
-                                        // console.log("eeeeee", e.category)
+                                        // console.log("eeeeee", e)
                                         return (
                                             <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('productDetail', e.product_id)} >
                                                 <View style={bsP.imgRoot} >
@@ -115,7 +115,7 @@ const OrderScreen = ({ navigation }) => {
 
                                                 {/* Buy Now Button  */}
                                                 <TouchableOpacity style={bsP.buyNowButton}
-                                                    onPress={() => bestSellingHolder(e.description, e.product_id, e.image, e.sale_price, e.regular_price)}
+                                                    onPress={() => bestSellingHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
                                                 >
                                                     <Text style={bsP.buttonText}>BUY NOW</Text>
                                                 </TouchableOpacity>
@@ -124,8 +124,6 @@ const OrderScreen = ({ navigation }) => {
                                     })}
                                 </ScrollView>
                             </View>
-
-
                             <TouchableOpacity style={styles.shopping_btn} onPress={() => navigation.navigate('Home')} >
                                 <Text style={styles.shopping_text}>Continue Shopping</Text>
                             </TouchableOpacity>

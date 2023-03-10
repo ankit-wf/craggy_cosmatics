@@ -6,8 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/dataSlice';
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { Snackbar } from 'react-native-paper';
-
-
+import { CONSUMER_KEY, ALL_PRODUCT_API } from "@env";
 
 const ViewProduct = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -18,11 +17,11 @@ const ViewProduct = ({ navigation }) => {
 
     useEffect(() => {
         axios.get(
-            `https://craggycosmetic.com/api/products/`,
+            ALL_PRODUCT_API,
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {

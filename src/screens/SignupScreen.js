@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, ImageBackground, Image } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import TextInput from '../components/InputHook';
@@ -10,7 +10,8 @@ import { useStyles } from '../styles/responsiveStyle';
 import BackButton from '../components/BackButton';
 import useMailer from '../utilFunctions/useMailer';
 import { otpTemp } from '../../Data/mailTemplate/Mailer';
-
+import axios from 'axios'
+import { CONSUMER_KEY, USER_REGISTER_API } from "@env";
 
 const SignupScreen = ({ navigation }) => {
     const mailer = useMailer();
@@ -26,16 +27,16 @@ const SignupScreen = ({ navigation }) => {
     // // console.log("logged-in ", isLoggedIn)
     // const [login, setLogin] = useState(false)
     // const [passwordVisible, setPasswordVisible] = useState(true);
-    const { control, handleSubmit, reset, formState: { errors } } = useForm({
-        defaultValues: {
-            FirstName: '',
-            LastName: '',
-            email: '',
-            PhoneNumber: '',
-            Password: ''
-        }
+    const { control, handleSubmit, watch, reset, formState: { errors } } = useForm({
+        // defaultValues: {
+        //     userName: '',
+        //     phone: '',
+        //     email: '',
+        //     pass: '',
+        //     cpass: ''
+        // }
     })
-
+    let pwd = watch("pass");
     const timeout = () => {
         setTimeout(() => {
             dispatch(loginActions.otp({ otp: '' }));
@@ -44,43 +45,53 @@ const SignupScreen = ({ navigation }) => {
     }
 
     const onSubmit = async (data) => {
-
-        // axios({
-        //     method: 'post',
-        //     url: 'https://craggycosmetic.com/api/user/add/',
-        //     data: {
-        //         user_name: data.userName,
-        //         email: data.email,
-        //         phone: data.phone,
-        //         password: data.cpass
-        //     },
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629'
-        //     }
-        // }).then((res) => {
-        //     // console.log(res.data)
-        //     if (res.data.status === 200) {
-        //         reset();
-        //         navigation.navigate('SignupOtpScreen', { email: data.email })
-        //     }
-        //     timeout()
-        // })
+        // console.log("password", data.pass, "confirmPassword", data.cpass)
+        console.log("password Matched")
+        axios({
+            method: 'post',
+            url: USER_REGISTER_API,
+            data: {
+                user_name: data.userName,
+                email: data.email,
+                phone: data.phone,
+                password: data.cpass
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'consumer_key': CONSUMER_KEY
+            }
+        }).then((res) => {
+            // console.log("gghghghgh", res.data)
+            if (res.data.status === 200) {
+                dd
+            }
+        })
+        reset();
+        navigation.navigate('signupOtpScreen', { email: data.email })
+        dispatch(loginActions.otp(
+            {
+                otp: otpTemplate.otp
+            }
+        ));
+        timeout()
+        // console.log("respooo111", dd);     
 
         const dd = await mailer.mailTemplate({
             to: data.email,
             from: "moneymakkar@gmail.com",
             sub: otpTemplate.sub,
             body: otpTemplate.body,
-            otp: otpTemplate.otp
+            // otp: otpTemplate.otp
         });
         console.log("respooo111", dd);
-
+        // reset()
+        // navigation.navigate('signupOtpScreen', { email: data.email })
         // dispatch(loginActions.otp(
         //     {
-        //         otp: otpVal
+        //         otp: otpTemplate.otp
         //     }
         // ));
+        // timeout()
 
     }
 
@@ -107,11 +118,14 @@ const SignupScreen = ({ navigation }) => {
                             )}
                             name="userName"
                         />
-                        {errors.userName && <Text style={styles.inputError}>This field is required.</Text>}
+                        {errors.userName && errors.userName.type === 'required' && <Text style={styles.inputError}>This field is required.</Text>}
 
                         <Controller
                             control={control}
-                            rules={{ required: true }}
+                            rules={{
+                                required: true,
+                                pattern: { value: /^[0-9]{10,10}$/ }
+                            }}
                             render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     style={styles.loginInput}
@@ -124,11 +138,15 @@ const SignupScreen = ({ navigation }) => {
                             )}
                             name="phone"
                         />
-                        {errors.phone && <Text style={styles.inputError}>This field is required.</Text>}
-
+                        {errors.phone && errors.phone.type === 'required' && <Text style={styles.inputError}>This field is required.</Text>}
+                        {errors.phone && errors.phone.type === 'pattern' && <Text style={styles.inputError}> Maximum 10 digit limit</Text>}
                         <Controller
                             control={control}
-                            rules={{ required: true }}
+                            rules={{
+                                required: true,
+                                pattern: { value: /^([A-Za-z0-9_.])+@+[A-Za-z0-9_.]+.+[A-Za-z]{2,4}$/ }
+                                // pattern: { value: /^[a-zA-Z ]{2,40}$/ }
+                            }}
                             render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     style={styles.loginInput}
@@ -144,11 +162,15 @@ const SignupScreen = ({ navigation }) => {
                             )}
                             name="email"
                         />
-                        {errors.email && <Text style={styles.inputError}>This field is required.</Text>}
+                        {errors.email && errors.email.type === 'required' && <Text style={styles.inputError}>This field is required.</Text>}
+                        {errors.email && errors.email.type === 'pattern' && <Text style={styles.inputError}> Please enter a valid email</Text>}
 
                         <Controller
                             control={control}
-                            rules={{ required: true }}
+                            rules={{
+                                required: true,
+                                pattern: { value: /^[A-Za-z0-9!@#\$%\^\&*\)\(+=._-]{8,12}$/ },
+                            }}
                             render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     style={styles.loginInput}
@@ -163,11 +185,16 @@ const SignupScreen = ({ navigation }) => {
                             )}
                             name="pass"
                         />
-                        {errors.pass && <Text style={styles.inputError}>This field is required.</Text>}
+                        {errors.pass && errors.pass.type === 'pattern' && <Text style={styles.inputError}> Minimum Eight characters, at Least One Letter and One Number</Text>}
+                        {errors.pass && errors.pass.type === 'required' && <Text style={styles.inputError}>This field is required.</Text>}
 
                         <Controller
                             control={control}
-                            rules={{ required: true }}
+                            rules={{
+                                required: true,
+                                validate: value => value === pwd || "The passwords does not match"
+                                // pattern: { value: /^[A-Za-z0-9!@#\$%\^\&*\)\(+=._-]{8,12}$/ },
+                            }}
                             render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     style={styles.loginInput}
@@ -182,7 +209,11 @@ const SignupScreen = ({ navigation }) => {
                             )}
                             name="cpass"
                         />
-                        {errors.cpass && <Text style={styles.inputError}>This field is required.</Text>}
+
+                        {errors.cpass && errors.cpass.type === 'required' && <Text style={styles.inputError}>This field is required.</Text>}
+                        {errors.cpass && errors.cpass.type === "validate" && <Text style={styles.inputError}>{errors.cpass.message}</Text>}
+                        {/* {errors.cpass && errors.cpass.type === 'pattern' && <Text style={styles.inputError}> Minimum eight characters, at least one letter and one number</Text>} */}
+
                     </View>
                     <View style={styles.LoginButtong}>
                         <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonStyle}>

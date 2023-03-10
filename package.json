@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@expo/webpack-config": "^0.17.2",
     "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-native-masked-view/masked-view": "0.2.8",
     "@react-navigation/drawer": "^6.5.6",
@@ -25,12 +26,12 @@
     "expo-font": "~11.0.1",
     "expo-image-picker": "~14.0.2",
     "expo-linear-gradient": "~12.0.1",
-    "expo-linking": "~3.3.1",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "i": "^0.3.7",
     "npm": "^9.2.0",
     "react": "18.1.0",
+    "react-dom": "18.1.0",
     "react-hook-form": "^7.39.5",
     "react-native": "0.70.5",
     "react-native-dotenv": "^3.4.8",
@@ -54,12 +55,10 @@
     "react-native-tab-view": "^3.3.0",
     "react-native-vector-icons": "^9.2.0",
     "react-native-virtualized-view": "^1.0.0",
+    "react-native-web": "~0.18.9",
     "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0",
-    "rn-responsive-styles": "^2.1.0",
-    "react-native-web": "~0.18.9",
-    "@expo/webpack-config": "^0.17.2",
-    "react-dom": "18.1.0"
+    "rn-responsive-styles": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3"

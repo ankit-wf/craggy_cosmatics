@@ -19,9 +19,6 @@ const WriteReview = ({ navigation }) => {
     let name = month[d.getMonth()];
     let FullDate = name + "-" + d.getDate() + "-" + d.getFullYear()
     // console.log("date", FullDate);
-
-
-
     const ratingCompleted = (rating) => {
         setStar(rating);
         // console.log("Rating is: " + star)
@@ -35,7 +32,7 @@ const WriteReview = ({ navigation }) => {
     })
 
     const onSubmit = (data) => {
-        // console.log("dataaaaa", data)
+        console.log("dataaaaa", data)
         let Data = [...reviewData, {
             star: star,
             description: data.description,
@@ -51,7 +48,6 @@ const WriteReview = ({ navigation }) => {
         navigation.navigate('productDetail')
         reset();
     }
-
 
     return (
         <View style={{ backgroundColor: '#fff' }}>

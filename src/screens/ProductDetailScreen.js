@@ -71,6 +71,25 @@ const ProductDetailScreen = ({ navigation, route }) => {
         })
     }
 
+    const bestSellingApi = () => {
+        axios.get(
+            BEST_SELLING_API,
+            {
+                headers: {
+                    'consumer_key': CONSUMER_KEY,
+                }
+            }
+        ).then((res) => {
+            // console.log("resss", res.data)
+            if (res.data.status = "success") {
+                setBestSeldata(res.data.response)
+                // setTimeout(() => {
+                //     setLoading(false)
+                // },);
+            }
+        })
+    }
+
     const ratingCompleted = (rating) => {
         setStar(rating);
     }
@@ -131,25 +150,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
             navigation.navigate("cart");
         }
 
-    }
-
-    const bestSellingApi = () => {
-        axios.get(
-            BEST_SELLING_API,
-            {
-                headers: {
-                    'consumer_key': CONSUMER_KEY,
-                }
-            }
-        ).then((res) => {
-            // console.log("resss", res.data)
-            if (res.data.status = "success") {
-                setBestSeldata(res.data.response)
-                // setTimeout(() => {
-                //     setLoading(false)
-                // },);
-            }
-        })
     }
 
     const wishlistHandler = () => {

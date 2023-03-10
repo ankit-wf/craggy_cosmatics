@@ -10,10 +10,12 @@ import { useStyles } from '../styles/responsiveStyle';
 import { Ionicons } from '@expo/vector-icons'
 import BackButton from '../components/BackButton';
 import axios from 'axios';
+import { CONSUMER_KEY, USER_AUTH_API } from "@env";
 
 const SignupOtpScreen = ({ navigation, route }) => {
 
     const email = route.params.email;
+    // console.log("email", email)
     const styles = useStyles()
     // const [isChecked, setChecked] = useState(false);
     const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const SignupOtpScreen = ({ navigation, route }) => {
     // const [login, setLogin] = useState(false)
     // const [passwordVisible, setPasswordVisible] = useState(true);
     const otp = useSelector(state => state.userData.otp);
-    // console.log('topval', otp)
+    console.log('topval', otp)
     const [value1, setValue1] = useState();
     const [value2, setValue2] = useState();
     const [value3, setValue3] = useState();
@@ -85,14 +87,14 @@ const SignupOtpScreen = ({ navigation, route }) => {
 
         axios({
             method: 'post',
-            url: 'https://craggycosmetic.com/api/user/auth/',
+            url: USER_AUTH_API,
             data: {
                 to: email,
                 otp: otpVal
             },
             headers: {
                 'Content-Type': 'application/json',
-                'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629'
+                'consumer_key': CONSUMER_KEY
             }
         }).then((res) => {
             console.log(res.status)
@@ -102,16 +104,6 @@ const SignupOtpScreen = ({ navigation, route }) => {
             timeout()
         })
     }
-
-
-
-
-
-
-
-
-
-
 
     return (
         <View style={styles.rootContainter}>

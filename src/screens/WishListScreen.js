@@ -7,20 +7,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 import BackButton from '../components/BackButton'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import { CONSUMER_KEY, ALL_PRODUCT_API } from "@env";
 
 const WishListScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const storeData = useSelector(state => state.cartData.cart);
-
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([])
 
     useEffect(() => {
         axios.get(
-            `https://craggycosmetic.com/api/products/`,
+            ALL_PRODUCT_API,
             {
                 headers: {
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {
@@ -32,9 +32,9 @@ const WishListScreen = ({ navigation }) => {
         })
     }, [])
 
-    const buyNowHanlder = (description, product_id, image, regular_price, sale_price) => {
+    const buyNowHanlder = (product_title, product_id, image, regular_price, sale_price) => {
         let Data = [...storeData, {
-            description: description,
+            description: product_title,
             categoriesDetail_id: product_id,
             images: image,
             price: regular_price,
@@ -103,7 +103,7 @@ const WishListScreen = ({ navigation }) => {
                                 <TouchableOpacity
                                     activeOpacity={0.6}
                                     style={sS.buyNowButton}
-                                    onPress={() => buyNowHanlder(item.description, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                    onPress={() => buyNowHanlder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                 >
                                     <Text style={sS.buttonText}>BUY NOW</Text>
                                 </TouchableOpacity>

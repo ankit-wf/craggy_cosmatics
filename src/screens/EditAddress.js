@@ -7,7 +7,6 @@ import { ScrollView } from 'react-native-gesture-handler'
 import TextInput from '../components/AccountInputHook'
 import { useRoute } from '@react-navigation/native'
 
-
 const EditAddress = ({ navigation }) => {
     const route = useRoute();
     const index = route.params;

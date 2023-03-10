@@ -10,6 +10,7 @@ import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyl
 const placeholderText = require('../../Data/Placeholder.json');
 import { shopStyle as sS } from '../styles/shopStyle'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import { CONSUMER_KEY, SEARCH_PRODUCT_API, BEST_SELLING_API } from "@env";
 
 const SearchScreen = ({ navigation }) => {
     let bs = "BestSellers";
@@ -51,14 +52,14 @@ const SearchScreen = ({ navigation }) => {
 
     const onSubmit = () => {
         axios.get(
-            `https://craggycosmetic.com/api/products/search/`,
+            SEARCH_PRODUCT_API,
             {
                 params: {
                     s: searchQuery
                 },
                 headers: {
                     'Content-Type': 'application/json',
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {
@@ -69,10 +70,10 @@ const SearchScreen = ({ navigation }) => {
     }
     const bestSellingApi = () => {
         axios.get(
-            `https://craggycosmetic.com/api/products/best-selling/`,
+            BEST_SELLING_API,
             {
                 headers: {
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {

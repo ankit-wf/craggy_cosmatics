@@ -9,6 +9,7 @@ import { TextInput as Input, Title } from 'react-native-paper';
 import axios from 'axios';
 import { useStyles } from '../styles/responsiveStyle';
 import BackButton from '../components/BackButton';
+import { USER_LOGIN_API, CONSUMER_KEY } from "@env";
 
 const LoginScreen = ({ navigation }) => {
     const styles = useStyles()
@@ -35,14 +36,14 @@ const LoginScreen = ({ navigation }) => {
     const onSubmit = (data) => {
         axios({
             method: 'post',
-            url: 'https://craggycosmetic.com/api/user/login/',
+            url: USER_LOGIN_API,
             data: {
                 username: data.userName,
                 password: data.password
             },
             headers: {
                 'Content-Type': 'application/json',
-                'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629'
+                'consumer_key': CONSUMER_KEY
             }
         }).then((response) => {
             if (response.data.login == true) {

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableOpacity, Dimensions, FlatList, StyleSheet, ScrollView } from 'react-native'
 import axios from 'axios'
 import { useStyles } from '../styles/responsiveStyle';
-import BackgroundImageService from '../components/CatImage'
+// import BackgroundImageService from '../components/CatImage'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
+import { ALL_CATEGORIES_API, CONSUMER_KEY } from "@env";
 
 const CategoriesScreen = ({ navigation }) => {
   const styles = useStyles()
-  const imageData = BackgroundImageService();
+  // const imageData = BackgroundImageService();
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true);
   let Cat = "Categories";
@@ -15,10 +16,10 @@ const CategoriesScreen = ({ navigation }) => {
   useEffect(() => {
     const sF = navigation.addListener('focus', () => {
       axios.get(
-        `https://craggycosmetic.com/api/products/category/`,
+        ALL_CATEGORIES_API,
         {
           headers: {
-            'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+            'consumer_key': CONSUMER_KEY,
           }
         }
       ).then((res) => {
