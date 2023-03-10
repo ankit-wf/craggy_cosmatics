@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
-import Swiper from 'react-native-swiper'
+// import Swiper from 'react-native-swiper'
 import { List, Snackbar } from 'react-native-paper';
 import { shopStyle as sS } from '../styles/shopStyle'
 import { useStyles } from '../styles/responsiveStyle'
@@ -12,10 +12,8 @@ import BottomSheet from 'react-native-gesture-bottom-sheet'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { RadioButton } from 'react-native-paper';
 import { CONSUMER_KEY, ALL_PRODUCT_API, BEST_SELLING_API, HOME_API } from "@env";
-
-
 import SocialIcon from '../components/SocialIcon'
-const bannerImg = require('../../Data/bannerSlider.json')
+// const bannerImg = require('../../Data/bannerSlider.json')
 
 const ProductListingScreen = ({ navigation, route }) => {
     const styles = useStyles()
@@ -24,7 +22,7 @@ const ProductListingScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     // const [bannerData, setBannerData] = useState([]);
-    console.log("dDDDDD", data)
+    // console.log("dDDDDD", data)
     const name = route.params.name;
     const id = route.params.id;
     const banner = route.params.banner;
@@ -56,7 +54,6 @@ const ProductListingScreen = ({ navigation, route }) => {
         // setTimeout(() => {
         //     setLoading(false)
         // },);
-
     }, [id])
 
     const allProductsApi = () => {
@@ -116,7 +113,6 @@ const ProductListingScreen = ({ navigation, route }) => {
     //         setBannerData(res.data.response)
     //     })
     // }
-
     const onDismissSnackBar = () => setVisible(false);
     const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
         if (cartData.length !== 0) {

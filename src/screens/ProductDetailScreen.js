@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import ImageView from "react-native-image-viewing"
+import { CONSUMER_KEY, BEST_SELLING_API, SINGLE_PRODUCT_API } from "@env";
 
 const ProductDetailScreen = ({ navigation, route }) => {
     let bs = "BestSellers";
@@ -51,14 +52,15 @@ const ProductDetailScreen = ({ navigation, route }) => {
     // }, []);
 
     const Single_Product = () => {
-        axios.get(`https://craggycosmetic.com/api/products/`,
+        axios.get(
+            SINGLE_PRODUCT_API,
             {
                 params: {
                     product_id: id
                 },
                 headers: {
                     'Content-Type': 'application/json',
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {
@@ -133,10 +135,10 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
     const bestSellingApi = () => {
         axios.get(
-            `https://craggycosmetic.com/api/products/best-selling/`,
+            BEST_SELLING_API,
             {
                 headers: {
-                    'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
+                    'consumer_key': CONSUMER_KEY,
                 }
             }
         ).then((res) => {
