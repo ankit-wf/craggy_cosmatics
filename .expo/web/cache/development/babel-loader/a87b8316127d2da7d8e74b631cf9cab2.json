@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from \"./PanResponderAdapter\";","map":{"version":3,"mappings":"AAAA,SAASA,OAAO","names":["default"],"sourceRoot":"../../src","sources":["Pager.tsx"],"sourcesContent":[null]},"metadata":{},"sourceType":"module"}
