@@ -45,6 +45,7 @@ const MainNavigator = () => {
         },
         headerTintColor: '#C68625', //Set Header text color
         headerBackTitleVisible: false,
+        headerShadowVisible: false,
         headerTitle: () => <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
         // headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
         headerRight: () => (

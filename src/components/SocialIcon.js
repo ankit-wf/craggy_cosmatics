@@ -4,10 +4,10 @@ import { Ionicons } from '@expo/vector-icons'
 
 const SocialIcon = () => {
     return (
-        <View style={{ alignItems: 'center', margin: 20 }}>
-            <Text style={{ fontSize: 18, fontWeight: '600', color: '#525252' }}>FOLLOW US ON</Text>
+        <View style={styles.root}>
+            <Text style={styles.follow_text}>FOLLOW US ON</Text>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+            <View style={styles.icon_root}>
                 <Ionicons name="logo-facebook" size={35} color='#525252' />
                 <Ionicons name="logo-instagram" size={35} color='#525252' />
                 <Ionicons name="logo-pinterest" size={35} color='#525252' />
@@ -21,4 +21,18 @@ const SocialIcon = () => {
 
 export default SocialIcon
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    root: {
+        alignItems: 'center',
+        margin: 20
+    },
+    follow_text: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#525252'
+    },
+    icon_root: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    }
+})

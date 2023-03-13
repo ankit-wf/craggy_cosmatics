@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native'
-import { Button, Snackbar } from 'react-native-paper';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, } from 'react-native'
+import { Snackbar, Button } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import BackButton from '../components/BackButton'
 import { Ionicons } from '@expo/vector-icons'
@@ -78,12 +78,10 @@ const MyCartScreen = ({ navigation, route }) => {
   }
   return (
     <View >
-
       <View style={styles.searchRoot}>
-        <View style={{ marginTop: 10, marginLeft: '2%' }}>
-          <BackButton goBack={navigation.goBack} Color={'#666666'} />
-        </View>
-
+        {/* <View style={{ marginTop: 10, marginLeft: '5%' }}> */}
+        <BackButton goBack={navigation.goBack} />
+        {/* </View> */}
         <View style={styles.searchImgRoot}>
           <Text style={styles.mycartText}>MY CART</Text>
         </View>
@@ -91,7 +89,9 @@ const MyCartScreen = ({ navigation, route }) => {
       </View>
       {storeData.length < 1 ?
         <Text style={styles.emptyCart}>This Cart Is Empty</Text>
-        : <ScrollView>
+        :
+        <ScrollView>
+
           {storeData.map((i, e) => {
             return (
               <View key={e}>
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Raleway600',
     lineHeight: 19,
     color: '#333333',
-    paddingTop: 10
+    paddingTop: 0
   },
   searchImg: {
     height: 50,
