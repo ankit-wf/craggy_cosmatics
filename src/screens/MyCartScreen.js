@@ -213,14 +213,7 @@ const MyCartScreen = ({ navigation, route }) => {
               </View>
             </SkeletonContainer>
 
-            <Snackbar
-              visible={visible}
-              onDismiss={onDismissSnackBar}
-              duration={2000}
-              style={{ opacity: 0.7 }}
-            >
-              <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
-            </Snackbar>
+
             <SkeletonContainer isLoading={loading}>
               <View style={styles.subtotalRoot}>
                 <Text style={styles.subtotal}>Promo Discount</Text>
@@ -260,6 +253,14 @@ const MyCartScreen = ({ navigation, route }) => {
 
         </ScrollView>
       }
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        duration={2000}
+        style={styles.Snackbar_style}
+      >
+        <Text style={styles.Snackbar_text}>Shipping charges of Rs. 50.00 wil apply on order below Rs. 499.00</Text>
+      </Snackbar>
     </View>
   )
 }
@@ -528,11 +529,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '3%'
   },
-  Snackbar_text: {
-    color: '#fff',
-    fontSize: 16,
-    textAlign: 'center'
-  },
+  // Snackbar_text: {
+  //   color: '#fff',
+  //   fontSize: 16,
+  //   textAlign: 'center'
+  // },
   subtotalRoot: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -596,6 +597,20 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     fontWeight: '700',
     fontFamily: 'Raleway700'
-  }
+  },
+  Snackbar_style: {
+    width: "70%",
+    height: 70,
+    alignSelf: 'center',
+    position: 'absolute',
+    zIndex: 3,
+    bottom: 250,
+    opacity: 0.7
+  },
+  Snackbar_text: {
+    color: '#fff',
+    fontSize: 15,
+    textAlign: 'center'
+  },
 
 })

@@ -32,7 +32,7 @@ const WriteReview = ({ navigation }) => {
     })
 
     const onSubmit = (data) => {
-        console.log("dataaaaa", data)
+        // console.log("dataaaaa", data)
         let Data = [...reviewData, {
             star: star,
             description: data.description,
@@ -45,13 +45,13 @@ const WriteReview = ({ navigation }) => {
                 review: Data
             }
         ));
-        navigation.navigate('productDetail')
+        navigation.goBack()
         reset();
     }
 
     return (
-        <View style={{ backgroundColor: '#fff' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+        <View style={{ backgroundColor: '#fff', height: '100%' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <BackButton goBack={navigation.goBack} />
                 <Text style={styles.ReviewsTitle}>My Reviews</Text>
             </View>
@@ -85,7 +85,7 @@ const WriteReview = ({ navigation }) => {
                             autoCapitalize="none"
                             autoCompleteType="Title"
                             extContentType="Title"
-                            keyboardType="Text"
+                            keyboardType="text"
                         />
                     )}
                     name="title"
@@ -105,7 +105,7 @@ const WriteReview = ({ navigation }) => {
                             autoCapitalize="none"
                             autoCompleteType="Description"
                             extContentType="Description"
-                            keyboardType="Text"
+                            keyboardType="text"
                             multiline
                             numberOfLines={6}
                             style={
@@ -120,7 +120,7 @@ const WriteReview = ({ navigation }) => {
                 />
             </View>
 
-            <View style={{ width: "90%", alignSelf: 'center' }}>
+            <View style={{ width: "90%", alignSelf: 'center', marginTop: 20 }}>
                 <Button
                     style={{ width: "100%", }}
                     title="Save"
@@ -137,7 +137,7 @@ export default WriteReview
 
 const styles = StyleSheet.create({
     ReviewsTitle: {
-        paddingTop: '11%',
+        paddingTop: '9%',
         fontSize: 20,
         paddingLeft: '10%'
     },

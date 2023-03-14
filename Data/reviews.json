@@ -1,68 +1,79 @@
 [
     {
         "name": "AMANDA",
-        "title": "GREAT",
+        "title": "NOT BAD",
         "date": "May 21,2021",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 1
     },
     {
-        "name": "AMANDA",
+        "name": "USER",
         "title": "GREAT",
         "date": "May 22,2022",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 3
     },
     {
-        "name": "AMANDA",
-        "title": "GREAT",
+        "name": "AMANDEEP",
+        "title": "AWESOME",
         "date": "May 23,2023",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 5
     },
     {
-        "name": "MANDA",
-        "title": "GREAT",
+        "name": "SUNNY",
+        "title": "NOT BAD",
         "date": "May 24,2024",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 2
     },
     {
-        "name": "AMADA",
+        "name": "API USER",
         "title": "GREAT",
         "date": "May 20,2020",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 4
     },
     {
-        "name": "MAND",
-        "title": "GREAT",
+        "name": "PANDAY",
+        "title": "GOOD",
         "date": "May 26,2026",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 5
     },
     {
-        "name": "AMANDA",
-        "title": "GREAT",
+        "name": "USER API",
+        "title": "NOT BAD",
         "date": "May 21,2021",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 3
     },
     {
-        "name": "AMANDA",
+        "name": "AMIT",
         "title": "GREAT",
         "date": "May 22,2022",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 4
     },
     {
-        "name": "AMANDA",
+        "name": "SANDEEP",
         "title": "GREAT",
         "date": "May 23,2023",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 5
     },
     {
-        "name": "AMANDA",
-        "title": "GREAT",
+        "name": "GAGAN",
+        "title": "GOOD",
         "date": "May 22,2022",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 3
     },
     {
-        "name": "AMANDA",
-        "title": "GREAT",
+        "name": "NASA",
+        "title": "NOT BAD",
         "date": "May 23,2023",
-        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products "
+        "review": "I am being using this onion shampoo and conditioner and i felt the result so quick i m loving the products ",
+        "rating": 2
     }
 ]

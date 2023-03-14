@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15
   },
   CraggyTextRoot: {
-    height: 400,
+    height: 440,
     backgroundColor: '#ffffff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

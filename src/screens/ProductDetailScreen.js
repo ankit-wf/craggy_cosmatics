@@ -16,13 +16,14 @@ import { CONSUMER_KEY, BEST_SELLING_API, SINGLE_PRODUCT_API } from "@env";
 const ProductDetailScreen = ({ navigation, route }) => {
     let bs = "BestSellers";
     const dispatch = useDispatch();
-    const newData = useSelector(state => state.reviewData.review);
+    const reviewData = useSelector(state => state.reviewData.review);
+    // console.log("gggggg", reviewData[5].title)
     const cartData = useSelector(state => state.cartData.cart);
     const [visible, setVisible] = useState(false);
     const [star, setStar] = useState('')
     const [page, setPage] = useState('1')
     const [bestSelData, setBestSeldata] = useState([])
-    const [singleProduct, setSingleProduct] = useState([])
+    const [singleData, setSingleData] = useState([])
     const [isVisible, setIsVisible] = useState(false);
     // console.log("wwwwwww", data)
     const [loading, setLoading] = useState(true);
@@ -64,7 +65,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 }
             }
         ).then((res) => {
-            setSingleProduct(res.data)
+            setSingleData(res.data)
             setTimeout(() => {
                 setLoading(false);
             },);
@@ -159,35 +160,17 @@ const ProductDetailScreen = ({ navigation, route }) => {
     return (
         <View>
             <SafeAreaView style={styles.safe_root}>
-                <Snackbar
+                {/* <Snackbar
                     visible={visible}
                     onDismiss={onDismissSnackBar}
                     duration={2000}
                     style={styles.Snackbar_style}
                 >
                     <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
-                </Snackbar>
-                {singleProduct.map((data, i) => {
-                    return (
-                        <SkeletonContainer isLoading={loading} key={i}>
-                            <View style={styles.sticky_Btn} key={i}>
-                                <View style={styles.bottomView1} >
-                                    <Text style={[styles.textStyle, styles.color]}>₹{data.regular_price}</Text>
-                                </View>
-                                <View style={styles.bottomView} >
-                                    <View style={styles.inner_bottomView}>
-                                        <Button
-                                            title='Add'
-                                            onPress={() => CartHolder(data.product_title, data.product_id, data.image, data.sale_price, data.regular_price,)}
-                                        />
-                                    </View>
-                                </View>
-                            </View>
-                        </SkeletonContainer>
-                    )
-                })}
+                </Snackbar> */}
+
                 <ScrollView>
-                    {singleProduct.map((data, i) => {
+                    {singleData.map((data, i) => {
                         // console.log("gallery_images", data)
                         return (
                             <View key={i}>
@@ -305,7 +288,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                 <View style={styles.review_outerRoot}>
                                     <View style={styles.review_innerRoot}>
                                         <SkeletonContainer isLoading={loading} >
-                                            <View style={styles.reviews_root} >
+                                            <View style={styles.reviews_root} key={i} >
                                                 <Text style={styles.review_MainHeading}>REVIEWS</Text>
                                                 <TouchableOpacity
                                                     activeOpacity={0.8}
@@ -317,15 +300,15 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             </View>
                                         </SkeletonContainer>
                                         <SkeletonContainer isLoading={loading} >
-                                            <View style={styles.reviews_root}>
-                                                <Text style={styles.reviews_length}>REVIEWS  ({newData.length - 1})</Text>
+                                            <View style={styles.reviews_root} key={i}>
+                                                <Text style={styles.reviews_length}>REVIEWS  ({reviewData.length - 1})</Text>
                                                 <Text style={styles.review_Short}>SHORT:</Text>
                                             </View>
                                         </SkeletonContainer>
 
                                         <View style={[styles.baseLine2, { height: 1, }]} />
 
-                                        {newData.map((value, k) => {
+                                        {reviewData.map((value, k) => {
                                             let ending = parseInt(page) * 3;
                                             let starting = ending - 2;
                                             if (k >= starting && k <= ending) {
@@ -344,9 +327,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                 style={{ padding: 10 }}
 
                                                             />
-                                                            <Text style={styles.starReviws}>{value.star}</Text>
+                                                            {/* <Text style={styles.starReviws}>{value.star}</Text> */}
                                                         </View>
-                                                        <Text style={styles.review_Title}>{value.title}</Text>
+                                                        {/* <Text style={styles.review_Title}>{value.title}</Text> */}
                                                         <Text style={styles.review_Review}>{value.description}</Text>
                                                         <View style={styles.baseLine} />
                                                     </View>
@@ -358,8 +341,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 activeOpacity={0.5}
                                                 onPress={() => navigation.navigate('reviews')}
                                                 style={styles.allreview_root}
+                                                key={i}
                                             >
-                                                <Text style={{ paddingLeft: 20 }}>All {newData.length - 1} reviews </Text>
+                                                <Text style={{ paddingLeft: 20 }}>All {reviewData.length - 1} reviews </Text>
                                                 <Ionicons
                                                     name="chevron-forward-outline"
                                                     color={'black'}
@@ -436,6 +420,33 @@ const ProductDetailScreen = ({ navigation, route }) => {
                         )
                     })}
                 </ScrollView >
+                <Snackbar
+                    visible={visible}
+                    onDismiss={onDismissSnackBar}
+                    duration={2000}
+                    style={styles.Snackbar_style}
+                >
+                    <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                </Snackbar>
+                {singleData.map((data, i) => {
+                    return (
+                        <SkeletonContainer isLoading={loading} key={i}>
+                            <View style={styles.sticky_Btn} key={i}>
+                                <View style={styles.bottomView1} >
+                                    <Text style={[styles.textStyle, styles.color]}>₹{data.regular_price}</Text>
+                                </View>
+                                <View style={styles.bottomView} >
+                                    <View style={styles.inner_bottomView}>
+                                        <Button
+                                            title='Add'
+                                            onPress={() => CartHolder(data.product_title, data.product_id, data.image, data.sale_price, data.regular_price,)}
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                        </SkeletonContainer>
+                    )
+                })}
             </SafeAreaView>
         </View>
     )
@@ -691,8 +702,8 @@ const styles = StyleSheet.create({
     },
     review_Name: {
         fontSize: 16,
-        fontWeight: '400',
-        fontFamily: 'Raleway400',
+        fontWeight: '700',
+        fontFamily: 'Raleway700',
         lineHeight: 19,
     },
     review_Date: {
@@ -780,8 +791,8 @@ const styles = StyleSheet.create({
     //     // right: '8%',
     // },
     Snackbar_style: {
-        width: "65%",
-        height: 55,
+        width: "70%",
+        height: 70,
         alignSelf: 'center',
         position: 'absolute',
         zIndex: 3,
@@ -790,8 +801,7 @@ const styles = StyleSheet.create({
     },
     Snackbar_text: {
         color: '#fff',
-        fontSize: 14,
-        lineHeight: 15,
+        fontSize: 15,
         textAlign: 'center'
     },
     sticky_Btn: {

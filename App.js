@@ -8,7 +8,6 @@ import Index from './src/store/index'
 import { PersistGate } from "redux-persist/integration/react";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { View } from 'react-native';
 
 export default function App() {
   const { store, persistor } = Index();

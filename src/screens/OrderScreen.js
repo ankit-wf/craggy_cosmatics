@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Image, ActivityIndicator } from 'react-native'
 import BackButton from '../components/BackButton'
+import { Snackbar } from 'react-native-paper';
 import Heading from '../components/Heading'
 import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
 import { useStyles } from '../styles/responsiveStyle'
@@ -12,10 +13,12 @@ import { BEST_SELLING_API, CONSUMER_KEY } from "@env";
 const OrderScreen = ({ navigation }) => {
     let bs = "BestSellers";
     const gs = useStyles();
+    const dispatch = useDispatch();
     const [bestData, setBestData] = useState([])
     const cartData = useSelector(state => state.cartData.cart);
-    const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const [visible, setVisible] = useState(false);
+    const onDismissSnackBar = () => setVisible(false);
 
     useEffect(() => {
         axios.get(
@@ -35,20 +38,56 @@ const OrderScreen = ({ navigation }) => {
     }, [])
 
     const bestSellingHolder = (product_title, product_id, image, sale_price, regular_price,) => {
-        let Data = [...cartData, {
-            description: product_title,
-            sellingProduct_id: product_id,
-            images: image,
-            oldprice: sale_price,
-            price: regular_price,
-            quantity: 1
-        }];
-        dispatch(submitActions.price(
-            {
-                cart: Data
+        // let Data = [...cartData, {
+        //     description: product_title,
+        //     sellingProduct_id: product_id,
+        //     images: image,
+        //     oldprice: sale_price,
+        //     price: regular_price,
+        //     quantity: 1
+        // }];
+        // dispatch(submitActions.price(
+        //     {
+        //         cart: Data
+        //     }
+        // ));
+        // navigation.navigate('cart', product_id);
+        if (cartData.length !== 0) {
+            let ss = false;
+            cartData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
+                setVisible(!visible);
             }
-        ));
-        navigation.navigate('cart', product_id);
+            else {
+                let Data = [...cartData, {
+                    description: product_title,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    oldprice: regular_price,
+                    price: sale_price,
+                    quantity: 1
+                }];
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("cart");
+            }
+        }
+        else {
+            let Data = [...cartData, {
+                description: product_title,
+                categoriesDetail_id: product_id,
+                images: image,
+                oldprice: regular_price,
+                price: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("cart");
+        }
     }
 
     return (
@@ -131,7 +170,14 @@ const OrderScreen = ({ navigation }) => {
                         </View>
                 }
             </View>
-
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+                duration={2000}
+                style={styles.Snackbar_style}
+            >
+                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+            </Snackbar>
         </View>
     )
 }
@@ -160,5 +206,20 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#fff',
 
-    }
+    },
+    Snackbar_style: {
+        width: "65%",
+        height: 55,
+        alignSelf: 'center',
+        position: 'absolute',
+        zIndex: 9,
+        bottom: 250,
+        opacity: 0.7
+    },
+    Snackbar_text: {
+        color: '#fff',
+        fontSize: 14,
+        lineHeight: 15,
+        textAlign: 'center'
+    },
 })

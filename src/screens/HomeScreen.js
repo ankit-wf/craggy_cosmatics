@@ -136,14 +136,14 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={ds.appContainer}>
-      <Snackbar
+      {/* <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
         duration={2000}
         style={styles.Snackbar_style}
       >
         <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
-      </Snackbar>
+      </Snackbar> */}
       <Header search={SearchHandler} />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -356,6 +356,14 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView >
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        duration={2000}
+        style={styles.Snackbar_style}
+      >
+        <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+      </Snackbar>
     </View >
   )
 }

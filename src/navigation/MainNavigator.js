@@ -26,7 +26,7 @@ import MyCartScreen from '../screens/MyCartScreen';
 import OrderPlacedScreen from '../screens/OrderPlacedScreen';
 // import PaymentScreen from '../screens/PaymentScreen';
 import ProductListingScreen from '../screens/ProductListingScreen';
-import { View, TouchableOpacity, Text, Image, } from 'react-native'
+import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useStyles } from '../styles/responsiveStyle';
 import { Badge } from 'react-native-paper';
@@ -46,18 +46,19 @@ const MainNavigator = () => {
         headerTintColor: '#C68625', //Set Header text color
         headerBackTitleVisible: false,
         headerShadowVisible: false,
-        headerTitle: () => <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
+        headerTitleAlign: 'left',
+        headerTitle: () => <Image style={styles.header_title} source={require('../../assets/logo.png')} />,
         // headerTitle: () => (route.params.offsetYvalue) > 260 ? <Text style={{ color: '#C68625', fontSize: 20, fontWeight: '700' }} >{route.params.name}</Text> : <Image style={{ width: 100, height: 25 }} source={require('../../assets/logo.png')} />,
         headerRight: () => (
           <View style={gs.headerNotification}>
-            <TouchableOpacity onPress={() => navigation.navigate('searchPage')} activeOpacity={0.8} style={{ marginRight: 20, }}>
+            <TouchableOpacity onPress={() => navigation.navigate('searchPage')} activeOpacity={0.8} style={styles.header_right}>
               <Ionicons name='search' color='#CC933B' size={25} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('cart')} activeOpacity={0.8} style={{ marginRight: 20, }}>
+            <TouchableOpacity onPress={() => navigation.navigate('cart')} activeOpacity={0.8} style={styles.header_right}>
               <Ionicons name='cart-outline' color='#CC933B' size={25} />
               {cart.length > 0 ?
-                <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}>
-                  <Text style={{ color: '#000' }}>{cart.length}</Text></Badge>
+                <Badge size={15} style={styles.Badge_length}>
+                  <Text style={styles.text_color}>{cart.length}</Text></Badge>
                 : ""
               }
             </TouchableOpacity>
@@ -115,3 +116,20 @@ const MainNavigator = () => {
   );
 }
 export default MainNavigator;
+const styles = StyleSheet.create({
+  header_title: {
+    width: 100,
+    height: 25
+  },
+  header_right: {
+    marginRight: 20,
+  },
+  Badge_length: {
+    position: 'absolute',
+    marginTop: -7,
+    backgroundColor: '#CC933B',
+  },
+  text_color: {
+    color: '#000'
+  }
+})

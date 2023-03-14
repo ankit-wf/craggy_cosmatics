@@ -1,30 +1,31 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { useSelector, } from 'react-redux'
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 
 const ReviewsScreen = ({ navigation }) => {
-    const newData = useSelector(state => state.reviewData.review);
+    const reviewData = useSelector(state => state.reviewData.review);
     const [page, setPage] = useState('1')
     return (
         <View>
             {/* <View style={{ backgroundColor: 'white' }}>
                 <Text style={styles.deliveryText}>REVIEWS</Text>
             </View> */}
-            {newData.map((value, k) => {
-                // console.log("rewviewData", newData)
-                let ending = parseInt(page) * 3;
-                let starting = ending - 2;
-                if (k >= starting && k <= ending) {
+            <ScrollView>
+                {reviewData.map((value, k) => {
+                    // console.log("rewviewData", newData)
+                    // let ending = parseInt(page) * 3;
+                    // let starting = ending - 2;
+                    // if (k >= starting && k <= ending) {
                     return (
-                        <View style={{ backgroundColor: 'white' }}>
-                            <View style={{ marginTop: 30, width: '90%', alignSelf: 'center', }} key={k}>
-                                <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
+                        <View style={styles.root} key={k}>
+                            <View style={styles.inner_root} key={k}>
+                                <View style={styles.title_root}>
                                     <Text style={styles.review_Name}>{value.title}</Text>
                                     <Text style={styles.review_Date}>{value.date}</Text>
                                 </View>
-                                <View style={{ flexDirection: 'row', marginLeft: -8 }} >
+                                <View style={styles.rating_root} key={k} >
                                     <Rating
                                         readonly={true}
                                         ratingCount={5}
@@ -41,13 +42,30 @@ const ReviewsScreen = ({ navigation }) => {
                             </View>
                         </View>
                     )
-                }
-            })}
+
+                })}
+            </ScrollView>
         </View>
     )
 }
 export default ReviewsScreen;
 const styles = StyleSheet.create({
+    root: {
+        backgroundColor: 'white'
+    },
+    inner_root: {
+        marginTop: 30,
+        width: '90%',
+        alignSelf: 'center',
+    },
+    title_root: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+    },
+    rating_root: {
+        flexDirection: 'row',
+        marginLeft: -8
+    },
     deliveryText: {
         fontSize: 20,
         alignSelf: 'center',

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image
 import React, { useEffect, useState, useRef } from 'react'
 import { shopStyle as sS } from '../styles/shopStyle'
 import axios from 'axios'
+import { Snackbar } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
@@ -11,9 +12,11 @@ import { CONSUMER_KEY, ALL_PRODUCT_API } from "@env";
 
 const WishListScreen = ({ navigation }) => {
     const dispatch = useDispatch();
-    const storeData = useSelector(state => state.cartData.cart);
+    const cartData = useSelector(state => state.cartData.cart);
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const onDismissSnackBar = () => setVisible(false);
 
     useEffect(() => {
         axios.get(
@@ -33,20 +36,42 @@ const WishListScreen = ({ navigation }) => {
     }, [])
 
     const buyNowHanlder = (product_title, product_id, image, regular_price, sale_price) => {
-        let Data = [...storeData, {
-            description: product_title,
-            categoriesDetail_id: product_id,
-            images: image,
-            price: regular_price,
-            oldprice: sale_price,
-            quantity: 1
-        }];
-        dispatch(submitActions.price(
-            {
-                cart: Data
+        if (cartData.length !== 0) {
+            let ss = false;
+            cartData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
+                setVisible(!visible);
             }
-        ));
-        navigation.navigate("cart", product_id);
+            else {
+                let Data = [...cartData, {
+                    description: product_title,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    oldprice: regular_price,
+                    price: sale_price,
+                    quantity: 1
+                }];
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("cart");
+            }
+        }
+        else {
+            let Data = [...cartData, {
+                description: product_title,
+                categoriesDetail_id: product_id,
+                images: image,
+                oldprice: regular_price,
+                price: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("cart");
+        }
     }
 
     return (
@@ -114,6 +139,14 @@ const WishListScreen = ({ navigation }) => {
                     />
                 </SkeletonContainer>
             </View>
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+                duration={2000}
+                style={styles.Snackbar_style}
+            >
+                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+            </Snackbar>
         </View>
     )
 }
@@ -138,5 +171,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         marginTop: 3
-    }
+    },
+    Snackbar_style: {
+        width: "65%",
+        height: 55,
+        alignSelf: 'center',
+        position: 'absolute',
+        zIndex: 9,
+        bottom: 250,
+        opacity: 0.7
+    },
+    Snackbar_text: {
+        color: '#fff',
+        fontSize: 14,
+        lineHeight: 15,
+        textAlign: 'center'
+    },
 })

@@ -30,17 +30,18 @@ export default function DrawerScreen({ navigation }) {
                     borderBottomColor: 'black',
                 },
                 headerTintColor: '#CC933B',
+                headerTitleAlign: "left",
                 headerTitle: Logo,
                 headerRight: () => (
                     <View style={gs.headerNotification}>
-                        <TouchableOpacity onPress={() => navigation.navigate('searchPage')} activeOpacity={0.8} style={{ marginRight: 20, }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('searchPage')} activeOpacity={0.8} style={styles.header_right}>
                             <Ionicons name='search' color='#CC933B' size={25} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('cart')} activeOpacity={0.8} style={{ marginRight: 20, }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('cart')} activeOpacity={0.8} style={styles.header_right}>
                             <Ionicons name='cart-outline' color='#CC933B' size={25} />
                             {cart.length > 0 ?
-                                <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}>
-                                    <Text style={{ color: '#000' }}>{cart.length}</Text></Badge>
+                                <Badge size={15} style={styles.Badge_length}>
+                                    <Text style={styles.text_color}>{cart.length}</Text></Badge>
                                 : ""
                             }
                         </TouchableOpacity>
@@ -58,3 +59,17 @@ export default function DrawerScreen({ navigation }) {
 
     );
 }
+
+const styles = StyleSheet.create({
+    header_right: {
+        marginRight: 20,
+    },
+    Badge_length: {
+        position: 'absolute',
+        marginTop: -7,
+        backgroundColor: '#CC933B',
+    },
+    text_color: {
+        color: '#000'
+    }
+})

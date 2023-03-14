@@ -579,6 +579,7 @@ export const useStyles = CreateResponsiveStyle(
             height: 80,
             width: '100%',
         },
+
         mens_text: {
             fontSize: 18,
             color: '#222222',
@@ -590,6 +591,27 @@ export const useStyles = CreateResponsiveStyle(
             zIndex: 10,
         },
 
+        /**Home PAge */
+
+        // skinImgText: {
+        //     color: '#fff',
+        //     fontSize: 12,
+        //     fontWeight: '500',
+        //     fontFamily: 'Raleway500',
+        //     lineHeight: 14,
+        //     textAlign: 'center',
+        //     marginTop: 5,
+        // },
+        // headingText: {
+        //     fontFamily: 'Raleway600',
+        //     fontWeight: '600',
+        //     textTransform: "uppercase",
+        //     color: '#CC933B',
+        //     fontSize: 16,
+        //     lineHeight: 19,
+        //     textAlign: 'left'
+
+        // },
         color: '#222222',
         textTransform: 'capitalize',
         fontWeight: '700',
@@ -663,6 +685,7 @@ export const useStyles = CreateResponsiveStyle(
             inputError: {
                 fontSize: theme.fontsM.fontS10,
             },
+
             checkboxField: {
                 width: 15,
                 height: 15,
@@ -692,6 +715,27 @@ export const useStyles = CreateResponsiveStyle(
                 paddingLeft: 10,
                 paddingRight: 10,
                 paddingBottom: 15,
+            },
+
+            /**Home Page */
+            skinImgText: {
+                color: '#fff',
+                fontSize: theme.fontsM.fontS12,
+                fontWeight: '500',
+                fontFamily: 'Raleway',
+                lineHeight: theme.lineHeightM.lineH14,
+                textAlign: 'center',
+                marginTop: 5,
+            },
+            headingText: {
+                fontFamily: 'Raleway600',
+                fontWeight: '600',
+                textTransform: "uppercase",
+                color: '#CC933B',
+                fontSize: 16,
+                lineHeight: 19,
+                textAlign: 'left'
+
             },
 
         },

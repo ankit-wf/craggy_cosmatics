@@ -133,14 +133,14 @@ const SearchScreen = ({ navigation }) => {
 
     return (
         <View>
-            <Snackbar
+            {/* <Snackbar
                 visible={visible}
                 onDismiss={onDismissSnackBar}
                 duration={2000}
                 style={styles.Snackbar_style}
             >
                 <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
-            </Snackbar>
+            </Snackbar> */}
             <Appbar.Header style={{ backgroundColor: 'white', }}>
                 <Appbar.BackAction onPress={navigation.goBack} color="blue" />
                 <Searchbar
@@ -306,6 +306,14 @@ const SearchScreen = ({ navigation }) => {
                     }
                 </View>
             }
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+                duration={2000}
+                style={styles.Snackbar_style}
+            >
+                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+            </Snackbar>
         </View>
     )
 }
