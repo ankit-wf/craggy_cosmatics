@@ -42,7 +42,7 @@ export const productDetailsStyle = StyleSheet.create({
     contentText: {
         fontSize: 10,
         fontWeight: '300',
-        fontFamily: 'Lato300',
+        fontFamily: 'Lato',
         lineHeight: 12,
         color: '#FFFFFF',
         alignSelf: 'center'
@@ -77,7 +77,7 @@ export const productDetailsStyle = StyleSheet.create({
         color: '#0D0D0D',
         textAlign: 'center',
         paddingTop: 7,
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         fontWeight: '700',
         fontSize: 10,
         lineHeight: 13
@@ -93,7 +93,7 @@ export const productDetailsStyle = StyleSheet.create({
         color: 'white',
         fontSize: 12,
         fontWeight: '600',
-        fontFamily: 'Lato600'
+        fontFamily: 'Lato'
     },
     spaceRoot: {
         color: 'white',
@@ -105,7 +105,7 @@ export const productDetailsStyle = StyleSheet.create({
         textDecorationLine: 'line-through',
         fontSize: 12,
         fontWeight: '600',
-        fontFamily: 'Lato600',
+        fontFamily: 'Lato',
     },
     baseLine2: {
         height: 1,

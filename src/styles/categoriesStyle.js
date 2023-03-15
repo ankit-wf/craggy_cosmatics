@@ -46,7 +46,7 @@ export const categoriesStyle = StyleSheet.create({
         color: '#fff',
         fontSize: 12,
         fontWeight: '500',
-        fontFamily: 'Raleway500',
+        fontFamily: 'Raleway',
         lineHeight: 14,
         textAlign: 'center',
         marginTop: 5,
@@ -96,7 +96,7 @@ export const categoriesStyle = StyleSheet.create({
     contentText: {
         fontSize: 10,
         fontWeight: '300',
-        fontFamily: 'Lato300',
+        fontFamily: 'Lato',
         lineHeight: 12,
         color: '#FFFFFF',
         alignSelf: 'center'
@@ -119,7 +119,7 @@ export const categoriesStyle = StyleSheet.create({
     price: {
         color: 'white',
         fontSize: 12,
-        fontFamily: 'Lato600',
+        fontFamily: 'Lato',
         fontWeight: '600',
         lineHeight: 15,
 
@@ -133,7 +133,7 @@ export const categoriesStyle = StyleSheet.create({
         color: '#666666',
         textDecorationLine: 'line-through',
         fontSize: 14,
-        fontFamily: 'Lato300',
+        fontFamily: 'Lato',
         fontWeight: '300',
         lineHeight: 17
 
@@ -152,7 +152,7 @@ export const categoriesStyle = StyleSheet.create({
         color: '#0D0D0D',
         textAlign: 'center',
         paddingTop: 7,
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         fontWeight: '700',
         fontSize: 10,
         lineHeight: 13
@@ -177,7 +177,7 @@ export const categoriesStyle = StyleSheet.create({
         fontSize: 12,
         lineHeight: 12,
         fontWeight: '500',
-        fontFamily: 'Raleway500',
+        fontFamily: 'Raleway',
         borderBottomColor: '#222222',
         // borderBottomWidth: 1,
         // marginBottom: 10,
@@ -187,7 +187,7 @@ export const categoriesStyle = StyleSheet.create({
         fontSize: 12,
         lineHeight: 14,
         fontWeight: '500',
-        fontFamily: 'Raleway500',
+        fontFamily: 'Raleway',
         color: '#222222',
     },
     filterImg: {

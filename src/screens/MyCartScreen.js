@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 14,
     fontWeight: '600',
-    fontFamily: 'Raleway600',
+    fontFamily: 'Raleway',
     lineHeight: 19,
     color: '#333333',
     paddingTop: 0
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
   textDescription: {
     fontSize: 12,
     fontWeight: '500',
-    fontFamily: 'Raleway500',
+    fontFamily: 'Raleway',
     lineHeight: 17,
     paddingLeft: 15,
     paddingTop: 9
@@ -366,21 +366,21 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 12,
     fontWeight: '700',
-    fontFamily: 'Lato700',
+    fontFamily: 'Lato',
     lineHeight: 15
 
   },
   slace: {
     fontSize: 10,
     fontWeight: '300',
-    fontFamily: 'Lato300',
+    fontFamily: 'Lato',
     lineHeight: 12,
     letterSpacing: 5
   },
   oldprice: {
     fontSize: 14,
     fontWeight: '400',
-    fontFamily: 'Lato400',
+    fontFamily: 'Lato',
     color: '#444444',
     textDecorationLine: 'line-through',
     lineHeight: 17
@@ -388,14 +388,14 @@ const styles = StyleSheet.create({
   free_price: {
     fontSize: 14,
     fontWeight: '400',
-    fontFamily: 'Lato400',
+    fontFamily: 'Lato',
     color: '#444444',
     lineHeight: 17
   },
   oldprice1: {
     fontSize: 14,
     fontWeight: '400',
-    fontFamily: 'Lato400',
+    fontFamily: 'Lato',
     color: '#444444',
     textDecorationLine: 'line-through',
     lineHeight: 17
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: -2,
     fontWeight: '400',
-    fontFamily: 'Lato400',
+    fontFamily: 'Lato',
     fontSize: 12,
     lineHeight: 19
   },
@@ -494,7 +494,7 @@ const styles = StyleSheet.create({
     borderColor: '#000000',
     paddingLeft: 20,
     fontSize: 10,
-    fontFamily: 'Raleway700',
+    fontFamily: 'Raleway',
     fontStyle: '700',
     lineHeight: 13,
     backgroundColor: '#E3E3E3'
@@ -518,7 +518,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 10,
     fontWeight: '700',
-    fontFamily: 'Raleway700',
+    fontFamily: 'Raleway',
     lineHeight: 17,
   },
   totalRoot: {
@@ -543,25 +543,25 @@ const styles = StyleSheet.create({
   subtotal: {
     fontSize: 14,
     fontWeight: '500',
-    fontFamily: 'Raleway500',
+    fontFamily: 'Raleway',
     lineHeight: 17
   },
   total: {
     fontSize: 14,
     fontWeight: '500',
-    fontFamily: 'Lato500',
+    fontFamily: 'Lato',
     lineHeight: 17
   },
   maintotal: {
     fontSize: 16,
     fontWeight: '700',
-    fontFamily: 'Raleway700',
+    fontFamily: 'Raleway',
     lineHeight: 19
   },
   mainprice: {
     fontSize: 16,
     fontWeight: '700',
-    fontFamily: 'Lato700',
+    fontFamily: 'Lato',
     lineHeight: 19
   },
   baseLine2: {
@@ -596,7 +596,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     lineHeight: 25,
     fontWeight: '700',
-    fontFamily: 'Raleway700'
+    fontFamily: 'Raleway'
   },
   Snackbar_style: {
     width: "70%",

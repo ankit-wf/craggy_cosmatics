@@ -170,7 +170,7 @@ const HomeScreen = ({ navigation }) => {
         {/* <catgories /> */}
         <SkeletonContainer isLoading={loading} >
           <ScrollView horizontal>
-            <View style={cS.categoriesRoot}>
+            <View style={styles.categories_img_Root}>
               {category.map((data, i) => {
                 // console.log("kkdkddkdk", data)
                 if (data.cat_name != "Uncategorized")
@@ -178,7 +178,7 @@ const HomeScreen = ({ navigation }) => {
                     <TouchableOpacity
                       activeOpacity={0.8}
                       onPress={() => { navigation.navigate('productListing', { id: data.id, name: data.cat_name }) }} key={i}
-                      style={styles1.category_root}
+                      style={styles.category_root_img}
                     >
                       <View style={cS.skinImgRoot}>
                         <Image source={{ uri: data.app_circle_image }} style={cS.imgCenter} />
@@ -209,13 +209,13 @@ const HomeScreen = ({ navigation }) => {
         </SkeletonContainer>
 
         <SkeletonContainer isLoading={loading} >
-          <View style={bsP.productsListRoot}>
+          <View style={styles.productsListRoot}>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
               {bestSelling.map((e, i) => {
                 return (
                   <TouchableOpacity
                     activeOpacity={0.8}
-                    style={bsP.touchable}
+                    style={styles.best_touchable}
                     onPress={() => navigation.navigate('productDetail', e.product_id)}
                     key={i}
                   >
@@ -267,14 +267,15 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </SkeletonContainer>
 
-        <View style={bsP.productsListRoot}>
+        <View style={styles.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {latestProduct.map((e, i) => {
+
               return (
                 <SkeletonContainer isLoading={loading} key={i} >
                   <TouchableOpacity
                     activeOpacity={0.8}
-                    style={bsP.touchable}
+                    style={styles.best_touchable}
                     onPress={() => navigation.navigate('productDetail', e.product_id)}
                     key={i}
                   >
@@ -305,6 +306,7 @@ const HomeScreen = ({ navigation }) => {
                   </TouchableOpacity>
                 </SkeletonContainer>
               )
+
             })}
           </ScrollView>
         </View>
@@ -378,7 +380,9 @@ const styles1 = StyleSheet.create({
     width: 80,
     marginLeft: 8,
     marginTop: 30,
-    borderRadius: 50
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: '#fff'
   },
   categoriesHeight: {
     height: 100,

@@ -16,7 +16,7 @@ export const defaultStyles = StyleSheet.create({
         fontFamily: "cherry"
     },
     headingText: {
-        fontFamily: 'Raleway600',
+        fontFamily: 'Raleway',
         fontWeight: '600',
         textTransform: "uppercase",
         color: '#CC933B',

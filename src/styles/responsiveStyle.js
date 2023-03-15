@@ -244,6 +244,20 @@ export const useStyles = CreateResponsiveStyle(
 
         /** Home Page Style **/
 
+        category_root_img: {
+            height: 80,
+            width: 80,
+            marginLeft: 8,
+            marginTop: 30,
+            borderRadius: 50,
+        },
+        best_touchable: {
+            height: 252,
+            width: 145,
+            marginRight: 15,
+            position: 'relative',
+        },
+
         siteLogo: {
             display: 'flex',
             alignItems: 'center',
@@ -253,9 +267,17 @@ export const useStyles = CreateResponsiveStyle(
             paddingTop: 30,
             paddingBottom: 30,
         },
-        categoriesRoot: {
-            height: 212,
+        // categoriesRoot: {
+        //     height: 212,
+        //     backgroundColor: '#050505',
+        // },
+        categories_img_Root: {
+            height: 150,
+            width: "100%",
             backgroundColor: '#050505',
+            flexDirection: 'row',
+            alignContent: 'center',
+            justifyContent: 'space-around'
         },
         categoriesImgRoot: {
             flexDirection: 'row',
@@ -372,6 +394,8 @@ export const useStyles = CreateResponsiveStyle(
         promiseText: {
             fontWeight: '400',
             Size: 16,
+            fontFamily: 'Baskervville',
+            fontWeight: '400',
             lineHeight: 20,
             color: '#666666'
         },
@@ -397,6 +421,7 @@ export const useStyles = CreateResponsiveStyle(
             marginBottom: 8,
         },
         essientialOilText: {
+            fontFamily: 'Lato',
             fontWeight: '400',
             lineHeight: 11,
             fontSize: 9,
@@ -413,8 +438,9 @@ export const useStyles = CreateResponsiveStyle(
             borderRadius: 22,
         },
         viewProductText: {
+            fontFamily: 'Raleway',
             fontWeight: '700',
-            fontSize: 13,
+            fontSize: 11,
             color: '#fff',
         },
         swiperRoot: {
@@ -462,14 +488,14 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 16,
             color: '#fff',
             fontWeight: '800',
-            fontFamily: 'Lato800',
+            fontFamily: 'Lato',
             lineHeight: 24,
         },
         bannerShopNow: {
             color: '#C68625',
             fontSize: 14,
             fontWeight: '700',
-            fontFamily: 'Raleway700',
+            fontFamily: 'Raleway',
             textAlign: 'center',
             borderWidth: 1,
             borderColor: '#C68625',
@@ -501,8 +527,9 @@ export const useStyles = CreateResponsiveStyle(
         },
         latestProductText: {
             fontSize: 12,
-            lineHeight: 14.09,
+            lineHeight: 15,
             fontWeight: '600',
+            fontFamily: 'Raleway',
             paddingLeft: 5
         },
         latestProductImg: {
@@ -571,8 +598,9 @@ export const useStyles = CreateResponsiveStyle(
             // marginTop: 20
         },
         categories_text: {
-            fontSize: 22,
+            fontSize: 20,
             color: '#222222',
+            fontFamily: 'Raleway',
             fontWeight: '700',
         },
         mens_rooot: {
@@ -584,49 +612,215 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 18,
             color: '#222222',
             textTransform: 'capitalize',
-            fontWeight: '700',
             position: 'absolute',
             top: 40,
             left: 15,
             zIndex: 10,
+            fontFamily: 'Raleway',
+            fontWeight: '700',
         },
 
-        /**Home PAge */
 
-        // skinImgText: {
-        //     color: '#fff',
-        //     fontSize: 12,
-        //     fontWeight: '500',
-        //     fontFamily: 'Raleway500',
-        //     lineHeight: 14,
-        //     textAlign: 'center',
-        //     marginTop: 5,
+        /** Account Page  */
+        account_Root: {
+            height: '26%',
+            // backgroundColor: 'black',
+            // position: 'relative'
+        },
+        profileImgRoot: {
+            width: "80%",
+            // height: 100,
+            flexDirection: 'row',
+            alignSelf: 'center',
+            marginVertical: '5%',
+            marginHorizontal: '10%',
+            // borderRadius: 50,
+        },
+        ImgRoot_Radius: {
+            height: 80,
+            width: 80,
+            borderWidth: 3,
+            borderColor: '#CC933B',
+            borderRadius: 100,
+            alignSelf: 'center'
+        },
+        Account_profile_image: {
+            width: "100%",
+            height: "100%",
+            borderRadius: 50,
+        },
+        display_name: {
+            width: 300
+        },
+        redTextName: {
+            color: '#CC933B',
+            fontSize: 20,
+            fontWeight: '700',
+            fontFamily: 'Raleway',
+            lineHeight: 22,
+            paddingLeft: 15
+        },
+        user_phone: {
+            width: 300,
+            marginTop: 8
+        },
+        redText: {
+            color: '#CC933B',
+            fontSize: 15,
+            fontWeight: '500',
+            fontFamily: 'Raleway',
+            lineHeight: 22,
+            paddingLeft: 15
+        },
+        CraggyTextRoot: {
+            height: '79%',
+            backgroundColor: '#ffffff',
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            marginTop: '-7%',
+            position: 'relative'
+        },
+        myProfileRoot: {
+            height: 45,
+            width: '90%',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignSelf: 'center'
+        },
+        icon_style: {
+            marginTop: 8
+        },
+        profileText: {
+            fontSize: 14,
+            lineHeight: 42,
+            fontWeight: '500',
+            fontFamily: 'Raleway',
+            paddingHorizontal: 15,
+            paddingTop: 3
+        },
+        icon_lineHieght: {
+            lineHeight: 42
+        },
+        // bs_Line2: {
+        //     height: 1,
+        //     width: '100%',
+        //     alignSelf: 'center',
+        //     backgroundColor: '#DDDDDD',
+        //     marginTop: 20
         // },
-        // headingText: {
-        //     fontFamily: 'Raleway600',
-        //     fontWeight: '600',
-        //     textTransform: "uppercase",
-        //     color: '#CC933B',
-        //     fontSize: 16,
-        //     lineHeight: 19,
-        //     textAlign: 'left'
+        bs_Line: {
+            height: 1,
+            width: '100%',
+            alignSelf: 'center',
+            backgroundColor: '#C4C4C4',
+            marginTop: 10
+        },
 
-        // },
-        color: '#222222',
-        textTransform: 'capitalize',
-        fontWeight: '700',
-        // letterSpacing: '0.5px',
-        position: 'absolute',
-        top: 40,
-        left: 15,
-        zIndex: 10,
+
+        // color: '#222222',
+        // textTransform: 'capitalize',
+        // fontWeight: '700',
+        // // letterSpacing: '0.5px',
+        // position: 'absolute',
+        // top: 40,
+        // left: 15,
+        // zIndex: 10,
     },
 
     {
-        [maxSize(DEVICE_SIZES.SM)]: {
+
+        /** Medium Device Size */
+
+        [maxSize(DEVICE_SIZES.MD)]: {
+
+            /** Home Page */
+
+            categories_img_Root: {
+                height: 150,
+                width: "100%",
+                backgroundColor: '#050505',
+                flexDirection: 'row',
+                alignContent: 'center',
+                justifyContent: 'space-around'
+
+            },
+            category_root_img: {
+                height: 80,
+                width: 80,
+                marginLeft: 45,
+                marginTop: 30,
+                borderRadius: 50,
+            },
+            productsListRoot: {
+                height: 252,
+                width: '85%',
+                alignSelf: 'center'
+            },
+            best_touchable: {
+                height: 252,
+                width: 145,
+                marginRight: 90,
+                // marginLeft: 20,
+                position: 'relative',
+            },
+            /** Account Page */
+            // account_Root: {
+            //     height: '26%',
+            // },
+            // profileImgRoot: {
+            //     width: "80%",
+            //     flexDirection: 'row',
+            //     alignSelf: 'center',
+            //     // marginVertical: '5%',
+            //     marginHorizontal: '10%',
+            // },
+
+
 
         },
+
+
+
+        /** Extra Small Device Size */
+
         [maxSize(DEVICE_SIZES.XS)]: {
+
+            /**Home Page */
+
+            category_root_img: {
+                height: 80,
+                width: 80,
+                marginLeft: 8,
+                marginTop: 30,
+                borderRadius: 50,
+            },
+            productsListRoot: {
+                height: 252,
+                width: '95%',
+                alignSelf: 'center'
+            },
+            best_touchable: {
+                height: 252,
+                width: 145,
+                marginRight: 15,
+                position: 'relative',
+            },
+
+            /** Account Page */
+            // account_Root: {
+            //     height: '26%',
+            // },
+            // profileImgRoot: {
+            //     width: "80%",
+            //     flexDirection: 'row',
+            //     alignSelf: 'center',
+            //     marginVertical: '5%',
+            //     marginHorizontal: '10%',
+            // },
+
+
+            /** Login Page */
+
             loginText: {
                 fontSize: theme.fontsM.fontS14,
                 lineHeight: theme.lineHeightM.lineH16,
@@ -717,26 +911,7 @@ export const useStyles = CreateResponsiveStyle(
                 paddingBottom: 15,
             },
 
-            /**Home Page */
-            skinImgText: {
-                color: '#fff',
-                fontSize: theme.fontsM.fontS12,
-                fontWeight: '500',
-                fontFamily: 'Raleway',
-                lineHeight: theme.lineHeightM.lineH14,
-                textAlign: 'center',
-                marginTop: 5,
-            },
-            headingText: {
-                fontFamily: 'Raleway600',
-                fontWeight: '600',
-                textTransform: "uppercase",
-                color: '#CC933B',
-                fontSize: 16,
-                lineHeight: 19,
-                textAlign: 'left'
 
-            },
 
         },
     },

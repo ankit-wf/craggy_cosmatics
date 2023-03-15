@@ -74,26 +74,26 @@ const styles = StyleSheet.create({
     review_Name: {
         fontSize: 16,
         fontWeight: '400',
-        fontFamily: 'Raleway400',
+        fontFamily: 'Raleway',
         lineHeight: 19,
     },
     review_Date: {
         fontSize: 12,
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         lineHeight: 15
     },
     review_Title: {
         fontSize: 14,
         fontWeight: '700',
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         lineHeight: 17,
         marginTop: 2
     },
     review_Review: {
         fontSize: 16,
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         lineHeight: 20,
         marginTop: 5,
         textAlign: 'justify'
@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 17,
         fontWeight: '700',
-        fontFamily: 'Lato700'
+        fontFamily: 'Lato'
     },
 })

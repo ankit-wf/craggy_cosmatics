@@ -478,7 +478,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 9,
         fontWeight: "700",
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         fontSize: 10,
         lineHeight: 13
 
@@ -507,7 +507,7 @@ const styles = StyleSheet.create({
         color: '#CC933B',
         fontSize: 16,
         fontWeight: '600',
-        fontFamily: 'Raleway500',
+        fontFamily: 'Raleway',
         lineHeight: 22,
         letterSpacing: 0.5
     },
@@ -554,7 +554,7 @@ const styles = StyleSheet.create({
     },
     Textone: {
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         fontSize: 12,
         lineHeight: 20,
         marginTop: 6,
@@ -566,7 +566,7 @@ const styles = StyleSheet.create({
     },
     titleStyle_description: {
         color: '#222222',
-        fontFamily: 'Raleway500',
+        fontFamily: 'Raleway',
         fontWeight: '500',
         fontSize: 14,
         lineHeight: 17,
@@ -584,7 +584,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         letterSpacing: 0.2,
         lineHeight: 27,
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         fontWeight: '400',
         width: '85%',
         color: '#444444'
@@ -606,7 +606,7 @@ const styles = StyleSheet.create({
     review_MainHeading: {
         fontSize: 16,
         fontWeight: '500',
-        fontFamily: 'Raleway500',
+        fontFamily: 'Raleway',
         lineHeight: 19
     },
     review_outerRoot: {
@@ -638,18 +638,18 @@ const styles = StyleSheet.create({
     reviews_length: {
         fontSize: 14,
         fontWeight: '600',
-        fontFamily: 'Raleway600',
+        fontFamily: 'Raleway',
         lineHeight: 17
     },
     review_heading: {
         fontSize: 10,
         fontWeight: '400',
-        fontFamily: 'Lato400'
+        fontFamily: 'Lato'
     },
     review_Short: {
         fontSize: 12,
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         lineHeight: 15
     },
     BestSellingRoot: {
@@ -703,26 +703,26 @@ const styles = StyleSheet.create({
     review_Name: {
         fontSize: 16,
         fontWeight: '700',
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         lineHeight: 19,
     },
     review_Date: {
         fontSize: 12,
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         lineHeight: 15
     },
     review_Title: {
         fontSize: 14,
         fontWeight: '700',
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         lineHeight: 17,
         marginTop: 2
     },
     review_Review: {
         fontSize: 16,
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         lineHeight: 20,
         marginTop: 5,
         textAlign: 'justify'
@@ -732,7 +732,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 17,
         fontWeight: '700',
-        fontFamily: 'Lato700'
+        fontFamily: 'Lato'
     },
     boxStyle: {
         borderWidth: 1,

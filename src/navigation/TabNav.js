@@ -29,7 +29,7 @@ const TabNav = () => {
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
-              
+
                 options={{
                     tabBarLabel: 'Home',
 

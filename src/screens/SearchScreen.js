@@ -237,9 +237,9 @@ const SearchScreen = ({ navigation }) => {
                                                 <View style={bsP.baseLine}></View>
 
                                                 <View style={bsP.priceRoot}>
-                                                    <Text style={bsP.price}>₹{e.sale_price}</Text>
-                                                    <Text style={bsP.spaceRoot}>/ </Text>
                                                     <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                                                    <Text style={bsP.spaceRoot}>/ </Text>
+                                                    <Text style={bsP.price}>₹{e.sale_price}</Text>
                                                 </View>
                                             </View>
 
@@ -281,9 +281,9 @@ const SearchScreen = ({ navigation }) => {
                                             </View>
                                             <View style={sS.baseLine}></View>
                                             <View style={sS.priceRoot}>
-                                                <Text style={sS.price}>₹{item.sale_price}</Text>
-                                                <Text style={sS.spaceRoot}>/ </Text>
                                                 <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                                <Text style={sS.spaceRoot}>/ </Text>
+                                                <Text style={sS.price}>₹{item.sale_price}</Text>
                                             </View>
                                         </View>
 

@@ -40,7 +40,7 @@ export const letestProductStyle = StyleSheet.create({
     descriptionText: {
         fontSize: 10,
         fontWeight: '300',
-        fontFamily: 'Lato300',
+        fontFamily: 'Lato',
         lineHeight: 12,
         color: '#FFFFFF',
         alignSelf: 'center'
@@ -63,7 +63,7 @@ export const letestProductStyle = StyleSheet.create({
     price: {
         color: 'white',
         fontSize: 12,
-        fontFamily: 'Lato600',
+        fontFamily: 'Lato',
         lineHeight: 15
     },
     spaceRoot: {
@@ -75,7 +75,7 @@ export const letestProductStyle = StyleSheet.create({
         color: '#666666',
         textDecorationLine: 'line-through',
         fontSize: 14,
-        fontFamily: 'Lato300',
+        fontFamily: 'Lato',
         fontWeight: '300',
         lineHeight: 16
 
@@ -96,7 +96,7 @@ export const letestProductStyle = StyleSheet.create({
         paddingTop: 7,
         fontSize: 10,
         lineHeight: 13,
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         fontWeight: '700'
     },
 

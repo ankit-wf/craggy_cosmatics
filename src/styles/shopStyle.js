@@ -48,7 +48,7 @@ export const shopStyle = StyleSheet.create({
         fontSize: 12,
         lineHeight: 14,
         fontWeight: '500',
-        fontFamily: 'Raleway500',
+        fontFamily: 'Raleway',
         color: '#222222',
     },
     filterImg: {
@@ -124,7 +124,7 @@ export const shopStyle = StyleSheet.create({
     price: {
         color: 'white',
         fontSize: 12,
-        fontFamily: 'Lato600',
+        fontFamily: 'Lato',
         fontWeight: '600',
         lineHeight: 15,
     },
@@ -137,7 +137,7 @@ export const shopStyle = StyleSheet.create({
         color: '#666666',
         textDecorationLine: 'line-through',
         fontSize: 14,
-        fontFamily: 'Lato300',
+        fontFamily: 'Lato',
         fontWeight: '300',
         lineHeight: 17
     },
@@ -155,7 +155,7 @@ export const shopStyle = StyleSheet.create({
         color: '#0D0D0D',
         textAlign: 'center',
         paddingTop: 7,
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         fontWeight: '700',
         fontSize: 10,
         lineHeight: 13,

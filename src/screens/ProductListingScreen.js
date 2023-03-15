@@ -185,11 +185,11 @@ const ProductListingScreen = ({ navigation, route }) => {
                 showsVerticalScrollIndicator={false}
                 nestedScrollEnabled={true}
             >
-                {/* <SkeletonContainer isLoading={loading}> */}
-                <View style={styles1.banner_img_root}>
-                    <Image source={{ uri: banner }} style={styles1.banner_img} />
-                </View>
-                {/* </SkeletonContainer> */}
+                <SkeletonContainer isLoading={loading}>
+                    <View style={styles1.banner_img_root}>
+                        <Image source={{ uri: banner }} style={styles1.banner_img} />
+                    </View>
+                </SkeletonContainer>
                 <SafeAreaView style={styles.container}>
                     <SkeletonContainer isLoading={loading}>
                         <View style={styles1.bestSellerRoot}>
@@ -329,6 +329,8 @@ const styles1 = StyleSheet.create({
     panelTitle: {
         fontSize: 27,
         height: 40,
+        fontFamily: 'Raleway',
+        fontWeight: '600',
     },
     panelSubtitle: {
         fontSize: 14,
@@ -368,7 +370,7 @@ const styles1 = StyleSheet.create({
         paddingLeft: 20,
         marginTop: 20,
         marginBottom: 10,
-        fontFamily: 'Raleway600',
+        fontFamily: 'Raleway',
         fontWeight: '600',
         textTransform: "uppercase",
         color: '#CC933B',
@@ -389,15 +391,18 @@ const styles1 = StyleSheet.create({
         flexDirection: 'row'
     },
     latestProductText: {
-        fontSize: 10,
+        fontSize: 11,
         lineHeight: 14.09,
-        fontWeight: '600',
-        paddingLeft: 5
+        // fontWeight: '600',
+        paddingLeft: 5,
+        fontFamily: 'Raleway',
+        fontWeight: '500',
     },
     dots: {
         fontSize: 12,
         lineHeight: 14.09,
-        fontWeight: '600',
+        fontFamily: 'Raleway',
+        fontWeight: '500',
         paddingLeft: 3,
     },
     shorting_root: {
@@ -410,7 +415,7 @@ const styles1 = StyleSheet.create({
     name_text: {
         fontSize: 25,
         color: '#C68625'
-        // fontFamily: 'Raleway600',
+        // fontFamily: 'Raleway',
         // fontWeight: '600',
         // textTransform: "uppercase",
         // color: '#CC933B',
@@ -482,7 +487,7 @@ const styles1 = StyleSheet.create({
         fontSize: 15,
         padding: 6,
         marginLeft: 15,
-        // fontWeight: "700",
-        // fontFamily: 'Raleway700',
+        fontWeight: "700",
+        fontFamily: 'Raleway',
     },
 })

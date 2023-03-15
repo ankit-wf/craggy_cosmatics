@@ -323,21 +323,21 @@ const styles = StyleSheet.create({
     total_text: {
         fontSize: 16,
         fontWeight: "700",
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         paddingLeft: '5%'
     },
     other_option: {
         fontSize: 16,
         fontWeight: "600",
-        fontFamily: 'Raleway600',
+        fontFamily: 'Raleway',
         paddingLeft: '5%',
         paddingBottom: 8
     },
     total_price: {
         fontSize: 16,
         fontWeight: "700",
-        fontFamily: 'Raleway700',
-        paddingRight: '5%'
+        fontFamily: 'Raleway',
+        paddingRight: '5%',
     },
     user_nameRoot: {
         height: 60,
@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
         padding: '5%'
     },
     user_adrdress_root: {
-        height: 80,
+        height: 95,
         width: "90%",
         alignSelf: 'center',
         borderWidth: 1,
@@ -477,7 +477,7 @@ const styles = StyleSheet.create({
     select_text: {
         fontSize: 15,
         // fontWeight: "700",
-        // fontFamily: 'Raleway700',
+        // fontFamily: 'Raleway',
     },
 
 
@@ -534,7 +534,7 @@ const styles = StyleSheet.create({
     //     // textAlign: 'center',
     //     // paddingTop: 9,
     //     // fontWeight: "700",
-    //     // fontFamily: 'Raleway700',
+    //     // fontFamily: 'Raleway',
     //     // fontSize: 15,
     //     // lineHeight: 13
     // },
@@ -574,7 +574,7 @@ const styles = StyleSheet.create({
     textDescription: {
         fontSize: 12,
         fontWeight: '500',
-        fontFamily: 'Raleway500',
+        fontFamily: 'Raleway',
         lineHeight: 17,
         paddingLeft: 15,
         paddingTop: 9
@@ -594,29 +594,29 @@ const styles = StyleSheet.create({
     price: {
         fontSize: 12,
         fontWeight: '700',
-        fontFamily: 'Lato700',
+        fontFamily: 'Lato',
         lineHeight: 15
 
     },
     slace: {
         fontSize: 10,
         fontWeight: '300',
-        fontFamily: 'Lato300',
+        fontFamily: 'Lato',
         lineHeight: 12,
         letterSpacing: 5
     },
     oldprice: {
         fontSize: 14,
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         color: '#444444',
         textDecorationLine: 'line-through',
-        lineHeight: 17
+        lineHeight: 15
     },
     oldprice1: {
         fontSize: 14,
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         color: '#444444',
         textDecorationLine: 'line-through',
         lineHeight: 17
@@ -666,7 +666,7 @@ const styles = StyleSheet.create({
         color: 'black',
         alignSelf: "center",
         fontWeight: '700',
-        // fontFamily: 'Lato700',
+        fontFamily: 'Lato',
         fontSize: 12,
         lineHeight: 19
     },

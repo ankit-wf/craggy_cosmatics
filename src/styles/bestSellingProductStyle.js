@@ -11,7 +11,9 @@ export const bestSellingProductStyle = StyleSheet.create({
         height: 252,
         width: 145,
         marginRight: 15,
-        position: 'relative'
+        position: 'relative',
+        borderWidth: 1,
+        borderColor: 'blue'
     },
     imgRoot: {
         height: 145,
@@ -41,7 +43,7 @@ export const bestSellingProductStyle = StyleSheet.create({
     descriptionText: {
         fontSize: 10,
         fontWeight: '300',
-        fontFamily: 'Lato300',
+        fontFamily: 'Lato',
         lineHeight: 12,
         color: '#FFFFFF',
         alignSelf: 'center',
@@ -66,21 +68,24 @@ export const bestSellingProductStyle = StyleSheet.create({
     price: {
         color: 'white',
         fontSize: 12,
-        fontWeight: '600',
-        fontFamily: 'Lato600',
-        textAlign: 'center'
+        fontWeight: '300',
+        fontFamily: 'Lato',
+        textAlign: 'center',
+        lineHeight: 15
     },
     spaceRoot: {
         color: 'white',
         marginLeft: 5,
-        fontSize: 12
+        fontSize: 12,
+        lineHeight: 15
     },
     oldprice: {
         color: '#666666',
         textDecorationLine: 'line-through',
         fontSize: 12,
         fontWeight: '600',
-        fontFamily: 'Lato600',
+        fontFamily: 'Lato',
+        lineHeight: 15
     },
     buyNowButton: {
         height: 27,
@@ -97,7 +102,7 @@ export const bestSellingProductStyle = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 7,
         fontSize: 10,
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         fontWeight: '700',
         lineHeight: 13
     },

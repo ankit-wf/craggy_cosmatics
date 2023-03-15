@@ -16,7 +16,7 @@ export const wePromiseStyle = StyleSheet.create({
     },
     promiseText: {
         fontWeight: '400',
-        fontFamily: 'Baskervville400',
+        fontFamily: 'Baskervville',
         Size: 16,
         lineHeight: 20,
         color: '#666666'
@@ -56,7 +56,7 @@ export const wePromiseStyle = StyleSheet.create({
     },
     essientialOilText: {
         fontWeight: '400',
-        fontFamily: 'Lato400',
+        fontFamily: 'Lato',
         lineHeight: 11,
         fontSize: 9,
         textAlign: 'center',
@@ -74,7 +74,7 @@ export const wePromiseStyle = StyleSheet.create({
     },
     viewProductText: {
         fontWeight: '700',
-        fontFamily: 'Raleway700',
+        fontFamily: 'Raleway',
         fontSize: 9,
         lineHeight: 12,
         color: '#333333'

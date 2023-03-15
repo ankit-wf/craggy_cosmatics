@@ -17,7 +17,7 @@ export default function BottomTabs() {
                 swipeEnabled: false,
                 tabBarActiveTintColor: '#C68625',
                 tabBarInactiveTintColor: '#444444',
-                tabBarLabelStyle: { fontSize: 8, fontFamily: 'Raleway600', fontWeight: '600', lineHeight: 10, width: "90%", alignSelf: 'center' },
+                tabBarLabelStyle: { fontSize: 8, fontFamily: 'Raleway', fontWeight: '600', lineHeight: 10, width: "90%", alignSelf: 'center' },
                 tabBarStyle: { backgroundColor: 'black', height: 80, paddingTop: 10 },
                 tabBarIndicatorStyle: {
                     height: 4,
