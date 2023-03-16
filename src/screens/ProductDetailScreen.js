@@ -11,11 +11,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import ImageView from "react-native-image-viewing"
+import { useStyles } from '../styles/responsiveStyle'
 import { CONSUMER_KEY, BEST_SELLING_API, SINGLE_PRODUCT_API } from "@env";
 
 const ProductDetailScreen = ({ navigation, route }) => {
     let bs = "BestSellers";
     const dispatch = useDispatch();
+    const Pd_Style = useStyles();
     const reviewData = useSelector(state => state.reviewData.review);
     // console.log("gggggg", reviewData[5].title)
     const cartData = useSelector(state => state.cartData.cart);
@@ -159,7 +161,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
     return (
         <View>
-            <SafeAreaView style={styles.safe_root}>
+            <SafeAreaView style={Pd_Style.safe_root}>
                 {/* <Snackbar
                     visible={visible}
                     onDismiss={onDismissSnackBar}
@@ -174,13 +176,13 @@ const ProductDetailScreen = ({ navigation, route }) => {
                         // console.log("gallery_images", data)
                         return (
                             <View key={i}>
-                                <View style={styles.swiperRoot}>
-                                    <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }} style={styles.wrapper} >
+                                <View style={Pd_Style.product_swiperRoot}>
+                                    <Swiper dotStyle={{ marginTop: -70 }} activeDotStyle={{ marginTop: -70 }} style={Pd_Style.wrapper} >
                                         {data.gallery_images == "" ?
                                             <View key={i}>
                                                 <SkeletonContainer isLoading={loading} key={i}>
                                                     <View>
-                                                        <Image source={{ uri: data.image }} style={{ height: '100%', width: '100%' }} />
+                                                        <Image source={{ uri: data.image }} style={Pd_Style.swiper_image} />
                                                     </View>
                                                 </SkeletonContainer>
 
@@ -191,7 +193,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                     <View key={e}>
                                                         <SkeletonContainer isLoading={loading} key={e}>
                                                             <TouchableOpacity onPress={() => setIsVisible(true)}>
-                                                                <Image source={{ uri: i.uri }} style={{ height: '100%', width: '100%' }} />
+                                                                <Image source={{ uri: i.uri }} style={Pd_Style.swiper_image} />
                                                             </TouchableOpacity>
                                                         </SkeletonContainer>
                                                     </View>
@@ -207,22 +209,22 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                     />
 
                                     <SkeletonContainer isLoading={loading} >
-                                        <View style={styles.shadow_Box} elevation={7}>
+                                        <View style={Pd_Style.shadow_Box} elevation={7}>
                                             <TouchableOpacity
                                                 onPress={wishlistHandler}
                                                 activeOpacity={0.5}
-                                                style={styles.fabOne}
+                                                style={Pd_Style.fabOne}
                                             >
                                                 <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={22} style={{ alignSelf: 'center' }} />
                                             </TouchableOpacity>
                                         </View>
                                     </SkeletonContainer>
                                     <SkeletonContainer isLoading={loading} >
-                                        <View style={styles.shadow_Box1} elevation={7}>
+                                        <View style={Pd_Style.shadow_Box1} elevation={7}>
                                             <TouchableOpacity
                                                 onPress={() => console.log("share")}
                                                 activeOpacity={0.5}
-                                                style={styles.fabOne}
+                                                style={Pd_Style.fabOne}
                                             >
                                                 <Ionicons name="md-share-social-outline" size={22} style={{ alignSelf: 'center' }} />
                                             </TouchableOpacity>
@@ -231,82 +233,82 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                 </View>
 
 
-                                <View style={styles.CraggyTextRoot}>
+                                <View style={Pd_Style.product_Title_Root}>
                                     <SkeletonContainer isLoading={loading} key={i} >
-                                        <View style={styles.textRoot}>
-                                            <Text style={styles.craggyText}>{data.product_title}</Text>
+                                        <View style={Pd_Style.Title_text_Root}>
+                                            <Text style={Pd_Style.Title_craggy_Text}>{data.product_title}</Text>
                                         </View>
                                     </SkeletonContainer>
                                 </View>
 
-                                <View style={styles.Accordion_Root}>
-                                    <View style={styles.description_heading}>
+                                <View style={Pd_Style.Accordion_Root}>
+                                    <View style={Pd_Style.description_heading}>
                                         <SkeletonContainer isLoading={loading} >
-                                            <Text style={styles.titleStyle_description}>DESCRIPTION</Text>
+                                            <Text style={Pd_Style.titleStyle_description}>DESCRIPTION</Text>
                                         </SkeletonContainer>
                                     </View>
                                     <SkeletonContainer isLoading={loading}  >
-                                        <View style={styles.li_text_root} >
+                                        <View style={Pd_Style.li_text_root} >
                                             <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
 
-                                            <Text style={styles.li_text}>{data.description}</Text>
+                                            <Text style={Pd_Style.li_text}>{data.description}</Text>
                                         </View>
                                     </SkeletonContainer>
 
-                                    <View style={styles.baseLine} />
-                                    <View style={styles.description_heading}>
+                                    <View style={Pd_Style.ProductDetail_baseLine} />
+                                    <View style={Pd_Style.description_heading}>
                                         <SkeletonContainer isLoading={loading} >
-                                            <Text style={styles.titleStyle_description}>KEY FEATURES</Text>
+                                            <Text style={Pd_Style.titleStyle_description}>KEY FEATURES</Text>
                                         </SkeletonContainer>
                                     </View>
 
                                     <SkeletonContainer isLoading={loading}  >
-                                        <View style={styles.li_text_root} >
+                                        <View style={Pd_Style.li_text_root} >
                                             <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                            <Text style={styles.li_text}>{data.key_feature}</Text>
+                                            <Text style={Pd_Style.li_text}>{data.key_feature}</Text>
                                         </View>
                                     </SkeletonContainer>
 
-                                    <View style={styles.baseLine} />
+                                    <View style={Pd_Style.ProductDetail_baseLine} />
 
-                                    <View style={styles.description_heading}>
+                                    <View style={Pd_Style.description_heading}>
                                         <SkeletonContainer isLoading={loading} >
-                                            <Text style={styles.titleStyle_description}>HOW TO USE</Text>
+                                            <Text style={Pd_Style.titleStyle_description}>HOW TO USE</Text>
                                         </SkeletonContainer>
                                     </View>
 
                                     <SkeletonContainer isLoading={loading} >
-                                        <View style={styles.li_text_root}>
+                                        <View style={Pd_Style.li_text_root}>
                                             <Text style={{ color: '#444444' }}>{"\u2B24" + " "}</Text>
-                                            <Text style={styles.li_text}>{data.how_to_use}</Text>
+                                            <Text style={Pd_Style.li_text}>{data.how_to_use}</Text>
                                         </View>
                                     </SkeletonContainer>
 
                                 </View>
 
 
-                                <View style={styles.review_outerRoot}>
-                                    <View style={styles.review_innerRoot}>
+                                <View style={Pd_Style.review_outerRoot}>
+                                    <View style={Pd_Style.review_innerRoot}>
                                         <SkeletonContainer isLoading={loading} >
-                                            <View style={styles.reviews_root} key={i} >
-                                                <Text style={styles.review_MainHeading}>REVIEWS</Text>
+                                            <View style={Pd_Style.reviews_root} key={i} >
+                                                <Text style={Pd_Style.review_MainHeading}>REVIEWS</Text>
                                                 <TouchableOpacity
                                                     activeOpacity={0.8}
                                                     onPress={() => navigation.navigate('writeReview')}
-                                                    style={styles.write_review}
+                                                    style={Pd_Style.write_review}
                                                 >
-                                                    <Text style={styles.review_heading}> WRITE A REVIEW </Text>
+                                                    <Text style={Pd_Style.review_heading}> WRITE A REVIEW </Text>
                                                 </TouchableOpacity>
                                             </View>
                                         </SkeletonContainer>
                                         <SkeletonContainer isLoading={loading} >
-                                            <View style={styles.reviews_root} key={i}>
-                                                <Text style={styles.reviews_length}>REVIEWS  ({reviewData.length - 1})</Text>
-                                                <Text style={styles.review_Short}>SHORT:</Text>
+                                            <View style={Pd_Style.reviews_root} key={i}>
+                                                <Text style={Pd_Style.reviews_length}>REVIEWS  ({reviewData.length - 1})</Text>
+                                                <Text style={Pd_Style.review_Short}>SHORT:</Text>
                                             </View>
                                         </SkeletonContainer>
 
-                                        <View style={[styles.baseLine2, { height: 1, }]} />
+                                        <View style={[Pd_Style.ProductDetail_baseLine2, { height: 1, }]} />
 
                                         {reviewData.map((value, k) => {
                                             let ending = parseInt(page) * 3;
@@ -315,8 +317,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 return (
                                                     <View style={{ marginTop: 30 }} key={k}>
                                                         <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
-                                                            <Text style={styles.review_Name}>{value.title}</Text>
-                                                            <Text style={styles.review_Date}>{value.date}</Text>
+                                                            <Text style={Pd_Style.review_Name}>{value.title}</Text>
+                                                            <Text style={Pd_Style.review_Date}>{value.date}</Text>
                                                         </View>
                                                         <View style={{ flexDirection: 'row', marginLeft: -8 }} >
                                                             <Rating
@@ -330,8 +332,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                             {/* <Text style={styles.starReviws}>{value.star}</Text> */}
                                                         </View>
                                                         {/* <Text style={styles.review_Title}>{value.title}</Text> */}
-                                                        <Text style={styles.review_Review}>{value.description}</Text>
-                                                        <View style={styles.baseLine} />
+                                                        <Text style={Pd_Style.review_Review}>{value.description}</Text>
+                                                        <View style={Pd_Style.ProductDetail_baseLine} />
                                                     </View>
                                                 )
                                             }
@@ -340,7 +342,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             <TouchableOpacity
                                                 activeOpacity={0.5}
                                                 onPress={() => navigation.navigate('reviews')}
-                                                style={styles.allreview_root}
+                                                style={Pd_Style.allreview_root}
                                                 key={i}
                                             >
                                                 <Text style={{ paddingLeft: 20 }}>All {reviewData.length - 1} reviews </Text>
@@ -354,15 +356,15 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         </SkeletonContainer>
                                         <SkeletonContainer isLoading={loading} >
 
-                                            <View style={styles.youMayAlso}>
+                                            <View style={Pd_Style.youMayAlso}>
                                                 <Heading title=' YOU MAY ALSO LIKE ' />
                                                 <TouchableOpacity
                                                     activeOpacity={0.6}
                                                     onPress={() => { navigation.navigate('productListing', { name: bs }) }}
                                                     // onPress={() => console.log("first")}
-                                                    style={styles.viewLatestProduct}
+                                                    style={Pd_Style.product_viewLatest_Product}
                                                 >
-                                                    <Text style={styles.latestProductText}>
+                                                    <Text style={Pd_Style.latestProduct_Text}>
                                                         View All
                                                     </Text>
                                                 </TouchableOpacity>
@@ -370,13 +372,13 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         </SkeletonContainer>
                                         <SkeletonContainer isLoading={loading} >
 
-                                            <View style={styles.productsListRoot}>
+                                            <View style={Pd_Style.products_Details_ListRoot}>
                                                 <ScrollView horizontal showsHorizontalScrollIndicator={false} >
                                                     {bestSelData.map((e, i) => {
                                                         return (
                                                             <TouchableOpacity
-                                                                // activeOpacity={0.8}
-                                                                style={bsP.touchable}
+                                                                activeOpacity={0.8}
+                                                                style={Pd_Style.best_touchable}
                                                                 onPress={() => navigation.navigate('productDetail', e.product_id)}
                                                                 key={i}
                                                             >
@@ -389,7 +391,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                                         <Text style={bsP.descriptionText}>{e.product_title}</Text>
                                                                     </View>
 
-                                                                    <View style={styles.baseLine}></View>
+                                                                    <View style={Pd_Style.ProductDetail_baseLine}></View>
 
                                                                     <View style={bsP.priceRoot}>
                                                                         <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
@@ -424,19 +426,19 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     visible={visible}
                     onDismiss={onDismissSnackBar}
                     duration={2000}
-                    style={styles.Snackbar_style}
+                    style={Pd_Style.product_Snackbar_style}
                 >
-                    <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                    <Text style={Pd_Style.product_Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
                 </Snackbar>
                 {singleData.map((data, i) => {
                     return (
                         <SkeletonContainer isLoading={loading} key={i}>
-                            <View style={styles.sticky_Btn} key={i}>
-                                <View style={styles.bottomView1} >
-                                    <Text style={[styles.textStyle, styles.color]}>₹{data.regular_price}</Text>
+                            <View style={Pd_Style.sticky_Btn} key={i}>
+                                <View style={Pd_Style.bottomView1} >
+                                    <Text style={[Pd_Style.textStyle,]}>₹{data.regular_price}</Text>
                                 </View>
-                                <View style={styles.bottomView} >
-                                    <View style={styles.inner_bottomView}>
+                                <View style={Pd_Style.bottomView} >
+                                    <View style={Pd_Style.inner_bottomView}>
                                         <Button
                                             title='Add'
                                             onPress={() => CartHolder(data.product_title, data.product_id, data.image, data.sale_price, data.regular_price,)}

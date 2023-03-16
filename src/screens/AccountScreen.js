@@ -39,106 +39,108 @@ const AccountScreen = ({ navigation }) => {
   }
   return (
     <View>
-      <View style={Ac_Style.account_Root}>
-        <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
-          <View style={Ac_Style.profileImgRoot}>
-            <View style={Ac_Style.ImgRoot_Radius}>
-              <Image source={(require('../../assets/images/dummy.png'))} style={Ac_Style.Account_profile_image} />
-            </View>
-            <View>
-              <View style={Ac_Style.display_name}>
-                <Text style={Ac_Style.redTextName}>{userData.display_name}</Text>
-              </View>
-              <View style={Ac_Style.user_phone}>
-                <Text style={Ac_Style.redText}>{userData.user_phone}</Text>
-              </View>
-              <View style={Ac_Style.display_name}>
-                <Text style={Ac_Style.redText}>{userData.user_email}</Text>
-              </View>
-            </View>
-          </View>
-        </ImageBackground>
-      </View>
-
-
-      <View style={Ac_Style.CraggyTextRoot}>
+      <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  >
         <ScrollView>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={Ac_Style.myProfileRoot}
-            onPress={() => navigation.navigate('order')}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Ionicons
-                name="newspaper-outline"
-                color='#666666'
-                size={32}
-                style={Ac_Style.icon_style}
-              />
-              <Text style={Ac_Style.profileText}>Orders</Text>
+          {/* <ImageBackground source={require('../../assets/imgBackground.png')} resizeMode='stretch' style={{ height: '100%' }}  > */}
+          <View style={Ac_Style.account_Root}>
+            <View style={Ac_Style.profileImgRoot}>
+              <View style={Ac_Style.ImgRoot_Radius}>
+                <Image source={(require('../../assets/images/dummy.png'))} style={Ac_Style.Account_profile_image} />
+              </View>
+              <View>
+                <View style={Ac_Style.display_name}>
+                  <Text style={Ac_Style.redTextName}>{userData.display_name}</Text>
+                </View>
+                <View style={Ac_Style.user_phone}>
+                  <Text style={Ac_Style.redText}>{userData.user_phone}</Text>
+                </View>
+                <View style={Ac_Style.display_name}>
+                  <Text style={Ac_Style.redText}>{userData.user_email}</Text>
+                </View>
+              </View>
             </View>
+            {/* </ImageBackground> */}
+          </View>
 
-            <Ionicons
-              name="chevron-forward"
-              color='#666666'
-              size={25}
-              style={Ac_Style.icon_lineHieght}
-            />
-          </TouchableOpacity>
 
-          <View style={Ac_Style.bs_Line} />
+          <View style={Ac_Style.CraggyTextRoot}>
+            <ScrollView>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={Ac_Style.myProfileRoot}
+                onPress={() => navigation.navigate('order')}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons
+                    name="newspaper-outline"
+                    color='#666666'
+                    size={32}
+                    style={Ac_Style.icon_style}
+                  />
+                  <Text style={Ac_Style.profileText}>Orders</Text>
+                </View>
 
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={Ac_Style.myProfileRoot}
-            onPress={() => navigation.navigate('address')}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Ionicons
-                name="location-outline"
-                color='#666666'
-                size={32}
-                style={Ac_Style.icon_style}
-              />
-              <Text style={Ac_Style.profileText}> Addresses</Text>
-            </View>
+                <Ionicons
+                  name="chevron-forward"
+                  color='#666666'
+                  size={25}
+                  style={Ac_Style.icon_lineHieght}
+                />
+              </TouchableOpacity>
 
-            <Ionicons
-              name="chevron-forward"
-              color='#666666'
-              size={25}
-              style={Ac_Style.icon_lineHieght}
-            />
-          </TouchableOpacity>
+              <View style={Ac_Style.bs_Line} />
 
-          <View style={Ac_Style.bs_Line} />
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={Ac_Style.myProfileRoot}
+                onPress={() => navigation.navigate('address')}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons
+                    name="location-outline"
+                    color='#666666'
+                    size={32}
+                    style={Ac_Style.icon_style}
+                  />
+                  <Text style={Ac_Style.profileText}> Addresses</Text>
+                </View>
 
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={Ac_Style.myProfileRoot}
-            onPress={() => navigation.navigate('wishlist')}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Ionicons
-                name="heart-circle-outline"
-                color='#666666'
-                size={35}
-                style={Ac_Style.icon_style}
-              />
-              <Text style={Ac_Style.profileText}>Wishlist</Text>
-            </View>
+                <Ionicons
+                  name="chevron-forward"
+                  color='#666666'
+                  size={25}
+                  style={Ac_Style.icon_lineHieght}
+                />
+              </TouchableOpacity>
 
-            <Ionicons
-              name="chevron-forward"
-              color='#666666'
-              size={25}
-              style={Ac_Style.icon_lineHieght}
-            />
-          </TouchableOpacity>
+              <View style={Ac_Style.bs_Line} />
 
-          <View style={Ac_Style.bs_Line} />
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={Ac_Style.myProfileRoot}
+                onPress={() => navigation.navigate('wishlist')}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons
+                    name="heart-circle-outline"
+                    color='#666666'
+                    size={35}
+                    style={Ac_Style.icon_style}
+                  />
+                  <Text style={Ac_Style.profileText}>Wishlist</Text>
+                </View>
 
-          {/* <TouchableOpacity style={Ac_Style.myProfileRoot} onPress={() => navigation.navigate('payment')} >
+                <Ionicons
+                  name="chevron-forward"
+                  color='#666666'
+                  size={25}
+                  style={Ac_Style.icon_lineHieght}
+                />
+              </TouchableOpacity>
+
+              <View style={Ac_Style.bs_Line} />
+
+              {/* <TouchableOpacity style={Ac_Style.myProfileRoot} onPress={() => navigation.navigate('payment')} >
           <View style={{ flexDirection: 'row' }}>
             <Ionicons
               name="heart-circle-outline"
@@ -159,128 +161,129 @@ const AccountScreen = ({ navigation }) => {
 
         <View style={styles.baseLine} /> */}
 
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={Ac_Style.myProfileRoot}
-            onPress={() => navigation.navigate('coupan')}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Ionicons
-                name="headset-outline"
-                color='#666666'
-                size={32}
-                style={Ac_Style.icon_style}
-              />
-              <Text style={Ac_Style.profileText}>Help & Suport</Text>
-            </View>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={Ac_Style.myProfileRoot}
+                onPress={() => navigation.navigate('coupan')}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons
+                    name="headset-outline"
+                    color='#666666'
+                    size={32}
+                    style={Ac_Style.icon_style}
+                  />
+                  <Text style={Ac_Style.profileText}>Help & Suport</Text>
+                </View>
 
-            <Ionicons
-              name="chevron-forward"
-              color='#666666'
-              size={25}
-              style={Ac_Style.icon_lineHieght}
-            />
-          </TouchableOpacity>
-          <View style={Ac_Style.bs_Line} />
-
-
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={Ac_Style.myProfileRoot}
-            onPress={() => navigation.navigate('coupan')}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Ionicons
-                name="md-document-text-outline"
-                color='#666666'
-                size={32}
-                style={Ac_Style.icon_style}
-              />
-              <Text style={Ac_Style.profileText}>Terms & Conditions</Text>
-            </View>
-
-            <Ionicons
-              name="chevron-forward"
-              color='#666666'
-              size={25}
-              style={Ac_Style.icon_lineHieght}
-            />
-          </TouchableOpacity>
-          <View style={Ac_Style.bs_Line} />
+                <Ionicons
+                  name="chevron-forward"
+                  color='#666666'
+                  size={25}
+                  style={Ac_Style.icon_lineHieght}
+                />
+              </TouchableOpacity>
+              <View style={Ac_Style.bs_Line} />
 
 
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={Ac_Style.myProfileRoot}
-            onPress={() => navigation.navigate('coupan')}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Ionicons
-                name="heart-circle"
-                color='#666666'
-                size={35}
-                style={Ac_Style.icon_style}
-              />
-              <Text style={Ac_Style.profileText}>About Us</Text>
-            </View>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={Ac_Style.myProfileRoot}
+                onPress={() => navigation.navigate('coupan')}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons
+                    name="md-document-text-outline"
+                    color='#666666'
+                    size={32}
+                    style={Ac_Style.icon_style}
+                  />
+                  <Text style={Ac_Style.profileText}>Terms & Conditions</Text>
+                </View>
 
-            <Ionicons
-              name="chevron-forward"
-              color='#666666'
-              size={25}
-              style={Ac_Style.icon_lineHieght}
-            />
-          </TouchableOpacity>
+                <Ionicons
+                  name="chevron-forward"
+                  color='#666666'
+                  size={25}
+                  style={Ac_Style.icon_lineHieght}
+                />
+              </TouchableOpacity>
+              <View style={Ac_Style.bs_Line} />
 
-          <View style={Ac_Style.bs_Line} />
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={Ac_Style.myProfileRoot}
-            onPress={() => navigation.navigate('hotOffer')}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Ionicons
-                name="heart-circle"
-                color='#666666'
-                size={35}
-                style={Ac_Style.icon_style}
-              />
-              <Text style={Ac_Style.profileText}>Hot Offers</Text>
-            </View>
 
-            <Ionicons
-              name="chevron-forward"
-              color='#666666'
-              size={25}
-              style={Ac_Style.icon_lineHieght}
-            />
-          </TouchableOpacity>
-          <View style={Ac_Style.bs_Line} />
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={Ac_Style.myProfileRoot}
-            onPress={LogoutUserHandler}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Ionicons
-                name="exit-outline"
-                color='#666666'
-                size={32}
-                style={Ac_Style.icon_style}
-              />
-              <Text style={Ac_Style.profileText}>Logout</Text>
-            </View>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={Ac_Style.myProfileRoot}
+                onPress={() => navigation.navigate('coupan')}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons
+                    name="heart-circle"
+                    color='#666666'
+                    size={35}
+                    style={Ac_Style.icon_style}
+                  />
+                  <Text style={Ac_Style.profileText}>About Us</Text>
+                </View>
 
-            <Ionicons
-              name="chevron-forward"
-              color='#666666'
-              size={25}
-              style={Ac_Style.icon_lineHieght}
-            />
-          </TouchableOpacity>
+                <Ionicons
+                  name="chevron-forward"
+                  color='#666666'
+                  size={25}
+                  style={Ac_Style.icon_lineHieght}
+                />
+              </TouchableOpacity>
+
+              <View style={Ac_Style.bs_Line} />
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={Ac_Style.myProfileRoot}
+                onPress={() => navigation.navigate('hotOffer')}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons
+                    name="heart-circle"
+                    color='#666666'
+                    size={35}
+                    style={Ac_Style.icon_style}
+                  />
+                  <Text style={Ac_Style.profileText}>Hot Offers</Text>
+                </View>
+
+                <Ionicons
+                  name="chevron-forward"
+                  color='#666666'
+                  size={25}
+                  style={Ac_Style.icon_lineHieght}
+                />
+              </TouchableOpacity>
+              <View style={Ac_Style.bs_Line} />
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={Ac_Style.myProfileRoot}
+                onPress={LogoutUserHandler}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons
+                    name="exit-outline"
+                    color='#666666'
+                    size={32}
+                    style={Ac_Style.icon_style}
+                  />
+                  <Text style={Ac_Style.profileText}>Logout</Text>
+                </View>
+
+                <Ionicons
+                  name="chevron-forward"
+                  color='#666666'
+                  size={25}
+                  style={Ac_Style.icon_lineHieght}
+                />
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
         </ScrollView>
-      </View>
-
+      </ImageBackground>
     </View>
   )
 }

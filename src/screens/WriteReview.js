@@ -6,11 +6,13 @@ import { Controller, useForm } from 'react-hook-form'
 import TextInput from '../components/InputHook';
 import { useDispatch, useSelector, } from 'react-redux'
 import { reviewActions } from '../store/ReviewSlice';
+import { useStyles } from '../styles/responsiveStyle';
 
 const WriteReview = ({ navigation }) => {
     const [star, setStar] = useState('');
     // const [text, setText] = useState("");
     const dispatch = useDispatch();
+    const Wr_style = useStyles();
     const reviewData = useSelector(state => state.reviewData.review);
 
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -50,14 +52,14 @@ const WriteReview = ({ navigation }) => {
     }
 
     return (
-        <View style={{ backgroundColor: '#fff', height: '100%' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <View style={Wr_style.write_root}>
+            <View style={Wr_style.write_back_root}>
                 <BackButton goBack={navigation.goBack} />
-                <Text style={styles.ReviewsTitle}>My Reviews</Text>
+                <Text style={Wr_style.ReviewsTitle}>My Reviews</Text>
             </View>
 
-            <View style={{ flexDirection: 'row', marginTop: '10%' }}>
-                <View style={styles.ratingRoot}>
+            <View style={Wr_style.rating_outer_root}>
+                <View style={Wr_style.rating_inner_root}>
                     <Rating
                         onFinishRating={ratingCompleted}
                         ratingCount={5}
@@ -69,10 +71,10 @@ const WriteReview = ({ navigation }) => {
                     />
 
                 </View>
-                <Text style={styles.starReviws}>{star}</Text>
+                <Text style={Wr_style.starReviws}>{star}</Text>
             </View>
 
-            <View style={{ width: "90%", alignSelf: 'center' }}>
+            <View style={Wr_style.rating_title_root}>
                 <Controller
                     control={control}
 
@@ -81,7 +83,7 @@ const WriteReview = ({ navigation }) => {
                             onChangeText={onChange}
                             value={value}
                             label="Title"
-                            returnKeyType="next"
+                            returnKeyType
                             autoCapitalize="none"
                             autoCompleteType="Title"
                             extContentType="Title"
@@ -92,7 +94,7 @@ const WriteReview = ({ navigation }) => {
                 />
             </View>
 
-            <View style={{ width: "90%", alignSelf: 'center' }}>
+            <View style={Wr_style.rating_title_root}>
                 <Controller
                     control={control}
 
@@ -108,19 +110,14 @@ const WriteReview = ({ navigation }) => {
                             keyboardType="text"
                             multiline
                             numberOfLines={6}
-                            style={
-                                {
-                                    maxHeight: 200,
-                                    paddingBottom: 20,
-                                }
-                            }
+                            style={Wr_style.rating_description_height}
                         />
                     )}
                     name="description"
                 />
             </View>
 
-            <View style={{ width: "90%", alignSelf: 'center', marginTop: 20 }}>
+            <View style={Wr_style.rating_button_root}>
                 <Button
                     style={{ width: "100%", }}
                     title="Save"
@@ -136,17 +133,42 @@ const WriteReview = ({ navigation }) => {
 export default WriteReview
 
 const styles = StyleSheet.create({
+    write_root: {
+        backgroundColor: '#fff',
+        height: '100%'
+    },
+    write_back_root: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
     ReviewsTitle: {
         paddingTop: '9%',
         fontSize: 20,
         paddingLeft: '10%'
     },
-    ratingRoot: {
+    rating_outer_root: {
+        flexDirection: 'row',
+        marginTop: '10%'
+    },
+    rating_inner_root: {
         marginLeft: '5%'
     },
     starReviws: {
         margin: 8,
         fontSize: 15,
         fontWeight: '500'
+    },
+    rating_title_root: {
+        width: "90%",
+        alignSelf: 'center'
+    },
+    rating_description_height: {
+        maxHeight: 200,
+        paddingBottom: 20,
+    },
+    rating_button_root: {
+        width: "90%",
+        alignSelf: 'center',
+        marginTop: 20
     }
 })

@@ -27,8 +27,6 @@ export const useStyles = CreateResponsiveStyle(
             marginLeft: 1,
         },
         container: {
-            // paddingLeft: 20,
-            // paddingRight: 20,
         },
         headerHamburger: {
             width: 32,
@@ -88,7 +86,6 @@ export const useStyles = CreateResponsiveStyle(
             bottom: '15%',
         },
         logoBackground: {
-            // height: '40%',
             height: '50%',
             width: '100%',
         },
@@ -170,8 +167,6 @@ export const useStyles = CreateResponsiveStyle(
         checkboxPassword: {
             display: 'flex',
             flexDirection: 'row-reverse',
-            // alignItems: 'center',
-            // justifyContent: 'space-between',
             width: '100%',
             paddingTop: 30,
             paddingBottom: 30,
@@ -223,24 +218,20 @@ export const useStyles = CreateResponsiveStyle(
             alignItems: 'center',
         },
         needHelpBottom: {
-
             color: '#fff',
             fontWeight: '600',
         },
         contactUsBottom: {
             color: '#CC933B',
             fontWeight: '700',
-
             color: '#fff',
             fontWeight: '600',
-            // letterSpacing:0,
         },
         contactUsBottom: {
             color: '#CC933B',
             fontWeight: '700',
-            // letterSpacing:0,
-
         },
+
 
         /** Home Page Style **/
 
@@ -267,10 +258,6 @@ export const useStyles = CreateResponsiveStyle(
             paddingTop: 30,
             paddingBottom: 30,
         },
-        // categoriesRoot: {
-        //     height: 212,
-        //     backgroundColor: '#050505',
-        // },
         categories_img_Root: {
             height: 150,
             width: "100%",
@@ -401,7 +388,6 @@ export const useStyles = CreateResponsiveStyle(
         },
         promiseOuterRoot: {
             paddingBottom: 90,
-            // paddingBottom: 160,
         },
         group115Root: {
             flexDirection: 'row',
@@ -446,7 +432,6 @@ export const useStyles = CreateResponsiveStyle(
         swiperRoot: {
             height: 350,
             position: 'relative',
-            // display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
         },
@@ -573,21 +558,13 @@ export const useStyles = CreateResponsiveStyle(
             alignSelf: 'center',
         },
 
+
         /** Category Page **/
 
         categoryMainDiv: {
-            // paddingTop: 30,
-            // backgroundColor: '#f2f2f2',
             height: "100%",
         },
-
         categories_root: {
-            // display: 'flex',
-            // padding: 10,
-            // paddingTop: 10,
-            // justifyContent: 'center',
-            // alignItems: 'center',
-            // backgroundColor: '#fff',
             height: 80,
             justifyContent: 'center',
             alignSelf: 'center'
@@ -595,7 +572,6 @@ export const useStyles = CreateResponsiveStyle(
         catMainSec: {
             position: 'relative',
             marginBottom: 5,
-            // marginTop: 20
         },
         categories_text: {
             fontSize: 20,
@@ -622,19 +598,16 @@ export const useStyles = CreateResponsiveStyle(
 
 
         /** Account Page  */
+
         account_Root: {
-            height: '26%',
-            // backgroundColor: 'black',
-            // position: 'relative'
+            height: '20%',
         },
         profileImgRoot: {
             width: "80%",
-            // height: 100,
             flexDirection: 'row',
             alignSelf: 'center',
             marginVertical: '5%',
             marginHorizontal: '10%',
-            // borderRadius: 50,
         },
         ImgRoot_Radius: {
             height: 80,
@@ -673,11 +646,10 @@ export const useStyles = CreateResponsiveStyle(
             paddingLeft: 15
         },
         CraggyTextRoot: {
-            height: '79%',
+            height: '80%',
             backgroundColor: '#ffffff',
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
-            marginTop: '-7%',
             position: 'relative'
         },
         myProfileRoot: {
@@ -701,13 +673,6 @@ export const useStyles = CreateResponsiveStyle(
         icon_lineHieght: {
             lineHeight: 42
         },
-        // bs_Line2: {
-        //     height: 1,
-        //     width: '100%',
-        //     alignSelf: 'center',
-        //     backgroundColor: '#DDDDDD',
-        //     marginTop: 20
-        // },
         bs_Line: {
             height: 1,
             width: '100%',
@@ -715,6 +680,308 @@ export const useStyles = CreateResponsiveStyle(
             backgroundColor: '#C4C4C4',
             marginTop: 10
         },
+
+
+
+        //** ProductDetail Page */
+
+        safe_root: {
+            height: '100%',
+            width: '100%',
+            alignSelf: 'center',
+        },
+        product_swiperRoot: {
+            height: 400,
+            position: 'relative'
+        },
+        swiper_image: {
+            height: '100%',
+            width: '100%'
+        },
+        shadow_Box: {
+            flex: 1,
+            justifyContent: 'center',
+            height: 50,
+            width: 50,
+            borderRadius: 100,
+            position: 'absolute',
+            bottom: '15%',
+            left: '8%'
+        },
+        shadow_Box1: {
+            flex: 1,
+            justifyContent: 'center',
+            height: 50,
+            width: 50,
+            borderRadius: 100,
+            position: 'absolute',
+            bottom: '15%',
+            right: '8%'
+        },
+        fabOne: {
+            flex: 1,
+            justifyContent: 'center',
+            alignSelf: 'center',
+            height: 35,
+            width: 35,
+            borderRadius: 100,
+            backgroundColor: '#fff',
+            position: 'absolute',
+        },
+        product_Title_Root: {
+            padding: 15,
+            backgroundColor: '#fff',
+            marginTop: '-12%'
+        },
+        Title_text_Root: {
+            flex: 1,
+            justifyContent: 'center',
+            alignSelf: 'center',
+            width: "90%"
+        },
+        Title_craggy_Text: {
+            color: '#CC933B',
+            fontSize: 16,
+            fontWeight: '600',
+            fontFamily: 'Raleway',
+            lineHeight: 22,
+            letterSpacing: 0.5
+        },
+        Accordion_Root: {
+            alignContent: 'center',
+            width: '90%',
+            alignSelf: 'center'
+        },
+        description_heading: {
+            height: 50,
+            width: '40%',
+            justifyContent: 'center'
+        },
+        titleStyle_description: {
+            color: '#222222',
+            fontFamily: 'Raleway',
+            fontWeight: '500',
+            fontSize: 14,
+            lineHeight: 17,
+            padding: 10
+        },
+        li_text_root: {
+            flexDirection: 'row',
+            alignSelf: 'center',
+        },
+        li_text: {
+            textAlign: "justify",
+            marginLeft: 10,
+            fontSize: 14,
+            letterSpacing: 0.2,
+            lineHeight: 27,
+            fontFamily: 'Lato',
+            fontWeight: '400',
+            width: '85%',
+            color: '#444444'
+        },
+        review_outerRoot: {
+            backgroundColor: '#ffffff',
+            marginTop: 20,
+            width: '100%',
+            marginBottom: 30
+        },
+        review_innerRoot: {
+            width: '90%',
+            alignSelf: 'center',
+        },
+        reviews_root: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 20,
+        },
+        reviews_length: {
+            fontSize: 14,
+            fontWeight: '600',
+            fontFamily: 'Raleway',
+            lineHeight: 17
+        },
+        review_Short: {
+            fontSize: 12,
+            fontWeight: '400',
+            fontFamily: 'Lato',
+            lineHeight: 15
+        },
+        review_MainHeading: {
+            fontSize: 16,
+            fontWeight: '500',
+            fontFamily: 'Raleway',
+            lineHeight: 19
+        },
+        ProductDetail_baseLine2: {
+            height: 1,
+            width: '100%',
+            alignSelf: 'center',
+            backgroundColor: '#C4C4C4',
+            marginTop: 20
+        },
+        ProductDetail_baseLine: {
+            height: 1,
+            backgroundColor: '#C4C4C4',
+            marginTop: 5
+        },
+        write_review: {
+            borderWidth: 1,
+            borderRadius: 4,
+            paddingTop: 15,
+            paddingBottom: 15,
+            paddingLeft: 35,
+            paddingRight: 35,
+            borderColor: '#333333'
+        },
+        review_heading: {
+            fontSize: 10,
+            fontWeight: '400',
+            fontFamily: 'Lato'
+        },
+        review_Name: {
+            fontSize: 16,
+            fontWeight: '700',
+            fontFamily: 'Raleway',
+            lineHeight: 19,
+        },
+        review_Date: {
+            fontSize: 12,
+            fontWeight: '400',
+            fontFamily: 'Lato',
+            lineHeight: 15
+        },
+        review_Review: {
+            fontSize: 16,
+            fontWeight: '400',
+            fontFamily: 'Lato',
+            lineHeight: 20,
+            marginTop: 5,
+            textAlign: 'justify'
+        },
+        allreview_root: {
+            height: 40,
+            width: '100%',
+            borderWidth: 0.4,
+            marginTop: 15,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderRadius: 4
+        },
+        youMayAlso: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 20,
+            marginBottom: 10
+        },
+        product_viewLatest_Product: {
+            height: 25,
+            width: 70,
+            borderRadius: 15,
+            borderWidth: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 10,
+            marginRight: 20,
+            alignSelf: 'center'
+        },
+        latestProduct_Text: {
+            fontSize: 12,
+            lineHeight: 14.09,
+            fontWeight: '600',
+        },
+        products_Details_ListRoot: {
+            height: 252,
+            width: '95%',
+            alignSelf: 'center',
+            marginBottom: "10%"
+        },
+        product_Snackbar_style: {
+            width: "70%",
+            height: 70,
+            alignSelf: 'center',
+            position: 'absolute',
+            zIndex: 3,
+            bottom: 250,
+            opacity: 0.7
+        },
+        product_Snackbar_text: {
+            color: '#fff',
+            fontSize: 15,
+            textAlign: 'center'
+        },
+        sticky_Btn: {
+            flexDirection: 'row',
+            position: 'absolute',
+            bottom: 0,
+            zIndex: 2,
+            backgroundColor: '#fff',
+
+        },
+        bottomView: {
+            height: 60,
+            width: '50%',
+            justifyContent: 'center',
+        },
+        inner_bottomView: {
+            height: 50,
+            width: '90%',
+            justifyContent: 'center'
+        },
+        bottomView1: {
+            height: 60,
+            width: '50%',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        textStyle: {
+            color: '#000',
+            fontSize: 22
+        },
+
+
+        /** Write Reviews page */
+
+        write_root: {
+            backgroundColor: '#fff',
+            height: '100%'
+        },
+        write_back_root: {
+            flexDirection: 'row',
+            justifyContent: 'center'
+        },
+        ReviewsTitle: {
+            paddingTop: '8%',
+            fontSize: 20,
+            paddingLeft: '10%'
+        },
+        rating_outer_root: {
+            flexDirection: 'row',
+            marginTop: '10%'
+        },
+        rating_inner_root: {
+            marginLeft: '5%'
+        },
+        starReviws: {
+            marginLeft: 10,
+            marginTop: 15,
+            fontSize: 17,
+            fontWeight: '500'
+        },
+        rating_title_root: {
+            width: "90%",
+            alignSelf: 'center'
+        },
+        rating_description_height: {
+            maxHeight: 200,
+            paddingBottom: 20,
+        },
+        rating_button_root: {
+            width: "90%",
+            alignSelf: 'center',
+            marginTop: 20
+        }
 
 
         // color: '#222222',
@@ -760,22 +1027,132 @@ export const useStyles = CreateResponsiveStyle(
                 height: 252,
                 width: 145,
                 marginRight: 90,
-                // marginLeft: 20,
                 position: 'relative',
             },
+
+
+
             /** Account Page */
-            // account_Root: {
-            //     height: '26%',
-            // },
-            // profileImgRoot: {
-            //     width: "80%",
-            //     flexDirection: 'row',
-            //     alignSelf: 'center',
-            //     // marginVertical: '5%',
-            //     marginHorizontal: '10%',
-            // },
+
+            account_Root: {
+                height: '15%',
+            },
+            profileImgRoot: {
+                width: "80%",
+                flexDirection: 'row',
+                alignSelf: 'center',
+                marginVertical: '5%',
+            },
+            ImgRoot_Radius: {
+                height: 100,
+                width: 100,
+                borderWidth: 3,
+                borderColor: '#CC933B',
+                borderRadius: 100,
+                alignSelf: 'center'
+            },
+            display_name: {
+                width: 450,
+            },
+            redTextName: {
+                color: '#CC933B',
+                fontSize: 20,
+                fontWeight: '700',
+                fontFamily: 'Raleway',
+                lineHeight: 22,
+                paddingLeft: 15
+            },
+            user_phone: {
+                width: 450,
+                marginTop: 15,
+            },
+            redText: {
+                color: '#CC933B',
+                fontSize: 15,
+                fontWeight: '500',
+                fontFamily: 'Raleway',
+                lineHeight: 22,
+                paddingLeft: 15
+            },
+            CraggyTextRoot: {
+                height: '80%',
+                backgroundColor: '#ffffff',
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
+                marginTop: '10%',
+                position: 'relative'
+            },
 
 
+            /** Product Detail Page */
+
+            safe_root: {
+                height: '100%',
+                width: '100%',
+                alignSelf: 'center',
+            },
+            product_swiperRoot: {
+                height: 400,
+                position: 'relative'
+            },
+            shadow_Box: {
+                flex: 1,
+                justifyContent: 'center',
+                height: 50,
+                width: 50,
+                borderRadius: 100,
+                position: 'absolute',
+                bottom: '10%',
+                left: '10%'
+            },
+            shadow_Box1: {
+                flex: 1,
+                justifyContent: 'center',
+                height: 50,
+                width: 50,
+                borderRadius: 100,
+                position: 'absolute',
+                bottom: '10%',
+                right: '10%'
+            },
+            product_Title_Root: {
+                padding: 15,
+                backgroundColor: '#fff',
+                marginTop: '0%'
+            },
+            Title_craggy_Text: {
+                color: '#CC933B',
+                fontSize: 16,
+                fontWeight: '600',
+                fontFamily: 'Raleway',
+                lineHeight: 22,
+                textAlign: 'center',
+                letterSpacing: 0.5
+            },
+            products_Details_ListRoot: {
+                height: 252,
+                width: '95%',
+                alignSelf: 'center',
+                marginBottom: "5%"
+            },
+
+            /**Write Reviews Page */
+
+            ReviewsTitle: {
+                paddingTop: '4%',
+                fontSize: 20,
+                paddingLeft: '10%'
+            },
+            rating_outer_root: {
+                flexDirection: 'row',
+                marginTop: '5%'
+            },
+            starReviws: {
+                marginLeft: 10,
+                marginTop: 15,
+                fontSize: 17,
+                fontWeight: '500'
+            },
 
         },
 
@@ -784,6 +1161,94 @@ export const useStyles = CreateResponsiveStyle(
         /** Extra Small Device Size */
 
         [maxSize(DEVICE_SIZES.XS)]: {
+
+            /** Write Reviews page */
+
+
+            ReviewsTitle: {
+                paddingTop: '8%',
+                fontSize: 20,
+                paddingLeft: '10%'
+            },
+            rating_outer_root: {
+                flexDirection: 'row',
+                marginTop: '10%'
+            },
+            rating_inner_root: {
+                marginLeft: '5%'
+            },
+            starReviws: {
+                marginLeft: 10,
+                marginTop: 15,
+                fontSize: 17,
+                fontWeight: '500'
+            },
+            rating_title_root: {
+                width: "90%",
+                alignSelf: 'center'
+            },
+            rating_description_height: {
+                maxHeight: 200,
+                paddingBottom: 20,
+            },
+            rating_button_root: {
+                width: "90%",
+                alignSelf: 'center',
+                marginTop: 20
+            },
+
+
+            /** Product Detail Page */
+
+            safe_root: {
+                height: '100%',
+                width: '100%',
+                alignSelf: 'center',
+            },
+            product_swiperRoot: {
+                height: 400,
+                position: 'relative'
+            },
+            shadow_Box: {
+                flex: 1,
+                justifyContent: 'center',
+                height: 50,
+                width: 50,
+                borderRadius: 100,
+                position: 'absolute',
+                bottom: '15%',
+                left: '8%'
+            },
+            shadow_Box1: {
+                flex: 1,
+                justifyContent: 'center',
+                height: 50,
+                width: 50,
+                borderRadius: 100,
+                position: 'absolute',
+                bottom: '15%',
+                right: '8%'
+            },
+            product_Title_Root: {
+                padding: 15,
+                backgroundColor: '#fff',
+                marginTop: '-12%'
+            },
+            Title_craggy_Text: {
+                color: '#CC933B',
+                fontSize: 16,
+                fontWeight: '600',
+                fontFamily: 'Raleway',
+                lineHeight: 22,
+                textAlign: 'left',
+                letterSpacing: 0.5
+            },
+            products_Details_ListRoot: {
+                height: 252,
+                width: '95%',
+                alignSelf: 'center',
+                marginBottom: "10%"
+            },
 
             /**Home Page */
 
@@ -807,16 +1272,61 @@ export const useStyles = CreateResponsiveStyle(
             },
 
             /** Account Page */
-            // account_Root: {
-            //     height: '26%',
-            // },
-            // profileImgRoot: {
-            //     width: "80%",
-            //     flexDirection: 'row',
-            //     alignSelf: 'center',
-            //     marginVertical: '5%',
-            //     marginHorizontal: '10%',
-            // },
+
+            account_Root: {
+                height: '20%',
+            },
+            profileImgRoot: {
+                width: "80%",
+                flexDirection: 'row',
+                alignSelf: 'center',
+                marginVertical: '5%',
+                marginHorizontal: '10%',
+            },
+            ImgRoot_Radius: {
+                height: 80,
+                width: 80,
+                borderWidth: 3,
+                borderColor: '#CC933B',
+                borderRadius: 100,
+                alignSelf: 'center'
+            },
+            Account_profile_image: {
+                width: "100%",
+                height: "100%",
+                borderRadius: 50,
+            },
+            display_name: {
+                width: 300,
+            },
+            redTextName: {
+                color: '#CC933B',
+                fontSize: 20,
+                fontWeight: '700',
+                fontFamily: 'Raleway',
+                lineHeight: 22,
+                paddingLeft: 15
+            },
+            user_phone: {
+                width: 300,
+                marginTop: 8,
+            },
+            redText: {
+                color: '#CC933B',
+                fontSize: 15,
+                fontWeight: '500',
+                fontFamily: 'Raleway',
+                lineHeight: 22,
+                paddingLeft: 15
+            },
+            CraggyTextRoot: {
+                height: '80%',
+                backgroundColor: '#ffffff',
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
+                marginTop: '0%',
+                position: 'relative'
+            },
 
 
             /** Login Page */
