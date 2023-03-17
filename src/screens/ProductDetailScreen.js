@@ -162,14 +162,6 @@ const ProductDetailScreen = ({ navigation, route }) => {
     return (
         <View>
             <SafeAreaView style={Pd_Style.safe_root}>
-                {/* <Snackbar
-                    visible={visible}
-                    onDismiss={onDismissSnackBar}
-                    duration={2000}
-                    style={styles.Snackbar_style}
-                >
-                    <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
-                </Snackbar> */}
 
                 <ScrollView>
                     {singleData.map((data, i) => {
@@ -455,401 +447,401 @@ const ProductDetailScreen = ({ navigation, route }) => {
 }
 export default ProductDetailScreen;
 const styles = StyleSheet.create({
-    safe_root: {
-        height: '100%',
-        width: '100%',
-        alignSelf: 'center',
-    },
-    wrapper: {},
-    swiperRoot: {
-        height: 400,
-        position: 'relative'
-    },
-    buyNowButton: {
-        height: 40,
-        width: "85%",
-        paddingTop: 5,
-        borderRadius: 20,
-        marginTop: 13,
-        backgroundColor: '#C68625',
-        alignSelf: 'center',
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: 'white',
-        textAlign: 'center',
-        paddingTop: 9,
-        fontWeight: "700",
-        fontFamily: 'Raleway',
-        fontSize: 10,
-        lineHeight: 13
+    // safe_root: {
+    //     height: '100%',
+    //     width: '100%',
+    //     alignSelf: 'center',
+    // },
+    // wrapper: {},
+    // swiperRoot: {
+    //     height: 400,
+    //     position: 'relative'
+    // },
+    // buyNowButton: {
+    //     height: 40,
+    //     width: "85%",
+    //     paddingTop: 5,
+    //     borderRadius: 20,
+    //     marginTop: 13,
+    //     backgroundColor: '#C68625',
+    //     alignSelf: 'center',
+    //     alignItems: 'center',
+    // },
+    // buttonText: {
+    //     color: 'white',
+    //     textAlign: 'center',
+    //     paddingTop: 9,
+    //     fontWeight: "700",
+    //     fontFamily: 'Raleway',
+    //     fontSize: 10,
+    //     lineHeight: 13
 
-    },
-    Accordion_Root: {
-        alignContent: 'center',
-        width: '90%',
-        alignSelf: 'center'
-    },
+    // },
+    // Accordion_Root: {
+    //     alignContent: 'center',
+    //     width: '90%',
+    //     alignSelf: 'center'
+    // },
 
-    CraggyTextRoot: {
-        // height: 130,
-        padding: 15,
-        backgroundColor: '#fff',
-        // borderTopLeftRadius: 50,
-        // borderTopRightRadius: 50,
-        marginTop: '-12%'
-    },
-    textRoot: {
-        flex: 1,
-        justifyContent: 'center',
-        alignSelf: 'center',
-        width: "90%"
-    },
-    craggyText: {
-        color: '#CC933B',
-        fontSize: 16,
-        fontWeight: '600',
-        fontFamily: 'Raleway',
-        lineHeight: 22,
-        letterSpacing: 0.5
-    },
-
-    productButtonRoot: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        borderColor: '#333333',
-        // borderWidth: 2,
-        borderRadius: 15,
-        height: 40,
-        width: 55
-    },
-    blackButton: {
-        backgroundColor: 'black',
-        borderColor: 'black',
-        borderWidth: 2,
-        borderRadius: 50,
-        height: 20,
-        width: 20,
-        marginTop: 7,
-        color: 'white'
-    },
-    whiteButton: {
-        borderColor: 'transparent',
-        borderWidth: 1,
-        borderRadius: 50,
-        height: 20,
-        width: 20,
-        marginTop: 7,
-        color: 'black'
-    },
-    whiteText: {
-        color: 'white',
-        alignSelf: "center",
-        marginTop: -2,
-        fontWeight: '800'
-    },
-    blackText: {
-        color: 'black',
-        alignSelf: "center",
-        marginTop: -2,
-
-    },
-    Textone: {
-        fontWeight: '400',
-        fontFamily: 'Lato',
-        fontSize: 12,
-        lineHeight: 20,
-        marginTop: 6,
-    },
-    description_heading: {
-        height: 50,
-        width: '40%',
-        justifyContent: 'center'
-    },
-    titleStyle_description: {
-        color: '#222222',
-        fontFamily: 'Raleway',
-        fontWeight: '500',
-        fontSize: 14,
-        lineHeight: 17,
-        padding: 10
-    },
-    li_text_root: {
-        flexDirection: 'row',
-        // width: '100%',
-        alignSelf: 'center',
-        // marginLeft: -60
-    },
-    li_text: {
-        textAlign: "justify",
-        marginLeft: 10,
-        fontSize: 14,
-        letterSpacing: 0.2,
-        lineHeight: 27,
-        fontFamily: 'Lato',
-        fontWeight: '400',
-        width: '85%',
-        color: '#444444'
-    },
-    baseLine2: {
-        height: 1,
-        width: '100%',
-        alignSelf: 'center',
-        backgroundColor: '#C4C4C4',
-        marginTop: 20
-    },
-    baseLine: {
-        height: 1,
-        // width: '100%',
-        // alignSelf: 'center',
-        backgroundColor: '#C4C4C4',
-        marginTop: 5
-    },
-    review_MainHeading: {
-        fontSize: 16,
-        fontWeight: '500',
-        fontFamily: 'Raleway',
-        lineHeight: 19
-    },
-    review_outerRoot: {
-        backgroundColor: '#ffffff',
-        marginTop: 20,
-        width: '100%',
-        marginBottom: 30
-    },
-    review_innerRoot: {
-        width: '90%',
-        alignSelf: 'center',
-    },
-    reviews_root: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 20,
-        // width: '90%',
-        // alignSelf: 'center'
-    },
-    write_review: {
-        borderWidth: 1,
-        borderRadius: 4,
-        paddingTop: 15,
-        paddingBottom: 15,
-        paddingLeft: 35,
-        paddingRight: 35,
-        borderColor: '#333333'
-    },
-    reviews_length: {
-        fontSize: 14,
-        fontWeight: '600',
-        fontFamily: 'Raleway',
-        lineHeight: 17
-    },
-    review_heading: {
-        fontSize: 10,
-        fontWeight: '400',
-        fontFamily: 'Lato'
-    },
-    review_Short: {
-        fontSize: 12,
-        fontWeight: '400',
-        fontFamily: 'Lato',
-        lineHeight: 15
-    },
-    BestSellingRoot: {
-        height: 'auto',
-        backgroundColor: '#fff'
-    },
-    sellingTitleRoot: {
-        height: 330,
-        width: 465,
-        marginLeft: 15,
-        marginTop: 26
-    },
-    allreview_root: {
-        height: 40,
-        width: '100%',
-        borderWidth: 0.4,
-        marginTop: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderRadius: 4
-    },
-    youMayAlso: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 20,
-        marginBottom: 10
-    },
-    viewLatestProduct: {
-        height: 25,
-        width: 70,
-        borderRadius: 15,
-        borderWidth: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 10,
-        marginRight: 20,
-        alignSelf: 'center'
-    },
-    latestProductText: {
-        fontSize: 12,
-        lineHeight: 14.09,
-        fontWeight: '600',
-    },
-    productsListRoot: {
-        height: 252,
-        width: '95%',
-        alignSelf: 'center',
-        marginBottom: "10%"
-    },
-    review_Name: {
-        fontSize: 16,
-        fontWeight: '700',
-        fontFamily: 'Raleway',
-        lineHeight: 19,
-    },
-    review_Date: {
-        fontSize: 12,
-        fontWeight: '400',
-        fontFamily: 'Lato',
-        lineHeight: 15
-    },
-    review_Title: {
-        fontSize: 14,
-        fontWeight: '700',
-        fontFamily: 'Raleway',
-        lineHeight: 17,
-        marginTop: 2
-    },
-    review_Review: {
-        fontSize: 16,
-        fontWeight: '400',
-        fontFamily: 'Lato',
-        lineHeight: 20,
-        marginTop: 5,
-        textAlign: 'justify'
-    },
-    starReviws: {
-        marginTop: 17,
-        fontSize: 14,
-        lineHeight: 17,
-        fontWeight: '700',
-        fontFamily: 'Lato'
-    },
-    boxStyle: {
-        borderWidth: 1,
-        marginLeft: -10,
-        borderColor: 'transparent',
-    },
-    paginationStyle: {
-        marginTop: 15,
-        alignSelf: 'center'
-    },
-    shadow_Box: {
-        flex: 1,
-        justifyContent: 'center',
-        height: 50,
-        width: 50,
-        borderRadius: 100,
-        // backgroundColor: '#171717',
-        // opacity: 0.5,
-        position: 'absolute',
-        bottom: '15%',
-        left: '8%'
-    },
-    shadow_Box1: {
-        flex: 1,
-        justifyContent: 'center',
-        height: 50,
-        width: 50,
-        borderRadius: 100,
-        // backgroundColor: '#171717',
-        // opacity: 0.5,
-        position: 'absolute',
-        bottom: '15%',
-        right: '8%'
-    },
-    fabOne: {
-        flex: 1,
-        justifyContent: 'center',
-        alignSelf: 'center',
-        height: 35,
-        width: 35,
-        borderRadius: 100,
-        backgroundColor: '#fff',
-        position: 'absolute',
-        // bottom: '15%',
-        // left: '8%'
-    },
-    // fabOne1: {
+    // CraggyTextRoot: {
+    //     // height: 130,
+    //     padding: 15,
+    //     backgroundColor: '#fff',
+    //     // borderTopLeftRadius: 50,
+    //     // borderTopRightRadius: 50,
+    //     marginTop: '-12%'
+    // },
+    // textRoot: {
     //     flex: 1,
     //     justifyContent: 'center',
+    //     alignSelf: 'center',
+    //     width: "90%"
+    // },
+    // craggyText: {
+    //     color: '#CC933B',
+    //     fontSize: 16,
+    //     fontWeight: '600',
+    //     fontFamily: 'Raleway',
+    //     lineHeight: 22,
+    //     letterSpacing: 0.5
+    // },
+
+    // productButtonRoot: {
+    //     flexDirection: 'row',
+    //     justifyContent: 'center',
+    //     borderColor: '#333333',
+    //     // borderWidth: 2,
+    //     borderRadius: 15,
     //     height: 40,
-    //     width: 40,
+    //     width: 55
+    // },
+    // blackButton: {
+    //     backgroundColor: 'black',
+    //     borderColor: 'black',
+    //     borderWidth: 2,
+    //     borderRadius: 50,
+    //     height: 20,
+    //     width: 20,
+    //     marginTop: 7,
+    //     color: 'white'
+    // },
+    // whiteButton: {
+    //     borderColor: 'transparent',
+    //     borderWidth: 1,
+    //     borderRadius: 50,
+    //     height: 20,
+    //     width: 20,
+    //     marginTop: 7,
+    //     color: 'black'
+    // },
+    // whiteText: {
+    //     color: 'white',
+    //     alignSelf: "center",
+    //     marginTop: -2,
+    //     fontWeight: '800'
+    // },
+    // blackText: {
+    //     color: 'black',
+    //     alignSelf: "center",
+    //     marginTop: -2,
+
+    // },
+    // Textone: {
+    //     fontWeight: '400',
+    //     fontFamily: 'Lato',
+    //     fontSize: 12,
+    //     lineHeight: 20,
+    //     marginTop: 6,
+    // },
+    // description_heading: {
+    //     height: 50,
+    //     width: '40%',
+    //     justifyContent: 'center'
+    // },
+    // titleStyle_description: {
+    //     color: '#222222',
+    //     fontFamily: 'Raleway',
+    //     fontWeight: '500',
+    //     fontSize: 14,
+    //     lineHeight: 17,
+    //     padding: 10
+    // },
+    // li_text_root: {
+    //     flexDirection: 'row',
+    //     // width: '100%',
+    //     alignSelf: 'center',
+    //     // marginLeft: -60
+    // },
+    // li_text: {
+    //     textAlign: "justify",
+    //     marginLeft: 10,
+    //     fontSize: 14,
+    //     letterSpacing: 0.2,
+    //     lineHeight: 27,
+    //     fontFamily: 'Lato',
+    //     fontWeight: '400',
+    //     width: '85%',
+    //     color: '#444444'
+    // },
+    // baseLine2: {
+    //     height: 1,
+    //     width: '100%',
+    //     alignSelf: 'center',
+    //     backgroundColor: '#C4C4C4',
+    //     marginTop: 20
+    // },
+    // baseLine: {
+    //     height: 1,
+    //     // width: '100%',
+    //     // alignSelf: 'center',
+    //     backgroundColor: '#C4C4C4',
+    //     marginTop: 5
+    // },
+    // review_MainHeading: {
+    //     fontSize: 16,
+    //     fontWeight: '500',
+    //     fontFamily: 'Raleway',
+    //     lineHeight: 19
+    // },
+    // review_outerRoot: {
+    //     backgroundColor: '#ffffff',
+    //     marginTop: 20,
+    //     width: '100%',
+    //     marginBottom: 30
+    // },
+    // review_innerRoot: {
+    //     width: '90%',
+    //     alignSelf: 'center',
+    // },
+    // reviews_root: {
+    //     flexDirection: 'row',
+    //     justifyContent: 'space-between',
+    //     marginTop: 20,
+    //     // width: '90%',
+    //     // alignSelf: 'center'
+    // },
+    // write_review: {
+    //     borderWidth: 1,
+    //     borderRadius: 4,
+    //     paddingTop: 15,
+    //     paddingBottom: 15,
+    //     paddingLeft: 35,
+    //     paddingRight: 35,
+    //     borderColor: '#333333'
+    // },
+    // reviews_length: {
+    //     fontSize: 14,
+    //     fontWeight: '600',
+    //     fontFamily: 'Raleway',
+    //     lineHeight: 17
+    // },
+    // review_heading: {
+    //     fontSize: 10,
+    //     fontWeight: '400',
+    //     fontFamily: 'Lato'
+    // },
+    // review_Short: {
+    //     fontSize: 12,
+    //     fontWeight: '400',
+    //     fontFamily: 'Lato',
+    //     lineHeight: 15
+    // },
+    // BestSellingRoot: {
+    //     height: 'auto',
+    //     backgroundColor: '#fff'
+    // },
+    // sellingTitleRoot: {
+    //     height: 330,
+    //     width: 465,
+    //     marginLeft: 15,
+    //     marginTop: 26
+    // },
+    // allreview_root: {
+    //     height: 40,
+    //     width: '100%',
+    //     borderWidth: 0.4,
+    //     marginTop: 15,
+    //     flexDirection: 'row',
+    //     justifyContent: 'space-between',
+    //     alignItems: 'center',
+    //     borderRadius: 4
+    // },
+    // youMayAlso: {
+    //     flexDirection: 'row',
+    //     justifyContent: 'space-between',
+    //     marginTop: 20,
+    //     marginBottom: 10
+    // },
+    // viewLatestProduct: {
+    //     height: 25,
+    //     width: 70,
+    //     borderRadius: 15,
+    //     borderWidth: 1,
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     marginTop: 10,
+    //     marginRight: 20,
+    //     alignSelf: 'center'
+    // },
+    // latestProductText: {
+    //     fontSize: 12,
+    //     lineHeight: 14.09,
+    //     fontWeight: '600',
+    // },
+    // productsListRoot: {
+    //     height: 252,
+    //     width: '95%',
+    //     alignSelf: 'center',
+    //     marginBottom: "10%"
+    // },
+    // review_Name: {
+    //     fontSize: 16,
+    //     fontWeight: '700',
+    //     fontFamily: 'Raleway',
+    //     lineHeight: 19,
+    // },
+    // review_Date: {
+    //     fontSize: 12,
+    //     fontWeight: '400',
+    //     fontFamily: 'Lato',
+    //     lineHeight: 15
+    // },
+    // review_Title: {
+    //     fontSize: 14,
+    //     fontWeight: '700',
+    //     fontFamily: 'Raleway',
+    //     lineHeight: 17,
+    //     marginTop: 2
+    // },
+    // review_Review: {
+    //     fontSize: 16,
+    //     fontWeight: '400',
+    //     fontFamily: 'Lato',
+    //     lineHeight: 20,
+    //     marginTop: 5,
+    //     textAlign: 'justify'
+    // },
+    // starReviws: {
+    //     marginTop: 17,
+    //     fontSize: 14,
+    //     lineHeight: 17,
+    //     fontWeight: '700',
+    //     fontFamily: 'Lato'
+    // },
+    // boxStyle: {
+    //     borderWidth: 1,
+    //     marginLeft: -10,
+    //     borderColor: 'transparent',
+    // },
+    // paginationStyle: {
+    //     marginTop: 15,
+    //     alignSelf: 'center'
+    // },
+    // shadow_Box: {
+    //     flex: 1,
+    //     justifyContent: 'center',
+    //     height: 50,
+    //     width: 50,
     //     borderRadius: 100,
-    //     backgroundColor: '#7aebda',
+    //     // backgroundColor: '#171717',
+    //     // opacity: 0.5,
+    //     position: 'absolute',
+    //     bottom: '15%',
+    //     left: '8%'
+    // },
+    // shadow_Box1: {
+    //     flex: 1,
+    //     justifyContent: 'center',
+    //     height: 50,
+    //     width: 50,
+    //     borderRadius: 100,
+    //     // backgroundColor: '#171717',
+    //     // opacity: 0.5,
+    //     position: 'absolute',
+    //     bottom: '15%',
+    //     right: '8%'
+    // },
+    // fabOne: {
+    //     flex: 1,
+    //     justifyContent: 'center',
+    //     alignSelf: 'center',
+    //     height: 35,
+    //     width: 35,
+    //     borderRadius: 100,
+    //     backgroundColor: '#fff',
     //     position: 'absolute',
     //     // bottom: '15%',
-    //     // right: '8%',
+    //     // left: '8%'
     // },
-    Snackbar_style: {
-        width: "70%",
-        height: 70,
-        alignSelf: 'center',
-        position: 'absolute',
-        zIndex: 3,
-        bottom: 250,
-        opacity: 0.7
-    },
-    Snackbar_text: {
-        color: '#fff',
-        fontSize: 15,
-        textAlign: 'center'
-    },
-    sticky_Btn: {
-        flexDirection: 'row',
-        position: 'absolute',
-        bottom: 0,
-        zIndex: 2,
-        backgroundColor: '#fff',
+    // // fabOne1: {
+    // //     flex: 1,
+    // //     justifyContent: 'center',
+    // //     height: 40,
+    // //     width: 40,
+    // //     borderRadius: 100,
+    // //     backgroundColor: '#7aebda',
+    // //     position: 'absolute',
+    // //     // bottom: '15%',
+    // //     // right: '8%',
+    // // },
+    // Snackbar_style: {
+    //     width: "70%",
+    //     height: 70,
+    //     alignSelf: 'center',
+    //     position: 'absolute',
+    //     zIndex: 3,
+    //     bottom: 250,
+    //     opacity: 0.7
+    // },
+    // Snackbar_text: {
+    //     color: '#fff',
+    //     fontSize: 15,
+    //     textAlign: 'center'
+    // },
+    // sticky_Btn: {
+    //     flexDirection: 'row',
+    //     position: 'absolute',
+    //     bottom: 0,
+    //     zIndex: 2,
+    //     backgroundColor: '#fff',
 
-    },
-    bottomView: {
-        height: 60,
-        width: '50%',
-        justifyContent: 'center',
-        // backgroundColor: '#FF9800',
-        // alignItems: 'center',
-        // position: 'absolute',
-        // bottom: 0,
-        // zIndex: 99,
-    },
-    inner_bottomView: {
-        height: 50,
-        width: '90%',
-        justifyContent: 'center'
-    },
-    add_btn: {
-        backgroundColor: '#blue',
-        alignSelf: 'center',
-    },
-    bottomView1: {
-        height: 60,
-        width: '50%',
-        // borderWidth: 1,
-        // backgroundColor: 'blue',
-        justifyContent: 'center',
-        alignItems: 'center',
-        // position: 'absolute',
-        // bottom: 0,
-        // zIndex: 99,
-    },
-    textStyle: {
-        color: '#000',
-        fontSize: 22
-    },
-    // color: {
-    //     color: '#000'
-    // }
+    // },
+    // bottomView: {
+    //     height: 60,
+    //     width: '50%',
+    //     justifyContent: 'center',
+    //     // backgroundColor: '#FF9800',
+    //     // alignItems: 'center',
+    //     // position: 'absolute',
+    //     // bottom: 0,
+    //     // zIndex: 99,
+    // },
+    // inner_bottomView: {
+    //     height: 50,
+    //     width: '90%',
+    //     justifyContent: 'center'
+    // },
+    // add_btn: {
+    //     backgroundColor: '#blue',
+    //     alignSelf: 'center',
+    // },
+    // bottomView1: {
+    //     height: 60,
+    //     width: '50%',
+    //     // borderWidth: 1,
+    //     // backgroundColor: 'blue',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     // position: 'absolute',
+    //     // bottom: 0,
+    //     // zIndex: 99,
+    // },
+    // textStyle: {
+    //     color: '#000',
+    //     fontSize: 22
+    // },
+    // // color: {
+    // //     color: '#000'
+    // // }
 
 })

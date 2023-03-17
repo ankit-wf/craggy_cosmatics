@@ -308,7 +308,7 @@ export const useStyles = CreateResponsiveStyle(
         },
         imgRoot: {
             height: 145,
-            width: 145,
+            width: '100%',
         },
         productImg: {
             height: '100%',
@@ -316,34 +316,42 @@ export const useStyles = CreateResponsiveStyle(
         },
         contentRoot: {
             height: 95,
-            width: 145,
+            width: '100%',
             backgroundColor: '#0D0D0D',
+            display: 'flex'
         },
         textRoot: {
             height: 36,
             width: 130,
             alignSelf: 'center',
-            marginTop: 5
+            justifyContent: 'center',
         },
         contentText: {
             fontSize: 12,
             fontWeight: '300',
             lineHeight: 12,
             color: '#FFFFFF',
-            alignSelf: 'center'
+            alignSelf: 'center',
+            paddingTop: 8
         },
         baseLine: {
             height: 1,
-            width: 145,
+            width: '100%',
             backgroundColor: '#272727',
             marginTop: 10
         },
         priceRoot: {
             flexDirection: 'row',
             height: 17,
-            width: 103,
             alignSelf: 'center',
             marginTop: 7,
+            // width: 103,
+            // flexDirection: 'row',
+            // height: 17,
+            width: "99%",
+            justifyContent: 'center',
+            alignSelf: 'center',
+            // marginTop: 7,
         },
         price: {
             color: 'white',
@@ -683,7 +691,7 @@ export const useStyles = CreateResponsiveStyle(
 
 
 
-        //** ProductDetail Page */
+        //** Product Detail Page */
 
         safe_root: {
             height: '100%',
@@ -981,7 +989,185 @@ export const useStyles = CreateResponsiveStyle(
             width: "90%",
             alignSelf: 'center',
             marginTop: 20
-        }
+        },
+
+
+        /** Product Listing Page */
+
+        banner_img_root: {
+            height: 200,
+        },
+        banner_img: {
+            height: '100%',
+            width: '100%'
+        },
+        Cat_Seller_Root: {
+            height: 50,
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+        },
+        productListing_name: {
+            paddingLeft: 20,
+            marginTop: 20,
+            marginBottom: 10,
+            fontFamily: 'Raleway',
+            fontWeight: '600',
+            textTransform: "uppercase",
+            color: '#CC933B',
+            fontSize: 16,
+            lineHeight: 19,
+            textAlign: 'left'
+        },
+        touchable_sort: {
+            height: 30,
+            width: 120,
+            borderRadius: 15,
+            borderWidth: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 10,
+            marginRight: 20,
+            alignSelf: 'center',
+            flexDirection: 'row'
+        },
+        sort_Text: {
+            fontSize: 11,
+            lineHeight: 14.09,
+            paddingLeft: 5,
+            fontFamily: 'Raleway',
+            fontWeight: '500',
+        },
+        dots: {
+            fontSize: 12,
+            lineHeight: 14.09,
+            fontFamily: 'Raleway',
+            fontWeight: '500',
+            paddingLeft: 3,
+        },
+        panel: {
+            paddingTop: 5,
+        },
+        sort_align_root: {
+            alignItems: 'center'
+        },
+        panelTitle: {
+            fontSize: 27,
+            height: 40,
+            fontFamily: 'Raleway',
+            fontWeight: '600',
+        },
+        panel_btnText_Root: {
+            flexDirection: 'row',
+            width: "100%",
+            alignSelf: 'center',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        },
+        panel_select_text: {
+            fontSize: 15,
+            padding: 6,
+            marginLeft: 15,
+            fontWeight: "700",
+            fontFamily: 'Raleway',
+        },
+        flatList_Root: {
+            height: '100%',
+            width: '100%',
+            alignSelf: 'center',
+        },
+        flatList_tochable_root: {
+            height: 252,
+            width: '42.2%',
+            marginLeft: '5%',
+            marginTop: 20,
+            marginBottom: 20,
+        },
+        flatList_imgRoot: {
+            height: 145,
+            width: '100%',
+        },
+        flatList_Img: {
+            height: '100%',
+            width: "100%"
+        },
+        flatList_contentRoot: {
+            height: 95,
+            width: '100%',
+            backgroundColor: '#0D0D0D',
+            display: 'flex'
+        },
+        flatList_textRoot: {
+            height: 36,
+            width: 130,
+            alignSelf: 'center',
+            justifyContent: 'center',
+        },
+        flatList_contentText: {
+            fontSize: 10,
+            fontWeight: '300',
+            fontFamily: 'Lato',
+            lineHeight: 12,
+            color: '#FFFFFF',
+            alignSelf: 'center'
+        },
+        flatList_baseLine: {
+            height: 1,
+            width: '100%',
+            backgroundColor: '#272727',
+            marginTop: 10
+        },
+        flatList_priceRoot: {
+            flexDirection: 'row',
+            height: 17,
+            width: "99%",
+            justifyContent: 'center',
+            alignSelf: 'center',
+            marginTop: 7,
+        },
+        flatList_oldprice: {
+            color: '#666666',
+            textDecorationLine: 'line-through',
+            fontSize: 14,
+            fontFamily: 'Lato',
+            fontWeight: '300',
+            lineHeight: 17
+        },
+        flatList_spaceRoot: {
+            color: 'white',
+            marginLeft: 5,
+            fontSize: 12
+        },
+        flatList_price: {
+            color: 'white',
+            fontSize: 12,
+            fontFamily: 'Lato',
+            fontWeight: '600',
+            lineHeight: 15,
+        },
+        btn_btn: {
+            height: 27,
+            width: '100%',
+        },
+        flatList_buyNowButton: {
+            height: 27,
+            width: 98,
+            borderRadius: 4,
+            backgroundColor: '#C68625',
+            position: 'absolute',
+            bottom: 0,
+            alignSelf: 'center',
+            alignItems: 'center',
+        },
+        flatList_buttonText: {
+            color: '#0D0D0D',
+            textAlign: 'center',
+            paddingTop: 7,
+            fontFamily: 'Raleway',
+            fontWeight: '700',
+            fontSize: 10,
+            lineHeight: 13,
+        },
 
 
         // color: '#222222',
@@ -1135,6 +1321,16 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center',
                 marginBottom: "5%"
             },
+            product_Snackbar_style: {
+                width: "45%",
+                height: 65,
+                alignSelf: 'center',
+                position: 'absolute',
+                zIndex: 3,
+                bottom: 150,
+                opacity: 0.7
+            },
+
 
             /**Write Reviews Page */
 
@@ -1153,6 +1349,53 @@ export const useStyles = CreateResponsiveStyle(
                 fontSize: 17,
                 fontWeight: '500'
             },
+            rating_description_height: {
+                maxHeight: 100,
+                paddingBottom: 0,
+            },
+
+
+            /** Product Listing Page */
+            flatList_tochable_root: {
+                height: 252,
+                width: '30%',
+                marginLeft: '14.5%',
+                marginTop: 20,
+                marginBottom: 20,
+            },
+            flatList_imgRoot: {
+                height: 145,
+                width: '90%',
+            },
+            flatList_contentRoot: {
+                height: 95,
+                width: '90%',
+                display: 'flex',
+                backgroundColor: '#0D0D0D',
+            },
+            btn_btn: {
+                height: 27,
+                width: '90%',
+                position: 'absolute',
+                bottom: 0,
+                justifyContent: "center",
+            },
+            flatList_buyNowButton: {
+                height: 27,
+                width: 98,
+                borderRadius: 4,
+                backgroundColor: '#C68625',
+                position: 'absolute',
+            },
+            Snackbar_style: {
+                width: "40%",
+                height: 55,
+                alignSelf: 'center',
+                position: 'absolute',
+                zIndex: 3,
+                bottom: 150,
+                opacity: 0.7
+            },
 
         },
 
@@ -1161,6 +1404,55 @@ export const useStyles = CreateResponsiveStyle(
         /** Extra Small Device Size */
 
         [maxSize(DEVICE_SIZES.XS)]: {
+
+            /** Product Listing Page */
+
+            flatList_tochable_root: {
+                height: 252,
+                width: '42.2%',
+                marginLeft: '5%',
+                marginTop: 20,
+                marginBottom: 20,
+            },
+            flatList_imgRoot: {
+                height: 145,
+                width: '100%',
+            },
+            flatList_contentRoot: {
+                height: 95,
+                width: '100%',
+                backgroundColor: '#0D0D0D',
+                display: 'flex'
+            },
+            btn_btn: {
+                height: 27,
+                width: '100%',
+                position: 'absolute',
+                bottom: 0,
+                alignSelf: 'center',
+                alignItems: 'center',
+            },
+            flatList_buyNowButton: {
+                height: 27,
+                width: 98,
+                borderRadius: 4,
+                backgroundColor: '#C68625',
+                position: 'absolute',
+                bottom: 0,
+                alignSelf: 'center',
+                alignItems: 'center',
+            },
+            Snackbar_style: {
+                width: "65%",
+                height: 55,
+                alignSelf: 'center',
+                position: 'absolute',
+                zIndex: 3,
+                bottom: 250,
+                opacity: 0.7
+            },
+
+
 
             /** Write Reviews page */
 
@@ -1249,6 +1541,16 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center',
                 marginBottom: "10%"
             },
+            product_Snackbar_style: {
+                width: "70%",
+                height: 70,
+                alignSelf: 'center',
+                position: 'absolute',
+                zIndex: 3,
+                bottom: 250,
+                opacity: 0.7
+            },
+
 
             /**Home Page */
 

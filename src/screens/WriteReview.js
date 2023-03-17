@@ -67,7 +67,6 @@ const WriteReview = ({ navigation }) => {
                         fractions={1}
                         jumpValue={1}
                         style={{ padding: 10, }}
-
                     />
 
                 </View>
@@ -83,7 +82,6 @@ const WriteReview = ({ navigation }) => {
                             onChangeText={onChange}
                             value={value}
                             label="Title"
-                            returnKeyType
                             autoCapitalize="none"
                             autoCompleteType="Title"
                             extContentType="Title"
@@ -103,7 +101,6 @@ const WriteReview = ({ navigation }) => {
                             onChangeText={onChange}
                             value={value}
                             label="Description"
-                            returnKeyType="next"
                             autoCapitalize="none"
                             autoCompleteType="Description"
                             extContentType="Description"

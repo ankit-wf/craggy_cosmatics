@@ -8,11 +8,11 @@ const SocialIcon = () => {
             <Text style={styles.follow_text}>FOLLOW US ON</Text>
 
             <View style={styles.icon_root}>
-                <Ionicons name="logo-facebook" size={35} color='#525252' />
-                <Ionicons name="logo-instagram" size={35} color='#525252' />
-                <Ionicons name="logo-pinterest" size={35} color='#525252' />
-                <Ionicons name="logo-twitter" size={35} color='#525252' />
-                <Ionicons name="logo-youtube" size={35} color='#525252' />
+                <Ionicons name="logo-facebook" size={35} color='#525252' style={styles.icon_left} />
+                <Ionicons name="logo-instagram" size={35} color='#525252' style={styles.icon_left} />
+                <Ionicons name="logo-pinterest" size={35} color='#525252' style={styles.icon_left} />
+                <Ionicons name="logo-twitter" size={35} color='#525252' style={styles.icon_left} />
+                <Ionicons name="logo-youtube" size={35} color='#525252' style={styles.icon_left} />
             </View>
 
         </View>
@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
     },
     icon_root: {
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+    },
+    icon_left: {
+        marginRight: 5
     }
 })

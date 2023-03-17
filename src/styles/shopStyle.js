@@ -59,8 +59,6 @@ export const shopStyle = StyleSheet.create({
         height: '100%',
         width: '100%',
         alignSelf: 'center',
-        // borderColor: 'red',
-        // borderWidth: 1
     },
     product109: {
         height: 252,
@@ -68,8 +66,6 @@ export const shopStyle = StyleSheet.create({
         marginLeft: '5%',
         marginTop: 20,
         marginBottom: 20,
-        // backgroundColor: 'blue',
-        // position: 'relative',
     },
     imgRoot: {
         height: 145,
@@ -93,9 +89,6 @@ export const shopStyle = StyleSheet.create({
         width: 130,
         alignSelf: 'center',
         justifyContent: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1,
-        // marginTop: 5
     },
     contentText: {
         fontSize: 10,
