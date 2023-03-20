@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { shopStyle as sS } from '../styles/shopStyle';
+// import { shopStyle as sS } from '../styles/shopStyle';
+import { useStyles } from '../styles/viewAllProductResponsive';
 import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/dataSlice';
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
@@ -9,6 +10,7 @@ import { Snackbar } from 'react-native-paper';
 import { CONSUMER_KEY, ALL_PRODUCT_API } from "@env";
 
 const ViewProduct = ({ navigation }) => {
+    const Va_Style = useStyles();
     const dispatch = useDispatch();
     const [allData, setAllData] = useState([])
     const [loading, setLoading] = useState(true);
@@ -103,44 +105,37 @@ const ViewProduct = ({ navigation }) => {
             >
                 <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
             </Snackbar> */}
-            <SafeAreaView style={sS.productsListRoot}>
+            <SafeAreaView style={Va_Style.productsListRoot}>
                 <FlatList
                     data={allData}
                     renderItem={({ item }) => (
                         <SkeletonContainer isLoading={loading}>
-                            < TouchableOpacity style={{
-                                backgroundColor: ['#e1e1e1', '#f2f2f2', '#e1e1e1'],
-                                height: 252,
-                                width: '42.2%',
-                                marginLeft: '5%',
-                                marginTop: 20,
-                                marginBottom: 20,
-                            }}
+                            < TouchableOpacity style={Va_Style.toch_root}
                                 onPress={() => navigation.navigate("productDetail", item.product_id)} >
-                                <View style={sS.imgRoot} >
-                                    <Image source={{ uri: item.image }} style={sS.productImg} />
+                                <View style={Va_Style.imgRoot} >
+                                    <Image source={{ uri: item.image }} style={Va_Style.productImg} />
                                 </View>
 
-                                <View style={sS.contentRoot}>
-                                    <View style={sS.textRoot}>
-                                        <Text style={sS.contentText}>{item.product_title}</Text>
+                                <View style={Va_Style.contentRoot}>
+                                    <View style={Va_Style.textRoot}>
+                                        <Text style={Va_Style.contentText}>{item.product_title}</Text>
                                     </View>
 
-                                    <View style={sS.baseLine}></View>
+                                    <View style={Va_Style.baseLine}></View>
 
-                                    <View style={sS.priceRoot}>
-                                        <Text style={sS.oldprice}>₹{item.regular_price}</Text>
-                                        <Text style={sS.spaceRoot}>/ </Text>
-                                        <Text style={sS.price}>₹{item.sale_price}</Text>
+                                    <View style={Va_Style.priceRoot}>
+                                        <Text style={Va_Style.oldprice}>₹{item.regular_price}</Text>
+                                        <Text style={Va_Style.spaceRoot}>/ </Text>
+                                        <Text style={Va_Style.price}>₹{item.sale_price}</Text>
                                     </View>
 
                                 </View>
 
                                 {/* {/ Buy Now Button  /} */}
-                                <TouchableOpacity style={sS.buyNowButton}
+                                <TouchableOpacity style={Va_Style.buyNowButton}
                                     onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                 >
-                                    <Text style={sS.buttonText}>BUY NOW</Text>
+                                    <Text style={Va_Style.buttonText}>BUY NOW</Text>
                                 </TouchableOpacity>
                             </TouchableOpacity>
                         </SkeletonContainer>
@@ -153,9 +148,9 @@ const ViewProduct = ({ navigation }) => {
                 visible={visible}
                 onDismiss={onDismissSnackBar}
                 duration={2000}
-                style={styles.Snackbar_style}
+                style={Va_Style.Snackbar_style}
             >
-                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                <Text style={Va_Style.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
             </Snackbar>
 
         </View>
@@ -164,26 +159,26 @@ const ViewProduct = ({ navigation }) => {
 
 export default ViewProduct;
 
-const styles = StyleSheet.create({
-    deliveryText: {
-        fontSize: 20,
-        alignSelf: 'center',
-        paddingTop: 35,
-        paddingLeft: 20
-    },
-    Snackbar_style: {
-        width: "65%",
-        height: 55,
-        alignSelf: 'center',
-        position: 'absolute',
-        zIndex: 3,
-        bottom: 250,
-        opacity: 0.7
-    },
-    Snackbar_text: {
-        color: '#fff',
-        fontSize: 14,
-        lineHeight: 15,
-        textAlign: 'center'
-    },
-})
+// const styles = StyleSheet.create({
+//     deliveryText: {
+//         fontSize: 20,
+//         alignSelf: 'center',
+//         paddingTop: 35,
+//         paddingLeft: 20
+//     },
+//     Snackbar_style: {
+//         width: "65%",
+//         height: 55,
+//         alignSelf: 'center',
+//         position: 'absolute',
+//         zIndex: 3,
+//         bottom: 250,
+//         opacity: 0.7
+//     },
+//     Snackbar_text: {
+//         color: '#fff',
+//         fontSize: 14,
+//         lineHeight: 15,
+//         textAlign: 'center'
+//     },
+// })

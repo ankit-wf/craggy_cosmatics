@@ -7,14 +7,16 @@ export const bestSellingProductStyle = StyleSheet.create({
         alignSelf: 'center',
         // bottom: 1
     },
+
     touchable: {
         height: 252,
         width: 145,
         marginRight: 15,
         position: 'relative',
-        borderWidth: 1,
-        borderColor: 'blue'
+        // borderWidth: 1,
+        // borderColor: 'blue'
     },
+
     imgRoot: {
         height: 145,
         width: 145,

@@ -3,10 +3,12 @@ import React from 'react'
 import { FAB } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons'
 import BackButton from '../components/BackButton';
+import { useStyles } from '../styles/addResponsive';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginActions } from '../store/UserSlice'
 
 const AddressesScreen = ({ navigation }) => {
+  const styles = useStyles();
   const dispatch = useDispatch();
   const AddData = useSelector(state => state.userData.userAddress);
   // console.log("datataaaaa", AddData)
@@ -50,7 +52,7 @@ const AddressesScreen = ({ navigation }) => {
       {AddData.length < 1 ?
         <View>
           <View style={styles.root_defaultImg}>
-            <Image source={(require('../../assets/images/dummy_location.png'))} resizeMode="cover" />
+            <Image source={(require('../../assets/images/dummy_location.png'))} resizeMode="cover" style={styles.img_center} />
             <View style={{ alignItems: 'center' }}>
               <Text style={{ fontSize: 18, fontWeight: '400' }}>We can't seem to locate you</Text>
               <Text style={{ fontSize: 18, fontWeight: '400' }}>Please add in your address</Text>
@@ -61,7 +63,7 @@ const AddressesScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         :
-        <View>
+        <View >
           <FAB
             icon="plus"
             style={styles.fab}
@@ -74,9 +76,9 @@ const AddressesScreen = ({ navigation }) => {
           {AddData.map((data, i) => {
             return (
               <View style={styles.default_address} key={i}>
-                <View style={{ width: '90%', alignSelf: 'center' }}>
+                <View style={styles.default_address_inner}>
                   <View style={styles.default_color} >
-                    <Text style={{ color: '#fff', alignSelf: 'center', }}>DEFAULT</Text>
+                    <Text style={styles.default_text}>DEFAULT</Text>
                   </View>
 
                   <Text style={styles.default_Name}> {data.firstname} {data.Lastname} </Text>
@@ -106,99 +108,99 @@ const AddressesScreen = ({ navigation }) => {
 
 export default AddressesScreen
 
-const styles = StyleSheet.create({
-  root_container: {
-    // flex: 1,
-    marginTop: '10%',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  root_defaultImg: {
-    height: 300,
-    width: '100%',
-    alignSelf: 'center',
-    marginTop: '10%'
-    // flex: 1,
-    // justifyContent: 'center',
-  },
+// const styles = StyleSheet.create({
+  // root_container: {
+  //   // flex: 1,
+  //   marginTop: '10%',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
+  // root_defaultImg: {
+  //   height: 300,
+  //   width: '100%',
+  //   alignSelf: 'center',
+  //   marginTop: '10%'
+  //   // flex: 1,
+  //   // justifyContent: 'center',
+  // },
 
-  add_Btn: {
-    height: 60,
-    width: 60,
-    backgroundColor: '#000',
-    borderRadius: 50,
-    alignSelf: 'flex-end',
-    // marginRight: 20,
-    marginTop: '40%',
-    justifyContent: 'center',
-  },
-  btn_text: {
-    color: '#fff',
-    alignSelf: 'center',
-    fontSize: 30
-  },
-  default_address: {
-    height: 200,
-    width: 300,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginTop: 10
-  },
-  btn_btn: {
-    height: 70,
-    width: 70,
-    backgroundColor: 'red',
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    // right: "-20%",
-    // bottom: 0,
-  },
-  add_Add: {
-    fontSize: 18,
-    color: '#fff',
-    // alignSelf: 'flex-end',
-    // paddingRight: 15
-    // alignItems: 'center'
-  },
-  default_color: {
-    height: 30,
-    width: 80,
-    backgroundColor: 'red',
-    borderRadius: 8,
-    justifyContent: 'center',
-    marginTop: 15,
-    // alignSelf: 'flex-end'
-  },
-  default_Name: {
-    color: '#000',
-    paddingTop: 8,
-    fontSize: 16,
-    fontWeight: '700'
-  },
-  add_text: {
-    color: '#000',
-    paddingTop: 8,
-    fontSize: 15,
-    fontWeight: '400',
-    // paddingHorizontal: 10
-  },
-  add_delete: {
-    color: 'red',
-    paddingTop: 8,
-    fontSize: 15,
-    fontWeight: '400',
-    paddingRight: 20
-  },
-  fab: {
-    position: 'absolute',
-    zIndex: 999,
-    // margin: 16,
-    top: "-15%",
-    right: 0,
-    // bottom: 0,
-  },
+  // add_Btn: {
+  //   height: 60,
+  //   width: 60,
+  //   backgroundColor: '#000',
+  //   borderRadius: 50,
+  //   alignSelf: 'flex-end',
+  //   // marginRight: 20,
+  //   marginTop: '40%',
+  //   justifyContent: 'center',
+  // },
+  // btn_text: {
+  //   color: '#fff',
+  //   alignSelf: 'center',
+  //   fontSize: 30
+  // },
+  // default_address: {
+  //   height: 200,
+  //   width: 300,
+  //   backgroundColor: '#fff',
+  //   borderRadius: 10,
+  //   marginTop: 10
+  // },
+  // btn_btn: {
+  //   height: 70,
+  //   width: 70,
+  //   backgroundColor: 'red',
+  //   borderRadius: 30,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   position: 'absolute',
+  //   // right: "-20%",
+  //   // bottom: 0,
+  // },
+  // add_Add: {
+  //   fontSize: 18,
+  //   color: '#fff',
+  //   // alignSelf: 'flex-end',
+  //   // paddingRight: 15
+  //   // alignItems: 'center'
+  // },
+  // default_color: {
+  //   height: 30,
+  //   width: 80,
+  //   backgroundColor: 'red',
+  //   borderRadius: 8,
+  //   justifyContent: 'center',
+  //   marginTop: 15,
+  //   // alignSelf: 'flex-end'
+  // },
+  // default_Name: {
+  //   color: '#000',
+  //   paddingTop: 8,
+  //   fontSize: 16,
+  //   fontWeight: '700'
+  // },
+  // add_text: {
+  //   color: '#000',
+  //   paddingTop: 8,
+  //   fontSize: 15,
+  //   fontWeight: '400',
+  //   // paddingHorizontal: 10
+  // },
+  // add_delete: {
+  //   color: 'red',
+  //   paddingTop: 8,
+  //   fontSize: 15,
+  //   fontWeight: '400',
+  //   paddingRight: 20
+  // },
+  // fab: {
+  //   position: 'absolute',
+  //   zIndex: 999,
+  //   // margin: 16,
+  //   top: "-15%",
+  //   right: 0,
+  //   // bottom: 0,
+  // },
   // searchRoot: {
   //   // width: '95%',
   //   // alignSelf: 'center',
@@ -258,4 +260,4 @@ const styles = StyleSheet.create({
   //   marginLeft: 10
   // },
 
-})
+// })

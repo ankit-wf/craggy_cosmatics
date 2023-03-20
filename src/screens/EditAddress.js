@@ -6,8 +6,10 @@ import { loginActions } from '../store/UserSlice'
 import { ScrollView } from 'react-native-gesture-handler'
 import TextInput from '../components/AccountInputHook'
 import { useRoute } from '@react-navigation/native'
+import { useStyles } from '../styles/addResponsive';
 
 const EditAddress = ({ navigation }) => {
+    const Edit_Style = useStyles();
     const route = useRoute();
     const index = route.params;
     // console.log("iiiinnnnddddxxx", index)
@@ -59,8 +61,8 @@ const EditAddress = ({ navigation }) => {
         // reset();
     }
     return (
-        <View>
-            <View style={styles.root_container}>
+        <View >
+            <View style={Edit_Style.edit_root_container}>
                 <ScrollView>
                     {userAdd.map((v, i) => {
                         return (
@@ -84,7 +86,7 @@ const EditAddress = ({ navigation }) => {
                                                     autoCompleteType="firstname"
                                                     // textContentType="firstname"
                                                     keyboardType="text"
-                                                    style={styles.firstname_text}
+                                                    style={Edit_Style.firstname_text}
                                                 />
                                             )}
                                             name="firstname"
@@ -110,7 +112,7 @@ const EditAddress = ({ navigation }) => {
                                                     textContentType="Lastname"
                                                     keyboardType="text"
                                                     // style={{ height: 40 }}
-                                                    style={styles.firstname_text}
+                                                    style={Edit_Style.firstname_text}
                                                 />
                                             )}
                                             name="Lastname"
@@ -138,7 +140,7 @@ const EditAddress = ({ navigation }) => {
                                                 // textContentType="phone"
                                                 keyboardType="numeric"
                                                 // style={{ height: 40 }}
-                                                style={styles.firstname_text}
+                                                style={Edit_Style.firstname_text}
                                             />
                                         )}
                                         name="phone"
@@ -164,7 +166,7 @@ const EditAddress = ({ navigation }) => {
                                                 autoCompleteType="flate"
                                                 textContentType="flate"
                                                 // style={{ height: 40 }}
-                                                style={styles.firstname_text}
+                                                style={Edit_Style.firstname_text}
                                             />
                                         )}
                                         name="flate"
@@ -190,7 +192,7 @@ const EditAddress = ({ navigation }) => {
                                                 autoCompleteType="Apartment"
                                                 textContentType="Apartment"
                                                 // style={{ height: 40 }}
-                                                style={styles.firstname_text}
+                                                style={Edit_Style.firstname_text}
                                             />
                                         )}
                                         name="Apartment"
@@ -216,7 +218,7 @@ const EditAddress = ({ navigation }) => {
                                                 autoCompleteType="Pincode"
                                                 keyboardType="numeric"
                                                 // style={{ height: 40 }}
-                                                style={styles.firstname_text}
+                                                style={Edit_Style.firstname_text}
                                             />
                                         )}
                                         name="Pincode"
@@ -242,7 +244,7 @@ const EditAddress = ({ navigation }) => {
                                                 autoCompleteType="State"
                                                 textContentType="State"
                                                 // style={{ height: 40 }}
-                                                style={styles.firstname_text}
+                                                style={Edit_Style.firstname_text}
                                             />
                                         )}
                                         name="State"
@@ -268,7 +270,7 @@ const EditAddress = ({ navigation }) => {
                                                 autoCompleteType="City"
                                                 textContentType="City"
                                                 // style={{ height: 40 }}
-                                                style={styles.firstname_text}
+                                                style={Edit_Style.firstname_text}
                                             />
                                         )}
                                         name="City"
@@ -282,44 +284,44 @@ const EditAddress = ({ navigation }) => {
                 </ScrollView>
             </View>
 
-            <TouchableOpacity style={styles.btn_root} onPress={handleSubmit(onSubmit)}>
-                <Text style={styles.btn_text}>Update</Text>
+            <TouchableOpacity style={Edit_Style.btn_root} onPress={handleSubmit(onSubmit)}>
+                <Text style={Edit_Style.edit_btn_text}>Update</Text>
             </TouchableOpacity>
         </View>
     )
 }
 export default EditAddress
 
-const styles = StyleSheet.create({
-    root_container: {
-        height: '88%',
-        width: '90%',
-        borderWidth: 0.5,
-        borderRadius: 15,
-        marginTop: 15,
-        alignSelf: 'center',
-        backgroundColor: '#fff'
-    },
-    btn_root: {
-        height: 45,
-        width: 200,
-        backgroundColor: 'black',
-        marginTop: 10,
-        borderRadius: 10,
-        alignSelf: 'center',
-        justifyContent: 'center'
-    },
-    btn_text: {
-        color: '#fff',
-        alignSelf: 'center',
-        fontSize: 16
-    },
-    firstname_text: {
-        // height: 40,
-        borderTopWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderBottomWidth: 0,
-        padding: 0,
-    }
-})
+// const styles = StyleSheet.create({
+    // root_container: {
+    //     height: '88%',
+    //     width: '90%',
+    //     borderWidth: 0.5,
+    //     borderRadius: 15,
+    //     marginTop: 15,
+    //     alignSelf: 'center',
+    //     backgroundColor: '#fff'
+    // },
+    // btn_root: {
+    //     height: 45,
+    //     width: 200,
+    //     backgroundColor: 'black',
+    //     marginTop: 10,
+    //     borderRadius: 10,
+    //     alignSelf: 'center',
+    //     justifyContent: 'center'
+    // },
+    // btn_text: {
+    //     color: '#fff',
+    //     alignSelf: 'center',
+    //     fontSize: 16
+    // },
+    // firstname_text: {
+    //     // height: 40,
+    //     borderTopWidth: 0,
+    //     borderLeftWidth: 0,
+    //     borderRightWidth: 0,
+    //     borderBottomWidth: 0,
+    //     padding: 0,
+    // }
+// })

@@ -212,7 +212,7 @@ export const useStyles = CreateResponsiveStyle(
         coupon_text: {
             fontSize: 20,
             padding: '3%',
-            marginLeft: '-4%'
+            marginLeft: '-2%'
         },
         TextInputRoot2: {
             flexDirection: 'row',
@@ -240,7 +240,8 @@ export const useStyles = CreateResponsiveStyle(
         price_summary: {
             fontSize: 20,
             fontWeight: '700',
-            padding: '3%',
+            paddingTop: '2%',
+            paddingLeft: '8%',
         },
         promoButton: {
             position: 'absolute',
@@ -262,8 +263,6 @@ export const useStyles = CreateResponsiveStyle(
         totalRoot: {
             height: 170,
             width: '85%',
-            // borderWidth:1,
-            // borderColor:'black',
             alignSelf: 'center',
             marginTop: '3%'
         },
@@ -402,21 +401,30 @@ export const useStyles = CreateResponsiveStyle(
                 flexDirection: 'row',
                 marginLeft: '-71%',
                 marginTop: '7%',
-                // borderColor: 'blue',
-                // borderWidth: 1,
-                // paddingLeft: 15,
                 justifyContent: 'center',
                 alignItems: 'center'
             },
-            // TextInputRoot: {
-            //     flexDirection: 'row',
-            //     height: 50,
-            //     width: '100%',
-            //     alignSelf: 'center',
-            //     marginTop: 10,
-            //     backgroundColor: '#fff',
-            //     marginBottom: 10
-            // },
+            coupon_icon: {
+                marginLeft: '5%',
+                padding: '2%'
+            },
+            coupon_text: {
+                fontSize: 23,
+                padding: '1.5%',
+                marginLeft: '-2%'
+            },
+            price_summary: {
+                fontSize: 21,
+                fontWeight: '700',
+                paddingTop: '2%',
+                paddingLeft: '8%',
+            },
+            totalRoot: {
+                height: 200,
+                width: '85%',
+                alignSelf: 'center',
+                marginTop: '0%'
+            },
 
 
         },
@@ -485,7 +493,27 @@ export const useStyles = CreateResponsiveStyle(
             //     backgroundColor: '#fff',
             //     marginBottom: 10
             // },
-
+            coupon_icon: {
+                marginLeft: '5%',
+                padding: '3%'
+            },
+            coupon_text: {
+                fontSize: 20,
+                padding: '3%',
+                marginLeft: '-2%'
+            },
+            price_summary: {
+                fontSize: 20,
+                fontWeight: '700',
+                paddingTop: '2%',
+                paddingLeft: '8%',
+            },
+            totalRoot: {
+                height: 170,
+                width: '85%',
+                alignSelf: 'center',
+                marginTop: '3%'
+            },
 
         },
     },
