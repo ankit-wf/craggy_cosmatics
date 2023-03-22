@@ -365,6 +365,10 @@ export const useStyles = CreateResponsiveStyle(
             marginTop: -2,
             fontWeight: '800',
         },
+        quantity_text: {
+            fontSize: 12,
+            fontWeight: '700'
+        },
         blackText: {
             color: 'black',
             alignSelf: "center",

@@ -62,14 +62,14 @@ const EditAddress = ({ navigation }) => {
     }
     return (
         <View >
-            <View style={Edit_Style.edit_root_container}>
+            <View style={Edit_Style.edit_container}>
                 <ScrollView>
                     {userAdd.map((v, i) => {
                         return (
 
                             <View key={i}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                                    <View style={{ width: '45%' }}>
+                                <View style={Edit_Style.width_container}>
+                                    <View style={Edit_Style.half_width}>
                                         <Controller
                                             control={control}
                                             rules={{
@@ -94,7 +94,7 @@ const EditAddress = ({ navigation }) => {
                                         {errors.firstname && errors.firstname.type === 'required' && <Text> this is required !</Text>}
                                         {errors.firstname && errors.firstname.type === 'pattern' && <Text> please enter correct !</Text>}
                                     </View>
-                                    <View style={{ width: '45%' }}>
+                                    <View style={Edit_Style.half_width}>
                                         <Controller
                                             control={control}
                                             rules={{
@@ -122,7 +122,7 @@ const EditAddress = ({ navigation }) => {
                                     </View>
                                 </View>
 
-                                <View style={{ width: '95%', alignSelf: 'center' }}>
+                                <View style={Edit_Style.full_width}>
                                     <Controller
                                         control={control}
                                         rules={{
@@ -149,7 +149,7 @@ const EditAddress = ({ navigation }) => {
                                     {errors.phone && errors.phone.type === 'pattern' && <Text> please enter correct !</Text>}
                                 </View>
 
-                                <View style={{ width: '95%', alignSelf: 'center' }}>
+                                <View style={Edit_Style.full_width}>
                                     <Controller
                                         control={control}
                                         rules={{
@@ -175,7 +175,7 @@ const EditAddress = ({ navigation }) => {
                                     {errors.flate && errors.flate.type === 'pattern' && <Text> please enter correct !</Text>}
                                 </View>
 
-                                <View style={{ width: '95%', alignSelf: 'center' }}>
+                                <View style={Edit_Style.full_width}>
                                     <Controller
                                         control={control}
                                         rules={{
@@ -201,7 +201,7 @@ const EditAddress = ({ navigation }) => {
                                     {errors.Apartment && errors.Apartment.type === 'pattern' && <Text> please enter correct !</Text>}
                                 </View>
 
-                                <View style={{ width: '95%', alignSelf: 'center' }}>
+                                <View style={Edit_Style.full_width}>
                                     <Controller
                                         control={control}
                                         rules={{
@@ -227,7 +227,7 @@ const EditAddress = ({ navigation }) => {
                                     {errors.Pincode && errors.Pincode.type === 'pattern' && <Text> please enter correct !</Text>}
                                 </View>
 
-                                <View style={{ width: '95%', alignSelf: 'center' }}>
+                                <View style={Edit_Style.full_width}>
                                     <Controller
                                         control={control}
                                         rules={{
@@ -253,7 +253,7 @@ const EditAddress = ({ navigation }) => {
                                     {errors.State && errors.State.type === 'pattern' && <Text> please enter correct !</Text>}
                                 </View>
 
-                                <View style={{ width: '95%', alignSelf: 'center' }}>
+                                <View style={Edit_Style.full_width}>
                                     <Controller
                                         control={control}
                                         rules={{

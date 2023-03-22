@@ -7,7 +7,7 @@ import { loginActions } from '../store/UserSlice';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
 import Checkbox from 'expo-checkbox';
-import { useStyles } from '../styles/responsiveStyle';
+import { useStyles } from '../styles/otpSignupResponsive';
 import { Ionicons } from '@expo/vector-icons';
 import BackButton from '../components/BackButton';
 // import OTPInputView from '@twotalltotems/react-native-otp-input';

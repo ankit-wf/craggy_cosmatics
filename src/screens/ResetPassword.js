@@ -7,7 +7,7 @@ import { loginActions } from '../store/UserSlice';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
 import Checkbox from 'expo-checkbox';
-import { useStyles } from '../styles/responsiveStyle';
+import { useStyles } from '../styles/loginResponsive';
 import BackButton from '../components/BackButton';
 
 const ResetPassword = ({ navigation }) => {
@@ -20,6 +20,7 @@ const ResetPassword = ({ navigation }) => {
     // console.log("logged-in ", isLoggedIn)
     const [login, setLogin] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(true);
+    const [CpasswordVisible, setCpasswordVisible] = useState(true);
     useEffect(() => {
         if (isLoggedIn == true) {
             navigation.reset({
@@ -64,7 +65,7 @@ const ResetPassword = ({ navigation }) => {
                             rules={{
                                 required: true,
                             }}
-                            render={({ field: { onChange, onBlur, value } }) => (
+                            render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     style={styles.loginInput}
                                     onChangeText={onChange}
@@ -72,9 +73,11 @@ const ResetPassword = ({ navigation }) => {
                                     label="Password"
                                     returnKeyType="next"
                                     autoCapitalize="none"
-                                    autoCompleteType="email"
-                                    textContentType="emailAddress"
+                                    autoCompleteType="password"
+                                    textContentType="password"
                                     keyboardType='numeric'
+                                    secureTextEntry={passwordVisible}
+                                    right={<Input.Icon name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)} color="#222" style={styles.inputIcon} />}
                                 />
                             )}
                             name="password"
@@ -86,7 +89,7 @@ const ResetPassword = ({ navigation }) => {
                             rules={{
                                 required: true,
                             }}
-                            render={({ field: { onChange, onBlur, value } }) => (
+                            render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     style={styles.loginInput}
                                     onChangeText={onChange}
@@ -94,9 +97,11 @@ const ResetPassword = ({ navigation }) => {
                                     label="Confirm Password"
                                     returnKeyType="next"
                                     autoCapitalize="none"
-                                    autoCompleteType="email"
-                                    textContentType="emailAddress"
+                                    autoCompleteType="confirm_password"
+                                    textContentType="confirm_password"
                                     keyboardType='numeric'
+                                    secureTextEntry={CpasswordVisible}
+                                    right={<Input.Icon name={CpasswordVisible ? "eye" : "eye-off"} onPress={() => setCpasswordVisible(!CpasswordVisible)} color="#222" style={styles.inputIcon} />}
                                 />
                             )}
                             name="confirm_password"

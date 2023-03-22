@@ -194,7 +194,7 @@ const HomeScreen = ({ navigation }) => {
         </SkeletonContainer>
 
         <SkeletonContainer isLoading={loading}>
-          <View style={styles1.bestSellerRoot}>
+          <View style={styles.bestSellerRoot}>
             <Heading title=' best selling ' />
             <TouchableOpacity
               activeOpacity={0.8}
@@ -253,7 +253,7 @@ const HomeScreen = ({ navigation }) => {
 
         {/* Latest Product  */}
         <SkeletonContainer isLoading={loading} >
-          <View style={styles1.bestSellerRoot}>
+          <View style={styles.bestSellerRoot}>
             <Heading title=' latest product ' />
             <TouchableOpacity
               activeOpacity={0.8}
@@ -390,12 +390,12 @@ const styles1 = StyleSheet.create({
     marginLeft: 8,
     marginTop: 30
   },
-  bestSellerRoot: {
-    height: 50,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-    marginBottom: 10,
-  }
+  // bestSellerRoot: {
+  //   height: 50,
+  //   width: '100%',
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   marginTop: 20,
+  //   marginBottom: 10,
+  // }
 })

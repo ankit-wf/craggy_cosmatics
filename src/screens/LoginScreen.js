@@ -7,7 +7,7 @@ import { loginActions } from '../store/UserSlice';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
 import axios from 'axios';
-import { useStyles } from '../styles/responsiveStyle';
+import { useStyles } from '../styles/loginResponsive';
 import BackButton from '../components/BackButton';
 import { USER_LOGIN_API, CONSUMER_KEY } from "@env";
 
@@ -129,7 +129,7 @@ const LoginScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.LoginButtong}>
-                        <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonStyle}>
+                        <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonStyle} activeOpacity={0.8}>
                             <Title style={styles.LoginButtongTittle}>Login</Title>
                         </TouchableOpacity>
                     </View>

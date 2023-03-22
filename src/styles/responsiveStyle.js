@@ -221,12 +221,7 @@ export const useStyles = CreateResponsiveStyle(
             color: '#fff',
             fontWeight: '600',
         },
-        contactUsBottom: {
-            color: '#CC933B',
-            fontWeight: '700',
-            color: '#fff',
-            fontWeight: '600',
-        },
+
         contactUsBottom: {
             color: '#CC933B',
             fontWeight: '700',
@@ -505,7 +500,14 @@ export const useStyles = CreateResponsiveStyle(
             marginLeft: 15,
             marginTop: 26
         },
-
+        bestSellerRoot: {
+            height: 50,
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 20,
+            marginBottom: 10,
+        },
         viewLatestProduct: {
             height: 25,
             width: 80,
@@ -658,7 +660,7 @@ export const useStyles = CreateResponsiveStyle(
             backgroundColor: '#ffffff',
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
-            position: 'relative'
+            position: 'relative',
         },
         myProfileRoot: {
             height: 45,
@@ -1169,6 +1171,30 @@ export const useStyles = CreateResponsiveStyle(
             lineHeight: 13,
         },
 
+        //** Order Screen */
+
+        no_order_text: {
+            fontSize: 18,
+            fontWeight: '700',
+            alignSelf: 'center',
+            paddingTop: '5%'
+        },
+        shopping_btn: {
+            height: 40,
+            width: 150,
+            borderWidth: 1,
+            borderRadius: 5,
+            alignSelf: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#C68625',
+            marginTop: 50
+        },
+        shopping_text: {
+            fontSize: 16,
+            alignSelf: 'center',
+            color: '#fff',
+
+        },
 
         // color: '#222222',
         // textTransform: 'capitalize',
@@ -1185,6 +1211,31 @@ export const useStyles = CreateResponsiveStyle(
         /** Medium Device Size */
 
         [maxSize(DEVICE_SIZES.MD)]: {
+
+            //** Order Screen */
+
+            no_order_text: {
+                fontSize: 18,
+                fontWeight: '700',
+                alignSelf: 'center',
+            },
+            shopping_btn: {
+                height: 40,
+                width: 150,
+                borderWidth: 1,
+                borderRadius: 5,
+                alignSelf: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#C68625',
+                marginTop: 50,
+                marginBottom: 10
+            },
+            shopping_text: {
+                fontSize: 16,
+                alignSelf: 'center',
+                color: '#fff',
+
+            },
 
             /** Home Page */
 
@@ -1356,6 +1407,7 @@ export const useStyles = CreateResponsiveStyle(
 
 
             /** Product Listing Page */
+
             flatList_tochable_root: {
                 height: 252,
                 width: '30%',
@@ -1396,6 +1448,81 @@ export const useStyles = CreateResponsiveStyle(
                 bottom: 150,
                 opacity: 0.7
             },
+            /**login */
+
+            loginBg: {
+                width: '100%',
+                height: 50,
+                // marginTop: 50,
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#000',
+            },
+            logoBackground: {
+                height: '20%',
+                width: '100%',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                // flex: 1
+                // marginTop: 50
+            },
+
+            loginInput: {
+                // width: '100%',
+                // fontSize: theme.fontsT.fontS10,
+                // borderTopWidth: 0,
+                // borderLeftWidth: 0,
+                // borderRightWidth: 0,
+                // borderBottomWidth: 0,
+                // backgroundColor: '#fff',
+                // padding: 0,
+                // height: 40,
+                marginTop: 0
+            },
+            // inputWidth: {
+            //     width: '100%',
+            //     color: theme.siteColor.colorFFFFFF,
+            //     // backgroundColor: 'red',
+            //     top: '15%',
+
+            // },
+            forgetLabel: {
+                fontSize: theme.fontsM.fontS15,
+                lineHeight: theme.lineHeightM.lineH15,
+                paddingTop: 0
+            },
+
+            LoginButtong: {
+                // display: 'flex',
+                // width: '100%',
+                marginTop: -10
+            },
+            // buttonStyle: {
+            //     padding: 20,
+            //     backgroundColor: '#C68625',
+            //     borderRadius: 24,
+            //     marginTop: -10
+            // },
+            // needHelpBottom: {
+            //     color: '#fff',
+            //     fontWeight: '600',
+            //     bottom: 0
+            // },
+            Containterlogin: {
+                display: 'flex',
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 15,
+                //     paddingBottom: 10,
+                //     backgroundColor: '#fff',
+                //     width: '90%',
+                //     borderRadius: 8,
+                //     position: 'relative',
+                // zIndex: 999,
+                bottom: '16%',
+            },
+
 
         },
 
@@ -1404,6 +1531,31 @@ export const useStyles = CreateResponsiveStyle(
         /** Extra Small Device Size */
 
         [maxSize(DEVICE_SIZES.XS)]: {
+
+
+            //** Order Screen */
+
+            no_order_text: {
+                fontSize: 18,
+                fontWeight: '700',
+                alignSelf: 'center',
+            },
+            shopping_btn: {
+                height: 40,
+                width: 150,
+                borderWidth: 1,
+                borderRadius: 5,
+                alignSelf: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#C68625',
+                marginTop: 50
+            },
+            shopping_text: {
+                fontSize: 16,
+                alignSelf: 'center',
+                color: '#fff',
+
+            },
 
             /** Product Listing Page */
 
@@ -1626,7 +1778,7 @@ export const useStyles = CreateResponsiveStyle(
                 backgroundColor: '#ffffff',
                 borderTopLeftRadius: 30,
                 borderTopRightRadius: 30,
-                marginTop: '0%',
+                marginTop: '2%',
                 position: 'relative'
             },
 
@@ -1643,17 +1795,24 @@ export const useStyles = CreateResponsiveStyle(
                 borderRadius: 10,
                 borderWidth: 2,
             },
+
+            logoBackground: {
+                height: '50%',
+                width: '50%',
+                marginTop: 0
+
+            },
             containerInner: {
                 paddingTop: 0,
                 paddingBottom: 20,
                 paddingLeft: 15,
                 paddingRight: 15,
             },
-            loginInput: {
-                fontSize: theme.fontsM.fontS13,
-                borderWidth: 1,
-                lineHeight: theme.lineHeightM.lineH15,
-            },
+            // loginInput: {
+            //     fontSize: theme.fontsM.fontS13,
+            //     borderWidth: 1,
+            //     lineHeight: theme.lineHeightM.lineH15,
+            // },
             containerInput: {
                 marginVertical: 5,
             },
@@ -1669,14 +1828,15 @@ export const useStyles = CreateResponsiveStyle(
             forgetLabel: {
                 fontSize: theme.fontsM.fontS13,
                 lineHeight: theme.lineHeightM.lineH15,
+                paddingTop: 0
             },
             inputIcon: {
                 top: 5,
             },
-            buttonStyle: {
-                padding: 16,
-                marginBottom: 25,
-            },
+            // buttonStyle: {
+            //     padding: 16,
+            //     marginBottom: 25,
+            // },
             LoginButtongTittle: {
                 fontSize: theme.fontsM.fontS13,
                 lineHeight: theme.lineHeightM.lineH15,
@@ -1722,7 +1882,53 @@ export const useStyles = CreateResponsiveStyle(
                 paddingRight: 10,
                 paddingBottom: 15,
             },
-
+            // needHelpBottom: {
+            //     color: '#fff',
+            //     fontWeight: '600',
+            //     bottom: 0
+            // },
+            LoginButtong: {
+                // display: 'flex',
+                // width: '100%',
+                marginTop: 10
+            },
+            buttonStyle: {
+                padding: 20,
+                backgroundColor: '#C68625',
+                borderRadius: 24,
+            },
+            inputWidth: {
+                width: '100%',
+                color: theme.siteColor.colorFFFFFF,
+                top: 0,
+                // bottom: 0,
+                // backgroundColor: 'red',
+            },
+            loginInput: {
+                // width: '100%',
+                height: 50,
+                // fontSize: theme.fontsT.fontS14,
+                // borderTopWidth: 0,
+                // borderLeftWidth: 0,
+                // borderRightWidth: 0,
+                // borderBottomWidth: 0,
+                // backgroundColor: '#fff',
+                // padding: 0,
+                marginTop: 0
+            },
+            Containterlogin: {
+                //     display: 'flex',
+                //     justifyContent: '',
+                //     alignItems: "center",
+                //     padding: 25,
+                //     paddingBottom: 10,
+                //     backgroundColor: '#fff',
+                //     width: '90%',
+                //     borderRadius: 8,
+                //     position: 'relative',
+                //     zIndex: 999,
+                bottom: '16%',
+            },
 
 
         },

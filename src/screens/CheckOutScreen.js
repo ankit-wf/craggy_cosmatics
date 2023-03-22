@@ -162,8 +162,8 @@ const CheckOutScreen = ({ navigation, route }) => {
                                                 {/* <TouchableOpacity onPress={() => subOne(e, i.quantity)} style={(i.quantity < 1) ? Co_Style.blackButton : Co_Style.whiteButton} >
                                                 <Text style={Co_Style.blackText}>-</Text>
                                             </TouchableOpacity> */}
-                                                <Text style={{ fontSize: 12, fontWeight: '700' }} >Qnty</Text>
-                                                <Text style={{ fontSize: 12, fontWeight: '700' }} >:</Text>
+                                                <Text style={Co_Style.quantity_text} >Qnty</Text>
+                                                <Text style={Co_Style.quantity_text} >:</Text>
                                                 <Text style={Co_Style.blackText}>{i.quantity}</Text>
 
                                                 {/* 

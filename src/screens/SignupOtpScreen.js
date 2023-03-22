@@ -6,7 +6,7 @@ import { useDispatch, useSelector, } from 'react-redux';
 import { loginActions } from '../store/UserSlice';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
-import { useStyles } from '../styles/responsiveStyle';
+import { useStyles } from '../styles/otpSignupResponsive'
 import { Ionicons } from '@expo/vector-icons'
 import BackButton from '../components/BackButton';
 import axios from 'axios';
@@ -159,22 +159,22 @@ const SignupOtpScreen = ({ navigation, route }) => {
                     <View >
 
                         {seconds > 0 ?
-                            <View style={styles1.fill_root}>
-                                <View style={styles1.Fill_counter_root}>
-                                    <Text style={styles1.Fill_counter_text}> Timing Remaining: 00:{seconds}</Text>
+                            <View style={styles.fill_root}>
+                                <View style={styles.Fill_counter_root}>
+                                    <Text style={styles.Fill_counter_text}> Timing Remaining: 00:{seconds}</Text>
                                 </View>
-                                <View style={styles1.fill_resend_root}>
-                                    <Text style={styles1.fill_resend_text}>Resend OTP</Text>
+                                <View style={styles.fill_resend_root}>
+                                    <Text style={styles.fill_resend_text}>Resend OTP</Text>
                                 </View>
                             </View>
                             :
-                            <View style={styles1.empty_root}>
-                                <View style={styles1.empty_counter_root}>
+                            <View style={styles.empty_root}>
+                                <View style={styles.empty_counter_root}>
 
                                 </View>
-                                <View style={styles1.empty_resend_root}>
+                                <View style={styles.empty_resend_root}>
                                     <TouchableOpacity onPress={onSubmit}>
-                                        <Text style={styles1.empty_resend_text}>Resend OTP</Text>
+                                        <Text style={styles.empty_resend_text}>Resend OTP</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -194,90 +194,91 @@ const SignupOtpScreen = ({ navigation, route }) => {
 
 export default SignupOtpScreen;
 
-const styles1 = StyleSheet.create({
-    borderStyleBase: {
-        width: 30,
-        height: 45
-    },
 
-    borderStyleHighLighted: {
-        borderColor: "#03DAC6",
-    },
+// const styles1 = StyleSheet.create({
+//     borderStyleBase: {
+//         width: 30,
+//         height: 45
+//     },
 
-    underlineStyleBase: {
-        width: 30,
-        height: 45,
-        borderWidth: 0,
-        borderBottomWidth: 1,
-    },
+//     borderStyleHighLighted: {
+//         borderColor: "#03DAC6",
+//     },
 
-    underlineStyleHighLighted: {
-        borderColor: "#03DAC6",
-    },
-    box: {
-        width: 300,
-        height: 55,
-        marginVertical: 20,
-        borderColor: 'red',
-        borderWidth: 1,
-    },
-    styleInput: {
-        height: 50,
-        width: 50,
-        borderRadius: 10,
-        borderWidth: 0.5,
-        fontWeight: "600",
-        alignSelf: 'center',
-        fontSize: 20,
-        justifyContent: 'center',
-        alignContent: 'center',
-        textAlign: 'center',
-        backgroundColor: '#f5f4f2',
-    },
-    fill_root: {
-        width: "100%",
-        flexDirection: 'row'
-    },
-    Fill_counter_root: {
-        width: "60%",
-        justifyContent: 'center',
-        alignItems: 'flex-start'
-    },
-    Fill_counter_text: {
-        color: 'grey',
-        textAlign: 'left'
-    },
-    fill_resend_root: {
-        width: "40%",
-        justifyContent: 'center',
-        alignItems: 'flex-end'
-    },
-    fill_resend_text: {
-        color: 'grey',
-        textAlign: 'right',
-        fontWeight: '600',
-        textDecorationLine: 'underline',
-        textDecorationColor: 'grey'
-    },
-    empty_root: {
-        width: "100%",
-        flexDirection: 'row'
-    },
-    empty_counter_root: {
-        width: "60%",
-        justifyContent: 'center',
-        alignItems: 'flex-end'
-    }, empty_resend_root: {
-        width: "40%",
-        justifyContent: 'center',
-        alignItems: 'flex-end'
-    },
-    empty_resend_text: {
-        color: 'blue',
-        textAlign: 'right',
-        fontWeight: '600',
-        textDecorationColor: 'blue',
-        textDecorationLine: 'underline'
-    }
-});
+//     underlineStyleBase: {
+//         width: 30,
+//         height: 45,
+//         borderWidth: 0,
+//         borderBottomWidth: 1,
+//     },
+
+//     underlineStyleHighLighted: {
+//         borderColor: "#03DAC6",
+//     },
+//     box: {
+//         width: 300,
+//         height: 55,
+//         marginVertical: 20,
+//         borderColor: 'red',
+//         borderWidth: 1,
+//     },
+//     styleInput: {
+//         height: 50,
+//         width: 50,
+//         borderRadius: 10,
+//         borderWidth: 0.5,
+//         fontWeight: "600",
+//         alignSelf: 'center',
+//         fontSize: 20,
+//         justifyContent: 'center',
+//         alignContent: 'center',
+//         textAlign: 'center',
+//         backgroundColor: '#f5f4f2',
+//     },
+//     fill_root: {
+//         width: "100%",
+//         flexDirection: 'row'
+//     },
+//     Fill_counter_root: {
+//         width: "60%",
+//         justifyContent: 'center',
+//         alignItems: 'flex-start'
+//     },
+//     Fill_counter_text: {
+//         color: 'grey',
+//         textAlign: 'left'
+//     },
+//     fill_resend_root: {
+//         width: "40%",
+//         justifyContent: 'center',
+//         alignItems: 'flex-end'
+//     },
+//     fill_resend_text: {
+//         color: 'grey',
+//         textAlign: 'right',
+//         fontWeight: '600',
+//         textDecorationLine: 'underline',
+//         textDecorationColor: 'grey'
+//     },
+//     empty_root: {
+//         width: "100%",
+//         flexDirection: 'row'
+//     },
+//     empty_counter_root: {
+//         width: "60%",
+//         justifyContent: 'center',
+//         alignItems: 'flex-end'
+//     }, empty_resend_root: {
+//         width: "40%",
+//         justifyContent: 'center',
+//         alignItems: 'flex-end'
+//     },
+//     empty_resend_text: {
+//         color: 'blue',
+//         textAlign: 'right',
+//         fontWeight: '600',
+//         textDecorationColor: 'blue',
+//         textDecorationLine: 'underline'
+//     }
+// });
 

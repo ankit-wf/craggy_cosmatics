@@ -7,7 +7,7 @@ import { loginActions } from '../store/UserSlice';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
 import Checkbox from 'expo-checkbox';
-import { useStyles } from '../styles/responsiveStyle';
+import { useStyles } from '../styles/loginResponsive';
 import { Ionicons } from '@expo/vector-icons';
 import BackButton from '../components/BackButton';
 
@@ -53,7 +53,7 @@ const ForgetPasswordScreen = ({ navigation }) => {
                             rules={{
                                 required: true,
                             }}
-                            render={({ field: { onChange, onBlur, value } }) => (
+                            render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     style={styles.loginInput}
                                     onChangeText={onChange}
@@ -71,7 +71,7 @@ const ForgetPasswordScreen = ({ navigation }) => {
                         {errors.email && <Text style={styles.inputError}>This field is required.</Text>}
                     </View>
                     <View style={styles.LoginButtong}>
-                        <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonStyle}>
+                        <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonStyle} activeOpacity={0.8} >
                             <Title style={styles.LoginButtongTittle}>Send OTP</Title>
                         </TouchableOpacity>
                     </View>

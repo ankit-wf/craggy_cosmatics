@@ -12,7 +12,7 @@ import { BEST_SELLING_API, CONSUMER_KEY } from "@env";
 
 const OrderScreen = ({ navigation }) => {
     let bs = "BestSellers";
-    const gs = useStyles();
+    const Hm_Style = useStyles();
     const dispatch = useDispatch();
     const [bestData, setBestData] = useState([])
     const cartData = useSelector(state => state.cartData.cart);
@@ -37,7 +37,7 @@ const OrderScreen = ({ navigation }) => {
         })
     }, [])
 
-    const bestSellingHolder = (product_title, product_id, image, sale_price, regular_price,) => {
+    const CartHolder = (product_title, product_id, image, sale_price, regular_price,) => {
         // let Data = [...cartData, {
         //     description: product_title,
         //     sellingProduct_id: product_id,
@@ -92,7 +92,7 @@ const OrderScreen = ({ navigation }) => {
 
     return (
 
-        <View style={{ flex: 1, justifyContent: 'space-around' }} >
+        <View style={styles.root} >
             {/* <View style={{ flexDirection: 'row', }}>
         <BackButton goBack={navigation.goBack} Color={'#666666'} />
         <Text style={styles.deliveryText}>MY ORDERS</Text>
@@ -113,70 +113,77 @@ const OrderScreen = ({ navigation }) => {
                             <ActivityIndicator size="large" />
                         </View>
                         :
-                        <View>
-                            <Text style={{ fontSize: 18, fontWeight: '700', alignSelf: 'center', }}>No orders placed</Text>
+                        <ScrollView>
+                            <View>
+                                <Text style={Hm_Style.no_order_text}>No orders placed</Text>
 
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 10, }}>
-                                <Heading title=' best selling ' />
-
-                                <TouchableOpacity
-                                    style={gs.viewLatestProduct}
-                                    onPress={() => { navigation.navigate('productListing', { name: bs }) }}
-                                >
-                                    <Text style={gs.latestProductText} >
-                                        View All
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={bsP.productsListRoot}>
-                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                                    {bestData.map((e, i) => {
-                                        // console.log("eeeeee", e)
-                                        return (
-                                            <TouchableOpacity style={bsP.touchable} key={i} onPress={() => navigation.navigate('productDetail', e.product_id)} >
-                                                <View style={bsP.imgRoot} >
-                                                    <Image source={{ uri: e.image }} style={bsP.productImg} />
-                                                </View>
-
-                                                <View style={bsP.contentRoot}>
-                                                    <View style={bsP.descriptionRoot}>
-                                                        <Text style={bsP.descriptionText}>{e.description}</Text>
-                                                    </View>
-
-                                                    <View style={bsP.baseLine}></View>
-
-                                                    <View style={bsP.priceRoot}>
-                                                        <Text style={bsP.price}>₹{e.sale_price}</Text>
-                                                        <Text style={bsP.spaceRoot}>/ </Text>
-                                                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
-                                                    </View>
-                                                </View>
-
-                                                {/* Buy Now Button  */}
-                                                <TouchableOpacity style={bsP.buyNowButton}
-                                                    onPress={() => bestSellingHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
+                                <View style={Hm_Style.bestSellerRoot}>
+                                    <Heading title=' best selling ' />
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        style={Hm_Style.viewLatestProduct}
+                                        onPress={() => { navigation.navigate('productListing', { name: bs }) }}
+                                    >
+                                        <Text style={Hm_Style.latestProductText}>
+                                            View All
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={Hm_Style.productsListRoot}>
+                                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+                                        {bestData.map((e, i) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    activeOpacity={0.8}
+                                                    style={Hm_Style.best_touchable}
+                                                    onPress={() => navigation.navigate('productDetail', e.product_id)}
+                                                    key={i}
                                                 >
-                                                    <Text style={bsP.buttonText}>BUY NOW</Text>
-                                                </TouchableOpacity>
-                                            </TouchableOpacity>
-                                        )
-                                    })}
-                                </ScrollView>
-                            </View>
-                            <TouchableOpacity style={styles.shopping_btn} onPress={() => navigation.navigate('Home')} >
-                                <Text style={styles.shopping_text}>Continue Shopping</Text>
-                            </TouchableOpacity>
+                                                    <View style={bsP.imgRoot} >
+                                                        <Image source={{ uri: e.image }} style={bsP.productImg} />
+                                                    </View>
+                                                    <View style={bsP.contentRoot}>
+                                                        <View style={bsP.descriptionRoot}>
+                                                            <Text style={bsP.descriptionText}>{e.product_title}</Text>
+                                                        </View>
+                                                        <View style={bsP.baseLine}></View>
+                                                        <View style={bsP.priceRoot}>
+                                                            <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
+                                                            <Text style={bsP.spaceRoot}>/ </Text>
+                                                            <Text style={bsP.price}>₹{e.sale_price}</Text>
 
-                        </View>
+                                                        </View>
+                                                    </View>
+
+                                                    {/* Buy Now Button  */}
+                                                    <TouchableOpacity
+                                                        activeOpacity={0.8}
+                                                        style={bsP.buyNowButton}
+                                                        onPress={() => CartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
+                                                    >
+                                                        <Text style={bsP.buttonText}>BUY NOW</Text>
+                                                    </TouchableOpacity>
+
+                                                </TouchableOpacity>
+                                            )
+                                        })}
+                                    </ScrollView>
+                                </View>
+                                <TouchableOpacity style={Hm_Style.shopping_btn} onPress={() => navigation.navigate('Home')} >
+                                    <Text style={Hm_Style.shopping_text}>Continue Shopping</Text>
+                                </TouchableOpacity>
+
+                            </View>
+                        </ScrollView>
                 }
             </View>
             <Snackbar
                 visible={visible}
                 onDismiss={onDismissSnackBar}
                 duration={2000}
-                style={styles.Snackbar_style}
+                style={Hm_Style.Snackbar_style}
             >
-                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                <Text style={Hm_Style.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
             </Snackbar>
         </View>
     )
@@ -185,41 +192,56 @@ const OrderScreen = ({ navigation }) => {
 export default OrderScreen
 
 const styles = StyleSheet.create({
+    root: {
+        flex: 1,
+        justifyContent: 'space-around'
+    },
+    no_order_text: {
+        fontSize: 18,
+        fontWeight: '700',
+        alignSelf: 'center',
+    },
+    best_root: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 5,
+        marginBottom: 10,
+    },
     deliveryText: {
         fontSize: 20,
         alignSelf: 'center',
         paddingTop: 35,
         paddingLeft: '25%'
     },
-    shopping_btn: {
-        height: 40,
-        width: 150,
-        borderWidth: 1,
-        borderRadius: 5,
-        alignSelf: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#C68625',
-        marginTop: 50
-    },
-    shopping_text: {
-        fontSize: 16,
-        alignSelf: 'center',
-        color: '#fff',
+    // shopping_btn: {
+    //     height: 40,
+    //     width: 150,
+    //     borderWidth: 1,
+    //     borderRadius: 5,
+    //     alignSelf: 'center',
+    //     justifyContent: 'center',
+    //     backgroundColor: '#C68625',
+    //     marginTop: 50
+    // },
+    // shopping_text: {
+    //     fontSize: 16,
+    //     alignSelf: 'center',
+    //     color: '#fff',
 
-    },
-    Snackbar_style: {
-        width: "65%",
-        height: 55,
-        alignSelf: 'center',
-        position: 'absolute',
-        zIndex: 9,
-        bottom: 250,
-        opacity: 0.7
-    },
-    Snackbar_text: {
-        color: '#fff',
-        fontSize: 14,
-        lineHeight: 15,
-        textAlign: 'center'
-    },
+    // },
+    // Snackbar_style: {
+    //     width: "65%",
+    //     height: 55,
+    //     alignSelf: 'center',
+    //     position: 'absolute',
+    //     zIndex: 9,
+    //     bottom: 250,
+    //     opacity: 0.7
+    // },
+    // Snackbar_text: {
+    //     color: '#fff',
+    //     fontSize: 14,
+    //     lineHeight: 15,
+    //     textAlign: 'center'
+    // },
 })

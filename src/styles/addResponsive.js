@@ -111,7 +111,7 @@ export const useStyles = CreateResponsiveStyle(
 
         /** Edit Address Page */
 
-        edit_root_container: {
+        edit_container: {
             height: '88%',
             width: '90%',
             borderWidth: 0.5,
@@ -141,6 +141,17 @@ export const useStyles = CreateResponsiveStyle(
             borderRightWidth: 0,
             borderBottomWidth: 0,
             padding: 0,
+        },
+        width_container: {
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+        },
+        full_width: {
+            width: '95%',
+            alignSelf: 'center'
+        },
+        half_width: {
+            width: '45%'
         }
 
     },
@@ -208,8 +219,9 @@ export const useStyles = CreateResponsiveStyle(
             },
 
             //** Edit Address Page */
-            edit_root_container: {
-                height: '73%',
+
+            edit_container: {
+                height: '74%',
                 width: '90%',
                 borderWidth: 0.5,
                 borderRadius: 15,
@@ -218,6 +230,8 @@ export const useStyles = CreateResponsiveStyle(
                 backgroundColor: '#fff'
             },
         },
+
+
         /** Extra Small Device Size */
 
         [maxSize(DEVICE_SIZES.XS)]: {
@@ -287,7 +301,7 @@ export const useStyles = CreateResponsiveStyle(
 
             //** Edit Address Page */
 
-            root_container: {
+            edit_container: {
                 height: '88%',
                 width: '90%',
                 borderWidth: 0.5,
@@ -296,28 +310,6 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center',
                 backgroundColor: '#fff'
             },
-            // btn_root: {
-            //     height: 45,
-            //     width: 200,
-            //     backgroundColor: 'black',
-            //     marginTop: 10,
-            //     borderRadius: 10,
-            //     alignSelf: 'center',
-            //     justifyContent: 'center'
-            // },
-            // btn_text: {
-            //     color: '#fff',
-            //     alignSelf: 'center',
-            //     fontSize: 16
-            // },
-            // firstname_text: {
-            //     // height: 40,
-            //     borderTopWidth: 0,
-            //     borderLeftWidth: 0,
-            //     borderRightWidth: 0,
-            //     borderBottomWidth: 0,
-            //     padding: 0,
-            // }
 
         },
     },
