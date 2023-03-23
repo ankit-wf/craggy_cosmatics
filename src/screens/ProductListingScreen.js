@@ -152,7 +152,6 @@ const ProductListingScreen = ({ navigation, route }) => {
     const latestData = () => {
         setChecked('Latest')
         data.sort((a, b) => b.publish_data.localeCompare(a.publish_data));
-        // console.log(data)
         setData(data)
     }
     const LowestData = () => {
@@ -181,7 +180,11 @@ const ProductListingScreen = ({ navigation, route }) => {
                     <SkeletonContainer isLoading={loading}>
                         <View style={Pl_Style.Cat_Seller_Root}>
                             <Text style={Pl_Style.productListing_name}>{name}</Text>
-                            <TouchableOpacity style={Pl_Style.touchable_sort} onPress={() => bs.current.show()} >
+                            <TouchableOpacity
+                                activeOpacity={0.5}
+                                style={Pl_Style.touchable_sort}
+                                onPress={() => bs.current.show()}
+                            >
                                 <Text style={Pl_Style.sort_Text}>Sort</Text>
                                 <Text style={Pl_Style.dots}>:</Text>
                                 <Text style={Pl_Style.sort_Text}>{checked}</Text>
@@ -287,197 +290,3 @@ const ProductListingScreen = ({ navigation, route }) => {
 }
 
 export default ProductListingScreen
-
-const styles1 = StyleSheet.create({
-    panel: {
-        // padding: 20,
-        // backgroundColor: '#FFFFFF',
-        paddingTop: 5,
-    },
-    header: {
-        backgroundColor: '#FFFFFF',
-        shadowColor: '#333333',
-        shadowOffset: { width: -1, height: -3 },
-        shadowRadius: 2,
-        shadowOpacity: 0.4,
-        // elevation: 5,
-        paddingTop: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-    },
-    panelHeader: {
-        alignItems: 'center',
-    },
-    panelHandle: {
-        width: 40,
-        height: 8,
-        borderRadius: 4,
-        backgroundColor: '#00000040',
-        marginBottom: 10,
-    },
-    panelTitle: {
-        fontSize: 27,
-        height: 40,
-        fontFamily: 'Raleway',
-        fontWeight: '600',
-    },
-    panelSubtitle: {
-        fontSize: 14,
-        color: 'gray',
-        height: 30,
-        marginBottom: 10,
-    },
-    panelButton: {
-        marginLeft: 15,
-        padding: 6
-        // alignItems: 'center',
-        // borderRadius: 10,
-        // backgroundColor: '#FF6347',
-        // marginVertical: 7,
-    },
-    panelButtonTitle: {
-        fontSize: 15,
-        // fontWeight: 'bolt',
-        // color: 'white',
-    },
-    banner_img_root: {
-        height: 200,
-    },
-    banner_img: {
-        height: '100%',
-        width: '100%'
-    },
-    bestSellerRoot: {
-        height: 50,
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        // marginTop: 20,
-        // marginBottom: 10,
-    },
-    productListing_name: {
-        paddingLeft: 20,
-        marginTop: 20,
-        marginBottom: 10,
-        fontFamily: 'Raleway',
-        fontWeight: '600',
-        textTransform: "uppercase",
-        color: '#CC933B',
-        fontSize: 16,
-        lineHeight: 19,
-        textAlign: 'left'
-    },
-    viewLatestProduct: {
-        height: 30,
-        width: 120,
-        borderRadius: 15,
-        borderWidth: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 10,
-        marginRight: 20,
-        alignSelf: 'center',
-        flexDirection: 'row'
-    },
-    latestProductText: {
-        fontSize: 11,
-        lineHeight: 14.09,
-        // fontWeight: '600',
-        paddingLeft: 5,
-        fontFamily: 'Raleway',
-        fontWeight: '500',
-    },
-    dots: {
-        fontSize: 12,
-        lineHeight: 14.09,
-        fontFamily: 'Raleway',
-        fontWeight: '500',
-        paddingLeft: 3,
-    },
-    shorting_root: {
-        height: 50,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: '#fff'
-    },
-    name_text: {
-        fontSize: 25,
-        color: '#C68625'
-        // fontFamily: 'Raleway',
-        // fontWeight: '600',
-        // textTransform: "uppercase",
-        // color: '#CC933B',
-        // fontSize: 16,
-        // lineHeight: 19,
-        // textAlign: 'left'
-    },
-    sort_text_root: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        borderWidth: 1,
-        borderRadius: 10,
-        height: 3,
-        width: 120
-    },
-    sort_text: {
-        fontSize: 22,
-        color: '#C68625'
-    },
-    sort_icon: {
-        color: '#C68625',
-        marginLeft: 3
-    },
-    loader: {
-        marginTop: 150
-    },
-    button: {
-        height: 50,
-        width: 150,
-        backgroundColor: "#140078",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 20,
-        shadowColor: "#8559da",
-        shadowOpacity: 0.7,
-        shadowOffset: {
-            height: 4,
-            width: 4,
-        },
-        shadowRadius: 5,
-        elevation: 6,
-    },
-    text: {
-        color: "white",
-        fontWeight: "600",
-    },
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 100
-
-    },
-    panel_btnText_Root: {
-        flexDirection: 'row',
-        // height: 50,
-        width: "100%",
-        // borderWidth: 0.3,
-        // borderRadius: 4,
-        // marginBottom: "6%",
-        alignSelf: 'center',
-        // justifyContent: 'space-around',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        // backgroundColor: '#fff'
-    },
-    panel_select_text: {
-        fontSize: 15,
-        padding: 6,
-        marginLeft: 15,
-        fontWeight: "700",
-        fontFamily: 'Raleway',
-    },
-})

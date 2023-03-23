@@ -1,41 +1,43 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
+import { useStyles } from '../styles/hotofferResponsive'
 
 const HotOfferScreen = () => {
+    const offer_Style = useStyles()
     const [details, setDetails] = useState(false)
     const detailsHandle = () => {
         setDetails(!details);
     }
 
     return (
-        <View style={styles.root_container}>
-            <View style={styles.inner_root}>
+        <View style={offer_Style.root_container}>
+            <View style={offer_Style.inner_root}>
 
-                <View style={styles.off_root}>
-                    <View style={{ width: '35%', borderRightWidth: 2, borderRightColor: '#D3D3D3', justifyContent: 'center', alignItems: 'center', }}>
-                        <Text style={{ color: 'green', fontSize: 23, fontWeight: '800' }}>1000</Text>
-                        <Text style={{ color: 'green', fontSize: 23, fontWeight: '800' }}>OFF</Text>
+                <View style={offer_Style.off_root}>
+                    <View style={offer_Style.left_off_root}>
+                        <Text style={offer_Style.left_text}>1000</Text>
+                        <Text style={offer_Style.left_text}>OFF</Text>
                     </View>
-                    <View style={{ width: '65%', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 20 }} >
-                        <Text>On minimum purchase of Rs.0</Text>
-                        <Text>Code: XYZ1000 </Text>
+                    <View style={offer_Style.right_off_root} >
+                        <Text style={offer_Style.right_text}>On minimum purchase of Rs.0</Text>
+                        <Text style={offer_Style.right_text} >Code: XYZ1000 </Text>
                     </View>
                 </View>
 
-                <View style={{ backgroundColor: 'white', height: 40, width: '100%', flexDirection: 'row', }}>
-                    <View style={{ width: '65%', justifyContent: 'center', alignItems: 'center', borderTopColor: '#D3D3D3', borderTopWidth: 2, flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 15, }}>Expiry :</Text>
-                        <Text style={{ fontSize: 15, fontWeight: '600', }}> JAN 31 2023</Text>
+                <View style={offer_Style.expiry_outer_root}>
+                    <View style={offer_Style.expiry_left_root}>
+                        <Text style={offer_Style.expiry_text}>Expiry :</Text>
+                        <Text style={offer_Style.expiry_date}> JAN 31 2023</Text>
                     </View>
-                    <View style={{ width: '35%', justifyContent: 'center', alignItems: 'center', borderTopColor: '#D3D3D3', borderTopWidth: 2, }} >
+                    <View style={offer_Style.details_right} >
                         <TouchableOpacity onPress={detailsHandle} >
-                            <Text style={{ color: 'blue', fontSize: 15, fontWeight: '700', }}>{details ? "Hide" : "Details"} </Text>
+                            <Text style={offer_Style.details_hide}>{details ? "Hide" : "Details"} </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
 
                 {(details) &&
-                    <View style={{ marginLeft: 50, marginBottom: 10, flexDirection: 'row', }}>
+                    <View style={offer_Style.hide_offer}>
                         <Text>{"\u25CF" + " "}</Text>
                         <Text>1000 Off</Text>
                     </View>
@@ -48,20 +50,3 @@ const HotOfferScreen = () => {
 }
 
 export default HotOfferScreen
-
-const styles = StyleSheet.create({
-    root_container: {
-        alignItems: 'center',
-        marginTop: "10%"
-    },
-    inner_root: {
-        backgroundColor: 'white',
-        width: '90%'
-    },
-    off_root: {
-        backgroundColor: 'white',
-        height: 90,
-        width: '100%',
-        flexDirection: 'row'
-    }
-})

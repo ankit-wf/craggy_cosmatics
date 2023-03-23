@@ -147,7 +147,7 @@ export const useStyles = CreateResponsiveStyle(
                 borderWidth: 1,
                 borderColor: 'blue',
                 margin: 20,
-                marginRight: 28,
+                marginRight: 27,
                 // marginTop: -10,
                 borderRadius: 6
             },

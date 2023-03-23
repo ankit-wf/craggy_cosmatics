@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator, ScrollView } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
-import { shopStyle as sS } from '../styles/shopStyle'
+import { useStyles } from '../styles/responsiveStyle'
 import axios from 'axios'
 import { Snackbar } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons'
@@ -11,6 +11,7 @@ import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { CONSUMER_KEY, ALL_PRODUCT_API } from "@env";
 
 const WishListScreen = ({ navigation }) => {
+    const Pl_Style = useStyles();
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.cartData.cart);
     const [loading, setLoading] = useState(true);
@@ -77,114 +78,144 @@ const WishListScreen = ({ navigation }) => {
     return (
         <View>
             {/* <View style={{ flexDirection: 'row', }}>
-                <BackButton goBack={navigation.goBack} Color={'#666666'} />
-                <Text style={styles.deliveryText}>MY WISHLIST</Text>
-            </View> */}
-            {/* <Text style={styles.deliveryText}>MY WISHLIST</Text> */}
+                    <BackButton goBack={navigation.goBack} Color={'#666666'} />
+                    <Text style={styles.deliveryText}>MY WISHLIST</Text>
+                </View> 
+                <Text style={styles.deliveryText}>MY WISHLIST</Text> 
 
-            {/* <View style={{ height: 40, width: 70, borderWidth: 1, borderRadius: 30, marginTop: 10, marginHorizontal: 15, display: 'flex', justifyContent: 'center', }}>
-                <Text style={{ alignSelf: 'center' }} >All</Text>
-            </View> */}
-
-            <View style={sS.productsListRoot}>
-                <SkeletonContainer isLoading={loading}>
-                    <FlatList
-                        data={data}
-                        renderItem={({ item }) => (
-                            <TouchableOpacity
+                <View style={{ height: 40, width: 70, borderWidth: 1, borderRadius: 30, marginTop: 10, marginHorizontal: 15, display: 'flex', justifyContent: 'center', }}>
+                    <Text style={{ alignSelf: 'center' }} >All</Text>
+                </View> */}
+            <View style={Pl_Style.flatList_Root}>
+                <FlatList
+                    data={data}
+                    renderItem={({ item }) => (
+                        <SkeletonContainer isLoading={loading}>
+                            < TouchableOpacity
+                                style={Pl_Style.flatList_tochable_root}
                                 activeOpacity={0.8}
-                                style={sS.product109}
                                 onPress={() => navigation.navigate("productDetail", item.product_id)}
                             >
-                                <View style={sS.imgRoot} >
-                                    <Image source={{ uri: item.image }} style={sS.productImg} />
+                                <View style={Pl_Style.flatList_imgRoot} >
+                                    <Image source={{ uri: item.image }} style={Pl_Style.flatList_Img} />
                                     <TouchableOpacity
                                         activeOpacity={0.5}
-                                        style={styles.img_icon_root}
+                                        style={Pl_Style.img_icon_root}
                                     >
                                         <Ionicons
                                             name="close-outline"
                                             color={'#000'}
                                             size={20}
-                                            style={styles.icon_style}
-                                        //   onPress={() => removeHandler(e)}
+                                            style={Pl_Style.icon_style}
+                                            onPress={() => removeHandler(e)}
                                         />
                                     </TouchableOpacity>
                                 </View>
 
-                                <View style={sS.contentRoot}>
-                                    <View style={sS.textRoot}>
-                                        <Text style={sS.contentText}>{item.product_title}</Text>
+                                <View style={Pl_Style.flatList_contentRoot}>
+                                    <View style={Pl_Style.flatList_textRoot}>
+                                        <Text style={Pl_Style.flatList_contentText}>{item.product_title}</Text>
                                     </View>
-                                    <View style={sS.baseLine}></View>
-                                    <View style={sS.priceRoot}>
-                                        <Text style={sS.price}>₹{item.sale_price}</Text>
-                                        <Text style={sS.spaceRoot}>/ </Text>
-                                        <Text style={sS.oldprice}>₹{item.regular_price}</Text>
+                                    <View style={Pl_Style.flatList_baseLine}></View>
+                                    <View style={Pl_Style.flatList_priceRoot}>
+                                        <Text style={Pl_Style.flatList_oldprice}>₹{item.regular_price}</Text>
+                                        <Text style={Pl_Style.flatList_spaceRoot}>/ </Text>
+                                        <Text style={Pl_Style.flatList_price}>₹{item.sale_price}</Text>
                                     </View>
                                 </View>
 
                                 {/* Buy Now Button  */}
-                                <TouchableOpacity
-                                    activeOpacity={0.6}
-                                    style={sS.buyNowButton}
-                                    onPress={() => buyNowHanlder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                >
-                                    <Text style={sS.buttonText}>BUY NOW</Text>
-                                </TouchableOpacity>
+                                <View style={Pl_Style.btn_btn}>
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        style={Pl_Style.flatList_buyNowButton}
+                                        onPress={() => buyNowHanlder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                    >
+                                        <Text style={Pl_Style.flatList_buttonText}>BUY NOW</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </TouchableOpacity>
-                        )}
-                        numColumns={2}
-                        keyExtractor={(item, index) => index}
-                    />
-                </SkeletonContainer>
+                        </SkeletonContainer>
+                    )}
+                    numColumns={2}
+                    keyExtractor={(item, index) => index}
+                />
+
             </View>
             <Snackbar
                 visible={visible}
                 onDismiss={onDismissSnackBar}
                 duration={2000}
-                style={styles.Snackbar_style}
+                style={Pl_Style.Snackbar_style}
             >
-                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                <Text style={Pl_Style.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
             </Snackbar>
         </View>
+        // <View>
+
+        //     <View style={Wl_Style.productsListRoot}>
+        //         <SkeletonContainer isLoading={loading}>
+        //             <FlatList
+        //                 data={data}
+        //                 renderItem={({ item }) => (
+        //                     <TouchableOpacity
+        //                         activeOpacity={0.8}
+        //                         style={Wl_Style.product109}
+        //                         onPress={() => navigation.navigate("productDetail", item.product_id)}
+        //                     >
+        //                         <View style={Wl_Style.imgRoot} >
+        //                             <Image source={{ uri: item.image }} style={Wl_Style.productImg} />
+        // <TouchableOpacity
+        //     activeOpacity={0.5}
+        //     style={Wl_Style.img_icon_root}
+        // >
+        //     <Ionicons
+        //         name="close-outline"
+        //         color={'#000'}
+        //         size={20}
+        //         style={Wl_Style.icon_style}
+        //     //   onPress={() => removeHandler(e)}
+        //     />
+        // </TouchableOpacity>
+        //                         </View>
+
+        //                         <View style={Wl_Style.contentRoot}>
+        //                             <View style={Wl_Style.textRoot}>
+        //                                 <Text style={Wl_Style.contentText}>{item.product_title}</Text>
+        //                             </View>
+        //                             <View style={Wl_Style.baseLine}></View>
+        //                             <View style={Wl_Style.priceRoot}>
+        //                                 <Text style={Wl_Style.price}>₹{item.sale_price}</Text>
+        //                                 <Text style={Wl_Style.spaceRoot}>/ </Text>
+        //                                 <Text style={Wl_Style.oldprice}>₹{item.regular_price}</Text>
+        //                             </View>
+        //                         </View>
+
+        //                         {/* Buy Now Button  */}
+        //                         <TouchableOpacity
+        //                             activeOpacity={0.6}
+        //                             style={Wl_Style.buyNowButton}
+        //     onPress = {() => buyNowHanlder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+        // >
+        //                             <Text style={Wl_Style.buttonText}>BUY NOW</Text>
+        //                         </TouchableOpacity>
+        //                     </TouchableOpacity>
+        //                 )}
+        //                 numColumns={2}
+        //                 keyExtractor={(item, index) => index}
+        //             />
+        //         </SkeletonContainer>
+        //     </View>
+        //     <Snackbar
+        //         visible={visible}
+        //         onDismiss={onDismissSnackBar}
+        //         duration={2000}
+        //         style={Wl_Style.Snackbar_style}
+        //     >
+        //         <Text style={Wl_Style.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+        //     </Snackbar>
+        // </View>
+
     )
 }
 export default WishListScreen;
-const styles = StyleSheet.create({
-    deliveryText: {
-        fontSize: 20,
-        alignSelf: 'center',
-        paddingTop: 35,
-        // paddingLeft: '25%'
-    },
-    img_icon_root: {
-        position: 'absolute',
-        alignSelf: 'flex-end',
-        marginTop: 10,
-        height: 30,
-        width: 30,
-        backgroundColor: '#C68625',
-        borderRadius: 50,
-    },
-    icon_style: {
-        justifyContent: 'center',
-        alignSelf: 'center',
-        marginTop: 3
-    },
-    Snackbar_style: {
-        width: "65%",
-        height: 55,
-        alignSelf: 'center',
-        position: 'absolute',
-        zIndex: 9,
-        bottom: 250,
-        opacity: 0.7
-    },
-    Snackbar_text: {
-        color: '#fff',
-        fontSize: 14,
-        lineHeight: 15,
-        textAlign: 'center'
-    },
-})

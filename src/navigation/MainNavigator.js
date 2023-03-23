@@ -41,6 +41,7 @@ const MainNavigator = () => {
     <Stack.Navigator initialRouteName='homeScreen'
       screenOptions={({ navigation, route }) => ({
         headerStyle: {
+          height: 80,
           backgroundColor: 'black', //Set Header color 
         },
         headerTintColor: '#C68625', //Set Header text color

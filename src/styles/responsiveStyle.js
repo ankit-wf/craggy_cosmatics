@@ -1093,6 +1093,20 @@ export const useStyles = CreateResponsiveStyle(
             height: '100%',
             width: "100%"
         },
+        img_icon_root: {
+            position: 'absolute',
+            alignSelf: 'flex-end',
+            marginTop: 10,
+            height: 30,
+            width: 30,
+            backgroundColor: '#C68625',
+            borderRadius: 50,
+        },
+        icon_style: {
+            justifyContent: 'center',
+            alignSelf: 'center',
+            marginTop: 3
+        },
         flatList_contentRoot: {
             height: 95,
             width: '100%',
@@ -1536,7 +1550,7 @@ export const useStyles = CreateResponsiveStyle(
             //** Order Screen */
 
             no_order_text: {
-                fontSize: 18,
+                fontSize: 17,
                 fontWeight: '700',
                 alignSelf: 'center',
             },

@@ -193,12 +193,12 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             })}
                                     </Swiper>
 
-                                    <ImageView
+                                    {/* <ImageView
                                         images={data.gallery_images}
-                                        imageIndex={0}
+                                        imageIndex={i}
                                         visible={isVisible}
                                         onRequestClose={() => setIsVisible(false)}
-                                    />
+                                    /> */}
 
                                     <SkeletonContainer isLoading={loading} >
                                         <View style={Pd_Style.shadow_Box} elevation={7}>
@@ -410,8 +410,16 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         </SkeletonContainer>
                                     </View>
                                 </View>
+                                <ImageView
+                                    images={data.gallery_images}
+                                    imageIndex={i}
+                                    visible={isVisible}
+                                    onRequestClose={() => setIsVisible(false)}
+                                />
                             </View>
+
                         )
+
                     })}
                 </ScrollView >
                 <Snackbar
@@ -442,6 +450,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     )
                 })}
             </SafeAreaView>
+
         </View>
     )
 }

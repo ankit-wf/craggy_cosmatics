@@ -12,6 +12,7 @@ const ReviewsScreen = ({ navigation }) => {
             {/* <View style={{ backgroundColor: 'white' }}>
                 <Text style={styles.deliveryText}>REVIEWS</Text>
             </View> */}
+
             <ScrollView>
                 {reviewData.map((value, k) => {
                     // console.log("rewviewData", newData)
@@ -45,6 +46,10 @@ const ReviewsScreen = ({ navigation }) => {
 
                 })}
             </ScrollView>
+
+
+
+
         </View>
     )
 }
@@ -97,6 +102,15 @@ const styles = StyleSheet.create({
         lineHeight: 20,
         marginTop: 5,
         textAlign: 'justify'
+    },
+    review_empty_root: {
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    empty_root_text: {
+        fontSize: 22,
+        fontWeight: '500'
     },
     starReviws: {
         marginTop: 17,

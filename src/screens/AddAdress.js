@@ -5,9 +5,11 @@ import { Controller, useForm } from 'react-hook-form'
 import TextInput from '../components/AccountInputHook'
 import { ScrollView } from 'react-native-gesture-handler'
 import { loginActions } from '../store/UserSlice'
+import { useStyles } from '../styles/addadressResponsive';
 
 
 const AddAddress = ({ navigation }) => {
+    const add_Style = useStyles()
     const userAdd = useSelector(state => state.userData.userAddress);
     const dispatch = useDispatch();
     // console.log("recieved", userAdd)
@@ -37,10 +39,10 @@ const AddAddress = ({ navigation }) => {
     }
     return (
         <View>
-            <View style={styles.root_container}>
+            <View style={add_Style.root_container}>
                 <ScrollView>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                        <View style={{ width: '45%', height: 40 }}>
+                    <View style={add_Style.first_last_root}>
+                        <View style={add_Style.first_input}>
                             <Controller
                                 control={control}
                                 rules={{
@@ -57,7 +59,7 @@ const AddAddress = ({ navigation }) => {
                                         autoCompleteType="firstname"
                                         textContentType="firstname"
                                         keyboardType="text"
-                                        style={styles.firstname_text}
+                                        style={add_Style.firstname_text}
                                     />
                                 )}
                                 name="firstname"
@@ -65,7 +67,7 @@ const AddAddress = ({ navigation }) => {
                             {errors.firstname && errors.firstname.type === 'required' && <Text> this is required !</Text>}
                             {errors.firstname && errors.firstname.type === 'pattern' && <Text> please enter correct !</Text>}
                         </View>
-                        <View style={{ width: '45%' }}>
+                        <View style={add_Style.last_input}>
                             <Controller
                                 control={control}
                                 rules={{
@@ -82,7 +84,7 @@ const AddAddress = ({ navigation }) => {
                                         autoCompleteType="Lastname"
                                         textContentType="Lastname"
                                         keyboardType="text"
-                                        style={styles.firstname_text}
+                                        style={add_Style.firstname_text}
                                     />
                                 )}
                                 name="Lastname"
@@ -92,7 +94,7 @@ const AddAddress = ({ navigation }) => {
                         </View>
                     </View>
 
-                    <View style={{ width: '95%', alignSelf: 'center' }}>
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
@@ -109,7 +111,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCompleteType="phone"
                                     textContentType="phone"
                                     keyboardType="numeric"
-                                    style={styles.firstname_text}
+                                    style={add_Style.firstname_text}
                                 />
                             )}
                             name="phone"
@@ -118,7 +120,7 @@ const AddAddress = ({ navigation }) => {
                         {errors.phone && errors.phone.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
 
-                    <View style={{ width: '95%', alignSelf: 'center' }}>
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
@@ -134,7 +136,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="flate"
                                     textContentType="flate"
-                                    style={styles.firstname_text}
+                                    style={add_Style.firstname_text}
                                 />
                             )}
                             name="flate"
@@ -143,7 +145,7 @@ const AddAddress = ({ navigation }) => {
                         {errors.flate && errors.flate.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
 
-                    <View style={{ width: '95%', alignSelf: 'center' }}>
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
@@ -159,7 +161,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="Apartment"
                                     textContentType="Apartment"
-                                    style={styles.firstname_text}
+                                    style={add_Style.firstname_text}
                                 />
                             )}
                             name="Apartment"
@@ -168,7 +170,7 @@ const AddAddress = ({ navigation }) => {
                         {errors.Apartment && errors.Apartment.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
 
-                    <View style={{ width: '95%', alignSelf: 'center' }}>
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
@@ -184,7 +186,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="Pincode"
                                     keyboardType="numeric"
-                                    style={styles.firstname_text}
+                                    style={add_Style.firstname_text}
                                 />
                             )}
                             name="Pincode"
@@ -193,7 +195,7 @@ const AddAddress = ({ navigation }) => {
                         {errors.Pincode && errors.Pincode.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
 
-                    <View style={{ width: '95%', alignSelf: 'center' }}>
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
@@ -209,7 +211,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="State"
                                     textContentType="State"
-                                    style={styles.firstname_text}
+                                    style={add_Style.firstname_text}
                                 />
                             )}
                             name="State"
@@ -218,7 +220,7 @@ const AddAddress = ({ navigation }) => {
                         {errors.State && errors.State.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
 
-                    <View style={{ width: '95%', alignSelf: 'center' }}>
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
@@ -234,7 +236,7 @@ const AddAddress = ({ navigation }) => {
                                     autoCapitalize="none"
                                     autoCompleteType="City"
                                     textContentType="City"
-                                    style={styles.firstname_text}
+                                    style={add_Style.firstname_text}
                                 />
                             )}
                             name="City"
@@ -245,47 +247,11 @@ const AddAddress = ({ navigation }) => {
                 </ScrollView>
             </View>
 
-            <TouchableOpacity style={styles.btn_root} onPress={handleSubmit(onSubmit)}>
-                <Text style={styles.btn_text}>Save And Continue</Text>
+            <TouchableOpacity style={add_Style.btn_root} onPress={handleSubmit(onSubmit)}>
+                <Text style={add_Style.btn_text}>Save And Continue</Text>
             </TouchableOpacity>
         </View>
     )
 }
 
 export default AddAddress;
-const styles = StyleSheet.create({
-    root_container: {
-        // flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        height: '85%',
-        width: '90%',
-        borderWidth: 0.5,
-        borderRadius: 15,
-        marginTop: "8%",
-        alignSelf: 'center',
-        backgroundColor: '#fff'
-    },
-    btn_root: {
-        height: 45,
-        width: 200,
-        backgroundColor: 'black',
-        marginTop: 10,
-        borderRadius: 10,
-        alignSelf: 'center',
-        justifyContent: 'center'
-    },
-    btn_text: {
-        color: '#fff',
-        alignSelf: 'center',
-        fontSize: 16
-    },
-    firstname_text: {
-        // height: 40,
-        borderTopWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderBottomWidth: 0,
-        padding: 0,
-    }
-})
