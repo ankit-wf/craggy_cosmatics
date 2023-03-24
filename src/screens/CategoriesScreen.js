@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableOpacity, Dimensions, FlatList, StyleSheet, ScrollView } from 'react-native'
 import axios from 'axios'
 import { useStyles } from '../styles/responsiveStyle';
-// import BackgroundImageService from '../components/CatImage'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { ALL_CATEGORIES_API, CONSUMER_KEY } from "@env";
 

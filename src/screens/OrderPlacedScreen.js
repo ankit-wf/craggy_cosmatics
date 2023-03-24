@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useStyles } from '../styles/orderPlacedResponsive';
+import BackButton from '../components/BackButton'
 
 
 const OrderPlacedScreen = ({ navigation, route }) => {
@@ -15,10 +16,15 @@ const OrderPlacedScreen = ({ navigation, route }) => {
     // console.log("fffffffghhhhh", item)
     return (
         <View style={Op_Style.container_root}>
-            <ScrollView>
-                <View style={Op_Style.root}>
+            <View style={Op_Style.searchRoot}>
+                <BackButton goBack={navigation.goBack} />
+                <View style={Op_Style.searchImgRoot}>
 
                 </View>
+
+            </View>
+            <ScrollView>
+                {/* <View style={Op_Style.root}></View> */}
                 <View style={Op_Style.placed_root}>
                     <View style={Op_Style.inner_text_root}>
                         <Text style={Op_Style.order_placed_text}>Order Placed</Text>
@@ -45,8 +51,8 @@ const OrderPlacedScreen = ({ navigation, route }) => {
                         <View style={Op_Style.flex_root}>
                             <Text style={Op_Style.full_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
                             {/* <View style={Op_Style.change_root}>
-                            <Text style={{ color: 'blue' }}>Change</Text>
-                        </View> */}
+                                    <Text style={{ color: 'blue' }}>Change</Text>
+                                </View> */}
                         </View>
 
                         <Text style={Op_Style.full_address}>{AddData[0].flate}</Text>

@@ -25,7 +25,7 @@ export default function DrawerScreen({ navigation }) {
 
             screenOptions={{
                 headerStyle: {
-                    height: 80,
+                    height: 70,
                     backgroundColor: 'black',
                     borderBottomColor: 'black',
                 },

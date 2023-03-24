@@ -28,6 +28,20 @@ export const useStyles = CreateResponsiveStyle(
         },
         container: {
         },
+        searchbar_root: {
+            width: "100%",
+            flexDirection: 'row',
+            backgroundColor: '#222222',
+            borderRadius: 8,
+            alignSelf: 'center'
+        },
+        inner_search_root: {
+            width: '90%'
+        },
+        search_style: {
+            height: 48,
+            padding: 15
+        },
         headerHamburger: {
             width: 32,
             height: 32,
@@ -1262,6 +1276,9 @@ export const useStyles = CreateResponsiveStyle(
                 justifyContent: 'space-around'
 
             },
+            swiperRoot: {
+                height: 250,
+            },
             category_root_img: {
                 height: 80,
                 width: 80,
@@ -1282,6 +1299,10 @@ export const useStyles = CreateResponsiveStyle(
             },
 
 
+            footerBannerImage: {
+                height: 280,
+                resizeMode: 'contain',
+            },
 
             /** Account Page */
 
@@ -1887,6 +1908,7 @@ export const useStyles = CreateResponsiveStyle(
                 fontSize: 13,
                 padding: 12,
             },
+
             footerBannerImage: {
                 height: 280,
                 resizeMode: 'contain',

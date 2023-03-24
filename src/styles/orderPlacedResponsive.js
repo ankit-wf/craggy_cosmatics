@@ -8,6 +8,33 @@ export const useStyles = CreateResponsiveStyle(
             height: '100%',
             backgroundColor: '#fff'
         },
+        searchRoot: {
+            // width: '95%',
+            // alignSelf: 'center',
+            justifyContent: 'space-between',
+            // alignItems: 'center',
+            flexDirection: 'row',
+            // borderWidth: 1,
+        },
+        searchImgRoot: {
+            marginTop: 35,
+            marginRight: '35%',
+            width: '100%',
+            // borderWidth: 1,
+            // borderColor: 'blue'
+            height: 50,
+            // justifyContent: 'center'
+            // alignSelf: 'center'
+        },
+        mycartText: {
+            alignSelf: 'center',
+            fontSize: 14,
+            fontWeight: '600',
+            fontFamily: 'Raleway',
+            lineHeight: 19,
+            color: '#333333',
+            paddingTop: 0
+        },
         root: {
             height: 60,
             width: '100%',

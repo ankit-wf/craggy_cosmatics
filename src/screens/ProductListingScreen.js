@@ -235,46 +235,50 @@ const ProductListingScreen = ({ navigation, route }) => {
                 </SafeAreaView>
 
                 <View style={Pl_Style.flatList_Root}>
-                    <FlatList
-                        data={data}
-                        renderItem={({ item }) => (
-                            <SkeletonContainer isLoading={loading}>
-                                < TouchableOpacity
-                                    style={Pl_Style.flatList_tochable_root}
-                                    activeOpacity={0.8}
-                                    onPress={() => navigation.navigate("productDetail", item.product_id)}
-                                >
-                                    <View style={Pl_Style.flatList_imgRoot} >
-                                        <Image source={{ uri: item.image }} style={Pl_Style.flatList_Img} />
-                                    </View>
-
-                                    <View style={Pl_Style.flatList_contentRoot}>
-                                        <View style={Pl_Style.flatList_textRoot}>
-                                            <Text style={Pl_Style.flatList_contentText}>{item.product_title}</Text>
+                    <SkeletonContainer isLoading={loading}>
+                        <FlatList
+                            data={data}
+                            renderItem={({ item }) => (
+                                <SkeletonContainer isLoading={loading}>
+                                    < TouchableOpacity
+                                        style={Pl_Style.flatList_tochable_root}
+                                        activeOpacity={0.8}
+                                        onPress={() => navigation.navigate("productDetail", item.product_id)}
+                                    >
+                                        <View style={Pl_Style.flatList_imgRoot} >
+                                            <Image source={{ uri: item.image }} style={Pl_Style.flatList_Img} />
                                         </View>
-                                        <View style={Pl_Style.flatList_baseLine}></View>
-                                        <View style={Pl_Style.flatList_priceRoot}>
-                                            <Text style={Pl_Style.flatList_oldprice}>₹{item.regular_price}</Text>
-                                            <Text style={Pl_Style.flatList_spaceRoot}>/ </Text>
-                                            <Text style={Pl_Style.flatList_price}>₹{item.sale_price}</Text>
-                                        </View>
-                                    </View>
 
-                                    {/* Buy Now Button  */}
-                                    <View style={Pl_Style.btn_btn}>
-                                        <TouchableOpacity style={Pl_Style.flatList_buyNowButton}
-                                            onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                        >
-                                            <Text style={Pl_Style.flatList_buttonText}>BUY NOW</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </TouchableOpacity>
-                            </SkeletonContainer>
-                        )}
-                        numColumns={2}
-                        keyExtractor={(item, index) => index}
-                    />
-                    <SocialIcon />
+                                        <View style={Pl_Style.flatList_contentRoot}>
+                                            <View style={Pl_Style.flatList_textRoot}>
+                                                <Text style={Pl_Style.flatList_contentText}>{item.product_title}</Text>
+                                            </View>
+                                            <View style={Pl_Style.flatList_baseLine}></View>
+                                            <View style={Pl_Style.flatList_priceRoot}>
+                                                <Text style={Pl_Style.flatList_oldprice}>₹{item.regular_price}</Text>
+                                                <Text style={Pl_Style.flatList_spaceRoot}>/ </Text>
+                                                <Text style={Pl_Style.flatList_price}>₹{item.sale_price}</Text>
+                                            </View>
+                                        </View>
+
+                                        {/* Buy Now Button  */}
+                                        <View style={Pl_Style.btn_btn}>
+                                            <TouchableOpacity style={Pl_Style.flatList_buyNowButton}
+                                                onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                            >
+                                                <Text style={Pl_Style.flatList_buttonText}>BUY NOW</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </TouchableOpacity>
+                                </SkeletonContainer>
+                            )}
+                            numColumns={2}
+                            keyExtractor={(item, index) => index}
+                        />
+                    </SkeletonContainer>
+                    <SkeletonContainer isLoading={loading}>
+                        <SocialIcon />
+                    </SkeletonContainer>
                 </View>
             </ScrollView >
             <Snackbar

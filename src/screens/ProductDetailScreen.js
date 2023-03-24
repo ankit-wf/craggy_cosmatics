@@ -156,7 +156,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
     }
 
     const wishlistHandler = () => {
+        // console.log("iiiddddddd", id)
         setHeart(!heart);
+        // navigation.navigate('wishlist', id)
     }
 
     return (
@@ -204,6 +206,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                         <View style={Pd_Style.shadow_Box} elevation={7}>
                                             <TouchableOpacity
                                                 onPress={wishlistHandler}
+                                                // onPress={() => wishlistHandler(data.product_id)}
                                                 activeOpacity={0.5}
                                                 style={Pd_Style.fabOne}
                                             >

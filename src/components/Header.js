@@ -67,8 +67,8 @@ export default function Header({ navigation, onPress, notification, Gift, search
                 {/* </View>
                 </View> */}
                 {/* <SearchBar onChangeText={onChangeSearch} value={searchQuery} onFocus={search} /> */}
-                <View style={{ width: "100%", flexDirection: 'row', backgroundColor: '#222222', borderRadius: 8, alignSelf: 'center' }}>
-                    <View style={{ width: '90%' }}>
+                <View style={styles.searchbar_root}>
+                    <View style={styles.inner_search_root}>
                         <TextInput
                             caretHidden={true}
                             placeholder="Search here..."
@@ -76,7 +76,7 @@ export default function Header({ navigation, onPress, notification, Gift, search
                             accessible={false}
                             onFocus={search}
                             placeholderTextColor="#7C7C7C"
-                            style={{ height: 48, padding: 15 }}
+                            style={styles.search_style}
                         />
                     </View>
                     {/* <TouchableOpacity onPress={search} style={{ justifyContent: 'center', alignItems: 'center' }} >

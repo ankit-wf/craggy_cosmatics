@@ -10,7 +10,9 @@ import BackButton from '../components/BackButton'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { CONSUMER_KEY, ALL_PRODUCT_API } from "@env";
 
-const WishListScreen = ({ navigation }) => {
+const WishListScreen = ({ navigation, route }) => {
+    // const id = route.params;
+    // console.log("dgjdfhjdfh", id)
     const Pl_Style = useStyles();
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.cartData.cart);

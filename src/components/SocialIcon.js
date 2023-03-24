@@ -6,7 +6,6 @@ const SocialIcon = () => {
     return (
         <View style={styles.root}>
             <Text style={styles.follow_text}>FOLLOW US ON</Text>
-
             <View style={styles.icon_root}>
                 <Ionicons name="logo-facebook" size={35} color='#525252' style={styles.icon_left} />
                 <Ionicons name="logo-instagram" size={35} color='#525252' style={styles.icon_left} />
