@@ -1,16 +1,17 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FAB } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useStyles } from '../styles/orderPlacedResponsive';
 import BackButton from '../components/BackButton'
 
-
 const OrderPlacedScreen = ({ navigation, route }) => {
     const Op_Style = useStyles();
-    const AddData = useSelector(state => state.userData.userAddress);
+    const AddressData = useSelector(state => state.userData.userAddress);
     const wf = route.params.wf;
-    const wof = route.params.wof;
+    // console.log("fefefefe", fee)
+    // console.log("hhhhhh", (wf + fee))
     const fee = route.params.fee;
     const item = route.params.item;
     // console.log("fffffffghhhhh", item)
@@ -21,53 +22,64 @@ const OrderPlacedScreen = ({ navigation, route }) => {
                 <View style={Op_Style.searchImgRoot}>
 
                 </View>
-
             </View>
-            <ScrollView>
-                {/* <View style={Op_Style.root}></View> */}
-                <View style={Op_Style.placed_root}>
-                    <View style={Op_Style.inner_text_root}>
-                        <Text style={Op_Style.order_placed_text}>Order Placed</Text>
-                    </View>
-                    <View style={Op_Style.price_root}>
-                        {fee ?
-                            <Text style={Op_Style.price_text}>Total price for {item} item ₹{wf}</Text>
-                            : <Text style={Op_Style.price_text}>Total price for {item} item ₹{wof}</Text>
-                        }
-                    </View>
+            <View>
+                {AddressData.length > 0 ?
+                    <ScrollView>
+                        <View style={Op_Style.placed_root}>
+                            <View style={Op_Style.inner_text_root}>
+                                <Text style={Op_Style.order_placed_text}>Order Placed</Text>
+                            </View>
+                            <View style={Op_Style.price_root}>
+                                {fee ?
+                                    <Text style={Op_Style.price_text}>Total price for {item} item ₹{(wf + fee).toFixed(2)}</Text>
+                                    : <Text style={Op_Style.price_text}>Total price for {item} item ₹{wf.toFixed(2)}</Text>
+                                }
+                            </View>
 
-                    <View style={Op_Style.detail_root}>
-                        <Text style={Op_Style.detail_text}>View Details</Text>
-                    </View>
-                </View>
-
-                <View style={Op_Style.delivery_root}>
-                    <View style={Op_Style.delivery_inner_root}>
-                        <Text style={Op_Style.delivey_text}>Delivery by Tue, Mar 7th '23</Text>
-                    </View>
-                </View>
-                <View style={Op_Style.address_root}>
-                    <View style={Op_Style.address_inner_root}>
-                        <View style={Op_Style.flex_root}>
-                            <Text style={Op_Style.full_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
-                            {/* <View style={Op_Style.change_root}>
-                                    <Text style={{ color: 'blue' }}>Change</Text>
-                                </View> */}
+                            <View style={Op_Style.detail_root}>
+                                <Text style={Op_Style.detail_text}>View Details</Text>
+                            </View>
                         </View>
 
-                        <Text style={Op_Style.full_address}>{AddData[0].flate}</Text>
-                        <Text style={Op_Style.full_address}>{AddData[0].Apartment}</Text>
-                        <Text style={Op_Style.full_address}>{AddData[0].City}</Text>
-                        <Text style={Op_Style.full_address}>{AddData[0].State} - {AddData[0].Pincode}</Text>
-                        <Text style={Op_Style.full_address}>Phone number - {AddData[0].phone}</Text>
+                        <View style={Op_Style.delivery_root}>
+                            <View style={Op_Style.delivery_inner_root}>
+                                <Text style={Op_Style.delivey_text}>Delivery by Tue, Mar 7th '23</Text>
+                            </View>
+                        </View>
+                        <View style={Op_Style.address_root}>
+                            <View style={Op_Style.address_inner_root}>
+                                <View style={Op_Style.flex_root}>
+                                    <Text style={Op_Style.full_name}>{AddressData[0].firstname} {AddressData[0].Lastname}</Text>
+                                    <View style={Op_Style.change_root}>
+                                        <Text style={{ color: 'blue' }}>Change</Text>
+                                    </View>
+                                </View>
+
+                                <Text style={Op_Style.full_address}>{AddressData[0].flate}</Text>
+                                <Text style={Op_Style.full_address}>{AddressData[0].Apartment}</Text>
+                                <Text style={Op_Style.full_address}>{AddressData[0].City}</Text>
+                                <Text style={Op_Style.full_address}>{AddressData[0].State} - {AddressData[0].Pincode}</Text>
+                                <Text style={Op_Style.full_address}>Phone number - {AddressData[0].phone}</Text>
+                            </View>
+                        </View>
+                        <View style={Op_Style.btn_root}>
+                            <TouchableOpacity style={Op_Style.btn_inner_root} onPress={() => navigation.navigate('Home')}>
+                                <Text style={Op_Style.btn_text}>Continue Shopping</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                    :
+                    <View style={Op_Style.empty_address}>
+                        <Text style={Op_Style.empty_text}>Add Your Address</Text>
+                        <FAB
+                            icon="plus"
+                            style={Op_Style.empty_fab}
+                            onPress={() => navigation.navigate('addAddress')}
+                        />
                     </View>
-                </View>
-                <View style={Op_Style.btn_root}>
-                    <TouchableOpacity style={Op_Style.btn_inner_root} onPress={() => navigation.navigate('Home')}>
-                        <Text style={Op_Style.btn_text}>Continue Shopping</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
+                }
+            </View>
         </View >
     )
 }

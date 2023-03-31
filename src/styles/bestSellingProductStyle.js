@@ -77,7 +77,8 @@ export const bestSellingProductStyle = StyleSheet.create({
     },
     spaceRoot: {
         color: 'white',
-        marginLeft: 5,
+        marginLeft: 3,
+        marginRight: 3,
         fontSize: 12,
         lineHeight: 15
     },

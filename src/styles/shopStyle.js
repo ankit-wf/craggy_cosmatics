@@ -123,16 +123,18 @@ export const shopStyle = StyleSheet.create({
     },
     spaceRoot: {
         color: 'white',
-        marginLeft: 5,
-        fontSize: 12
+        marginLeft: 3,
+        marginRight: 3,
+        fontSize: 12,
+        lineHeight: 15
     },
     oldprice: {
         color: '#666666',
         textDecorationLine: 'line-through',
-        fontSize: 14,
+        fontSize: 12,
+        fontWeight: '600',
         fontFamily: 'Lato',
-        fontWeight: '300',
-        lineHeight: 17
+        lineHeight: 15
     },
     buyNowButton: {
         height: 27,

@@ -132,6 +132,10 @@ const OrderScreen = ({ navigation }) => {
                                 <View style={Hm_Style.productsListRoot}>
                                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                         {bestData.map((e, i) => {
+                                            const rp = e.regular_price;
+                                            const sp = e.sale_price;
+                                            const regular_price = Number(rp).toFixed(2);
+                                            const sale_price = Number(sp).toFixed(2);
                                             return (
                                                 <TouchableOpacity
                                                     activeOpacity={0.8}
@@ -148,9 +152,9 @@ const OrderScreen = ({ navigation }) => {
                                                         </View>
                                                         <View style={bsP.baseLine}></View>
                                                         <View style={bsP.priceRoot}>
-                                                            <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
-                                                            <Text style={bsP.spaceRoot}>/ </Text>
-                                                            <Text style={bsP.price}>₹{e.sale_price}</Text>
+                                                            <Text style={bsP.oldprice}>₹{regular_price}</Text>
+                                                            <Text style={bsP.spaceRoot}>/</Text>
+                                                            <Text style={bsP.price}>₹{sale_price}</Text>
 
                                                         </View>
                                                     </View>

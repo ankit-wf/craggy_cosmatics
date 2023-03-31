@@ -79,5 +79,6 @@ export const theme = {
     lineH15: 15,
     lineH16: 16,
     lineH18: 18,
+    lineH20: 20,
   },
 }

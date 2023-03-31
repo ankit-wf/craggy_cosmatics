@@ -133,8 +133,10 @@ export const useStyles = CreateResponsiveStyle(
         },
         spaceRoot: {
             color: 'white',
-            marginLeft: 5,
-            fontSize: 12
+            marginLeft: 3,
+            marginRight: 3,
+            fontSize: 12,
+            lineHeight: 15
         },
         oldprice: {
             color: '#666666',

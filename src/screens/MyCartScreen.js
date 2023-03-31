@@ -11,8 +11,8 @@ import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const MyCartScreen = ({ navigation, route }) => {
   const Cart_Style = useStyles();
-  const storeData = useSelector(state => state.cartData.cart);
-  // console.log("adadadadda", storeData)
+  const cartData = useSelector(state => state.cartData.cart);
+  // console.log("adadadadda", cartData)
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const totalPrice = useRef()
@@ -52,8 +52,8 @@ const MyCartScreen = ({ navigation, route }) => {
 
   const totalAmount = () => {
     let sum = 0;
-    for (let i = 0; i < storeData.length; i++) {
-      sum = sum + storeData[i].oldprice * storeData[i].quantity
+    for (let i = 0; i < cartData.length; i++) {
+      sum = sum + cartData[i].oldprice * cartData[i].quantity
     }
     return sum;
   }
@@ -61,8 +61,8 @@ const MyCartScreen = ({ navigation, route }) => {
   const TAmount = totalAmount();
   const totalOldAmount = () => {
     let sum = 0;
-    for (let i = 0; i < storeData.length; i++) {
-      sum = sum + storeData[i].price * storeData[i].quantity
+    for (let i = 0; i < cartData.length; i++) {
+      sum = sum + cartData[i].price * cartData[i].quantity
     }
     return sum;
   }
@@ -89,12 +89,12 @@ const MyCartScreen = ({ navigation, route }) => {
         </View>
 
       </View>
-      {storeData.length < 1 ?
+      {cartData.length < 1 ?
         <Text style={Cart_Style.emptyCart}>This Cart Is Empty</Text>
         :
         <ScrollView>
 
-          {storeData.map((i, e) => {
+          {cartData.map((i, e) => {
             return (
               <View key={e} >
 
@@ -142,9 +142,9 @@ const MyCartScreen = ({ navigation, route }) => {
                   </View>
                   <SkeletonContainer isLoading={loading}>
                     <View style={Cart_Style.textPriceRoot} key={e}>
-                      <Text style={Cart_Style.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
-                      <Text style={Cart_Style.slace} > / </Text>
-                      <Text style={Cart_Style.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
+                      <Text style={Cart_Style.oldprice}>₹{(totalPrice.current = i.oldprice * i.quantity).toFixed(2)}</Text>
+                      <Text style={Cart_Style.slace}> </Text>
+                      <Text style={Cart_Style.price}>₹{(totaloldPrice.current = i.price * i.quantity).toFixed(2)}</Text>
                     </View>
                   </SkeletonContainer>
 
@@ -191,7 +191,7 @@ const MyCartScreen = ({ navigation, route }) => {
             <SkeletonContainer isLoading={loading}>
               <View style={Cart_Style.subtotalRoot}>
                 <Text style={Cart_Style.subtotal}>Order Total</Text>
-                <Text style={Cart_Style.total}>₹{totalOldAmount()}</Text>
+                <Text style={Cart_Style.total}>₹{TAmount.toFixed(2)}</Text>
               </View>
             </SkeletonContainer>
             <SkeletonContainer isLoading={loading}>
@@ -211,7 +211,7 @@ const MyCartScreen = ({ navigation, route }) => {
                 <View style={{ flexDirection: 'row' }}>
                   <View style={{ flexDirection: 'row' }}>
                     {Tprice < 499 ?
-                      <Text style={Cart_Style.free_price}>₹{fee}</Text> :
+                      <Text style={Cart_Style.free_price}>₹{fee.toFixed(2)}</Text> :
                       <Text style={Cart_Style.total}> Free</Text>
                     }
                   </View>
@@ -230,8 +230,8 @@ const MyCartScreen = ({ navigation, route }) => {
               <View style={Cart_Style.subtotalRoot}>
                 <Text style={Cart_Style.maintotal}>Total</Text>
                 {Tprice < 499 ?
-                  <Text style={Cart_Style.mainprice}>₹{TAmount + fee}</Text>
-                  : <Text style={Cart_Style.mainprice}>₹{TAmount}</Text>
+                  <Text style={Cart_Style.mainprice}>₹{(totalOldAmount() + fee).toFixed(2)}</Text>
+                  : <Text style={Cart_Style.mainprice}>₹{totalOldAmount().toFixed(2)}</Text>
                 }
               </View>
             </SkeletonContainer>
@@ -242,10 +242,10 @@ const MyCartScreen = ({ navigation, route }) => {
           <View style={Cart_Style.checkoutbuttonRoot} >
             <SkeletonContainer isLoading={loading}>
               {Tprice < 499 ?
-                <Button style={Cart_Style.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount, fee: fee, Tp: Tprice })}>
+                <Button style={Cart_Style.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: totalOldAmount(), fee: fee, Tp: Tprice })}>
                   <Text style={Cart_Style.checkoutText}>PROCEED TO CHECKOUT</Text>
                 </Button>
-                : <Button style={Cart_Style.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: TAmount })}>
+                : <Button style={Cart_Style.checkoutButton} onPress={() => navigation.navigate('checkOut', { Tm: totalOldAmount() })}>
                   <Text style={Cart_Style.checkoutText}>PROCEED TO CHECKOUT</Text>
                 </Button>
               }

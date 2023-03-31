@@ -8,9 +8,9 @@ import { submitActions } from '../store/dataSlice'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const CheckOutScreen = ({ navigation, route }) => {
-    const AddData = useSelector(state => state.userData.userAddress);
+    const AddressData = useSelector(state => state.userData.userAddress);
     const CartData = useSelector(state => state.cartData.cart);
-    // console.log("ffff", AddData)
+    // console.log("ffff", AddressData)
     const Co_Style = useStyles();
     const [loading, setLoading] = useState(true);
     const [checked, setChecked] = useState('ok');
@@ -18,7 +18,10 @@ const CheckOutScreen = ({ navigation, route }) => {
     const Tm = route.params.Tm;
     const fee = route.params.fee;
     const Tp = route.params.Tp;
-    // console.log("ffff", Tp)
+    // console.log("ffff", (Tm + fee).toFixed(2))
+    let withS = "Pay Now  " + "₹" + (Tm + fee).toFixed(2)
+    let withOutS = "Pay Now  " + "₹" + Tm.toFixed(2)
+
     const dispatch = useDispatch();
     const totalPrice = useRef();
     const totaloldPrice = useRef();
@@ -30,9 +33,6 @@ const CheckOutScreen = ({ navigation, route }) => {
     const onDismissSnackBar = () => {
         setVisible(false);
     }
-
-    let withS = "Pay Now  " + "₹" + JSON.stringify(Tm + fee)
-    let withOutS = "Pay Now  " + "₹" + JSON.stringify(Tm)
 
     useEffect(() => {
         setTimeout(() => {
@@ -93,35 +93,35 @@ const CheckOutScreen = ({ navigation, route }) => {
                         <View style={Co_Style.total_priceRoot}>
                             <Text style={Co_Style.total_text}>Total</Text>
                             {fee ?
-                                <Text style={Co_Style.total_price}>₹{Tm + fee}</Text>
-                                : <Text style={Co_Style.total_price}>₹{Tm}</Text>
+                                <Text style={Co_Style.total_price}>₹{(Tm + fee).toFixed(2)}</Text>
+                                : <Text style={Co_Style.total_price}>₹{Tm.toFixed(2)}</Text>
                             }
                         </View>
                     </SkeletonContainer>
                     {/* <View style={styles.user_nameRoot} >
                         <Text style={styles.user_nameRoot_text}>
-                            Hi {AddData[0].firstname} {AddData[0].Lastname}, Welcome to Craggy
+                            Hi {AddressData[0].firstname} {AddressData[0].Lastname}, Welcome to Craggy
                         </Text>
                     </View> */}
                     <View style={Co_Style.address_root} >
-                        {AddData.length > 0 ?
+                        {AddressData.length > 0 ?
                             <View>
                                 <SkeletonContainer isLoading={loading}>
-                                    <Text style={Co_Style.delivery_address_text}>Delivery Address</Text>
+                                    <Text style={Co_Style.delivery_address_text}>Delivery Address :</Text>
                                 </SkeletonContainer>
                                 <SkeletonContainer isLoading={loading}>
                                     <View style={Co_Style.user_adrdress_root}>
                                         <View style={Co_Style.user_name_default_root}>
                                             <View style={{ flexDirection: 'row' }}>
-                                                <Text style={Co_Style.user_name}>{AddData[0].firstname} {AddData[0].Lastname}</Text>
+                                                <Text style={Co_Style.user_name}>{AddressData[0].firstname} {AddressData[0].Lastname}</Text>
                                             </View>
                                             <TouchableOpacity style={Co_Style.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
-                                                <Text style={{ color: '#fff' }}>Edit</Text>
+                                                <Text style={Co_Style.edit_text}>Edit</Text>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={Co_Style.user_address_text_root}>
-                                            <Text style={Co_Style.user_address_text}>{AddData[0].flate}, {AddData[0].Apartment}, {AddData[0].City}, {AddData[0].State} {AddData[0].Pincode}</Text>
-                                            <Text style={Co_Style.user_phone}> {AddData[0].phone} </Text>
+                                            <Text style={Co_Style.user_address_text}>{AddressData[0].flate}, {AddressData[0].Apartment}, {AddressData[0].City}, {AddressData[0].State} {AddressData[0].Pincode}</Text>
+                                            <Text style={Co_Style.user_phone}> {AddressData[0].phone} </Text>
                                         </View>
                                     </View>
                                 </SkeletonContainer>
@@ -175,9 +175,9 @@ const CheckOutScreen = ({ navigation, route }) => {
                                     </View>
                                     <SkeletonContainer isLoading={loading}>
                                         <View style={Co_Style.textPriceRoot} key={e}>
-                                            <Text style={Co_Style.oldprice}>₹{totaloldPrice.current = i.price * i.quantity}</Text>
-                                            <Text style={Co_Style.slace} > / </Text>
-                                            <Text style={Co_Style.price}>₹{totalPrice.current = i.oldprice * i.quantity}</Text>
+                                            <Text style={Co_Style.oldprice}>₹{(totalPrice.current = i.oldprice * i.quantity).toFixed(2)}</Text>
+                                            <Text style={Co_Style.slace}> </Text>
+                                            <Text style={Co_Style.price}>₹{(totaloldPrice.current = i.price * i.quantity).toFixed(2)}</Text>
                                         </View>
                                     </SkeletonContainer>
                                 </View>
@@ -196,7 +196,7 @@ const CheckOutScreen = ({ navigation, route }) => {
                                 <View style={Co_Style.inner_pay_root}>
                                     <Text style={Co_Style.pay_text}>Order Total</Text>
 
-                                    <Text style={Co_Style.pay_text}>₹{totalOldAmount()}</Text>
+                                    <Text style={Co_Style.pay_text}>₹{totalOldAmount().toFixed(2)}</Text>
                                 </View>
                             </View>
                         </SkeletonContainer>
@@ -220,7 +220,7 @@ const CheckOutScreen = ({ navigation, route }) => {
                                         </TouchableOpacity>
                                     </View>
                                     {Tp < 499 ?
-                                        <Text style={Co_Style.pay_text}>₹{fee}</Text> :
+                                        <Text style={Co_Style.pay_text}>₹{fee.toFixed(2)}</Text> :
                                         <Text style={Co_Style.pay_text}>Free</Text>
                                     }
                                 </View>
@@ -239,10 +239,10 @@ const CheckOutScreen = ({ navigation, route }) => {
                     <SkeletonContainer isLoading={loading}>
                         <View style={Co_Style.to_pay_root}>
                             <View style={Co_Style.inner_pay_root}>
-                                <Text style={Co_Style.pay_text}>To Pay</Text>
+                                <Text style={Co_Style.to_pay}>To Pay</Text>
                                 {fee ?
-                                    <Text style={Co_Style.pay_text}>₹{Tm + fee}</Text>
-                                    : <Text style={Co_Style.pay_text}>₹{Tm}</Text>
+                                    <Text style={Co_Style.to_pay}>₹{(Tm + fee).toFixed(2)}</Text>
+                                    : <Text style={Co_Style.to_pay}>₹{Tm.toFixed(2)}</Text>
                                 }
                                 {/* <Text style={Co_Style.pay_text}>₹{totalAmount()}</Text> */}
                             </View>
@@ -290,8 +290,8 @@ const CheckOutScreen = ({ navigation, route }) => {
                     <View style={Co_Style.bottomView} >
                         <View style={Co_Style.inner_bottomView}>
                             {fee ?
-                                <Button title={withS} onPress={() => navigation.navigate("orderPlaced", { wf: Tm + fee, fee: fee, item: CartData.length })} />
-                                : <Button title={withOutS} onPress={() => navigation.navigate("orderPlaced", { wof: Tm, fee: fee, item: CartData.length })} />
+                                <Button title={withS} onPress={() => navigation.navigate("orderPlaced", { wf: Tm, fee: fee, item: CartData.length })} />
+                                : <Button title={withOutS} onPress={() => navigation.navigate("orderPlaced", { wf: Tm, fee: fee, item: CartData.length })} />
                             }
                         </View>
                     </View>

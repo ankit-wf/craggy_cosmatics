@@ -11,7 +11,7 @@ import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyl
 import { categoriesStyle as cS } from '../styles/categoriesStyle'
 import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
-import { useStyles } from '../styles/responsiveStyle'
+import { useStyles } from '../styles/homeResponsive'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import SocialIcon from '../components/SocialIcon'
 import { HOME_API, CONSUMER_KEY } from "@env";
@@ -30,6 +30,7 @@ const HomeScreen = ({ navigation }) => {
   const [bestSelling, setBestSelling] = useState([]);
   const [category, setCategory] = useState([]);
   const [latestProduct, setLatestProduct] = useState([]);
+  // console.log("hghhghhh", latestProduct)
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
@@ -108,8 +109,8 @@ const HomeScreen = ({ navigation }) => {
           description: product_title,
           categoriesDetail_id: product_id,
           images: image,
-          oldprice: regular_price,
-          price: sale_price,
+          price: regular_price,
+          oldprice: sale_price,
           quantity: 1
         }];
         dispatch(submitActions.price({ cart: Data }));
@@ -121,8 +122,8 @@ const HomeScreen = ({ navigation }) => {
         description: product_title,
         categoriesDetail_id: product_id,
         images: image,
-        oldprice: regular_price,
-        price: sale_price,
+        price: regular_price,
+        oldprice: sale_price,
         quantity: 1
       }];
       dispatch(submitActions.price({ cart: Data }));
@@ -135,7 +136,7 @@ const HomeScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={ds.appContainer}>
+    <View style={styles.appContainer}>
       {/* <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
@@ -155,11 +156,11 @@ const HomeScreen = ({ navigation }) => {
         {/* Banner Swiper  */}
         <SkeletonContainer isLoading={loading}>
           <View style={styles.swiperRoot}>
-            <Swiper style={styles.wrapper} autoplay >
+            <Swiper style={styles.wrapper} autoplay  >
               {bannerImage.map((e, i) => {
                 return (
                   <View key={i} >
-                    <Image source={{ uri: e }} style={styles1.bannerImgHight} />
+                    <Image source={{ uri: e }} style={styles.bannerImgHight} />
                   </View>
                 )
               })}
@@ -169,28 +170,30 @@ const HomeScreen = ({ navigation }) => {
 
         {/* <catgories /> */}
         <SkeletonContainer isLoading={loading} >
-          <ScrollView horizontal>
-            <View style={styles.categories_img_Root}>
-              {category.map((data, i) => {
-                // console.log("kkdkddkdk", data)
-                if (data.cat_name != "Uncategorized")
-                  return (
-                    <TouchableOpacity
-                      activeOpacity={0.8}
-                      onPress={() => { navigation.navigate('productListing', { id: data.id, name: data.cat_name }) }} key={i}
-                      style={styles.category_root_img}
-                    >
-                      <View style={cS.skinImgRoot}>
-                        <Image source={{ uri: data.app_circle_image }} style={cS.imgCenter} />
-                      </View>
-                      <View key={i}>
-                        <Text style={cS.skinImgText}>{data.cat_name}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  )
-              })}
+          <View style={styles.categories_img_Root}>
+            <View style={styles.categories_inner_img_Root}>
+              <ScrollView horizontal>
+                {category.map((data, i) => {
+                  // console.log("dataaa", data)
+                  if (data.cat_name != "Uncategorized")
+                    return (
+                      <TouchableOpacity
+                        activeOpacity={0.8}
+                        onPress={() => { navigation.navigate('productListing', { id: data.id, name: data.cat_name }) }} key={i}
+                        style={styles.category_root_img}
+                      >
+                        <View style={styles.skinImgRoot}>
+                          <Image source={{ uri: data.app_circle_image }} style={styles.imgCenter} />
+                        </View>
+                        <View key={i}>
+                          <Text style={styles.skinImgText}>{data.cat_name}</Text>
+                        </View>
+                      </TouchableOpacity>
+                    )
+                })}
+              </ScrollView>
             </View>
-          </ScrollView>
+          </View>
         </SkeletonContainer>
 
         <SkeletonContainer isLoading={loading}>
@@ -212,6 +215,11 @@ const HomeScreen = ({ navigation }) => {
           <View style={styles.productsListRoot}>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
               {bestSelling.map((e, i) => {
+                const rp = e.regular_price;
+                const sp = e.sale_price;
+                const regular_price = Number(rp).toFixed(2);
+                const sale_price = Number(sp).toFixed(2);
+                // console.log(result);
                 return (
                   <TouchableOpacity
                     activeOpacity={0.8}
@@ -219,18 +227,18 @@ const HomeScreen = ({ navigation }) => {
                     onPress={() => navigation.navigate('productDetail', e.product_id)}
                     key={i}
                   >
-                    <View style={bsP.imgRoot} >
-                      <Image source={{ uri: e.image }} style={bsP.productImg} />
+                    <View style={styles.imgRoot} >
+                      <Image source={{ uri: e.image }} style={styles.productImg} />
                     </View>
-                    <View style={bsP.contentRoot}>
-                      <View style={bsP.descriptionRoot}>
-                        <Text style={bsP.descriptionText}>{e.product_title}</Text>
+                    <View style={styles.contentRoot}>
+                      <View style={styles.descriptionRoot}>
+                        <Text style={styles.descriptionText}>{e.product_title}</Text>
                       </View>
-                      <View style={bsP.baseLine}></View>
-                      <View style={bsP.priceRoot}>
-                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
-                        <Text style={bsP.spaceRoot}>/ </Text>
-                        <Text style={bsP.price}>₹{e.sale_price}</Text>
+                      <View style={styles.baseLine}></View>
+                      <View style={styles.priceRoot}>
+                        <Text style={styles.oldprice}>₹{regular_price}</Text>
+                        <Text style={styles.spaceRoot}></Text>
+                        <Text style={styles.price}>₹{sale_price}</Text>
 
                       </View>
                     </View>
@@ -238,10 +246,10 @@ const HomeScreen = ({ navigation }) => {
                     {/* Buy Now Button  */}
                     <TouchableOpacity
                       activeOpacity={0.8}
-                      style={bsP.buyNowButton}
+                      style={styles.buyNowButton}
                       onPress={() => CartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
                     >
-                      <Text style={bsP.buttonText}>BUY NOW</Text>
+                      <Text style={styles.buttonText}>BUY NOW</Text>
                     </TouchableOpacity>
 
                   </TouchableOpacity>
@@ -270,7 +278,10 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.productsListRoot}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {latestProduct.map((e, i) => {
-
+              const rp = e.regular_price;
+              const sp = e.sale_price;
+              const regular_price = Number(rp).toFixed(2);
+              const sale_price = Number(sp).toFixed(2);
               return (
                 <SkeletonContainer isLoading={loading} key={i} >
                   <TouchableOpacity
@@ -279,29 +290,29 @@ const HomeScreen = ({ navigation }) => {
                     onPress={() => navigation.navigate('productDetail', e.product_id)}
                     key={i}
                   >
-                    <View style={bsP.imgRoot} >
-                      <Image source={{ uri: e.image }} style={bsP.productImg} />
+                    <View style={styles.imgRoot} >
+                      <Image source={{ uri: e.image }} style={styles.productImg} />
                     </View>
 
-                    <View style={bsP.contentRoot}>
-                      <View style={bsP.descriptionRoot}>
-                        <Text style={bsP.descriptionText}>{e.product_title}</Text>
+                    <View style={styles.contentRoot}>
+                      <View style={styles.descriptionRoot}>
+                        <Text style={styles.descriptionText}>{e.product_title}</Text>
                       </View>
 
-                      <View style={bsP.baseLine}></View>
+                      <View style={styles.baseLine}></View>
 
-                      <View style={bsP.priceRoot}>
-                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
-                        <Text style={bsP.spaceRoot}>/ </Text>
-                        <Text style={bsP.price}>₹{e.sale_price}</Text>
+                      <View style={styles.priceRoot}>
+                        <Text style={styles.oldprice}>₹{regular_price}</Text>
+                        <Text style={styles.spaceRoot}></Text>
+                        <Text style={styles.price}>₹{sale_price}</Text>
                       </View>
                     </View>
 
                     {/* Buy Now Button  */}
-                    <TouchableOpacity activeOpacity={0.8} style={bsP.buyNowButton}
+                    <TouchableOpacity activeOpacity={0.8} style={styles.buyNowButton}
                       onPress={() => CartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
                     >
-                      <Text style={bsP.buttonText}>BUY NOW</Text>
+                      <Text style={styles.buttonText}>BUY NOW</Text>
                     </TouchableOpacity>
                   </TouchableOpacity>
                 </SkeletonContainer>
@@ -370,32 +381,32 @@ const HomeScreen = ({ navigation }) => {
   )
 }
 export default HomeScreen;
-const styles1 = StyleSheet.create({
-  bannerImgHight: {
-    height: '100%',
-    width: '100%'
-  },
-  category_root: {
-    height: 80,
-    width: 80,
-    marginLeft: 8,
-    marginTop: 30,
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: '#fff'
-  },
-  categoriesHeight: {
-    height: 100,
-    width: 80,
-    marginLeft: 8,
-    marginTop: 30
-  },
-  // bestSellerRoot: {
-  //   height: 50,
-  //   width: '100%',
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   marginTop: 20,
-  //   marginBottom: 10,
-  // }
-})
+// const styles1 = StyleSheet.create({
+//   bannerImgHight: {
+//     height: '100%',
+//     width: '100%'
+//   },
+//   category_root: {
+//     height: 80,
+//     width: 80,
+//     marginLeft: 8,
+//     marginTop: 30,
+//     borderRadius: 50,
+//     borderWidth: 1,
+//     borderColor: '#fff'
+//   },
+//   categoriesHeight: {
+//     height: 100,
+//     width: 80,
+//     marginLeft: 8,
+//     marginTop: 30
+//   },
+//   // bestSellerRoot: {
+//   //   height: 50,
+//   //   width: '100%',
+//   //   flexDirection: 'row',
+//   //   justifyContent: 'space-between',
+//   //   marginTop: 20,
+//   //   marginBottom: 10,
+//   // }
+// })

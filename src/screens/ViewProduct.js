@@ -108,38 +108,44 @@ const ViewProduct = ({ navigation }) => {
             <SafeAreaView style={Va_Style.productsListRoot}>
                 <FlatList
                     data={allData}
-                    renderItem={({ item }) => (
-                        <SkeletonContainer isLoading={loading}>
-                            < TouchableOpacity style={Va_Style.toch_root}
-                                onPress={() => navigation.navigate("productDetail", item.product_id)} >
-                                <View style={Va_Style.imgRoot} >
-                                    <Image source={{ uri: item.image }} style={Va_Style.productImg} />
-                                </View>
-
-                                <View style={Va_Style.contentRoot}>
-                                    <View style={Va_Style.textRoot}>
-                                        <Text style={Va_Style.contentText}>{item.product_title}</Text>
+                    renderItem={({ item }) => {
+                        const rp = item.regular_price;
+                        const sp = item.sale_price;
+                        const regular_price = Number(rp).toFixed(2);
+                        const sale_price = Number(sp).toFixed(2);
+                        return (
+                            <SkeletonContainer isLoading={loading}>
+                                < TouchableOpacity style={Va_Style.toch_root}
+                                    onPress={() => navigation.navigate("productDetail", item.product_id)} >
+                                    <View style={Va_Style.imgRoot} >
+                                        <Image source={{ uri: item.image }} style={Va_Style.productImg} />
                                     </View>
 
-                                    <View style={Va_Style.baseLine}></View>
+                                    <View style={Va_Style.contentRoot}>
+                                        <View style={Va_Style.textRoot}>
+                                            <Text style={Va_Style.contentText}>{item.product_title}</Text>
+                                        </View>
 
-                                    <View style={Va_Style.priceRoot}>
-                                        <Text style={Va_Style.oldprice}>₹{item.regular_price}</Text>
-                                        <Text style={Va_Style.spaceRoot}>/ </Text>
-                                        <Text style={Va_Style.price}>₹{item.sale_price}</Text>
+                                        <View style={Va_Style.baseLine}></View>
+
+                                        <View style={Va_Style.priceRoot}>
+                                            <Text style={Va_Style.oldprice}>₹{regular_price}</Text>
+                                            <Text style={Va_Style.spaceRoot}>/</Text>
+                                            <Text style={Va_Style.price}>₹{sale_price}</Text>
+                                        </View>
+
                                     </View>
 
-                                </View>
-
-                                {/* {/ Buy Now Button  /} */}
-                                <TouchableOpacity style={Va_Style.buyNowButton}
-                                    onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                >
-                                    <Text style={Va_Style.buttonText}>BUY NOW</Text>
+                                    {/* {/ Buy Now Button  /} */}
+                                    <TouchableOpacity style={Va_Style.buyNowButton}
+                                        onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                    >
+                                        <Text style={Va_Style.buttonText}>BUY NOW</Text>
+                                    </TouchableOpacity>
                                 </TouchableOpacity>
-                            </TouchableOpacity>
-                        </SkeletonContainer>
-                    )}
+                            </SkeletonContainer>
+                        )
+                    }}
                     numColumns={2}
                     keyExtractor={(item, index) => index}
                 />

@@ -91,54 +91,60 @@ const WishListScreen = ({ navigation, route }) => {
             <View style={Pl_Style.flatList_Root}>
                 <FlatList
                     data={data}
-                    renderItem={({ item }) => (
-                        <SkeletonContainer isLoading={loading}>
-                            < TouchableOpacity
-                                style={Pl_Style.flatList_tochable_root}
-                                activeOpacity={0.8}
-                                onPress={() => navigation.navigate("productDetail", item.product_id)}
-                            >
-                                <View style={Pl_Style.flatList_imgRoot} >
-                                    <Image source={{ uri: item.image }} style={Pl_Style.flatList_Img} />
-                                    <TouchableOpacity
-                                        activeOpacity={0.5}
-                                        style={Pl_Style.img_icon_root}
-                                    >
-                                        <Ionicons
-                                            name="close-outline"
-                                            color={'#000'}
-                                            size={20}
-                                            style={Pl_Style.icon_style}
-                                            onPress={() => removeHandler(e)}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={Pl_Style.flatList_contentRoot}>
-                                    <View style={Pl_Style.flatList_textRoot}>
-                                        <Text style={Pl_Style.flatList_contentText}>{item.product_title}</Text>
+                    renderItem={({ item }) => {
+                        const rp = item.regular_price;
+                        const sp = item.sale_price;
+                        const regular_price = Number(rp).toFixed(2);
+                        const sale_price = Number(sp).toFixed(2);
+                        return (
+                            <SkeletonContainer isLoading={loading}>
+                                < TouchableOpacity
+                                    style={Pl_Style.flatList_tochable_root}
+                                    activeOpacity={0.8}
+                                    onPress={() => navigation.navigate("productDetail", item.product_id)}
+                                >
+                                    <View style={Pl_Style.flatList_imgRoot} >
+                                        <Image source={{ uri: item.image }} style={Pl_Style.flatList_Img} />
+                                        <TouchableOpacity
+                                            activeOpacity={0.5}
+                                            style={Pl_Style.img_icon_root}
+                                        >
+                                            <Ionicons
+                                                name="close-outline"
+                                                color={'#000'}
+                                                size={20}
+                                                style={Pl_Style.icon_style}
+                                                onPress={() => removeHandler(e)}
+                                            />
+                                        </TouchableOpacity>
                                     </View>
-                                    <View style={Pl_Style.flatList_baseLine}></View>
-                                    <View style={Pl_Style.flatList_priceRoot}>
-                                        <Text style={Pl_Style.flatList_oldprice}>₹{item.regular_price}</Text>
-                                        <Text style={Pl_Style.flatList_spaceRoot}>/ </Text>
-                                        <Text style={Pl_Style.flatList_price}>₹{item.sale_price}</Text>
-                                    </View>
-                                </View>
 
-                                {/* Buy Now Button  */}
-                                <View style={Pl_Style.btn_btn}>
-                                    <TouchableOpacity
-                                        activeOpacity={0.8}
-                                        style={Pl_Style.flatList_buyNowButton}
-                                        onPress={() => buyNowHanlder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                    >
-                                        <Text style={Pl_Style.flatList_buttonText}>BUY NOW</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </TouchableOpacity>
-                        </SkeletonContainer>
-                    )}
+                                    <View style={Pl_Style.flatList_contentRoot}>
+                                        <View style={Pl_Style.flatList_textRoot}>
+                                            <Text style={Pl_Style.flatList_contentText}>{item.product_title}</Text>
+                                        </View>
+                                        <View style={Pl_Style.flatList_baseLine}></View>
+                                        <View style={Pl_Style.flatList_priceRoot}>
+                                            <Text style={Pl_Style.flatList_oldprice}>₹{regular_price}</Text>
+                                            <Text style={Pl_Style.flatList_spaceRoot}>/</Text>
+                                            <Text style={Pl_Style.flatList_price}>₹{sale_price}</Text>
+                                        </View>
+                                    </View>
+
+                                    {/* Buy Now Button  */}
+                                    <View style={Pl_Style.btn_btn}>
+                                        <TouchableOpacity
+                                            activeOpacity={0.8}
+                                            style={Pl_Style.flatList_buyNowButton}
+                                            onPress={() => buyNowHanlder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                        >
+                                            <Text style={Pl_Style.flatList_buttonText}>BUY NOW</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </TouchableOpacity>
+                            </SkeletonContainer>
+                        )
+                    }}
                     numColumns={2}
                     keyExtractor={(item, index) => index}
                 />

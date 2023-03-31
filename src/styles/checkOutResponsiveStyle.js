@@ -1,5 +1,6 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
+import { theme } from '../../src/core/theme';
+import { Platform } from 'react-native';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -24,7 +25,7 @@ export const useStyles = CreateResponsiveStyle(
         total_text: {
             fontSize: 16,
             fontWeight: "700",
-            fontFamily: 'Raleway',
+            // fontFamily: 'Raleway',
             paddingLeft: '5%'
         },
         other_option: {
@@ -37,7 +38,7 @@ export const useStyles = CreateResponsiveStyle(
         total_price: {
             fontSize: 16,
             fontWeight: "700",
-            fontFamily: 'Raleway',
+            // fontFamily: 'Lato',
             paddingRight: '5%',
         },
         user_nameRoot: {
@@ -60,7 +61,8 @@ export const useStyles = CreateResponsiveStyle(
         delivery_address_text: {
             fontSize: 18,
             fontWeight: '700',
-            padding: '5%'
+            padding: '5%',
+            fontFamily: 'Raleway'
         },
         user_adrdress_root: {
             height: 95,
@@ -83,6 +85,7 @@ export const useStyles = CreateResponsiveStyle(
         user_name: {
             fontSize: 17,
             fontWeight: '700',
+            fontFamily: 'Raleway'
         },
 
         home_btn_root: {
@@ -93,6 +96,10 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'center',
             alignItems: 'center'
         },
+        edit_text: {
+            color: '#fff',
+            fontFamily: 'Raleway'
+        },
         user_address_text_root: {
             width: '90%',
             alignSelf: 'center',
@@ -100,7 +107,8 @@ export const useStyles = CreateResponsiveStyle(
         },
         user_address_text: {
             fontSize: 14,
-            fontWeight: '400'
+            fontWeight: '400',
+            // fontFamily: 'Lato'
         },
         user_phone: {
             fontSize: 14,
@@ -155,6 +163,11 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 18,
             fontWeight: '400',
             // color: 'grey',
+            paddingTop: 15
+        },
+        to_pay: {
+            fontSize: 18,
+            fontWeight: '400',
             paddingTop: 15
         },
         shipping_icon: {
@@ -297,7 +310,6 @@ export const useStyles = CreateResponsiveStyle(
         price: {
             fontSize: 12,
             fontWeight: '700',
-            fontFamily: 'Lato',
             lineHeight: 15
 
         },
@@ -309,12 +321,12 @@ export const useStyles = CreateResponsiveStyle(
             letterSpacing: 5
         },
         oldprice: {
-            fontSize: 14,
-            fontWeight: '400',
+            fontSize: 12,
+            fontWeight: '600',
             fontFamily: 'Lato',
             color: '#444444',
             textDecorationLine: 'line-through',
-            lineHeight: 15
+            lineHeight: 15,
         },
         oldprice1: {
             fontSize: 14,
@@ -336,8 +348,6 @@ export const useStyles = CreateResponsiveStyle(
             marginLeft: '7%',
             marginTop: '12%'
         },
-
-
         blackButton: {
             backgroundColor: 'black',
             borderColor: 'black',
@@ -393,6 +403,23 @@ export const useStyles = CreateResponsiveStyle(
         /** Medium Device Size */
 
         [maxSize(DEVICE_SIZES.MD)]: {
+            total_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
+                paddingLeft: (Platform.OS === 'ios') ? '5%' : '6%'
+            },
+            total_price: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
+                paddingRight: (Platform.OS === 'ios') ? '5%' : '6%'
+            },
+            delivery_address_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
+                paddingLeft: (Platform.OS === 'ios') ? '5%' : '6%',
+                paddingBottom: (Platform.OS === 'ios') ? '3%' : '3%',
+                paddingTop: (Platform.OS === 'ios') ? '3%' : '2%',
+            },
             user_adrdress_root: {
                 height: 105,
                 width: "90%",
@@ -404,8 +431,8 @@ export const useStyles = CreateResponsiveStyle(
                 marginTop: 0
             },
             user_name: {
-                fontSize: 18,
-                fontWeight: '700',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
             },
 
             home_btn_root: {
@@ -416,14 +443,20 @@ export const useStyles = CreateResponsiveStyle(
                 justifyContent: 'center',
                 alignItems: 'center'
             },
+
             user_address_text: {
-                fontSize: 16,
-                fontWeight: '400'
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? "400" : "400",
             },
             user_phone: {
-                fontSize: 16,
-                fontWeight: '700',
-                paddingTop: 3
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? "400" : "400",
+                paddingTop: (Platform.OS === 'ios') ? 3 : 3
+            },
+            order_summary_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS15,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
+                paddingLeft: (Platform.OS === 'ios') ? '5%' : '6%',
             },
             textRoot: {
                 height: 40,
@@ -436,13 +469,47 @@ export const useStyles = CreateResponsiveStyle(
                 alignItems: 'center'
             },
             textDescription: {
-                fontSize: 14,
-                fontWeight: '500',
-                fontFamily: 'Raleway',
-                lineHeight: 17,
-                paddingLeft: 0,
-                paddingTop: 0
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '600',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH16,
+                paddingLeft: (Platform.OS === 'ios') ? "5%" : '7%',
+                paddingTop: (Platform.OS === 'ios') ? 5 : 5,
             },
+            quantity_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS12,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+            },
+            blackText: {
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS12,
+                lineHeight: 19
+            },
+            oldprice: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS12,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+            },
+            price: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+            },
+
+            pay_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                paddingTop: (Platform.OS === 'ios') ? "4%" : "4%",
+            },
+            shipping_icon: {
+                marginLeft: (Platform.OS === 'ios') ? "5%" : "5%",
+                marginTop: (Platform.OS === 'ios') ? "25%" : "26%",
+            },
+            to_pay: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                paddingTop: (Platform.OS === 'ios') ? "4%" : "4%",
+            },
+
+
+
             buttonRoot: {
                 flexDirection: 'row',
                 justifyContent: 'space-around',
@@ -468,6 +535,23 @@ export const useStyles = CreateResponsiveStyle(
         /** Extra Small Device Size */
 
         [maxSize(DEVICE_SIZES.XS)]: {
+            total_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? "700" : "700",
+                paddingLeft: (Platform.OS === 'ios') ? '5%' : '5%'
+            },
+            total_price: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
+                paddingRight: (Platform.OS === 'ios') ? '5%' : '5%'
+            },
+            delivery_address_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
+                paddingLeft: (Platform.OS === 'ios') ? '5%' : '5%',
+                paddingBottom: (Platform.OS === 'ios') ? '3%' : '3%',
+                paddingTop: (Platform.OS === 'ios') ? '5%' : '3%',
+            },
             user_adrdress_root: {
                 height: 95,
                 width: "90%",
@@ -479,8 +563,8 @@ export const useStyles = CreateResponsiveStyle(
                 marginTop: 3
             },
             user_name: {
-                fontSize: 17,
-                fontWeight: '700',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
             },
 
             home_btn_root: {
@@ -492,29 +576,62 @@ export const useStyles = CreateResponsiveStyle(
                 alignItems: 'center'
             },
             user_address_text: {
-                fontSize: 14,
-                fontWeight: '400'
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? "400" : "400",
             },
             user_phone: {
-                fontSize: 14,
-                fontWeight: '700',
-                paddingTop: 3
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? "400" : "400",
+                paddingTop: (Platform.OS === 'ios') ? 3 : 3
+            },
+            order_summary_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? "600" : "600",
+                paddingLeft: (Platform.OS === 'ios') ? '5%' : '5%',
             },
             textRoot: {
                 height: 48,
                 width: '45%',
                 marginLeft: '1%',
-                // borderRadius: 15,
-                // borderColor: 'blue',
-                // borderWidth: 1,
             },
             textDescription: {
-                fontSize: 12,
-                fontWeight: '500',
-                fontFamily: 'Raleway',
-                lineHeight: 17,
-                paddingLeft: 1,
-                paddingTop: 0
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS12,
+                fontWeight: (Platform.OS === 'ios') ? '400' : '500',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH16,
+                paddingLeft: (Platform.OS === 'ios') ? "5%" : '7%',
+                paddingTop: (Platform.OS === 'ios') ? 5 : 5,
+            },
+            quantity_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS11,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+            },
+            blackText: {
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS12,
+                lineHeight: 19
+            },
+            oldprice: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+            },
+            price: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH15 : theme.lineHeightM.lineH15
+            },
+            pay_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS12,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                paddingTop: (Platform.OS === 'ios') ? "7%" : "7%",
+            },
+            shipping_icon: {
+                marginLeft: (Platform.OS === 'ios') ? "5%" : "5%",
+                marginTop: (Platform.OS === 'ios') ? "25%" : "26%",
+            },
+            to_pay: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                paddingTop: (Platform.OS === 'ios') ? "5%" : "5%",
             },
             buttonRoot: {
                 flexDirection: 'row',

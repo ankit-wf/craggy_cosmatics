@@ -128,6 +128,47 @@ const SearchScreen = ({ navigation }) => {
         }
 
     }
+
+    const AddCartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
+
+        if (cartData.length !== 0) {
+            let ss = false;
+            cartData.find(data => {
+                if (data.categoriesDetail_id == product_id) {
+                    ss = true;
+                }
+            })
+            if (ss == true) {
+                // console.log("already in list")
+                setVisible(!visible);
+            }
+            else {
+                let Data = [...cartData, {
+                    description: product_title,
+                    categoriesDetail_id: product_id,
+                    images: image,
+                    price: regular_price,
+                    oldprice: sale_price,
+                    quantity: 1
+                }];
+                dispatch(submitActions.price({ cart: Data }));
+                navigation.navigate("cart");
+            }
+        }
+        else {
+            let Data = [...cartData, {
+                description: product_title,
+                categoriesDetail_id: product_id,
+                images: image,
+                price: regular_price,
+                oldprice: sale_price,
+                quantity: 1
+            }];
+            dispatch(submitActions.price({ cart: Data }));
+            navigation.navigate("cart");
+        }
+
+    }
     const onDismissSnackBar = () => setVisible(false);
     const SearchHandler = (data) => {
         setSearchQuery(data)
@@ -135,14 +176,7 @@ const SearchScreen = ({ navigation }) => {
 
     return (
         <View>
-            {/* <Snackbar
-                visible={visible}
-                onDismiss={onDismissSnackBar}
-                duration={2000}
-                style={styles.Snackbar_style}
-            >
-                <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
-            </Snackbar> */}
+
             <Appbar.Header style={Srch_Style.header_root}>
                 <Appbar.BackAction onPress={navigation.goBack} color="blue" />
                 <Searchbar
@@ -151,7 +185,6 @@ const SearchScreen = ({ navigation }) => {
                     value={searchQuery}
                     style={Srch_Style.searchStyle}
                     onSubmitEditing={onSubmit}
-                // onIconPress={onSubmit}
                 />
             </Appbar.Header>
             {searchQuery == "" ?
@@ -223,6 +256,10 @@ const SearchScreen = ({ navigation }) => {
                             <View style={Srch_Style.productsListRoot}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {bestSeldata.map((e, i) => {
+                                        const rp = e.regular_price;
+                                        const sp = e.sale_price;
+                                        const regular_price = Number(rp).toFixed(2);
+                                        const sale_price = Number(sp).toFixed(2);
                                         return (
                                             <TouchableOpacity
                                                 activeOpacity={0.8}
@@ -242,9 +279,9 @@ const SearchScreen = ({ navigation }) => {
                                                     <View style={bsP.baseLine}></View>
 
                                                     <View style={bsP.priceRoot}>
-                                                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
-                                                        <Text style={bsP.spaceRoot}>/ </Text>
-                                                        <Text style={bsP.price}>₹{e.sale_price}</Text>
+                                                        <Text style={bsP.oldprice}>₹{regular_price}</Text>
+                                                        <Text style={bsP.spaceRoot}>/</Text>
+                                                        <Text style={bsP.price}>₹{sale_price}</Text>
                                                     </View>
                                                 </View>
 
@@ -252,7 +289,7 @@ const SearchScreen = ({ navigation }) => {
                                                 <TouchableOpacity
                                                     activeOpacity={0.8}
                                                     style={bsP.buyNowButton}
-                                                    onPress={() => CartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
+                                                    onPress={() => AddCartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
                                                 >
                                                     <Text style={bsP.buttonText}>BUY NOW</Text>
                                                 </TouchableOpacity>
@@ -271,36 +308,42 @@ const SearchScreen = ({ navigation }) => {
                         <SkeletonContainer isLoading={loading}>
                             <FlatList
                                 data={searchData}
-                                renderItem={({ item }) => (
-                                    < TouchableOpacity
-                                        style={Srch_Style.product109}
-                                        activeOpacity={0.8}
-                                        onPress={() => navigation.navigate("productDetail", item.product_id)}
-                                    >
-                                        <View style={sS.imgRoot} >
-                                            <Image source={{ uri: item.image }} style={sS.productImg} />
-                                        </View>
-
-                                        <View style={sS.contentRoot}>
-                                            <View style={sS.textRoot}>
-                                                <Text style={sS.contentText}>{item.product_title}</Text>
-                                            </View>
-                                            <View style={sS.baseLine}></View>
-                                            <View style={sS.priceRoot}>
-                                                <Text style={sS.oldprice}>₹{item.regular_price}</Text>
-                                                <Text style={sS.spaceRoot}>/ </Text>
-                                                <Text style={sS.price}>₹{item.sale_price}</Text>
-                                            </View>
-                                        </View>
-
-                                        {/* Buy Now Button  */}
-                                        <TouchableOpacity style={sS.buyNowButton}
-                                            onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                renderItem={({ item }) => {
+                                    const rp = item.regular_price;
+                                    const sp = item.sale_price;
+                                    const regular_price = Number(rp).toFixed(2);
+                                    const sale_price = Number(sp).toFixed(2);
+                                    return (
+                                        < TouchableOpacity
+                                            style={Srch_Style.product109}
+                                            activeOpacity={0.8}
+                                            onPress={() => navigation.navigate("productDetail", item.product_id)}
                                         >
-                                            <Text style={sS.buttonText}>BUY NOW</Text>
+                                            <View style={sS.imgRoot} >
+                                                <Image source={{ uri: item.image }} style={sS.productImg} />
+                                            </View>
+
+                                            <View style={sS.contentRoot}>
+                                                <View style={sS.textRoot}>
+                                                    <Text style={sS.contentText}>{item.product_title}</Text>
+                                                </View>
+                                                <View style={sS.baseLine}></View>
+                                                <View style={sS.priceRoot}>
+                                                    <Text style={sS.oldprice}>₹{regular_price}</Text>
+                                                    <Text style={sS.spaceRoot}>/</Text>
+                                                    <Text style={sS.price}>₹{sale_price}</Text>
+                                                </View>
+                                            </View>
+
+                                            {/* Buy Now Button  */}
+                                            <TouchableOpacity style={sS.buyNowButton}
+                                                onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
+                                            >
+                                                <Text style={sS.buttonText}>BUY NOW</Text>
+                                            </TouchableOpacity>
                                         </TouchableOpacity>
-                                    </TouchableOpacity>
-                                )}
+                                    )
+                                }}
                                 numColumns={2}
                                 keyExtractor={(item, index) => index}
                             />

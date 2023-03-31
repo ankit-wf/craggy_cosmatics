@@ -1,5 +1,6 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
+import { Platform } from 'react-native'
+import { theme } from '../../src/core/theme';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -96,17 +97,12 @@ export const useStyles = CreateResponsiveStyle(
             flexDirection: 'row',
             marginLeft: '-76%',
             marginTop: '16%',
-            // borderColor: 'blue',
-            // borderWidth: 1,
-            // paddingLeft: 15
-
         },
         price: {
             fontSize: 12,
             fontWeight: '700',
-            fontFamily: 'Lato',
+            // fontFamily: 'Lato',
             lineHeight: 15
-
         },
         slace: {
             fontSize: 10,
@@ -116,12 +112,12 @@ export const useStyles = CreateResponsiveStyle(
             letterSpacing: 5
         },
         oldprice: {
-            fontSize: 14,
-            fontWeight: '400',
+            fontSize: 12,
+            fontWeight: '600',
             fontFamily: 'Lato',
             color: '#444444',
             textDecorationLine: 'line-through',
-            lineHeight: 17
+            lineHeight: 15
         },
         free_price: {
             fontSize: 14,
@@ -147,7 +143,7 @@ export const useStyles = CreateResponsiveStyle(
             height: 35,
             width: 90,
             marginLeft: '7%',
-            marginTop: '12%'
+            marginTop: '8%'
         },
 
 
@@ -242,6 +238,7 @@ export const useStyles = CreateResponsiveStyle(
             fontWeight: '700',
             paddingTop: '2%',
             paddingLeft: '8%',
+            fontFamily: 'Lato'
         },
         promoButton: {
             position: 'absolute',
@@ -288,13 +285,12 @@ export const useStyles = CreateResponsiveStyle(
         maintotal: {
             fontSize: 16,
             fontWeight: '700',
-            fontFamily: 'Raleway',
+            // fontFamily: 'Raleway',
             lineHeight: 19
         },
         mainprice: {
             fontSize: 16,
             fontWeight: '700',
-            fontFamily: 'Lato',
             lineHeight: 19
         },
         baseLine2: {
@@ -304,7 +300,7 @@ export const useStyles = CreateResponsiveStyle(
             marginTop: 12
         },
         checkoutbuttonRoot: {
-            height: 250,
+            height: 240,
             width: '100%',
             marginTop: 10
         },
@@ -329,7 +325,7 @@ export const useStyles = CreateResponsiveStyle(
             color: '#fff',
             lineHeight: 25,
             fontWeight: '700',
-            fontFamily: 'Raleway'
+            // fontFamily: 'Raleway'
         },
         Snackbar_style: {
             width: "70%",
@@ -352,19 +348,23 @@ export const useStyles = CreateResponsiveStyle(
         /** Medium Device Size */
 
         [maxSize(DEVICE_SIZES.MD)]: {
+
             mycartText: {
-                alignSelf: 'center',
-                fontSize: 17,
-                fontWeight: '600',
-                fontFamily: 'Raleway',
-                lineHeight: 19,
-                color: '#333333',
-                paddingTop: 0
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
             },
             emptyCart: {
-                fontSize: 25,
-                textAlign: 'center',
-                paddingTop: 100
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '400' : '400',
+                paddingTop: 100,
+            },
+            oldprice: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS12,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+            },
+            price: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
             },
             dataRoot: {
                 flexDirection: 'row',
@@ -387,13 +387,13 @@ export const useStyles = CreateResponsiveStyle(
                 alignItems: 'center'
 
             },
+
             textDescription: {
-                fontSize: 15,
-                fontWeight: '500',
-                fontFamily: 'Raleway',
-                lineHeight: 17,
-                paddingLeft: 15,
-                paddingTop: 9
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '400' : '400',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH18 : theme.lineHeightM.lineH16,
+                // paddingLeft: (Platform.OS === 'ios') ? 15 : 17,
+                textAlign: 'center'
             },
             textPriceRoot: {
                 height: 32,
@@ -409,14 +409,24 @@ export const useStyles = CreateResponsiveStyle(
                 padding: '2%'
             },
             coupon_text: {
-                fontSize: 23,
-                padding: '1.5%',
-                marginLeft: '-2%'
+                fontSize: (Platform.OS === 'ios') ? 16 : 18,
+                padding: '2.2%',
+                marginLeft: '-2%',
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Lato'
             },
+            // price: {
+            //     // fontSize: 13,
+            //     fontSize: (Platform.OS === 'ios') ? 12 : 13,
+            //     // fontWeight: '700',
+            //     fontWeight: (Platform.OS === 'ios') ? '900' : '700',
+            //     fontFamily: 'Lato',
+            //     lineHeight: 15
+            // },
             price_summary: {
-                fontSize: 21,
-                fontWeight: '700',
-                paddingTop: '2%',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                paddingTop: (Platform.OS === 'ios') ? '2.5%' : '2%',
                 paddingLeft: '8%',
             },
             totalRoot: {
@@ -424,6 +434,38 @@ export const useStyles = CreateResponsiveStyle(
                 width: '85%',
                 alignSelf: 'center',
                 marginTop: '0%'
+            },
+            subtotal: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH15,
+            },
+            free_price: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '600',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH15,
+            },
+            total: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '600',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH15,
+            },
+            maintotal: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH18,
+            },
+            mainprice: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH18,
+            },
+            checkoutButton: {
+                marginTop: (Platform.OS === 'ios') ? '3%' : '3%',
+            },
+            checkoutText: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
             },
 
 
@@ -433,18 +475,16 @@ export const useStyles = CreateResponsiveStyle(
         [maxSize(DEVICE_SIZES.XS)]: {
 
             mycartText: {
-                alignSelf: 'center',
-                fontSize: 14,
-                fontWeight: '600',
-                fontFamily: 'Raleway',
-                lineHeight: 19,
-                color: '#333333',
-                paddingTop: 0
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '600',
             },
             emptyCart: {
-                fontSize: 25,
-                textAlign: 'center',
-                paddingTop: 200
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '400' : '400',
+            },
+            oldprice: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
             },
             dataRoot: {
                 flexDirection: 'row',
@@ -466,12 +506,11 @@ export const useStyles = CreateResponsiveStyle(
 
             },
             textDescription: {
-                fontSize: 12,
-                fontWeight: '500',
-                fontFamily: 'Raleway',
-                lineHeight: 17,
-                paddingLeft: 15,
-                paddingTop: 9
+                fontSize: (Platform.OS === 'ios') ? 13 : 12,
+                fontWeight: (Platform.OS === 'ios') ? '400' : '500',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH18 : theme.lineHeightM.lineH16,
+                // paddingLeft: (Platform.OS === 'ios') ? 15 : 15,
+                textAlign: 'center'
             },
             textPriceRoot: {
                 height: 30,
@@ -498,15 +537,18 @@ export const useStyles = CreateResponsiveStyle(
                 padding: '3%'
             },
             coupon_text: {
-                fontSize: 20,
-                padding: '3%',
-                marginLeft: '-2%'
+                fontSize: (Platform.OS === 'ios') ? 15 : 18,
+                padding: '3.8%',
+                marginLeft: '-3%',
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Lato'
             },
             price_summary: {
-                fontSize: 20,
-                fontWeight: '700',
-                paddingTop: '2%',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                paddingTop: (Platform.OS === 'ios') ? '4%' : '3.8%',
                 paddingLeft: '8%',
+
             },
             totalRoot: {
                 height: 170,
@@ -514,7 +556,42 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center',
                 marginTop: '3%'
             },
-
+            price: {
+                fontSize: (Platform.OS === 'ios') ? 14 : 13,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                lineHeight: (Platform.OS === 'ios') ? 15 : 15
+            },
+            subtotal: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+            },
+            total: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '600',
+                // lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH15,
+            },
+            free_price: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '600',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH15,
+            },
+            maintotal: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH18,
+            },
+            mainprice: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH18,
+            },
+            checkoutButton: {
+                marginTop: (Platform.OS === 'ios') ? '5%' : '10%',
+            },
+            checkoutText: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS11,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+            },
         },
     },
 )

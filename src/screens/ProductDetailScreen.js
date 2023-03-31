@@ -12,12 +12,14 @@ import { submitActions } from '../store/dataSlice'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import ImageView from "react-native-image-viewing"
 import { useStyles } from '../styles/responsiveStyle'
+import { useStyles as h_Style } from '../styles/homeResponsive'
 import { CONSUMER_KEY, BEST_SELLING_API, SINGLE_PRODUCT_API } from "@env";
 
 const ProductDetailScreen = ({ navigation, route }) => {
     let bs = "BestSellers";
     const dispatch = useDispatch();
     const Pd_Style = useStyles();
+    const home_Style = h_Style()
     const reviewData = useSelector(state => state.reviewData.review);
     // console.log("gggggg", reviewData[5].title)
     const cartData = useSelector(state => state.cartData.cart);
@@ -132,8 +134,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     description: product_title,
                     categoriesDetail_id: product_id,
                     images: image,
-                    oldprice: regular_price,
-                    price: sale_price,
+                    price: regular_price,
+                    oldprice: sale_price,
                     quantity: 1
                 }];
                 dispatch(submitActions.price({ cart: Data }));
@@ -145,8 +147,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 description: product_title,
                 categoriesDetail_id: product_id,
                 images: image,
-                oldprice: regular_price,
-                price: sale_price,
+                price: regular_price,
+                oldprice: sale_price,
                 quantity: 1
             }];
             dispatch(submitActions.price({ cart: Data }));
@@ -207,7 +209,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             <TouchableOpacity
                                                 onPress={wishlistHandler}
                                                 // onPress={() => wishlistHandler(data.product_id)}
-                                                activeOpacity={0.5}
+                                                activeOpacity={0.8}
                                                 style={Pd_Style.fabOne}
                                             >
                                                 <Ionicons name={(heart) ? "heart-sharp" : "heart-outline"} size={22} style={{ alignSelf: 'center' }} />
@@ -340,11 +342,11 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                                 style={Pd_Style.allreview_root}
                                                 key={i}
                                             >
-                                                <Text style={{ paddingLeft: 20 }}>All {reviewData.length - 1} reviews </Text>
+                                                <Text style={Pd_Style.all_review_text}>All {reviewData.length - 1} reviews </Text>
                                                 <Ionicons
                                                     name="chevron-forward-outline"
                                                     color={'black'}
-                                                    size={25}
+                                                    size={24}
                                                     style={{ marginRight: 20 }}
                                                 />
                                             </TouchableOpacity>
@@ -370,38 +372,42 @@ const ProductDetailScreen = ({ navigation, route }) => {
                                             <View style={Pd_Style.products_Details_ListRoot}>
                                                 <ScrollView horizontal showsHorizontalScrollIndicator={false} >
                                                     {bestSelData.map((e, i) => {
+                                                        const rp = e.regular_price;
+                                                        const sp = e.sale_price;
+                                                        const regular_price = Number(rp).toFixed(2);
+                                                        const sale_price = Number(sp).toFixed(2);
                                                         return (
                                                             <TouchableOpacity
                                                                 activeOpacity={0.8}
-                                                                style={Pd_Style.best_touchable}
+                                                                style={home_Style.best_touchable}
                                                                 onPress={() => navigation.navigate('productDetail', e.product_id)}
                                                                 key={i}
                                                             >
-                                                                <View style={bsP.imgRoot} >
-                                                                    <Image source={{ uri: e.image }} style={bsP.productImg} />
+                                                                <View style={home_Style.imgRoot} >
+                                                                    <Image source={{ uri: e.image }} style={home_Style.productImg} />
                                                                 </View>
 
-                                                                <View style={bsP.contentRoot}>
-                                                                    <View style={bsP.descriptionRoot}>
-                                                                        <Text style={bsP.descriptionText}>{e.product_title}</Text>
+                                                                <View style={home_Style.contentRoot}>
+                                                                    <View style={home_Style.descriptionRoot}>
+                                                                        <Text style={home_Style.descriptionText}>{e.product_title}</Text>
                                                                     </View>
 
                                                                     <View style={Pd_Style.ProductDetail_baseLine}></View>
 
                                                                     <View style={bsP.priceRoot}>
-                                                                        <Text style={bsP.oldprice}>₹{e.regular_price}</Text>
-                                                                        <Text style={bsP.spaceRoot}>/ </Text>
-                                                                        <Text style={bsP.price}>₹{e.sale_price}</Text>
+                                                                        <Text style={home_Style.oldprice}>₹{regular_price}</Text>
+                                                                        <Text style={home_Style.spaceRoot}></Text>
+                                                                        <Text style={home_Style.price}>₹{sale_price}</Text>
                                                                     </View>
                                                                 </View>
 
                                                                 {/* Buy Now Button  */}
                                                                 <TouchableOpacity
                                                                     activeOpacity={0.8}
-                                                                    style={bsP.buyNowButton}
+                                                                    style={home_Style.buyNowButton}
                                                                     onPress={() => CartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
                                                                 >
-                                                                    <Text style={bsP.buttonText}>BUY NOW</Text>
+                                                                    <Text style={home_Style.buttonText}>BUY NOW</Text>
                                                                 </TouchableOpacity>
 
                                                             </TouchableOpacity>
@@ -434,11 +440,15 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     <Text style={Pd_Style.product_Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
                 </Snackbar>
                 {singleData.map((data, i) => {
+                    const sp = data.sale_price;
+                    // const rp = data.regular_price;
+                    // const regular_price = Number(rp).toFixed(2);
+                    const sale_price = Number(sp).toFixed(2);
                     return (
                         <SkeletonContainer isLoading={loading} key={i}>
                             <View style={Pd_Style.sticky_Btn} key={i}>
                                 <View style={Pd_Style.bottomView1} >
-                                    <Text style={[Pd_Style.textStyle,]}>₹{data.regular_price}</Text>
+                                    <Text style={[Pd_Style.textStyle,]}>₹{sale_price}</Text>
                                 </View>
                                 <View style={Pd_Style.bottomView} >
                                     <View style={Pd_Style.inner_bottomView}>

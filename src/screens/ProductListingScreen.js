@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, } from 'react'
 import axios from 'axios'
 // import Swiper from 'react-native-swiper'
 import { List, Snackbar } from 'react-native-paper';
 import { shopStyle as sS } from '../styles/shopStyle'
 import { useStyles } from '../styles/responsiveStyle'
+import { useStyles as h_Style } from '../styles/homeResponsive'
 import { useDispatch, useSelector } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
 import { ScrollView } from 'react-native-virtualized-view';
@@ -16,6 +17,7 @@ import SocialIcon from '../components/SocialIcon'
 
 const ProductListingScreen = ({ navigation, route }) => {
     const Pl_Style = useStyles()
+    const home_Style = h_Style()
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.cartData.cart);
     const [loading, setLoading] = useState(true);
@@ -126,8 +128,8 @@ const ProductListingScreen = ({ navigation, route }) => {
                     description: product_title,
                     categoriesDetail_id: product_id,
                     images: image,
-                    oldprice: regular_price,
-                    price: sale_price,
+                    price: regular_price,
+                    oldprice: sale_price,
                     quantity: 1
                 }];
                 dispatch(submitActions.price({ cart: Data }));
@@ -139,15 +141,53 @@ const ProductListingScreen = ({ navigation, route }) => {
                 description: product_title,
                 categoriesDetail_id: product_id,
                 images: image,
-                oldprice: regular_price,
-                price: sale_price,
+                price: regular_price,
+                oldprice: sale_price,
                 quantity: 1
             }];
             dispatch(submitActions.price({ cart: Data }));
             navigation.navigate("cart");
         }
-
     }
+    // const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
+    //     if (cartData.length !== 0) {
+    //         let ss = false;
+    //         cartData.find(data => {
+    //             if (data.categoriesDetail_id == product_id) {
+    //                 ss = true;
+    //             }
+    //         })
+    //         if (ss == true) {
+    //             // console.log("already in list")
+    //             setVisible(!visible);
+    //         }
+    //         else {
+    //             let Data = [...cartData, {
+    //                 description: product_title,
+    //                 categoriesDetail_id: product_id,
+    //                 images: image,
+    //                 oldprice: regular_price,
+    //                 price: sale_price,
+    //                 quantity: 1
+    //             }];
+    //             dispatch(submitActions.price({ cart: Data }));
+    //             navigation.navigate("cart");
+    //         }
+    //     }
+    //     else {
+    //         let Data = [...cartData, {
+    //             description: product_title,
+    //             categoriesDetail_id: product_id,
+    //             images: image,
+    //             oldprice: regular_price,
+    //             price: sale_price,
+    //             quantity: 1
+    //         }];
+    //         dispatch(submitActions.price({ cart: Data }));
+    //         navigation.navigate("cart");
+    //     }
+
+    // }
 
     const latestData = () => {
         setChecked('Latest')
@@ -192,7 +232,7 @@ const ProductListingScreen = ({ navigation, route }) => {
                         </View>
                     </SkeletonContainer>
 
-                    <BottomSheet hasDraggableIcon ref={bs} height={220} >
+                    <BottomSheet hasDraggableIcon ref={bs} height={220}   >
                         <View style={Pl_Style.panel}>
                             <View style={Pl_Style.sort_align_root}>
                                 <Text style={Pl_Style.panelTitle}>Sort By</Text>
@@ -237,41 +277,49 @@ const ProductListingScreen = ({ navigation, route }) => {
                 <View style={Pl_Style.flatList_Root}>
                     <SkeletonContainer isLoading={loading}>
                         <FlatList
+                            removeClippedSubviews
                             data={data}
-                            renderItem={({ item }) => (
-                                <SkeletonContainer isLoading={loading}>
-                                    < TouchableOpacity
-                                        style={Pl_Style.flatList_tochable_root}
-                                        activeOpacity={0.8}
-                                        onPress={() => navigation.navigate("productDetail", item.product_id)}
-                                    >
-                                        <View style={Pl_Style.flatList_imgRoot} >
-                                            <Image source={{ uri: item.image }} style={Pl_Style.flatList_Img} />
-                                        </View>
-
-                                        <View style={Pl_Style.flatList_contentRoot}>
-                                            <View style={Pl_Style.flatList_textRoot}>
-                                                <Text style={Pl_Style.flatList_contentText}>{item.product_title}</Text>
+                            initialNumToRender={5}
+                            renderItem={({ item }) => {
+                                const rp = item.regular_price;
+                                const sp = item.sale_price;
+                                const regular_price = Number(rp).toFixed(2);
+                                const sale_price = Number(sp).toFixed(2);
+                                return (
+                                    <SkeletonContainer isLoading={loading}>
+                                        < TouchableOpacity
+                                            style={Pl_Style.flatList_tochable_root}
+                                            activeOpacity={0.8}
+                                            onPress={() => navigation.navigate("productDetail", item.product_id)}
+                                        >
+                                            <View style={Pl_Style.flatList_imgRoot} >
+                                                <Image source={{ uri: item.image }} style={Pl_Style.flatList_Img} />
                                             </View>
-                                            <View style={Pl_Style.flatList_baseLine}></View>
-                                            <View style={Pl_Style.flatList_priceRoot}>
-                                                <Text style={Pl_Style.flatList_oldprice}>₹{item.regular_price}</Text>
-                                                <Text style={Pl_Style.flatList_spaceRoot}>/ </Text>
-                                                <Text style={Pl_Style.flatList_price}>₹{item.sale_price}</Text>
-                                            </View>
-                                        </View>
 
-                                        {/* Buy Now Button  */}
-                                        <View style={Pl_Style.btn_btn}>
-                                            <TouchableOpacity style={Pl_Style.flatList_buyNowButton}
-                                                onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
-                                            >
-                                                <Text style={Pl_Style.flatList_buttonText}>BUY NOW</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </TouchableOpacity>
-                                </SkeletonContainer>
-                            )}
+                                            <View style={Pl_Style.flatList_contentRoot}>
+                                                <View style={Pl_Style.flatList_textRoot}>
+                                                    <Text style={Pl_Style.flatList_contentText}>{item.product_title}</Text>
+                                                </View>
+                                                <View style={Pl_Style.flatList_baseLine}></View>
+                                                <View style={Pl_Style.flatList_priceRoot}>
+                                                    <Text style={Pl_Style.flatList_oldprice}>₹{regular_price}</Text>
+                                                    <Text style={Pl_Style.flatList_spaceRoot}></Text>
+                                                    <Text style={Pl_Style.flatList_price}>₹{sale_price}</Text>
+                                                </View>
+                                            </View>
+
+                                            {/* Buy Now Button  */}
+                                            <View style={Pl_Style.btn_btn}>
+                                                <TouchableOpacity style={Pl_Style.flatList_buyNowButton}
+                                                    onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.sale_price, item.regular_price)}
+                                                >
+                                                    <Text style={Pl_Style.flatList_buttonText}>BUY NOW</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </SkeletonContainer>
+                                )
+                            }}
                             numColumns={2}
                             keyExtractor={(item, index) => index}
                         />

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import BackButton from '../components/BackButton';
 import { Rating, AirbnbRating } from 'react-native-ratings';
@@ -57,72 +57,73 @@ const WriteReview = ({ navigation }) => {
                 <BackButton goBack={navigation.goBack} />
                 <Text style={Wr_style.ReviewsTitle}>My Reviews</Text>
             </View>
+            <ScrollView>
 
-            <View style={Wr_style.rating_outer_root}>
-                <View style={Wr_style.rating_inner_root}>
-                    <Rating
-                        onFinishRating={ratingCompleted}
-                        ratingCount={5}
-                        imageSize={30}
-                        fractions={1}
-                        jumpValue={1}
-                        style={{ padding: 10, }}
-                    />
+                <View style={Wr_style.rating_outer_root}>
+                    <View style={Wr_style.rating_inner_root}>
+                        <Rating
+                            onFinishRating={ratingCompleted}
+                            ratingCount={5}
+                            imageSize={30}
+                            fractions={1}
+                            jumpValue={1}
+                            style={{ padding: 10, }}
+                        />
 
+                    </View>
+                    <Text style={Wr_style.starReviws}>{star}</Text>
                 </View>
-                <Text style={Wr_style.starReviws}>{star}</Text>
-            </View>
 
-            <View style={Wr_style.rating_title_root}>
-                <Controller
-                    control={control}
+                <View style={Wr_style.rating_title_root}>
+                    <Controller
+                        control={control}
 
-                    render={({ field: { onChange, value } }) => (
-                        <TextInput
-                            onChangeText={onChange}
-                            value={value}
-                            label="Title"
-                            autoCapitalize="none"
-                            autoCompleteType="Title"
-                            extContentType="Title"
-                            keyboardType="text"
-                        />
-                    )}
-                    name="title"
-                />
-            </View>
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                onChangeText={onChange}
+                                value={value}
+                                label="Title"
+                                autoCapitalize="none"
+                                autoCompleteType="Title"
+                                extContentType="Title"
+                                keyboardType="text"
+                            />
+                        )}
+                        name="title"
+                    />
+                </View>
 
-            <View style={Wr_style.rating_title_root}>
-                <Controller
-                    control={control}
+                <View style={Wr_style.rating_title_root}>
+                    <Controller
+                        control={control}
 
-                    render={({ field: { onChange, value } }) => (
-                        <TextInput
-                            onChangeText={onChange}
-                            value={value}
-                            label="Description"
-                            autoCapitalize="none"
-                            autoCompleteType="Description"
-                            extContentType="Description"
-                            keyboardType="text"
-                            multiline
-                            numberOfLines={6}
-                            style={Wr_style.rating_description_height}
-                        />
-                    )}
-                    name="description"
-                />
-            </View>
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                onChangeText={onChange}
+                                value={value}
+                                label="Description"
+                                autoCapitalize="none"
+                                autoCompleteType="Description"
+                                extContentType="Description"
+                                keyboardType="text"
+                                multiline
+                                numberOfLines={6}
+                                style={Wr_style.rating_description_height}
+                            />
+                        )}
+                        name="description"
+                    />
+                </View>
 
-            <View style={Wr_style.rating_button_root}>
-                <Button
-                    style={{ width: "100%", }}
-                    title="Save"
-                    color='#fb641b'
-                    onPress={handleSubmit(onSubmit)}
-                />
-            </View>
-
+                <View style={Wr_style.rating_button_root}>
+                    <Button
+                        style={{ width: "100%", }}
+                        title="Save"
+                        color='#fb641b'
+                        onPress={handleSubmit(onSubmit)}
+                    />
+                </View>
+            </ScrollView>
         </View>
     )
 }

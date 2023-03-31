@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
 import { theme } from '../../src/core/theme';
 
@@ -251,6 +252,7 @@ export const useStyles = CreateResponsiveStyle(
             marginTop: 30,
             borderRadius: 50,
         },
+
         best_touchable: {
             height: 252,
             width: 145,
@@ -258,6 +260,12 @@ export const useStyles = CreateResponsiveStyle(
             position: 'relative',
         },
 
+        imgRoot: {
+            height: 145,
+            width: 145,
+            // borderColor: 'red',
+            // borderWidth: 1
+        },
         siteLogo: {
             display: 'flex',
             alignItems: 'center',
@@ -841,12 +849,12 @@ export const useStyles = CreateResponsiveStyle(
             height: 1,
             width: '100%',
             alignSelf: 'center',
-            backgroundColor: '#C4C4C4',
+            backgroundColor: '#272727',
             marginTop: 20
         },
         ProductDetail_baseLine: {
             height: 1,
-            backgroundColor: '#C4C4C4',
+            backgroundColor: '#272727',
             marginTop: 5
         },
         write_review: {
@@ -892,6 +900,10 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'space-between',
             alignItems: 'center',
             borderRadius: 4
+        },
+        all_review_text: {
+            paddingLeft: 20,
+            fontSize: 20
         },
         youMayAlso: {
             flexDirection: 'row',
@@ -951,7 +963,8 @@ export const useStyles = CreateResponsiveStyle(
         inner_bottomView: {
             height: 50,
             width: '90%',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            // backgroundColor: 'blue'
         },
         bottomView1: {
             height: 60,
@@ -1022,6 +1035,7 @@ export const useStyles = CreateResponsiveStyle(
             width: '100%',
             flexDirection: 'row',
             justifyContent: 'space-between',
+            // borderWidth: 1
         },
         productListing_name: {
             paddingLeft: 20,
@@ -1042,7 +1056,7 @@ export const useStyles = CreateResponsiveStyle(
             borderWidth: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 10,
+            // marginTop: 10,
             marginRight: 20,
             alignSelf: 'center',
             flexDirection: 'row'
@@ -1058,7 +1072,7 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 12,
             lineHeight: 14.09,
             fontFamily: 'Raleway',
-            fontWeight: '500',
+            fontWeight: '600',
             paddingLeft: 3,
         },
         panel: {
@@ -1081,10 +1095,10 @@ export const useStyles = CreateResponsiveStyle(
             alignItems: 'center',
         },
         panel_select_text: {
-            fontSize: 15,
+            fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
             padding: 6,
             marginLeft: 15,
-            fontWeight: "700",
+            fontWeight: (Platform.OS === 'ios') ? "600" : "700",
             fontFamily: 'Raleway',
         },
         flatList_Root: {
@@ -1141,6 +1155,7 @@ export const useStyles = CreateResponsiveStyle(
             color: '#FFFFFF',
             alignSelf: 'center'
         },
+
         flatList_baseLine: {
             height: 1,
             width: '100%',
@@ -1158,23 +1173,26 @@ export const useStyles = CreateResponsiveStyle(
         flatList_oldprice: {
             color: '#666666',
             textDecorationLine: 'line-through',
-            fontSize: 14,
+            fontSize: 12,
             fontFamily: 'Lato',
-            fontWeight: '300',
-            lineHeight: 17
+            fontWeight: '600',
+            lineHeight: 15
         },
         flatList_spaceRoot: {
             color: 'white',
-            marginLeft: 5,
-            fontSize: 12
+            marginLeft: 3,
+            marginRight: 3,
+            fontSize: 12,
+            lineHeight: 15
         },
         flatList_price: {
             color: 'white',
             fontSize: 12,
             fontFamily: 'Lato',
-            fontWeight: '600',
+            fontWeight: '300',
             lineHeight: 15,
         },
+
         btn_btn: {
             height: 27,
             width: '100%',
@@ -1189,6 +1207,7 @@ export const useStyles = CreateResponsiveStyle(
             alignSelf: 'center',
             alignItems: 'center',
         },
+
         flatList_buttonText: {
             color: '#0D0D0D',
             textAlign: 'center',
@@ -1282,9 +1301,12 @@ export const useStyles = CreateResponsiveStyle(
             category_root_img: {
                 height: 80,
                 width: 80,
-                marginLeft: 45,
+                // marginLeft: 45,
+                marginLeft: (Platform.OS === 'ios') ? 27 : 34,
                 marginTop: 30,
                 borderRadius: 50,
+                // borderWidth: 1,
+                // borderColor: '#fff'
             },
             productsListRoot: {
                 height: 252,
@@ -1292,10 +1314,15 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center'
             },
             best_touchable: {
-                height: 252,
-                width: 145,
                 marginRight: 90,
-                position: 'relative',
+            },
+            skinImgText: {
+                color: '#fff',
+                fontSize: (Platform.OS === 'ios') ? 12 : 12,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+                lineHeight: (Platform.OS === 'ios') ? 20 : 18,
+                textAlign: 'center',
+                marginTop: (Platform.OS === 'ios') ? 10 : 10,
             },
 
 
@@ -1358,15 +1385,15 @@ export const useStyles = CreateResponsiveStyle(
 
             /** Product Detail Page */
 
-            safe_root: {
-                height: '100%',
-                width: '100%',
-                alignSelf: 'center',
-            },
-            product_swiperRoot: {
-                height: 400,
-                position: 'relative'
-            },
+            // safe_root: {
+            //     height: '100%',
+            //     width: '100%',
+            //     alignSelf: 'center',
+            // },
+            // product_swiperRoot: {
+            //     height: 400,
+            //     position: 'relative'
+            // },
             shadow_Box: {
                 flex: 1,
                 justifyContent: 'center',
@@ -1393,13 +1420,79 @@ export const useStyles = CreateResponsiveStyle(
                 marginTop: '0%'
             },
             Title_craggy_Text: {
-                color: '#CC933B',
-                fontSize: 16,
-                fontWeight: '600',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
                 fontFamily: 'Raleway',
-                lineHeight: 22,
                 textAlign: 'center',
-                letterSpacing: 0.5
+            },
+            titleStyle_description: {
+                fontFamily: 'Raleway',
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS15,
+            },
+            li_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS15,
+                fontFamily: 'Lato',
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+            },
+            review_MainHeading: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+                fontFamily: 'Raleway',
+                lineHeight: (Platform.OS === 'ios') ? 25 : 25,
+            },
+            write_review: {
+                // borderWidth: 1,
+                // borderRadius: 4,
+                paddingTop: (Platform.OS === 'ios') ? 12 : 12,
+                paddingBottom: (Platform.OS === 'ios') ? 12 : 12,
+                paddingLeft: (Platform.OS === 'ios') ? 20 : 20,
+                paddingRight: (Platform.OS === 'ios') ? 20 : 20,
+                // borderColor: '#333333'
+            },
+            reviews_length: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Raleway',
+                lineHeight: 17
+            },
+            review_heading: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS12,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Lato'
+            },
+            review_Short: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Raleway',
+                lineHeight: 15
+            },
+            review_Name: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                fontFamily: 'Raleway',
+                lineHeight: 19,
+            },
+            review_Date: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: '400',
+                fontFamily: 'Lato',
+                lineHeight: 15
+            },
+            review_Review: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS15,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+            },
+            all_review_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS15,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Lato'
+            },
+            latestProduct_Text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH15 : theme.lineHeightM.lineH15,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Lato'
             },
             products_Details_ListRoot: {
                 height: 252,
@@ -1415,6 +1508,11 @@ export const useStyles = CreateResponsiveStyle(
                 zIndex: 3,
                 bottom: 150,
                 opacity: 0.7
+            },
+            textStyle: {
+                fontSize: (Platform.OS === 'ios') ? 19 : 20,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                fontFamily: 'Lato'
             },
 
 
@@ -1443,6 +1541,29 @@ export const useStyles = CreateResponsiveStyle(
 
             /** Product Listing Page */
 
+            productListing_name: {
+                paddingLeft: (Platform.OS === 'ios') ? "8%" : "8%",
+                fontSize: (Platform.OS === 'ios') ? 18 : 18,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH18 : theme.lineHeightM.lineH18,
+            },
+            touchable_sort: {
+                marginRight: (Platform.OS === 'ios') ? "8%" : "8%",
+            },
+            sort_Text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS12,
+                // lineHeight: 14.09,
+                // paddingLeft: 5,
+                fontFamily: 'Lato',
+                fontWeight: (Platform.OS === 'ios') ? '700' : '600',
+            },
+            dots: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS12,
+                // lineHeight: 14.09,
+                // fontFamily: 'Raleway',
+                fontWeight: (Platform.OS === 'ios') ? '700' : '600',
+                paddingLeft: 2,
+            },
             flatList_tochable_root: {
                 height: 252,
                 width: '30%',
@@ -1460,6 +1581,35 @@ export const useStyles = CreateResponsiveStyle(
                 display: 'flex',
                 backgroundColor: '#0D0D0D',
             },
+
+            flatList_contentText: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS10,
+                fontWeight: (Platform.OS === 'ios') ? '300' : '400',
+                fontFamily: 'Lato',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH12 : theme.lineHeightM.lineH13,
+                // color: '#FFFFFF',
+                // alignSelf: 'center',
+            },
+            flatList_oldprice: {
+                // color: '#666666',
+                // textDecorationLine: 'line-through',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                // fontFamily: 'Lato',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH18
+            },
+            flatList_price: {
+                // color: 'white',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '400',
+                // fontFamily: 'Lato',
+                // textAlign: 'center',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH18,
+            },
+            flatList_buyNowButton: {
+                width: (Platform.OS === 'ios') ? 75 : 85,
+            },
+
             btn_btn: {
                 height: 27,
                 width: '90%',
@@ -1467,13 +1617,12 @@ export const useStyles = CreateResponsiveStyle(
                 bottom: 0,
                 justifyContent: "center",
             },
-            flatList_buyNowButton: {
-                height: 27,
-                width: 98,
-                borderRadius: 4,
-                backgroundColor: '#C68625',
-                position: 'absolute',
+            flatList_buttonText: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS11,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH14
             },
+
             Snackbar_style: {
                 width: "40%",
                 height: 55,
@@ -1594,6 +1743,32 @@ export const useStyles = CreateResponsiveStyle(
 
             /** Product Listing Page */
 
+            productListing_name: {
+                paddingLeft: (Platform.OS === 'ios') ? 20 : 20,
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH18 : theme.lineHeightM.lineH18,
+            },
+            touchable_sort: {
+                marginRight: (Platform.OS === 'ios') ? 20 : 20,
+                width: (Platform.OS === 'ios') ? 110 : 105,
+                height: (Platform.OS === 'ios') ? 28 : 28,
+
+            },
+            sort_Text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS11,
+                lineHeight: 14.09,
+                paddingLeft: 5,
+                fontFamily: 'Lato',
+                fontWeight: (Platform.OS === 'ios') ? '700' : '600',
+            },
+            dots: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS11,
+                lineHeight: 14.09,
+                fontFamily: 'Raleway',
+                fontWeight: (Platform.OS === 'ios') ? '700' : '600',
+                paddingLeft: 2,
+            },
             flatList_tochable_root: {
                 height: 252,
                 width: '42.2%',
@@ -1604,6 +1779,33 @@ export const useStyles = CreateResponsiveStyle(
             flatList_imgRoot: {
                 height: 145,
                 width: '100%',
+            },
+            flatList_contentText: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS10,
+                fontWeight: (Platform.OS === 'ios') ? '300' : '400',
+                fontFamily: 'Lato',
+                lineHeight: (Platform.OS === 'ios') ? 12 : 13,
+                // color: '#FFFFFF',
+                // alignSelf: 'center',
+            },
+            flatList_oldprice: {
+                // color: '#666666',
+                // textDecorationLine: 'line-through',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                // fontFamily: 'Lato',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH18
+            },
+            flatList_price: {
+                // color: 'white',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '400',
+                // fontFamily: 'Lato',
+                // textAlign: 'center',
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH18,
+            },
+            flatList_buyNowButton: {
+                width: (Platform.OS === 'ios') ? 80 : 90,
             },
             flatList_contentRoot: {
                 height: 95,
@@ -1619,15 +1821,10 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center',
                 alignItems: 'center',
             },
-            flatList_buyNowButton: {
-                height: 27,
-                width: 98,
-                borderRadius: 4,
-                backgroundColor: '#C68625',
-                position: 'absolute',
-                bottom: 0,
-                alignSelf: 'center',
-                alignItems: 'center',
+            flatList_buttonText: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS12,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                lineHeight: 13
             },
             Snackbar_style: {
                 width: "65%",
@@ -1679,15 +1876,15 @@ export const useStyles = CreateResponsiveStyle(
 
             /** Product Detail Page */
 
-            safe_root: {
-                height: '100%',
-                width: '100%',
-                alignSelf: 'center',
-            },
-            product_swiperRoot: {
-                height: 400,
-                position: 'relative'
-            },
+            // safe_root: {
+            //     height: '100%',
+            //     width: '100%',
+            //     alignSelf: 'center',
+            // },
+            // product_swiperRoot: {
+            //     height: 400,
+            //     position: 'relative'
+            // },
             shadow_Box: {
                 flex: 1,
                 justifyContent: 'center',
@@ -1714,13 +1911,85 @@ export const useStyles = CreateResponsiveStyle(
                 marginTop: '-12%'
             },
             Title_craggy_Text: {
-                color: '#CC933B',
-                fontSize: 16,
-                fontWeight: '600',
+                // color: '#CC933B',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS15,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
                 fontFamily: 'Raleway',
-                lineHeight: 22,
+                // lineHeight: 22,
                 textAlign: 'left',
-                letterSpacing: 0.5
+                // letterSpacing: 0.5
+            },
+            titleStyle_description: {
+                // color: '#222222',
+                fontFamily: 'Raleway',
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS15,
+                // lineHeight: 17,
+                // padding: 10
+            },
+            li_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS14,
+                fontFamily: 'Lato',
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+            },
+            review_MainHeading: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+                fontFamily: 'Raleway',
+                lineHeight: (Platform.OS === 'ios') ? 25 : 25,
+            },
+            write_review: {
+                // borderWidth: 1,
+                // borderRadius: 4,
+                paddingTop: (Platform.OS === 'ios') ? 12 : 12,
+                paddingBottom: (Platform.OS === 'ios') ? 12 : 12,
+                paddingLeft: (Platform.OS === 'ios') ? 10 : 13,
+                paddingRight: (Platform.OS === 'ios') ? 10 : 13,
+                // borderColor: '#333333'
+            },
+            reviews_length: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Raleway',
+                lineHeight: 17
+            },
+            review_Name: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                fontFamily: 'Raleway',
+                lineHeight: 19,
+            },
+            review_Date: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600',
+                fontFamily: 'Lato',
+                lineHeight: 15
+            },
+            review_Review: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS15 : theme.fontsM.fontS15,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+            },
+            review_heading: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS12,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Lato'
+            },
+            review_Short: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS13,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Raleway',
+                lineHeight: 15
+            },
+            all_review_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Lato'
+            },
+            latestProduct_Text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH15 : theme.lineHeightM.lineH15,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                fontFamily: 'Lato'
             },
             products_Details_ListRoot: {
                 height: 252,
@@ -1737,27 +2006,43 @@ export const useStyles = CreateResponsiveStyle(
                 bottom: 250,
                 opacity: 0.7
             },
-
+            textStyle: {
+                fontSize: (Platform.OS === 'ios') ? 18 : 18,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '700',
+                fontFamily: 'Lato'
+            },
 
             /**Home Page */
 
             category_root_img: {
                 height: 80,
                 width: 80,
-                marginLeft: 8,
+                marginLeft: (Platform.OS === 'ios') ? 35 : 22,
+                marginRight: (Platform.OS === 'ios') ? 0 : 18,
                 marginTop: 30,
                 borderRadius: 50,
+                borderWidth: 1,
+                borderColor: '#fff'
             },
             productsListRoot: {
                 height: 252,
                 width: '95%',
                 alignSelf: 'center'
             },
+
             best_touchable: {
-                height: 252,
-                width: 145,
                 marginRight: 15,
-                position: 'relative',
+            },
+            skinImgText: {
+                color: '#fff',
+                // fontSize: 12,
+                fontSize: (Platform.OS === 'ios') ? 12 : 11,
+                // fontWeight: '500',
+                fontWeight: (Platform.OS === 'ios') ? '600' : '500',
+                lineHeight: (Platform.OS === 'ios') ? 20 : 18,
+                textAlign: 'center',
+                // marginTop: 5
+                marginTop: (Platform.OS === 'ios') ? 10 : 11,
             },
 
             /** Account Page */
