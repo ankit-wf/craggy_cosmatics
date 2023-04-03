@@ -54,8 +54,8 @@ const AddressesScreen = ({ navigation }) => {
           <View style={styles.root_defaultImg}>
             <Image source={(require('../../assets/images/dummy_location.png'))} resizeMode="cover" style={styles.img_center} />
             <View style={{ alignItems: 'center' }}>
-              <Text style={{ fontSize: 18, fontWeight: '400' }}>We can't seem to locate you</Text>
-              <Text style={{ fontSize: 18, fontWeight: '400' }}>Please add in your address</Text>
+              <Text style={styles.root_text}>We can't seem to locate you</Text>
+              <Text style={styles.root_text}>Please add in your address</Text>
             </View>
           </View>
           <TouchableOpacity style={styles.add_Btn} onPress={() => navigation.navigate('addAddress')}>
@@ -86,12 +86,12 @@ const AddressesScreen = ({ navigation }) => {
                   <Text style={styles.add_text}> {data.flate} {data.Apartment} {data.City} {data.State} {data.Pincode} </Text>
                   <Text style={styles.add_text}>Phone : {data.phone} </Text>
 
-                  <View style={{ flexDirection: 'row' }}>
+                  <View style={styles.delete_root}>
                     <TouchableOpacity onPress={() => removeHandler(i)}>
                       <Text style={styles.add_delete}>Delete</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('editAddress', (i))}>
-                      <Text style={styles.add_text}>Edit</Text>
+                      <Text style={styles.edit_text}>Edit</Text>
                     </TouchableOpacity>
                   </View>
                 </View>

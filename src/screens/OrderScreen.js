@@ -5,6 +5,7 @@ import { Snackbar } from 'react-native-paper';
 import Heading from '../components/Heading'
 import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
 import { useStyles } from '../styles/responsiveStyle'
+import { useStyles as home_style } from '../styles/homeResponsive';
 import axios from 'axios'
 import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,7 +13,8 @@ import { BEST_SELLING_API, CONSUMER_KEY } from "@env";
 
 const OrderScreen = ({ navigation }) => {
     let bs = "BestSellers";
-    const Hm_Style = useStyles();
+    const Or_Style = useStyles();
+    const hm = home_style();
     const dispatch = useDispatch();
     const [bestData, setBestData] = useState([])
     const cartData = useSelector(state => state.cartData.cart);
@@ -115,21 +117,21 @@ const OrderScreen = ({ navigation }) => {
                         :
                         <ScrollView>
                             <View>
-                                <Text style={Hm_Style.no_order_text}>No orders placed</Text>
+                                <Text style={hm.no_order_text}>No orders placed</Text>
 
-                                <View style={Hm_Style.bestSellerRoot}>
+                                <View style={hm.bestSellerRoot}>
                                     <Heading title=' best selling ' />
                                     <TouchableOpacity
                                         activeOpacity={0.8}
-                                        style={Hm_Style.viewLatestProduct}
+                                        style={hm.viewLatestProduct}
                                         onPress={() => { navigation.navigate('productListing', { name: bs }) }}
                                     >
-                                        <Text style={Hm_Style.latestProductText}>
+                                        <Text style={hm.latestProductText}>
                                             View All
                                         </Text>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={Hm_Style.productsListRoot}>
+                                <View style={hm.productsListRoot}>
                                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                         {bestData.map((e, i) => {
                                             const rp = e.regular_price;
@@ -139,22 +141,22 @@ const OrderScreen = ({ navigation }) => {
                                             return (
                                                 <TouchableOpacity
                                                     activeOpacity={0.8}
-                                                    style={Hm_Style.best_touchable}
+                                                    style={hm.best_touchable}
                                                     onPress={() => navigation.navigate('productDetail', e.product_id)}
                                                     key={i}
                                                 >
-                                                    <View style={bsP.imgRoot} >
-                                                        <Image source={{ uri: e.image }} style={bsP.productImg} />
+                                                    <View style={hm.imgRoot} >
+                                                        <Image source={{ uri: e.image }} style={hm.productImg} />
                                                     </View>
-                                                    <View style={bsP.contentRoot}>
-                                                        <View style={bsP.descriptionRoot}>
-                                                            <Text style={bsP.descriptionText}>{e.product_title}</Text>
+                                                    <View style={hm.contentRoot}>
+                                                        <View style={hm.descriptionRoot}>
+                                                            <Text style={hm.descriptionText}>{e.product_title}</Text>
                                                         </View>
-                                                        <View style={bsP.baseLine}></View>
-                                                        <View style={bsP.priceRoot}>
-                                                            <Text style={bsP.oldprice}>₹{regular_price}</Text>
-                                                            <Text style={bsP.spaceRoot}>/</Text>
-                                                            <Text style={bsP.price}>₹{sale_price}</Text>
+                                                        <View style={hm.baseLine}></View>
+                                                        <View style={hm.priceRoot}>
+                                                            <Text style={hm.oldprice}>₹{regular_price}</Text>
+                                                            <Text style={hm.spaceRoot}></Text>
+                                                            <Text style={hm.price}>₹{sale_price}</Text>
 
                                                         </View>
                                                     </View>
@@ -162,10 +164,10 @@ const OrderScreen = ({ navigation }) => {
                                                     {/* Buy Now Button  */}
                                                     <TouchableOpacity
                                                         activeOpacity={0.8}
-                                                        style={bsP.buyNowButton}
+                                                        style={hm.buyNowButton}
                                                         onPress={() => CartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
                                                     >
-                                                        <Text style={bsP.buttonText}>BUY NOW</Text>
+                                                        <Text style={hm.buttonText}>BUY NOW</Text>
                                                     </TouchableOpacity>
 
                                                 </TouchableOpacity>
@@ -173,8 +175,8 @@ const OrderScreen = ({ navigation }) => {
                                         })}
                                     </ScrollView>
                                 </View>
-                                <TouchableOpacity style={Hm_Style.shopping_btn} onPress={() => navigation.navigate('Home')} >
-                                    <Text style={Hm_Style.shopping_text}>Continue Shopping</Text>
+                                <TouchableOpacity style={hm.shopping_btn} onPress={() => navigation.navigate('Home')} >
+                                    <Text style={hm.shopping_text}>Continue Shopping</Text>
                                 </TouchableOpacity>
 
                             </View>
@@ -185,9 +187,9 @@ const OrderScreen = ({ navigation }) => {
                 visible={visible}
                 onDismiss={onDismissSnackBar}
                 duration={2000}
-                style={Hm_Style.Snackbar_style}
+                style={hm.Snackbar_style}
             >
-                <Text style={Hm_Style.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                <Text style={hm.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
             </Snackbar>
         </View>
     )

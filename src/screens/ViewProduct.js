@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { shopStyle as sS } from '../styles/shopStyle';
 import { useStyles } from '../styles/viewAllProductResponsive';
+import { useStyles as h_Style } from '../styles/homeResponsive';
 import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/dataSlice';
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
@@ -11,6 +11,7 @@ import { CONSUMER_KEY, ALL_PRODUCT_API } from "@env";
 
 const ViewProduct = ({ navigation }) => {
     const Va_Style = useStyles();
+    const hm = h_Style();
     const dispatch = useDispatch();
     const [allData, setAllData] = useState([])
     const [loading, setLoading] = useState(true);
@@ -116,6 +117,7 @@ const ViewProduct = ({ navigation }) => {
                         return (
                             <SkeletonContainer isLoading={loading}>
                                 < TouchableOpacity style={Va_Style.toch_root}
+                                    activeOpacity={0.8}
                                     onPress={() => navigation.navigate("productDetail", item.product_id)} >
                                     <View style={Va_Style.imgRoot} >
                                         <Image source={{ uri: item.image }} style={Va_Style.productImg} />
@@ -123,15 +125,15 @@ const ViewProduct = ({ navigation }) => {
 
                                     <View style={Va_Style.contentRoot}>
                                         <View style={Va_Style.textRoot}>
-                                            <Text style={Va_Style.contentText}>{item.product_title}</Text>
+                                            <Text style={hm.descriptionText}>{item.product_title}</Text>
                                         </View>
 
                                         <View style={Va_Style.baseLine}></View>
 
                                         <View style={Va_Style.priceRoot}>
-                                            <Text style={Va_Style.oldprice}>₹{regular_price}</Text>
-                                            <Text style={Va_Style.spaceRoot}>/</Text>
-                                            <Text style={Va_Style.price}>₹{sale_price}</Text>
+                                            <Text style={hm.oldprice}>₹{regular_price}</Text>
+                                            <Text style={hm.spaceRoot}></Text>
+                                            <Text style={hm.price}>₹{sale_price}</Text>
                                         </View>
 
                                     </View>
@@ -140,7 +142,7 @@ const ViewProduct = ({ navigation }) => {
                                     <TouchableOpacity style={Va_Style.buyNowButton}
                                         onPress={() => AddToCartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                     >
-                                        <Text style={Va_Style.buttonText}>BUY NOW</Text>
+                                        <Text style={hm.buttonText}>BUY NOW</Text>
                                     </TouchableOpacity>
                                 </TouchableOpacity>
                             </SkeletonContainer>

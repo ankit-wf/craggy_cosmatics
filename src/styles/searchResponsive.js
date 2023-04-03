@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
 // import { theme } from '../../src/core/theme';
 
@@ -59,7 +60,8 @@ export const useStyles = CreateResponsiveStyle(
         view_container_text: {
             textAlign: 'center',
             paddingTop: 6,
-            color: 'blue'
+            color: 'blue',
+            fontFamily: 'Raleway'
         },
         viewLatestProduct: {
             height: 25,
@@ -123,8 +125,8 @@ export const useStyles = CreateResponsiveStyle(
 
         [maxSize(DEVICE_SIZES.MD)]: {
             trending_Text: {
-                fontSize: 20,
-                color: 'blue'
+                fontSize: (Platform.OS === 'ios') ? 16 : 17,
+                fontFamily: 'Raleway'
             },
             trending_View_container: {
                 flexDirection: 'row',
@@ -138,8 +140,12 @@ export const useStyles = CreateResponsiveStyle(
                 marginLeft: 10
             },
             trending_icon: {
-                marginTop: 10,
+                marginTop: (Platform.OS === 'ios') ? 12 : 10,
                 marginLeft: "5%"
+            },
+            view_container_text: {
+                paddingTop: (Platform.OS === 'ios') ? 9 : 6,
+                fontSize: (Platform.OS === 'ios') ? 13 : 13,
             },
             View_Container: {
                 height: 35,
@@ -172,8 +178,8 @@ export const useStyles = CreateResponsiveStyle(
 
         [maxSize(DEVICE_SIZES.XS)]: {
             trending_Text: {
-                fontSize: 17,
-                color: 'blue'
+                fontSize: (Platform.OS === 'ios') ? 17 : 16,
+                fontFamily: 'Raleway'
             },
             trending_View_container: {
                 flexDirection: 'row',
@@ -189,6 +195,10 @@ export const useStyles = CreateResponsiveStyle(
             trending_icon: {
                 marginTop: 10,
                 marginLeft: "5%"
+            },
+            view_container_text: {
+                paddingTop: (Platform.OS === 'ios') ? 9 : 6,
+                fontSize: (Platform.OS === 'ios') ? 12 : 12,
             },
             View_Container: {
                 height: 35,

@@ -91,8 +91,8 @@ const EditAddress = ({ navigation }) => {
                                             )}
                                             name="firstname"
                                         />
-                                        {errors.firstname && errors.firstname.type === 'required' && <Text> this is required !</Text>}
-                                        {errors.firstname && errors.firstname.type === 'pattern' && <Text> please enter correct !</Text>}
+                                        {errors.firstname && errors.firstname.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
+                                        {errors.firstname && errors.firstname.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                                     </View>
                                     <View style={Edit_Style.half_width}>
                                         <Controller
@@ -117,8 +117,8 @@ const EditAddress = ({ navigation }) => {
                                             )}
                                             name="Lastname"
                                         />
-                                        {errors.Lastname && errors.Lastname.type === 'required' && <Text> this is required !</Text>}
-                                        {errors.Lastname && errors.Lastname.type === 'pattern' && <Text> please enter correct !</Text>}
+                                        {errors.Lastname && errors.Lastname.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
+                                        {errors.Lastname && errors.Lastname.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                                     </View>
                                 </View>
 
@@ -145,8 +145,8 @@ const EditAddress = ({ navigation }) => {
                                         )}
                                         name="phone"
                                     />
-                                    {errors.phone && errors.phone.type === 'required' && <Text> this is required !</Text>}
-                                    {errors.phone && errors.phone.type === 'pattern' && <Text> please enter correct !</Text>}
+                                    {errors.phone && errors.phone.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
+                                    {errors.phone && errors.phone.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                                 </View>
 
                                 <View style={Edit_Style.full_width}>
@@ -171,8 +171,8 @@ const EditAddress = ({ navigation }) => {
                                         )}
                                         name="flate"
                                     />
-                                    {errors.flate && errors.flate.type === 'required' && <Text> this is required !</Text>}
-                                    {errors.flate && errors.flate.type === 'pattern' && <Text> please enter correct !</Text>}
+                                    {errors.flate && errors.flate.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
+                                    {errors.flate && errors.flate.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                                 </View>
 
                                 <View style={Edit_Style.full_width}>
@@ -197,8 +197,8 @@ const EditAddress = ({ navigation }) => {
                                         )}
                                         name="Apartment"
                                     />
-                                    {errors.Apartment && errors.Apartment.type === 'required' && <Text> this is required !</Text>}
-                                    {errors.Apartment && errors.Apartment.type === 'pattern' && <Text> please enter correct !</Text>}
+                                    {errors.Apartment && errors.Apartment.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
+                                    {errors.Apartment && errors.Apartment.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                                 </View>
 
                                 <View style={Edit_Style.full_width}>
@@ -223,8 +223,8 @@ const EditAddress = ({ navigation }) => {
                                         )}
                                         name="Pincode"
                                     />
-                                    {errors.Pincode && errors.Pincode.type === 'required' && <Text> this is required !</Text>}
-                                    {errors.Pincode && errors.Pincode.type === 'pattern' && <Text> please enter correct !</Text>}
+                                    {errors.Pincode && errors.Pincode.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
+                                    {errors.Pincode && errors.Pincode.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                                 </View>
 
                                 <View style={Edit_Style.full_width}>
@@ -249,8 +249,8 @@ const EditAddress = ({ navigation }) => {
                                         )}
                                         name="State"
                                     />
-                                    {errors.State && errors.State.type === 'required' && <Text> this is required !</Text>}
-                                    {errors.State && errors.State.type === 'pattern' && <Text> please enter correct !</Text>}
+                                    {errors.State && errors.State.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
+                                    {errors.State && errors.State.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                                 </View>
 
                                 <View style={Edit_Style.full_width}>
@@ -275,8 +275,8 @@ const EditAddress = ({ navigation }) => {
                                         )}
                                         name="City"
                                     />
-                                    {errors.City && errors.City.type === 'required' && <Text> this is required !</Text>}
-                                    {errors.City && errors.City.type === 'pattern' && <Text> please enter correct !</Text>}
+                                    {errors.City && errors.City.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
+                                    {errors.City && errors.City.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                                 </View>
                             </View>
                         )

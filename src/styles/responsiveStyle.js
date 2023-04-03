@@ -1224,7 +1224,8 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 18,
             fontWeight: '700',
             alignSelf: 'center',
-            paddingTop: '5%'
+            paddingTop: '5%',
+            fontFamily: 'Lato'
         },
         shopping_btn: {
             height: 40,
@@ -1262,9 +1263,8 @@ export const useStyles = CreateResponsiveStyle(
             //** Order Screen */
 
             no_order_text: {
-                fontSize: 18,
-                fontWeight: '700',
-                alignSelf: 'center',
+                fontSize: (Platform.OS === 'ios') ? 18 : 18,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
             },
             shopping_btn: {
                 height: 40,
@@ -1624,13 +1624,16 @@ export const useStyles = CreateResponsiveStyle(
             },
 
             Snackbar_style: {
-                width: "40%",
+                width: (Platform.OS === 'ios') ? "50%" : "45%",
                 height: 55,
                 alignSelf: 'center',
                 position: 'absolute',
                 zIndex: 3,
                 bottom: 150,
                 opacity: 0.7
+            },
+            Snackbar_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS12,
             },
             /**login */
 
@@ -1706,6 +1709,9 @@ export const useStyles = CreateResponsiveStyle(
                 // zIndex: 999,
                 bottom: '16%',
             },
+            rating_button_root: {
+                marginBottom: (Platform.OS === 'ios') ? 20 : 20,
+            },
 
 
         },
@@ -1720,9 +1726,8 @@ export const useStyles = CreateResponsiveStyle(
             //** Order Screen */
 
             no_order_text: {
-                fontSize: 17,
-                fontWeight: '700',
-                alignSelf: 'center',
+                fontSize: (Platform.OS === 'ios') ? 16 : 15,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
             },
             shopping_btn: {
                 height: 40,
@@ -1827,7 +1832,7 @@ export const useStyles = CreateResponsiveStyle(
                 lineHeight: 13
             },
             Snackbar_style: {
-                width: "65%",
+                width: (Platform.OS === 'ios') ? "70%" : "65%",
                 height: 55,
                 alignSelf: 'center',
                 position: 'absolute',
@@ -1836,6 +1841,9 @@ export const useStyles = CreateResponsiveStyle(
                 opacity: 0.7
             },
 
+            Snackbar_text: {
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS13,
+            },
 
 
             /** Write Reviews page */
@@ -1868,9 +1876,7 @@ export const useStyles = CreateResponsiveStyle(
                 paddingBottom: 20,
             },
             rating_button_root: {
-                width: "90%",
-                alignSelf: 'center',
-                marginTop: 20
+                marginTop: 20,
             },
 
 

@@ -1,5 +1,6 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
 import { theme } from '../../src/core/theme';
+import { Platform } from 'react-native';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -129,7 +130,7 @@ export const useStyles = CreateResponsiveStyle(
             loginInput: {
                 width: '100%',
                 height: 40,
-                fontSize: theme.fontsM.fontS14,
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
                 borderTopWidth: 0,
                 borderLeftWidth: 0,
                 borderRightWidth: 0,
@@ -149,8 +150,8 @@ export const useStyles = CreateResponsiveStyle(
                 paddingBottom: 15,
             },
             forgetLabel: {
-                fontSize: theme.fontsM.fontS14,
-                lineHeight: theme.lineHeightM.lineH15,
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH15 : theme.lineHeightM.lineH15,
                 paddingTop: 0
             },
 
@@ -163,9 +164,9 @@ export const useStyles = CreateResponsiveStyle(
                 borderRadius: 20,
             },
             LoginButtongTittle: {
-                fontWeight: '500',
-                fontSize: theme.fontsM.fontS15,
-                lineHeight: theme.lineHeightM.lineH14,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH14,
             },
             Containterlogin: {
                 padding: 15,
@@ -212,7 +213,7 @@ export const useStyles = CreateResponsiveStyle(
             loginInput: {
                 width: '100%',
                 height: 50,
-                fontSize: theme.fontsT.fontS14,
+                fontSize: (Platform.OS === 'ios') ? theme.fontsT.fontS12 : theme.fontsT.fontS12,
                 borderTopWidth: 0,
                 borderLeftWidth: 0,
                 borderRightWidth: 0,
@@ -233,16 +234,16 @@ export const useStyles = CreateResponsiveStyle(
                 paddingLeft: 8,
             },
             forgetLabel: {
-                fontSize: theme.fontsM.fontS13,
-                lineHeight: theme.lineHeightM.lineH15,
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH15 : theme.lineHeightM.lineH15,
                 paddingTop: 0
             },
             inputIcon: {
                 top: 5,
             },
             LoginButtongTittle: {
-                fontSize: theme.fontsM.fontS13,
-                lineHeight: theme.lineHeightM.lineH15,
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS13,
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH15 : theme.lineHeightM.lineH15,
             },
             creatAccount: {
                 fontSize: theme.fontsM.fontS13,

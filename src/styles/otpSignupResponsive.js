@@ -1,5 +1,6 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
 import { theme } from '../../src/core/theme';
+import { Platform } from 'react-native';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -160,9 +161,9 @@ export const useStyles = CreateResponsiveStyle(
                 borderRadius: 15
             },
             LoginButtongTittle: {
-                fontWeight: '500',
-                fontSize: theme.fontsM.fontS15,
-                lineHeight: theme.lineHeightM.lineH14,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS13,
+                lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH14,
             },
             buttonStyle: {
                 borderRadius: 28,

@@ -1,5 +1,6 @@
+import { Platform } from 'react-native';
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
+import { theme } from '../../src/core/theme';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -22,10 +23,15 @@ export const useStyles = CreateResponsiveStyle(
             // flex: 1,
             // justifyContent: 'center',
         },
+        root_text: {
+            fontSize: (Platform.OS === 'ios') ? 12 : 13,
+            fontWeight: (Platform.OS === 'ios') ? '400' : '400',
+            fontFamily: 'Raleway'
+        },
 
         add_Btn: {
-            height: 60,
-            width: 60,
+            height: 50,
+            width: 50,
             backgroundColor: '#000',
             borderRadius: 50,
             alignSelf: 'flex-end',
@@ -43,7 +49,7 @@ export const useStyles = CreateResponsiveStyle(
             width: 300,
             backgroundColor: '#fff',
             borderRadius: 10,
-            marginTop: 10
+            marginTop: 10,
         },
         default_address_inner: {
             width: '90%',
@@ -79,6 +85,8 @@ export const useStyles = CreateResponsiveStyle(
         default_text: {
             color: '#fff',
             alignSelf: 'center',
+            fontSize: 13,
+            fontFamily: 'Raleway'
         },
         default_Name: {
             color: '#000',
@@ -91,7 +99,19 @@ export const useStyles = CreateResponsiveStyle(
             paddingTop: 8,
             fontSize: 15,
             fontWeight: '400',
+            fontFamily: 'Lato'
             // paddingHorizontal: 10
+        },
+        delete_root: {
+            flexDirection: 'row',
+            marginTop: 10
+        },
+        edit_text: {
+            color: '#000',
+            paddingTop: 8,
+            fontSize: 15,
+            fontWeight: '400',
+            fontFamily: 'Lato'
         },
         add_delete: {
             color: 'red',
@@ -103,10 +123,8 @@ export const useStyles = CreateResponsiveStyle(
         fab: {
             position: 'absolute',
             zIndex: 999,
-            // margin: 16,
             top: "-5%",
             right: 0,
-            // bottom: 0,
         },
 
         /** Edit Address Page */
@@ -132,7 +150,8 @@ export const useStyles = CreateResponsiveStyle(
         edit_btn_text: {
             color: '#fff',
             alignSelf: 'center',
-            fontSize: 16
+            fontSize: 16,
+            fontFamily: 'Raleway'
         },
         firstname_text: {
             // height: 40,
@@ -141,6 +160,15 @@ export const useStyles = CreateResponsiveStyle(
             borderRightWidth: 0,
             borderBottomWidth: 0,
             padding: 0,
+            fontSize: (Platform.OS === 'ios') ? 12 : 12,
+            fontFamily: 'Raleway'
+        },
+        input_error: {
+            color: theme.siteColor.colorCC933B,
+            ffontSize: theme.fontsT.fontS16,
+            fontStyle: 'italic',
+            fontWeight: '600',
+
         },
         width_container: {
             flexDirection: 'row',
@@ -161,12 +189,8 @@ export const useStyles = CreateResponsiveStyle(
 
         [maxSize(DEVICE_SIZES.MD)]: {
             fab: {
-                position: 'absolute',
-                zIndex: 999,
-                // margin: 16,
-                top: "-22%",
-                right: 10,
-                // bottom: 0,
+                top: (Platform.OS === 'ios') ? '-25%' : "-25%",
+                right: (Platform.OS === 'ios') ? 10 : 10,
             },
             default_address: {
                 height: 200,
@@ -176,27 +200,38 @@ export const useStyles = CreateResponsiveStyle(
                 marginTop: -20
             },
             root_defaultImg: {
-                height: 300,
-                width: '100%',
-                alignSelf: 'center',
-                marginTop: '10%'
+                marginTop: '-5%'
                 // flex: 1,
                 // justifyContent: 'center',
             },
+            root_text: {
+                fontSize: (Platform.OS === 'ios') ? 13 : 14,
+            },
+            btn_text: {
+                fontSize: (Platform.OS === 'ios') ? 20 : 20
+            },
             default_Name: {
-                color: '#000',
-                paddingTop: 8,
-                fontSize: 18,
-                fontWeight: '700'
+                paddingTop: (Platform.OS === 'ios') ? 12 : 10,
+                fontSize: (Platform.OS === 'ios') ? 15 : 15,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500'
+            },
+            default_text: {
+                fontSize: (Platform.OS === 'ios') ? 13 : 13,
             },
             add_text: {
-                color: '#000',
-                paddingTop: 8,
-                fontSize: 17,
-                fontWeight: '400',
-                // paddingHorizontal: 10
+                paddingTop: (Platform.OS === 'ios') ? 8 : 5,
+                fontSize: (Platform.OS === 'ios') ? 14 : 14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600'
             },
-
+            delete_root: {
+                marginTop: (Platform.OS === 'ios') ? 10 : 10
+            },
+            edit_text: {
+                paddingTop: (Platform.OS === 'ios') ? 10 : 11,
+                fontSize: (Platform.OS === 'ios') ? 15 : 15,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                fontFamily: 'Lato'
+            },
             add_delete: {
                 color: 'red',
                 paddingTop: 8,
@@ -208,26 +243,30 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center'
             },
             add_Btn: {
-                height: 60,
-                width: 60,
-                backgroundColor: '#000',
-                borderRadius: 50,
-                alignSelf: 'flex-end',
-                marginRight: 20,
-                marginTop: '-17%',
-                justifyContent: 'center',
+                marginRight: (Platform.OS === 'ios') ? '-15%' : '-20%',
+                marginTop: (Platform.OS === 'ios') ? '-17%' : '-17%',
             },
 
             //** Edit Address Page */
 
             edit_container: {
-                height: '74%',
+                height: (Platform.OS === 'ios') ? '74%' : '74%',
                 width: '90%',
                 borderWidth: 0.5,
                 borderRadius: 15,
                 marginTop: 15,
                 alignSelf: 'center',
                 backgroundColor: '#fff'
+            },
+            btn_root: {
+                bottom: (Platform.OS === 'ios') ? 1 : 0,
+            },
+            edit_btn_text: {
+                fontSize: (Platform.OS === 'ios') ? 14 : 14,
+                fontWeight: (Platform.OS === 'ios') ? '600' : '600'
+            },
+            firstname_text: {
+                fontSize: (Platform.OS === 'ios') ? 13 : 13,
             },
         },
 
@@ -239,38 +278,23 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center'
             },
             add_Btn: {
-                height: 60,
-                width: 60,
-                backgroundColor: '#000',
-                borderRadius: 50,
-                alignSelf: 'flex-end',
-                marginRight: 20,
-                marginTop: '35%',
-                justifyContent: 'center',
+                marginRight: (Platform.OS === 'ios') ? 20 : 10,
+                marginTop: (Platform.OS === 'ios') ? '35%' : '55%',
             },
 
             fab: {
-                position: 'absolute',
-                zIndex: 999,
-                // margin: 16,
-                top: "-15%",
-                right: 0,
-                // bottom: 0,
+                top: (Platform.OS === 'ios') ? "5%" : '5%',
+                right: (Platform.OS === 'ios') ? 10 : 10,
             },
             root_defaultImg: {
-                height: 300,
-                width: '100%',
-                alignSelf: 'center',
                 marginTop: '10%'
-                // flex: 1,
-                // justifyContent: 'center',
             },
             default_address: {
                 height: 200,
                 width: 300,
                 backgroundColor: '#fff',
                 borderRadius: 10,
-                marginTop: 10
+                marginTop: (Platform.OS === 'ios') ? '10%' : '10%'
             },
             default_address_inner: {
                 width: '90%',
@@ -278,19 +302,30 @@ export const useStyles = CreateResponsiveStyle(
                 height: 100
             },
             default_Name: {
-                color: '#000',
-                paddingTop: 8,
-                fontSize: 16,
-                fontWeight: '700'
+                paddingTop: (Platform.OS === 'ios') ? 10 : 8,
+                fontSize: (Platform.OS === 'ios') ? 15 : 15,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500'
+            },
+            default_text: {
+                fontSize: (Platform.OS === 'ios') ? 12 : 12,
             },
             add_text: {
-                color: '#000',
-                paddingTop: 8,
-                fontSize: 15,
-                fontWeight: '400',
-                // paddingHorizontal: 10
+                paddingTop: (Platform.OS === 'ios') ? 8 : 5,
+                fontSize: (Platform.OS === 'ios') ? 12 : 12,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500'
             },
-
+            delete_root: {
+                marginTop: (Platform.OS === 'ios') ? 10 : 10
+            },
+            edit_text: {
+                paddingTop: (Platform.OS === 'ios') ? 8 : 11,
+                fontSize: (Platform.OS === 'ios') ? 15 : 15,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
+                fontFamily: 'Lato'
+            },
+            btn_text: {
+                fontSize: (Platform.OS === 'ios') ? 20 : 20
+            },
             add_delete: {
                 color: 'red',
                 paddingTop: 8,
@@ -302,13 +337,23 @@ export const useStyles = CreateResponsiveStyle(
             //** Edit Address Page */
 
             edit_container: {
-                height: '88%',
+                height: (Platform.OS === 'ios') ? '87%' : '88%',
                 width: '90%',
                 borderWidth: 0.5,
                 borderRadius: 15,
                 marginTop: 15,
                 alignSelf: 'center',
                 backgroundColor: '#fff'
+            },
+            btn_root: {
+                bottom: (Platform.OS === 'ios') ? 0 : 0,
+            },
+            edit_btn_text: {
+                fontSize: (Platform.OS === 'ios') ? 14 : 14,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500'
+            },
+            firstname_text: {
+                fontSize: (Platform.OS === 'ios') ? 12 : 12,
             },
 
         },

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, FlatList, ActivityIndicator, Platform } from 'react-native'
 import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
@@ -7,9 +7,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import axios from 'axios'
 import Heading from '../components/Heading'
 import { useStyles } from '../styles/searchResponsive';
-import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
 const placeholderText = require('../../Data/Placeholder.json');
-import { shopStyle as sS } from '../styles/shopStyle'
+import { useStyles as H_Style } from '../styles/homeResponsive';
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 import { CONSUMER_KEY, SEARCH_PRODUCT_API, BEST_SELLING_API } from "@env";
 
@@ -17,6 +16,7 @@ const SearchScreen = ({ navigation }) => {
     let bs = "BestSellers";
     let nodata = "Data not Match.."
     const Srch_Style = useStyles();
+    const hm = H_Style();
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.cartData.cart);
     const [loading, setLoading] = useState(true)
@@ -194,7 +194,7 @@ const SearchScreen = ({ navigation }) => {
                             <SkeletonContainer isLoading={loading}>
                                 <View style={Srch_Style.trending_container}>
                                     <View style={Srch_Style.trending_icon}>
-                                        <Ionicons name="trending-up-sharp" color='blue' size={26} />
+                                        <Ionicons name="trending-up-sharp" color='blue' size={(Platform.OS === 'ios') ? 20 : 26} />
                                     </View>
                                     <View style={Srch_Style.trending_Text_Container}>
                                         <Text style={Srch_Style.trending_Text}>Trending Searches</Text>
@@ -245,7 +245,7 @@ const SearchScreen = ({ navigation }) => {
                                     style={Srch_Style.viewLatestProduct}
                                     onPress={() => { navigation.navigate('productListing', { name: bs }) }}
                                 >
-                                    <Text style={Srch_Style.latestProductText}>
+                                    <Text style={hm.latestProductText}>
                                         View All
                                     </Text>
                                 </TouchableOpacity>
@@ -263,35 +263,35 @@ const SearchScreen = ({ navigation }) => {
                                         return (
                                             <TouchableOpacity
                                                 activeOpacity={0.8}
-                                                style={Srch_Style.best_touchable}
+                                                style={hm.best_touchable}
                                                 onPress={() => navigation.navigate('productDetail', e.product_id)}
                                                 key={i}
                                             >
-                                                <View style={bsP.imgRoot} >
-                                                    <Image source={{ uri: e.image }} style={bsP.productImg} />
+                                                <View style={hm.imgRoot} >
+                                                    <Image source={{ uri: e.image }} style={hm.productImg} />
                                                 </View>
 
-                                                <View style={bsP.contentRoot}>
-                                                    <View style={bsP.descriptionRoot}>
-                                                        <Text style={bsP.descriptionText}>{e.product_title}</Text>
+                                                <View style={hm.contentRoot}>
+                                                    <View style={hm.descriptionRoot}>
+                                                        <Text style={hm.descriptionText}>{e.product_title}</Text>
                                                     </View>
 
-                                                    <View style={bsP.baseLine}></View>
+                                                    <View style={hm.baseLine}></View>
 
-                                                    <View style={bsP.priceRoot}>
-                                                        <Text style={bsP.oldprice}>₹{regular_price}</Text>
-                                                        <Text style={bsP.spaceRoot}>/</Text>
-                                                        <Text style={bsP.price}>₹{sale_price}</Text>
+                                                    <View style={hm.priceRoot}>
+                                                        <Text style={hm.oldprice}>₹{regular_price}</Text>
+                                                        <Text style={hm.spaceRoot}></Text>
+                                                        <Text style={hm.price}>₹{sale_price}</Text>
                                                     </View>
                                                 </View>
 
                                                 {/* Buy Now Button  */}
                                                 <TouchableOpacity
                                                     activeOpacity={0.8}
-                                                    style={bsP.buyNowButton}
+                                                    style={hm.buyNowButton}
                                                     onPress={() => AddCartHolder(e.product_title, e.product_id, e.image, e.sale_price, e.regular_price)}
                                                 >
-                                                    <Text style={bsP.buttonText}>BUY NOW</Text>
+                                                    <Text style={hm.buttonText}>BUY NOW</Text>
                                                 </TouchableOpacity>
 
                                             </TouchableOpacity>
@@ -319,27 +319,27 @@ const SearchScreen = ({ navigation }) => {
                                             activeOpacity={0.8}
                                             onPress={() => navigation.navigate("productDetail", item.product_id)}
                                         >
-                                            <View style={sS.imgRoot} >
-                                                <Image source={{ uri: item.image }} style={sS.productImg} />
+                                            <View style={hm.imgRoot} >
+                                                <Image source={{ uri: item.image }} style={hm.productImg} />
                                             </View>
 
-                                            <View style={sS.contentRoot}>
-                                                <View style={sS.textRoot}>
-                                                    <Text style={sS.contentText}>{item.product_title}</Text>
+                                            <View style={hm.contentRoot}>
+                                                <View style={hm.textRoot}>
+                                                    <Text style={hm.contentText}>{item.product_title}</Text>
                                                 </View>
-                                                <View style={sS.baseLine}></View>
-                                                <View style={sS.priceRoot}>
-                                                    <Text style={sS.oldprice}>₹{regular_price}</Text>
-                                                    <Text style={sS.spaceRoot}>/</Text>
-                                                    <Text style={sS.price}>₹{sale_price}</Text>
+                                                <View style={hm.baseLine}></View>
+                                                <View style={hm.priceRoot}>
+                                                    <Text style={hm.oldprice}>₹{regular_price}</Text>
+                                                    <Text style={hm.spaceRoot}></Text>
+                                                    <Text style={hm.price}>₹{sale_price}</Text>
                                                 </View>
                                             </View>
 
                                             {/* Buy Now Button  */}
-                                            <TouchableOpacity style={sS.buyNowButton}
+                                            <TouchableOpacity style={hm.buyNowButton}
                                                 onPress={() => CartHolder(item.product_title, item.product_id, item.image, item.regular_price, item.sale_price,)}
                                             >
-                                                <Text style={sS.buttonText}>BUY NOW</Text>
+                                                <Text style={hm.buttonText}>BUY NOW</Text>
                                             </TouchableOpacity>
                                         </TouchableOpacity>
                                     )
@@ -359,9 +359,9 @@ const SearchScreen = ({ navigation }) => {
                 visible={visible}
                 onDismiss={onDismissSnackBar}
                 duration={2000}
-                style={Srch_Style.Snackbar_style}
+                style={hm.Snackbar_style}
             >
-                <Text style={Srch_Style.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
+                <Text style={hm.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
             </Snackbar>
         </View>
     )

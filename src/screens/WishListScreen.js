@@ -126,7 +126,7 @@ const WishListScreen = ({ navigation, route }) => {
                                         <View style={Pl_Style.flatList_baseLine}></View>
                                         <View style={Pl_Style.flatList_priceRoot}>
                                             <Text style={Pl_Style.flatList_oldprice}>₹{regular_price}</Text>
-                                            <Text style={Pl_Style.flatList_spaceRoot}>/</Text>
+                                            <Text style={Pl_Style.flatList_spaceRoot}></Text>
                                             <Text style={Pl_Style.flatList_price}>₹{sale_price}</Text>
                                         </View>
                                     </View>

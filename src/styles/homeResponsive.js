@@ -695,6 +695,31 @@ export const useStyles = CreateResponsiveStyle(
             alignSelf: 'center',
         },
 
+        //** Order Screen */
+
+        no_order_text: {
+            fontSize: 18,
+            fontWeight: '700',
+            alignSelf: 'center',
+            paddingTop: '5%',
+            fontFamily: 'Lato'
+        },
+        shopping_btn: {
+            height: 40,
+            width: 150,
+            // borderWidth: 1,
+            borderRadius: 5,
+            alignSelf: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#C68625',
+            marginTop: 50
+        },
+        shopping_text: {
+            fontSize: 16,
+            alignSelf: 'center',
+            color: '#fff',
+
+        },
 
     },
 
@@ -706,44 +731,25 @@ export const useStyles = CreateResponsiveStyle(
 
             /** Home Page */
 
-            // categories_img_Root: {
-            //     height: 150,
-            //     width: "100%",
-            //     backgroundColor: '#050505',
-            //     flexDirection: 'row',
-            //     alignContent: 'center',
-            //     justifyContent: 'space-around'
-
-            // },
             swiperRoot: {
                 height: 250,
             },
             category_root_img: {
-                // height: 80,
-                // width: 80,
-                // marginLeft: (Platform.OS === 'ios') ? 20 : 20,
                 marginRight: (Platform.OS === 'ios') ? 15 : 19,
-                // marginTop: 20,
                 marginTop: (Platform.OS === 'ios') ? 21 : 22,
-                // borderRadius: 50,
                 borderWidth: 1,
                 borderColor: '#fff',
             },
             productsListRoot: {
-                // height: 252,
-                // width: '85%',
                 width: (Platform.OS === 'ios') ? '90%' : '85%',
-                // alignSelf: 'center'
             },
             best_touchable: {
                 marginRight: 90,
             },
             skinImgText: {
-                // color: '#fff',
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS11,
                 fontWeight: (Platform.OS === 'ios') ? '600' : '500',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH20 : theme.lineHeightM.lineH18,
-                // textAlign: 'center',
                 marginTop: (Platform.OS === 'ios') ? 10 : 11,
             },
 
@@ -753,53 +759,29 @@ export const useStyles = CreateResponsiveStyle(
             },
             Snackbar_style: {
                 width: "40%",
-                // height: 55,
-                // alignSelf: 'center',
-                // position: 'absolute',
-                // zIndex: 3,
                 bottom: 150,
-                // opacity: 0.7
             },
             descriptionText: {
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS10,
                 fontWeight: (Platform.OS === 'ios') ? '300' : '400',
                 fontFamily: 'Lato',
                 lineHeight: (Platform.OS === 'ios') ? 12 : 13,
-                // color: '#FFFFFF',
-                // alignSelf: 'center',
             },
             oldprice: {
-                // color: '#666666',
-                // textDecorationLine: 'line-through',
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
                 fontWeight: (Platform.OS === 'ios') ? '600' : '700',
-                // fontFamily: 'Lato',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH16
             },
             price: {
-                // color: 'white',
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS13,
                 fontWeight: (Platform.OS === 'ios') ? '600' : '400',
-                // fontFamily: 'Lato',
-                // textAlign: 'center',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH15,
             },
             buyNowButton: {
-                // height: 27,
                 width: (Platform.OS === 'ios') ? 70 : 75,
-                // borderRadius: 4,
-                // backgroundColor: '#C68625',
-                // position: 'absolute',
-                // bottom: 0,
-                // alignSelf: 'center',
-                // alignItems: 'center',
             },
             buttonText: {
-                // color: '#0D0D0D',
-                // textAlign: 'center',
-                // paddingTop: 7,
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS11,
-                // fontFamily: 'Raleway',
                 fontWeight: (Platform.OS === 'ios') ? '600' : '700',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH14
             },
@@ -808,20 +790,29 @@ export const useStyles = CreateResponsiveStyle(
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS15,
                 fontFamily: (Platform.OS === 'ios') ? 'Baskervville' : 'Baskervville',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH18,
-                // color: '#666666'
             },
             essientialOilText: {
-                // fontFamily: 'Lato',
                 fontWeight: (Platform.OS === 'ios') ? '600' : '600',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH11 : theme.lineHeightM.lineH11,
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS10,
-                // textAlign: 'center',
             },
             viewProductText: {
-                // fontFamily: 'Raleway',
                 fontWeight: (Platform.OS === 'ios') ? '700' : '700',
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS13,
-                // color: '#fff',
+            },
+
+            //** Order Screen */
+
+            no_order_text: {
+                fontSize: (Platform.OS === 'ios') ? 18 : 18,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+            },
+            shopping_btn: {
+                marginBottom: (Platform.OS === 'ios') ? 15 : 10
+            },
+            shopping_text: {
+                fontSize: (Platform.OS === 'ios') ? 14 : 14,
+
             },
 
         },
@@ -834,32 +825,21 @@ export const useStyles = CreateResponsiveStyle(
             /**Home Page */
 
             category_root_img: {
-                // height: 80,
-                // width: 80,
-                // marginLeft: (Platform.OS === 'ios') ? 24 : 21,
                 marginRight: (Platform.OS === 'ios') ? 30 : 24,
-                // marginTop: 20,
                 marginTop: (Platform.OS === 'ios') ? 23 : 24,
-                // borderRadius: 50,
             },
             productsListRoot: {
-                // height: 252,
                 width: (Platform.OS === 'ios') ? '95%' : '95%',
-                // alignSelf: 'center'
             },
 
             best_touchable: {
                 marginRight: 15,
             },
             skinImgText: {
-                // color: '#fff',
-                // fontSize: 12,
                 fontSize: (Platform.OS === 'ios') ? 12 : 11,
-                // fontWeight: '500',
                 fontWeight: (Platform.OS === 'ios') ? '600' : '500',
                 lineHeight: (Platform.OS === 'ios') ? 20 : 18,
                 textAlign: 'center',
-                // marginTop: 5
                 marginTop: (Platform.OS === 'ios') ? 10 : 11,
             },
             oilIconRoot: {
@@ -882,34 +862,22 @@ export const useStyles = CreateResponsiveStyle(
                 fontWeight: (Platform.OS === 'ios') ? '300' : '400',
                 fontFamily: 'Lato',
                 lineHeight: (Platform.OS === 'ios') ? 12 : 13,
-                // color: '#FFFFFF',
-                // alignSelf: 'center',
             },
             oldprice: {
-                // color: '#666666',
-                // textDecorationLine: 'line-through',
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
                 fontWeight: (Platform.OS === 'ios') ? '600' : '700',
-                // fontFamily: 'Lato',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH16
             },
             price: {
-                // color: 'white',
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS13,
                 fontWeight: (Platform.OS === 'ios') ? '600' : '400',
-                // fontFamily: 'Lato',
-                // textAlign: 'center',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH15,
             },
             buyNowButton: {
                 width: (Platform.OS === 'ios') ? 80 : 90,
             },
             buttonText: {
-                // color: '#0D0D0D',
-                // textAlign: 'center',
-                // paddingTop: 7,
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS12,
-                // fontFamily: 'Raleway',
                 fontWeight: (Platform.OS === 'ios') ? '600' : '700',
                 lineHeight: 13
             },
@@ -918,20 +886,37 @@ export const useStyles = CreateResponsiveStyle(
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS15,
                 fontFamily: (Platform.OS === 'ios') ? 'Baskervville' : 'Baskervville',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH18 : theme.lineHeightM.lineH20,
-                // color: '#666666'
             },
             essientialOilText: {
-                // fontFamily: 'Lato',
                 fontWeight: (Platform.OS === 'ios') ? '600' : '600',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH11 : theme.lineHeightM.lineH11,
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS9 : theme.fontsM.fontS9,
-                // textAlign: 'center',
             },
             viewProductText: {
-                // fontFamily: 'Raleway',
                 fontWeight: (Platform.OS === 'ios') ? '600' : '700',
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS11 : theme.fontsM.fontS12,
-                // color: '#fff',
+            },
+
+            //** Order Screen */
+
+            no_order_text: {
+                fontSize: (Platform.OS === 'ios') ? 16 : 15,
+                fontWeight: (Platform.OS === 'ios') ? '700' : '700',
+            },
+            shopping_btn: {
+                height: 40,
+                width: 150,
+                // borderWidth: 1,
+                borderRadius: 5,
+                alignSelf: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#C68625',
+                marginTop: 50
+            },
+            shopping_text: {
+                fontSize: (Platform.OS === 'ios') ? 14 : 13,
+                fontFamily: 'Raleway',
+                fontWeight: (Platform.OS === 'ios') ? '500' : '600'
             },
 
         },
