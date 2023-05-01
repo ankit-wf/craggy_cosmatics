@@ -17,6 +17,18 @@ import SocialIcon from '../components/SocialIcon'
 import { HOME_API, CONSUMER_KEY } from "@env";
 
 const HomeScreen = ({ navigation }) => {
+  // const userAdd = useSelector(state => state.userData.userAddress);
+  // const d = userAdd.find((el) =>
+  //   el.City === "mohali"
+  //   // el.id == ab.id
+  //   // console.log("jjhhgg", el)
+  // )
+
+  // if (d) {
+  //   d.State = "PB"
+  //   // setQuant(!quant)
+  // }
+  // console.log("jjjjjj", userAdd)
   let bs = "BestSellers";
   let lp = "latest Product";
   const styles = useStyles();

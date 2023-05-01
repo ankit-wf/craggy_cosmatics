@@ -53,7 +53,7 @@ export const useStyles = CreateResponsiveStyle(
         },
         default_address_inner: {
             width: '90%',
-            alignSelf: 'center'
+            alignSelf: 'center',
         },
         btn_btn: {
             height: 70,
@@ -83,7 +83,7 @@ export const useStyles = CreateResponsiveStyle(
             // alignSelf: 'flex-end'
         },
         default_text: {
-            color: '#fff',
+            // color: '#fff',
             alignSelf: 'center',
             fontSize: 13,
             fontFamily: 'Raleway'
@@ -104,10 +104,12 @@ export const useStyles = CreateResponsiveStyle(
         },
         delete_root: {
             flexDirection: 'row',
-            marginTop: 10
+            justifyContent: 'flex-end',
+            marginTop: 10,
+            right: 20
         },
         edit_text: {
-            color: '#000',
+            color: 'red',
             paddingTop: 8,
             fontSize: 15,
             fontWeight: '400',
@@ -211,12 +213,14 @@ export const useStyles = CreateResponsiveStyle(
                 fontSize: (Platform.OS === 'ios') ? 20 : 20
             },
             default_Name: {
-                paddingTop: (Platform.OS === 'ios') ? 12 : 10,
+                paddingTop: (Platform.OS === 'ios') ? 12 : 15,
                 fontSize: (Platform.OS === 'ios') ? 15 : 15,
-                fontWeight: (Platform.OS === 'ios') ? '500' : '500'
+                fontWeight: (Platform.OS === 'ios') ? '500' : '500',
             },
             default_text: {
-                fontSize: (Platform.OS === 'ios') ? 13 : 13,
+                fontSize: (Platform.OS === 'ios') ? 15 : 18,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '700',
+                marginTop: (Platform.OS === 'ios') ? 15 : 25
             },
             add_text: {
                 paddingTop: (Platform.OS === 'ios') ? 8 : 5,
@@ -266,7 +270,7 @@ export const useStyles = CreateResponsiveStyle(
                 fontWeight: (Platform.OS === 'ios') ? '600' : '600'
             },
             firstname_text: {
-                fontSize: (Platform.OS === 'ios') ? 13 : 13,
+                fontSize: (Platform.OS === 'ios') ? 14 : 14,
             },
         },
 
@@ -279,7 +283,7 @@ export const useStyles = CreateResponsiveStyle(
             },
             add_Btn: {
                 marginRight: (Platform.OS === 'ios') ? 20 : 10,
-                marginTop: (Platform.OS === 'ios') ? '35%' : '55%',
+                marginTop: (Platform.OS === 'ios') ? '35%' : '0%',
             },
 
             fab: {
@@ -302,16 +306,18 @@ export const useStyles = CreateResponsiveStyle(
                 height: 100
             },
             default_Name: {
-                paddingTop: (Platform.OS === 'ios') ? 10 : 8,
+                paddingTop: (Platform.OS === 'ios') ? 10 : 15,
                 fontSize: (Platform.OS === 'ios') ? 15 : 15,
                 fontWeight: (Platform.OS === 'ios') ? '500' : '500'
             },
             default_text: {
-                fontSize: (Platform.OS === 'ios') ? 12 : 12,
+                fontSize: (Platform.OS === 'ios') ? 12 : 18,
+                fontWeight: (Platform.OS === 'ios') ? '500' : '700',
+                marginTop: (Platform.OS === 'ios') ? 15 : 25
             },
             add_text: {
                 paddingTop: (Platform.OS === 'ios') ? 8 : 5,
-                fontSize: (Platform.OS === 'ios') ? 12 : 12,
+                fontSize: (Platform.OS === 'ios') ? 13 : 14,
                 fontWeight: (Platform.OS === 'ios') ? '500' : '500'
             },
             delete_root: {
@@ -353,7 +359,7 @@ export const useStyles = CreateResponsiveStyle(
                 fontWeight: (Platform.OS === 'ios') ? '500' : '500'
             },
             firstname_text: {
-                fontSize: (Platform.OS === 'ios') ? 12 : 12,
+                fontSize: (Platform.OS === 'ios') ? 14 : 14,
             },
 
         },

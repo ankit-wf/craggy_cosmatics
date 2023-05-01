@@ -47,6 +47,8 @@ export const useStyles = CreateResponsiveStyle(
             borderRightWidth: 0,
             borderBottomWidth: 0,
             padding: 0,
+            fontSize: (Platform.OS === 'ios') ? 12 : 12,
+            fontFamily: 'Raleway'
         },
         last_input: {
             width: '45%'
@@ -63,7 +65,7 @@ export const useStyles = CreateResponsiveStyle(
         [maxSize(DEVICE_SIZES.MD)]: {
             root_container: {
                 marginTop: 10,
-                height: '78%',
+                height: (Platform.OS === 'ios') ? '77%' : '78%',
             },
 
             btn_root: {
@@ -75,6 +77,9 @@ export const useStyles = CreateResponsiveStyle(
                 alignSelf: 'center',
                 justifyContent: 'center'
             },
+            firstname_text: {
+                fontSize: (Platform.OS === 'ios') ? 14 : 14,
+            },
 
 
         },
@@ -82,7 +87,7 @@ export const useStyles = CreateResponsiveStyle(
 
         [maxSize(DEVICE_SIZES.XS)]: {
             root_container: {
-                height: '85%',
+                height: (Platform.OS === 'ios') ? '84%' : '85%',
                 marginTop: "8%",
             },
 
@@ -91,9 +96,13 @@ export const useStyles = CreateResponsiveStyle(
                 width: 200,
                 backgroundColor: 'black',
                 marginTop: 15,
+                bottom: (Platform.OS === 'ios') ? 0 : 0,
                 borderRadius: 10,
                 alignSelf: 'center',
                 justifyContent: 'center'
+            },
+            firstname_text: {
+                fontSize: (Platform.OS === 'ios') ? 14 : 14,
             },
 
 

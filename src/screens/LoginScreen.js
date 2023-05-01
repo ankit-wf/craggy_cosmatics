@@ -46,8 +46,10 @@ const LoginScreen = ({ navigation }) => {
                 'consumer_key': CONSUMER_KEY
             }
         }).then((response) => {
+            // console.log("response", response.data.user_data.shipping_address)
             if (response.data.login == true) {
                 dispatch(loginActions.userlogin({ user_data: response.data.user_data }));
+                dispatch(loginActions.useraddress({ userAddress: response.data.user_data.shipping_address }))
                 dispatch(loginActions.loginform({ isLoggedIn: true }));
                 navigation.reset({
                     index: 0,

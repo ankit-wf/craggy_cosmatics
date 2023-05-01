@@ -1,88 +1,182 @@
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Select, SafeAreaView } from 'react-native'
+import React, { useState } from 'react'
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form'
-import BackButton from '../components/BackButton'
-import Input from '../components/InputHook'
 import TextInput from '../components/AccountInputHook'
+import { ScrollView } from 'react-native-gesture-handler'
+import { loginActions } from '../store/UserSlice'
+import { useStyles } from '../styles/addadressResponsive';
+import CustomDropDown from '../components/CustomDropDown';
+import Dropdown from '../../Data/allState.json'
+import { USER_LOGIN_API, CONSUMER_KEY } from "@env";
 
 const ShippingAddressDetails = ({ navigation }) => {
 
+    const add_Style = useStyles()
+    const userAdd = useSelector(state => state.userData.userShipping);
+    const dispatch = useDispatch();
+    // console.log("userAdd", userAdd)
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
-        // defaultValues: {
-        //     FirstName: '',
-        //     LastName: '',
-        //     CompanyName: '',
-        //     StreetName: '',
-        //     Apartment: '',
-        //     TownCity: '',
-        //     Pincode: '',
-        //     PhoneNumber: '',
-        //     email: '',
-        // }
-    })
 
+    })
+    // let AddData = []
     const onSubmit = data => {
-        console.log("datatata", data);
-        reset();
+        axios({
+            method: 'post',
+            url: USER_LOGIN_API,
+            data: {
+                first_name: data.first_name,
+                last_name: data.last_name,
+                address_1: data.address_1,
+                address_2: data.address_2,
+                city: data.city,
+                state: data.state,
+                // "country": "IN",
+                postcode: data.pincode,
+                phone: data.phone
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'consumer_key': CONSUMER_KEY
+            }
+        }).then((res) => {
+            // console.log("gghghghgh", res.config.data)
+            if (res.status === 200) {
+                const e = res.config.data
+                const d = JSON.parse(e)
+                // console.log("ddddddd", d.ID)
+                let AddData = [...userAdd, {
+                    first_name: d.first_name,
+                    last_name: d.last_name,
+                    address_1: d.address_1,
+                    address_2: d.address_2,
+                    state: d.state,
+                    city: d.city,
+                    postcode: d.postcode,
+                    phone: d.phone
+                }];
+                // console.log("AddData", AddData)
+                dispatch(loginActions.usershipping(
+                    {
+                        userShipping: AddData
+                    }
+                ));
+                reset();
+                navigation.navigate('address', d.ID)
+            }
+        })
     }
 
     return (
         <View>
+            <View style={add_Style.root_container}>
+                <ScrollView>
+                    <View style={add_Style.first_last_root}>
+                        <View style={add_Style.first_input}>
+                            <Controller
+                                control={control}
+                                rules={{
+                                    required: true,
+                                    pattern: { value: /^[a-zA-Z ]{2,40}$/ }
+                                }}
+                                render={({ field: { onChange, value } }) => (
+                                    <TextInput
+                                        onChangeText={onChange}
+                                        value={value}
+                                        label="First Name"
+                                        returnKeyType="next"
+                                        autoCapitalize="none"
+                                        autoCompleteType="firstname"
+                                        textContentType="firstname"
+                                        keyboardType="text"
+                                        style={add_Style.firstname_text}
+                                    />
+                                )}
+                                name="first_name"
+                            />
+                            {errors.first_name && errors.first_name.type === 'required' && <Text> this is required !</Text>}
+                            {errors.first_name && errors.first_name.type === 'pattern' && <Text> please enter correct !</Text>}
+                        </View>
+                        <View style={add_Style.last_input}>
+                            <Controller
+                                control={control}
+                                rules={{
+                                    required: true,
+                                    pattern: { value: /^[a-zA-Z ]{2,40}$/ }
+                                }}
+                                render={({ field: { onChange, value } }) => (
+                                    <TextInput
+                                        onChangeText={onChange}
+                                        value={value}
+                                        label="Last Name"
+                                        returnKeyType="next"
+                                        autoCapitalize="none"
+                                        autoCompleteType="Lastname"
+                                        textContentType="Lastname"
+                                        keyboardType="text"
+                                        style={add_Style.firstname_text}
+                                    />
+                                )}
+                                name="last_name"
+                            />
+                            {errors.last_name && errors.last_name.type === 'required' && <Text> this is required !</Text>}
+                            {errors.last_name && errors.last_name.type === 'pattern' && <Text> please enter correct !</Text>}
+                        </View>
+                    </View>
 
-            <ScrollView>
-                <View style={{ marginTop: 20, width: '90%', alignSelf: 'center' }}>
-
-                    <View style={{ height: 940 }}>
-
-                        {/* First Name */}
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
                                 required: true,
-                                pattern: { value: /^[a-zA-Z ]{2,40}$/ }
-                            }}
+                                pattern: { value: /^[0-9]{10,10}$/ }
+                            }} Pincode
                             render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     onChangeText={onChange}
                                     value={value}
-                                    label="First Name"
+                                    label="Phone Number"
                                     returnKeyType="next"
                                     autoCapitalize="none"
-                                    autoCompleteType="FirstName"
-                                    textContentType="FirstName"
-                                    keyboardType="FirstName"
+                                    autoCompleteType="phone"
+                                    textContentType="phone"
+                                    keyboardType="numeric"
+                                    style={add_Style.firstname_text}
                                 />
                             )}
-                            name="FirstName"
+                            name="phone"
                         />
-                        {errors.FirstName && errors.FirstName.type === 'required' && <Text> this is required !</Text>}
-                        {errors.FirstName && errors.FirstName.type === 'pattern' && <Text> Please enter a valid FirstName</Text>}
+                        {errors.phone && errors.phone.type === 'required' && <Text> this is required !</Text>}
+                        {errors.phone && errors.phone.type === 'pattern' && <Text> please enter correct !</Text>}
+                    </View>
 
-                        {/* Last Name */}
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
                                 required: true,
-                                pattern: { value: /^[a-zA-Z ]{2,40}$/ }
+                                pattern: { value: /^[a-zA-Z,0-9 ]{2,10}$/ }
                             }}
                             render={({ field: { onChange, value } }) => (
                                 <TextInput
                                     onChangeText={onChange}
                                     value={value}
-                                    label="Last Name"
+                                    label="Flate/House Number"
                                     returnKeyType="next"
                                     autoCapitalize="none"
-                                    autoCompleteType="LastName"
-                                    textContentType="LastName"
-                                    keyboardType="LastName"
+                                    autoCompleteType="flate"
+                                    textContentType="flate"
+                                    style={add_Style.firstname_text}
                                 />
                             )}
-                            name="LastName"
+                            name="address_1"
                         />
-                        {errors.LastName && errors.LastName.type === 'required' && <Text> this is required !</Text>}
-                        {errors.LastName && errors.LastName.type === 'pattern' && <Text> Please enter a valid LastName</Text>}
+                        {errors.address_1 && errors.address_1.type === 'required' && <Text> this is required !</Text>}
+                        {errors.address_1 && errors.address_1.type === 'pattern' && <Text> please enter correct !</Text>}
+                    </View>
 
-                        {/* Company Name */}
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
@@ -93,68 +187,65 @@ const ShippingAddressDetails = ({ navigation }) => {
                                 <TextInput
                                     onChangeText={onChange}
                                     value={value}
-                                    label="Company Name (Optional)"
-                                    returnKeyType="next"
-                                    autoCapitalize="none"
-                                    autoCompleteType="CompanyName"
-                                    textContentType="CompanyName"
-                                    keyboardType="CompanyName"
-                                />
-                            )}
-                            name="CompanyName"
-                        />
-                        {errors.CompanyName && errors.CompanyName.type === 'required' && <Text> this is required !</Text>}
-                        {errors.CompanyName && errors.CompanyName.type === 'pattern' && <Text> Please enter a valid CompanyName</Text>}
-
-                        {/* Street Address  */}
-                        <Controller
-                            control={control}
-                            rules={{
-                                required: true,
-                                pattern: { value: /^[a-zA-Z ]{2,40}$/ }
-                            }}
-                            render={({ field: { onChange, value } }) => (
-                                <TextInput
-                                    onChangeText={onChange}
-                                    value={value}
-                                    label="House number and street name"
-                                    returnKeyType="next"
-                                    autoCapitalize="none"
-                                    autoCompleteType="StreetName"
-                                    textContentType="StreetName"
-                                    keyboardType="StreetName"
-                                />
-                            )}
-                            name="StreetName"
-                        />
-                        {errors.StreetName && errors.StreetName.type === 'required' && <Text> this is required !</Text>}
-                        {errors.StreetName && errors.StreetName.type === 'pattern' && <Text> Please enter a valid StreetName</Text>}
-
-                        {/* Apartment  */}
-                        <Controller
-                            control={control}
-                            rules={{
-                                required: true,
-                                pattern: { value: /^[a-zA-Z ]{2,40}$/ }
-                            }}
-                            render={({ field: { onChange, value } }) => (
-                                <TextInput
-                                    onChangeText={onChange}
-                                    value={value}
-                                    label="Apartment, suite, unit, etc.(optional)"
+                                    label="Apartment/Area/Locality/Road"
                                     returnKeyType="next"
                                     autoCapitalize="none"
                                     autoCompleteType="Apartment"
                                     textContentType="Apartment"
-                                    keyboardType="Apartment"
+                                    style={add_Style.firstname_text}
                                 />
                             )}
-                            name="Apartment"
+                            name="address_2"
                         />
-                        {errors.Apartment && errors.Apartment.type === 'required' && <Text> this is required !</Text>}
-                        {errors.Apartment && errors.Apartment.type === 'pattern' && <Text> Please enter a valid Apartment</Text>}
+                        {errors.Aaddress_2 && errors.Aaddress_2.type === 'required' && <Text> this is required !</Text>}
+                        {errors.Aaddress_2 && errors.Aaddress_2.type === 'pattern' && <Text> please enter correct !</Text>}
+                    </View>
 
-                        {/* Town / City   */}
+                    <View style={add_Style.other_input}>
+                        <Controller
+                            control={control}
+                            rules={{
+                                required: true,
+                                pattern: { value: /^[0-9 ]{6,6}$/ }
+                            }}
+                            render={({ field: { onChange, value } }) => (
+                                <TextInput
+                                    onChangeText={onChange}
+                                    value={value}
+                                    label="Pincode"
+                                    returnKeyType="next"
+                                    autoCapitalize="none"
+                                    autoCompleteType="Pincode"
+                                    keyboardType="numeric"
+                                    style={add_Style.firstname_text}
+                                />
+                            )}
+                            name="postcode"
+                        />
+                        {errors.postcode && errors.postcode.type === 'required' && <Text> this is required !</Text>}
+                        {errors.postcode && errors.postcode.type === 'pattern' && <Text> please enter correct !</Text>}
+                    </View>
+
+                    <View style={add_Style.other_input}>
+                        <Controller
+                            name="state"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { onChange, value } }) => (
+                                < CustomDropDown
+                                    setSelected={onChange}
+                                    data={Dropdown}
+                                    save="value"
+
+                                />
+                            )}
+                        />
+
+                        {/* {errors.state && errors.state.type === 'required' && <Text> this is required !</Text>}
+                    {errors.state && errors.state.type === 'pattern' && <Text> please enter correct !</Text>} */}
+                    </View>
+
+                    <View style={add_Style.other_input}>
                         <Controller
                             control={control}
                             rules={{
@@ -165,58 +256,26 @@ const ShippingAddressDetails = ({ navigation }) => {
                                 <TextInput
                                     onChangeText={onChange}
                                     value={value}
-                                    label="Town / City "
+                                    label="City"
                                     returnKeyType="next"
                                     autoCapitalize="none"
-                                    autoCompleteType="TownCity"
-                                    textContentType="TownCity"
-                                    keyboardType="TownCity"
+                                    autoCompleteType="City"
+                                    textContentType="City"
+                                    style={add_Style.firstname_text}
                                 />
                             )}
-                            name="TownCity"
+                            name="city"
                         />
-                        {errors.TownCity && errors.TownCity.type === 'required' && <Text> this is required !</Text>}
-                        {errors.TownCity && errors.TownCity.type === 'pattern' && <Text> Please enter a valid TownCity</Text>}
-
-                        {/* Postcode / ZIP */}
-                        <Controller
-                            control={control}
-                            rules={{
-                                required: true,
-                                pattern: { value: /^[0-9]{6,6}$/ }
-                            }}
-                            render={({ field: { onChange, value } }) => (
-                                <TextInput
-                                    onChangeText={onChange}
-                                    value={value}
-                                    label="Postcode / ZIP"
-                                    returnKeyType="next"
-                                    autoCapitalize="none"
-                                    autoCompleteType="Pincode"
-                                    textContentType="Pincode"
-                                    keyboardType="numeric"
-                                />
-                            )}
-                            name="Pincode"
-                        />
-                        {errors.Pincode && errors.Pincode.type === 'required' && <Text> this is required !</Text>}
-                        {errors.Pincode && errors.Pincode.type === 'pattern' && <Text> Please enter a valid Pincode</Text>}
-
-
-                        <View style={styles.handleBtnRoot}>
-                            <Button
-                                style={{ width: "100%", }}
-                                title="Save Address"
-                                color='#fb641b'
-                                onPress={handleSubmit(onSubmit)}
-                            />
-                        </View>
+                        {errors.city && errors.city.type === 'required' && <Text> this is required !</Text>}
+                        {errors.city && errors.city.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
+                </ScrollView>
+            </View>
 
-                </View>
-            </ScrollView>
-
-        </View >
+            <TouchableOpacity style={add_Style.btn_root} onPress={handleSubmit(onSubmit)}>
+                <Text style={add_Style.btn_text}>Save And Continue</Text>
+            </TouchableOpacity>
+        </View>
 
     );
 }

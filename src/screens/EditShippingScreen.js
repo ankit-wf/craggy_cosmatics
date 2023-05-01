@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import React, { useEffect } from 'react'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,46 +12,36 @@ import CustomDropDown from '../components/CustomDropDown';
 import DropDown from '../../Data/allState.json'
 import { USER_LOGIN_API, CONSUMER_KEY } from "@env";
 
-const EditAddress = ({ navigation }) => {
+const EditShippingScreen = ({ navigation }) => {
     const Edit_Style = useStyles();
     const route = useRoute();
     const index = route.params;
-    // console.log("iiiinnnnddddxxx", index)
-    // const userAdd = useSelector(state => state.userData.userAddress);
-    const bllingData = useSelector(state => state.userData.user_data)
+    console.log("index", index)
+    // const shippingData = useSelector(state => state.userData.userShipping);
+    const shippingData = useSelector(state => state.userData.user_data)
+    // console.log("datata", shippingData)
     const dispatch = useDispatch();
-    // console.log("recieved", userAdd)
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
 
     })
-    // let d = {}
     useEffect(() => {
         {
-            // userAdd.map((v, i) => {
-            // console.log("vvvgggg", v.State)
-            // d = DropDown.find((el) =>
-            //     el.value == v.State
-            //     // el.City === "mohali"
-            //     // el.id == ab.id
-            //     // console.log("jjhhgg", el.value == v.State)
-            // )
-            // console.log("jjhhgg", d.label)
+            // shippingData.map((v, i) => {
             reset({
-                first_name: bllingData.billing_address.first_name,
-                last_name: bllingData.billing_address.last_name,
-                address_1: bllingData.billing_address.address_1,
-                address_2: bllingData.billing_address.address_2,
-                state: bllingData.billing_address.state,
-                city: bllingData.billing_address.city,
-                postcode: bllingData.billing_address.postcode,
-                phone: bllingData.billing_address.phone
+                first_name: shippingData.shipping_address.first_name,
+                last_name: shippingData.shipping_address.last_name,
+                address_1: shippingData.shipping_address.address_1,
+                address_2: shippingData.shipping_address.address_2,
+                state: shippingData.shipping_address.state,
+                city: shippingData.shipping_address.city,
+                postcode: shippingData.shipping_address.postcode,
+                phone: shippingData.shipping_address.phone
             })
             // })
         }
     }, [])
-    // console.log("dddddddd", d)
     const onSubmit = data => {
-        // console.log("datatata", data.State);
+        // console.log("datatatadddd", data.State);
         let AddData = [{
             index: index,
             first_name: data.first_name,
@@ -63,10 +53,9 @@ const EditAddress = ({ navigation }) => {
             postcode: data.postcode,
             phone: data.phone
         }];
-        // console.log("dddddd", AddData)
-        dispatch(loginActions.useraddress(
+        dispatch(loginActions.usershipping(
             {
-                userAddress: AddData
+                userShipping: AddData
             }
         ));
         navigation.goBack();
@@ -91,8 +80,7 @@ const EditAddress = ({ navigation }) => {
         //     headers: {
         //         'Content-Type': 'application/json',
         //         'consumer_key': CONSUMER_KEY
-        //     }
-
+        //     }         
 
         // }).then((res) => {
         //     console.log("send",res.data);
@@ -277,7 +265,6 @@ const EditAddress = ({ navigation }) => {
                                     // pattern: { value: /^[a-zA-Z ]{2,40}$/ }
                                 }}
                                 render={({ field: { onChange, value } }) => (
-                                    // <View style={{ width: '100%', borderWidth: 1 }}>
                                     < CustomDropDown
                                         defaultOption={{ key: value, value: value }}
                                         setSelected={onChange}
@@ -285,7 +272,6 @@ const EditAddress = ({ navigation }) => {
                                         save="value"
                                         fontFamily='Lato'
                                     />
-                                    // </View>
                                 )}
                                 name="state"
                             />
@@ -318,8 +304,6 @@ const EditAddress = ({ navigation }) => {
                             {errors.city && errors.city.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                         </View>
                     </View>
-                    {/* ) */}
-                    {/* })} */}
                 </ScrollView>
             </View>
 
@@ -329,38 +313,4 @@ const EditAddress = ({ navigation }) => {
         </View>
     )
 }
-export default EditAddress
-
-// const styles = StyleSheet.create({
-    // root_container: {
-    //     height: '88%',
-    //     width: '90%',
-    //     borderWidth: 0.5,
-    //     borderRadius: 15,
-    //     marginTop: 15,
-    //     alignSelf: 'center',
-    //     backgroundColor: '#fff'
-    // },
-    // btn_root: {
-    //     height: 45,
-    //     width: 200,
-    //     backgroundColor: 'black',
-    //     marginTop: 10,
-    //     borderRadius: 10,
-    //     alignSelf: 'center',
-    //     justifyContent: 'center'
-    // },
-    // btn_text: {
-    //     color: '#fff',
-    //     alignSelf: 'center',
-    //     fontSize: 16
-    // },
-    // firstname_text: {
-    //     // height: 40,
-    //     borderTopWidth: 0,
-    //     borderLeftWidth: 0,
-    //     borderRightWidth: 0,
-    //     borderBottomWidth: 0,
-    //     padding: 0,
-    // }
-// })
+export default EditShippingScreen

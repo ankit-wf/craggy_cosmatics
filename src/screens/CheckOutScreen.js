@@ -8,7 +8,8 @@ import { submitActions } from '../store/dataSlice'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
 
 const CheckOutScreen = ({ navigation, route }) => {
-    const AddressData = useSelector(state => state.userData.userAddress);
+    // const AddressData = useSelector(state => state.userData.userAddress);
+    const AddressData = useSelector(state => state.userData.user_data)
     const CartData = useSelector(state => state.cartData.cart);
     // console.log("ffff", AddressData)
     const Co_Style = useStyles();
@@ -104,29 +105,29 @@ const CheckOutScreen = ({ navigation, route }) => {
                         </Text>
                     </View> */}
                     <View style={Co_Style.address_root} >
-                        {AddressData.length > 0 ?
-                            <View>
-                                <SkeletonContainer isLoading={loading}>
-                                    <Text style={Co_Style.delivery_address_text}>Delivery Address :</Text>
-                                </SkeletonContainer>
-                                <SkeletonContainer isLoading={loading}>
-                                    <View style={Co_Style.user_adrdress_root}>
-                                        <View style={Co_Style.user_name_default_root}>
-                                            <View style={{ flexDirection: 'row' }}>
-                                                <Text style={Co_Style.user_name}>{AddressData[0].firstname} {AddressData[0].Lastname}</Text>
-                                            </View>
-                                            <TouchableOpacity style={Co_Style.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
-                                                <Text style={Co_Style.edit_text}>Edit</Text>
-                                            </TouchableOpacity>
+                        {/* {AddressData.length > 0 ? */}
+                        <View>
+                            <SkeletonContainer isLoading={loading}>
+                                <Text style={Co_Style.delivery_address_text}>Delivery Address :</Text>
+                            </SkeletonContainer>
+                            <SkeletonContainer isLoading={loading}>
+                                <View style={Co_Style.user_adrdress_root}>
+                                    <View style={Co_Style.user_name_default_root}>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text style={Co_Style.user_name}>{AddressData.billing_address.first_name} {AddressData.billing_address.last_name}</Text>
                                         </View>
-                                        <View style={Co_Style.user_address_text_root}>
-                                            <Text style={Co_Style.user_address_text}>{AddressData[0].flate}, {AddressData[0].Apartment}, {AddressData[0].City}, {AddressData[0].State} {AddressData[0].Pincode}</Text>
-                                            <Text style={Co_Style.user_phone}> {AddressData[0].phone} </Text>
-                                        </View>
+                                        <TouchableOpacity style={Co_Style.home_btn_root} onPress={() => navigation.navigate('editAddress')}>
+                                            <Text style={Co_Style.edit_text}>Edit</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                </SkeletonContainer>
-                            </View>
-                            : ""}
+                                    <View style={Co_Style.user_address_text_root}>
+                                        <Text style={Co_Style.user_address_text}>{AddressData.billing_address.address_1}, {AddressData.billing_address.address_2}, {AddressData.billing_address.city}, {AddressData.billing_address.state} {AddressData.billing_address.postcode}</Text>
+                                        <Text style={Co_Style.user_phone}> Phone : {AddressData.billing_address.phone} </Text>
+                                    </View>
+                                </View>
+                            </SkeletonContainer>
+                        </View>
+                        {/* : ""} */}
                     </View>
 
                     <SkeletonContainer isLoading={loading}>

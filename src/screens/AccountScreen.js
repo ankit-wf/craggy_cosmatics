@@ -14,7 +14,7 @@ const AccountScreen = ({ navigation }) => {
   // const storeData = useSelector(state => state.cartData.cart);
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
   const userData = useSelector(state => state.userData.user_data);
-
+  // console.log("kkkk", userData)
   useFocusEffect(
     React.useCallback(() => {
       if (isLoggedIn === false) {

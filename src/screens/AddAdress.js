@@ -1,41 +1,90 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Select, SafeAreaView } from 'react-native'
+import React, { useState } from 'react'
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form'
 import TextInput from '../components/AccountInputHook'
 import { ScrollView } from 'react-native-gesture-handler'
 import { loginActions } from '../store/UserSlice'
 import { useStyles } from '../styles/addadressResponsive';
-
+import CustomDropDown from '../components/CustomDropDown';
+import Dropdown from '../../Data/allState.json'
+import { USER_LOGIN_API, CONSUMER_KEY } from "@env";
 
 const AddAddress = ({ navigation }) => {
     const add_Style = useStyles()
     const userAdd = useSelector(state => state.userData.userAddress);
     const dispatch = useDispatch();
-    // console.log("recieved", userAdd)
+    // console.log("userAdd", userAdd)
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
 
     })
+    // let AddData = []
     const onSubmit = data => {
-        // console.log("datatata", data);
-        let AddData = [...userAdd, {
-            firstname: data.firstname,
-            Lastname: data.Lastname,
-            flate: data.flate,
-            Apartment: data.Apartment,
-            State: data.State,
-            City: data.City,
-            Pincode: data.Pincode,
-            phone: data.phone
-        }];
-
-        dispatch(loginActions.useraddress(
-            {
-                userAddress: AddData
+        axios({
+            method: 'post',
+            url: USER_LOGIN_API,
+            data: {
+                // username: data.userName,
+                // password: data.password
+                first_name: data.first_name,
+                last_name: data.last_name,
+                address_1: data.address_1,
+                address_2: data.address_2,
+                city: data.city,
+                state: data.state,
+                // "country": "IN",
+                postcode: data.postcode,
+                phone: data.phone
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'consumer_key': CONSUMER_KEY
             }
-        ));
-        reset();
-        navigation.navigate('address')
+        }).then((res) => {
+            // console.log("gghghghgh", res.config.data)
+            if (res.status === 200) {
+                const e = res.config.data
+                const d = JSON.parse(e)
+                let AddData = [...userAdd, {
+                    first_name: d.first_name,
+                    last_name: d.last_name,
+                    address_1: d.address_1,
+                    address_2: d.address_2,
+                    state: d.state,
+                    city: d.city,
+                    postcode: d.postcode,
+                    phone: d.phone
+                }];
+                // console.log("AddData", AddData)
+                dispatch(loginActions.useraddress(
+                    {
+                        userAddress: AddData
+                    }
+                ));
+                reset();
+                navigation.navigate('address')
+            }
+        })
+        // console.log("ggggggg", data.State);
+        // let AddData = [...userAdd, {
+        //     firstname: res.config.data.firstname,
+        //     Lastname: res.config.data.last_name,
+        //     flate: res.config.data.address_1,
+        //     Apartment: res.config.data.address_2,
+        //     State: res.config.data.state,
+        //     City: res.config.data.city,
+        //     Pincode: res.config.data.postcode,
+        //     phone: res.config.data.phone
+        // }];
+
+        // dispatch(loginActions.useraddress(
+        //     {
+        //         userAddress: AddData
+        //     }
+        // ));
+        // reset();
+        // navigation.navigate('address')
     }
     return (
         <View>
@@ -62,10 +111,10 @@ const AddAddress = ({ navigation }) => {
                                         style={add_Style.firstname_text}
                                     />
                                 )}
-                                name="firstname"
+                                name="first_name"
                             />
-                            {errors.firstname && errors.firstname.type === 'required' && <Text> this is required !</Text>}
-                            {errors.firstname && errors.firstname.type === 'pattern' && <Text> please enter correct !</Text>}
+                            {errors.first_name && errors.first_name.type === 'required' && <Text> this is required !</Text>}
+                            {errors.first_name && errors.first_name.type === 'pattern' && <Text> please enter correct !</Text>}
                         </View>
                         <View style={add_Style.last_input}>
                             <Controller
@@ -87,10 +136,10 @@ const AddAddress = ({ navigation }) => {
                                         style={add_Style.firstname_text}
                                     />
                                 )}
-                                name="Lastname"
+                                name="last_name"
                             />
-                            {errors.Lastname && errors.Lastname.type === 'required' && <Text> this is required !</Text>}
-                            {errors.Lastname && errors.Lastname.type === 'pattern' && <Text> please enter correct !</Text>}
+                            {errors.last_name && errors.last_name.type === 'required' && <Text> this is required !</Text>}
+                            {errors.last_name && errors.last_name.type === 'pattern' && <Text> please enter correct !</Text>}
                         </View>
                     </View>
 
@@ -139,10 +188,10 @@ const AddAddress = ({ navigation }) => {
                                     style={add_Style.firstname_text}
                                 />
                             )}
-                            name="flate"
+                            name="address_1"
                         />
-                        {errors.flate && errors.flate.type === 'required' && <Text> this is required !</Text>}
-                        {errors.flate && errors.flate.type === 'pattern' && <Text> please enter correct !</Text>}
+                        {errors.address_1 && errors.address_1.type === 'required' && <Text> this is required !</Text>}
+                        {errors.address_1 && errors.address_1.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
 
                     <View style={add_Style.other_input}>
@@ -164,10 +213,10 @@ const AddAddress = ({ navigation }) => {
                                     style={add_Style.firstname_text}
                                 />
                             )}
-                            name="Apartment"
+                            name="address_2"
                         />
-                        {errors.Apartment && errors.Apartment.type === 'required' && <Text> this is required !</Text>}
-                        {errors.Apartment && errors.Apartment.type === 'pattern' && <Text> please enter correct !</Text>}
+                        {errors.address_2 && errors.address_2.type === 'required' && <Text> this is required !</Text>}
+                        {errors.address_2 && errors.address_2.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
 
                     <View style={add_Style.other_input}>
@@ -189,35 +238,29 @@ const AddAddress = ({ navigation }) => {
                                     style={add_Style.firstname_text}
                                 />
                             )}
-                            name="Pincode"
+                            name="postcode"
                         />
-                        {errors.Pincode && errors.Pincode.type === 'required' && <Text> this is required !</Text>}
-                        {errors.Pincode && errors.Pincode.type === 'pattern' && <Text> please enter correct !</Text>}
+                        {errors.postcode && errors.postcode.type === 'required' && <Text> this is required !</Text>}
+                        {errors.postcode && errors.postcode.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
 
                     <View style={add_Style.other_input}>
                         <Controller
+                            name="state"
                             control={control}
-                            rules={{
-                                required: true,
-                                pattern: { value: /^[a-zA-Z ]{2,40}$/ }
-                            }}
+                            rules={{ required: true }}
                             render={({ field: { onChange, value } }) => (
-                                <TextInput
-                                    onChangeText={onChange}
-                                    value={value}
-                                    label="State"
-                                    returnKeyType="next"
-                                    autoCapitalize="none"
-                                    autoCompleteType="State"
-                                    textContentType="State"
-                                    style={add_Style.firstname_text}
+                                < CustomDropDown
+                                    setSelected={onChange}
+                                    data={Dropdown}
+                                    save="value"
+
                                 />
                             )}
-                            name="State"
                         />
-                        {errors.State && errors.State.type === 'required' && <Text> this is required !</Text>}
-                        {errors.State && errors.State.type === 'pattern' && <Text> please enter correct !</Text>}
+
+                        {/* {errors.state && errors.state.type === 'required' && <Text> this is required !</Text>}
+                        {errors.state && errors.state.type === 'pattern' && <Text> please enter correct !</Text>} */}
                     </View>
 
                     <View style={add_Style.other_input}>
@@ -239,10 +282,10 @@ const AddAddress = ({ navigation }) => {
                                     style={add_Style.firstname_text}
                                 />
                             )}
-                            name="City"
+                            name="city"
                         />
-                        {errors.City && errors.City.type === 'required' && <Text> this is required !</Text>}
-                        {errors.City && errors.City.type === 'pattern' && <Text> please enter correct !</Text>}
+                        {errors.city && errors.city.type === 'required' && <Text> this is required !</Text>}
+                        {errors.city && errors.city.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
                 </ScrollView>
             </View>

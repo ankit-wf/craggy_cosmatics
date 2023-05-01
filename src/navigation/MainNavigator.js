@@ -1,7 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import ProductDetailScreen from '../screens/ProductDetailScreen';
 // import BillingAdressDetails from '../screens/BillingAdressDetails';
-// import ShippingAddressDetails from '../screens/ShippingAddressDetails';
+import ShippingAddressDetails from '../screens/ShippingAddressDetails';
+import EditShippingScreen from '../screens/EditShippingScreen';
 import PasswordScreen from '../screens/PasswordScreen';
 import OtpScreen from '../screens/LoginOtpScreen';
 import SignupOtpScreen from '../screens/SignupOtpScreen';
@@ -75,8 +76,9 @@ const MainNavigator = () => {
     >
       <Stack.Screen name='homeScreen' component={DrawerScreen} options={{ headerShown: false, headerShadowVisible: false }} />
       <Stack.Screen name="productDetail" component={ProductDetailScreen} />
-      {/* <Stack.Screen name="billingaddressDetails" component={BillingAdressDetails} options={{ headerShown: true, headerTitle: 'Billing Address' }} />
-      <Stack.Screen name='shippingaddressDetails' component={ShippingAddressDetails} options={{ headerShown: true, headerTitle: 'Shipping Address' }} /> */}
+      {/* <Stack.Screen name="billingaddressDetails" component={BillingAdressDetails} options={{ headerShown: true, headerTitle: 'Billing Address' }} /> */}
+      <Stack.Screen name='shippingaddressDetails' component={ShippingAddressDetails} options={{ headerShown: true, headerTitle: 'Shipping Address' }} />
+      <Stack.Screen name='editShipping' component={EditShippingScreen} options={{ headerShown: true, headerTitle: 'EditShipping' }} />
       <Stack.Screen name='passwordScreen' component={PasswordScreen} options={{ headerShown: false }} />
       <Stack.Screen name='otpScreen' component={OtpScreen} options={{ headerShown: false }} />
       <Stack.Screen name='signupOtpScreen' component={SignupOtpScreen} options={{ headerShown: false }} />
@@ -109,7 +111,7 @@ const MainNavigator = () => {
       // })}
       />
       <Stack.Screen name='addAddress' component={AddAddress} options={{ headerTitle: 'AddAddress' }} />
-      <Stack.Screen name='editAddress' component={EditAddress} options={{ headerTitle: 'EditAdress' }} />
+      <Stack.Screen name='editAddress' component={EditAddress} options={{ headerTitle: 'EditBilling' }} />
       <Stack.Screen name='cart' component={MyCartScreen} options={{ headerShown: false, }} />
       <Stack.Screen name='orderPlaced' component={OrderPlacedScreen} options={{ headerShown: false }} />
       {/* <Stack.Screen name='payment' component={PaymentScreen} options={{ headerTitle: 'My Payments' }} /> */}

@@ -5,7 +5,6 @@ import axios from 'axios'
 import Heading from '../components/Heading';
 import { Snackbar } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons'
-import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
 import { Rating, } from 'react-native-ratings';
 import { useSelector, useDispatch } from 'react-redux'
 import { submitActions } from '../store/dataSlice'
@@ -394,7 +393,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
                                                                     <View style={Pd_Style.ProductDetail_baseLine}></View>
 
-                                                                    <View style={bsP.priceRoot}>
+                                                                    <View style={home_Style.priceRoot}>
                                                                         <Text style={home_Style.oldprice}>₹{regular_price}</Text>
                                                                         <Text style={home_Style.spaceRoot}></Text>
                                                                         <Text style={home_Style.price}>₹{sale_price}</Text>

@@ -422,19 +422,6 @@ export const useStyles = CreateResponsiveStyle(
             backgroundColor: '#272727',
             marginTop: 10
         },
-        // priceRoot: {
-        //     flexDirection: 'row',
-        //     height: 17,
-        //     alignSelf: 'center',
-        //     marginTop: 7,
-        //     // width: 103,
-        //     // flexDirection: 'row',
-        //     // height: 17,
-        //     width: "99%",
-        //     justifyContent: 'center',
-        //     alignSelf: 'center',
-        //     // marginTop: 7,
-        // },
         priceRoot: {
             flexDirection: 'row',
             display: 'flex',
@@ -443,8 +430,6 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'center',
             alignSelf: 'center',
             marginTop: 7,
-            // borderColor: 'red',
-            // borderWidth: 1,
         },
         price: {
             color: 'white',
@@ -758,8 +743,11 @@ export const useStyles = CreateResponsiveStyle(
                 resizeMode: 'contain',
             },
             Snackbar_style: {
-                width: "40%",
+                width: (Platform.OS === 'ios') ? "50%" : "45%",
                 bottom: 150,
+            },
+            Snackbar_text: {
+                fontSize: (Platform.OS === 'ios') ? 12 : 12,
             },
             descriptionText: {
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS10,
@@ -849,13 +837,16 @@ export const useStyles = CreateResponsiveStyle(
             },
 
             Snackbar_style: {
-                width: "65%",
+                width: (Platform.OS === 'ios') ? "70%" : "65%",
                 height: 55,
                 alignSelf: 'center',
                 position: 'absolute',
                 zIndex: 3,
                 bottom: 250,
                 opacity: 0.7
+            },
+            Snackbar_text: {
+                fontSize: (Platform.OS === 'ios') ? 12 : 12,
             },
             descriptionText: {
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS9,

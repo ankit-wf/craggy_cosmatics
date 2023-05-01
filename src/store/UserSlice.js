@@ -4,6 +4,7 @@ const initialState = {
     isLoggedIn: false,
     user_data: {},
     userAddress: [],
+    userShipping: [],
     otp: ''
 }
 const UserSlice = createSlice({
@@ -22,6 +23,10 @@ const UserSlice = createSlice({
         },
         useraddress(state, action) {
             state.userAddress = action.payload.userAddress;
+            // console.log("gggggg", action.payload.userAddress)
+        },
+        usershipping(state, action) {
+            state.userShipping = action.payload.userShipping;
             // console.log("gggggg", action.payload.userAddress)
         },
         remove(state, action) {
