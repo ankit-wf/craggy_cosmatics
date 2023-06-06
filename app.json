@@ -7,18 +7,23 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo1.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "black"
+      "backgroundColor": "#FFFFFF"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/f309e3e6-bcda-44d9-9b6a-c6e8cc2becb8"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      },
+      "bundleIdentifier": "no"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,22 +33,15 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.ankit_123.craggy"
+      "package": "com.ankit_123.craggy",
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
-        }
-      ]
-    ],
     "extra": {
       "eas": {
-        "projectId": "4b2d2cdc-d440-40af-967a-fced6a9a3c37"
+        "projectId": "f309e3e6-bcda-44d9-9b6a-c6e8cc2becb8"
       }
     }
   }
