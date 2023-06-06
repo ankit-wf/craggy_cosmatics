@@ -3,7 +3,6 @@ const initialState = {
     review: [],
 }
 const ReviewSlice = createSlice({
-
     name: "reviewData",
     initialState: initialState,
     reducers: {

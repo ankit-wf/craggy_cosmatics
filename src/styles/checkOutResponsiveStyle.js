@@ -14,7 +14,6 @@ export const useStyles = CreateResponsiveStyle(
         total_priceRoot: {
             height: 50,
             width: '100%',
-            // borderWidth: 0.3,
             flexDirection: 'row',
             alignSelf: 'center',
             justifyContent: 'space-between',
@@ -25,7 +24,6 @@ export const useStyles = CreateResponsiveStyle(
         total_text: {
             fontSize: 16,
             fontWeight: "700",
-            // fontFamily: 'Raleway',
             paddingLeft: '5%'
         },
         other_option: {
@@ -38,13 +36,11 @@ export const useStyles = CreateResponsiveStyle(
         total_price: {
             fontSize: 16,
             fontWeight: "700",
-            // fontFamily: 'Lato',
             paddingRight: '5%',
         },
         user_nameRoot: {
             height: 60,
             backgroundColor: '#fff',
-            // flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: '1%'
@@ -76,7 +72,6 @@ export const useStyles = CreateResponsiveStyle(
         },
         user_name_default_root: {
             width: '90%',
-            // height: '100%',
             alignSelf: 'center',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -108,7 +103,6 @@ export const useStyles = CreateResponsiveStyle(
         user_address_text: {
             fontSize: 14,
             fontWeight: '400',
-            // fontFamily: 'Lato'
         },
         user_phone: {
             fontSize: 14,
@@ -118,8 +112,6 @@ export const useStyles = CreateResponsiveStyle(
         order_summary_root: {
             height: 60,
             width: '100%',
-            // borderBottomWidth: 1,
-            // borderBottomColor: '#DDDDDD',
             backgroundColor: '#fff',
             marginTop: '1%',
             justifyContent: 'center',
@@ -148,10 +140,6 @@ export const useStyles = CreateResponsiveStyle(
             width: '100%',
             backgroundColor: '#fff',
             marginTop: '0.5%',
-            // borderBottomWidth: 1,
-            // borderBottomColor: '#DDDDDD',
-            // justifyContent: 'space-between',
-            // flexDirection: 'row'
         },
         inner_pay_root: {
             width: '90%',
@@ -162,7 +150,6 @@ export const useStyles = CreateResponsiveStyle(
         pay_text: {
             fontSize: 18,
             fontWeight: '400',
-            // color: 'grey',
             paddingTop: 15
         },
         to_pay: {
@@ -177,8 +164,6 @@ export const useStyles = CreateResponsiveStyle(
         RadioButtonRoot: {
             marginTop: "1%",
             height: 57,
-            // height: 225
-            // bottom:'5%'
         },
         btnTextRoot: {
             flexDirection: 'row',
@@ -194,8 +179,6 @@ export const useStyles = CreateResponsiveStyle(
         },
         select_text: {
             fontSize: 15,
-            // fontWeight: "700",
-            // fontFamily: 'Raleway',
         },
 
         sticky_Btn: {
@@ -210,11 +193,6 @@ export const useStyles = CreateResponsiveStyle(
             height: 60,
             width: '100%',
             justifyContent: 'center',
-            // backgroundColor: '#FF9800',
-            // alignItems: 'center',
-            // position: 'absolute',
-            // bottom: 0,
-            // zIndex: 99,
         },
         inner_bottomView: {
             height: 50,
@@ -222,34 +200,6 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'center',
             alignSelf: 'center'
         },
-        // btn_Coninue: {
-        //     height: 60,
-        //     width: "100%",
-        //     // paddingTop: 5,
-        //     // borderRadius: 20,
-        //     // marginTop: 13,
-        //     // backgroundColor: '#C68625',
-        //     backgroundColor: '#fff',
-        //     // justifyContent: 'center',
-        //     // alignSelf: 'center',
-        //     // alignItems: 'center',
-        //     // marginRight: "5%"
-        //     // marginBottom: '5%',
-        //     position: 'absolute',
-        //     bottom: 0,
-        //     zIndex: 2
-        // },
-        // buttonText: {
-        //     height: 60,
-        //     width: "100%",
-        //     color: 'white',
-        //     // textAlign: 'center',
-        //     // paddingTop: 9,
-        //     // fontWeight: "700",
-        //     // fontFamily: 'Raleway',
-        //     // fontSize: 15,
-        //     // lineHeight: 13
-        // },
         product_detail_root: {
             backgroundColor: '#fff',
             marginTop: '1%'
@@ -258,8 +208,6 @@ export const useStyles = CreateResponsiveStyle(
             flexDirection: 'row',
             width: '90%',
             height: 80,
-            // borderColor: 'red',
-            // borderWidth: 1,
             alignSelf: 'center',
             marginTop: 15,
             marginBottom: 15,
@@ -275,17 +223,12 @@ export const useStyles = CreateResponsiveStyle(
             borderRadius: 15
         },
         centerTextRoot: {
-            // borderColor: 'red', 
-            // borderWidth: 1, 
             height: 80,
             marginLeft: 10
         },
         textRoot: {
             height: 48,
             width: '45%',
-            // borderRadius: 15,
-            // borderColor: 'blue',
-            // borderWidth: 1,
         },
         textDescription: {
             fontSize: 12,
@@ -359,7 +302,6 @@ export const useStyles = CreateResponsiveStyle(
             color: 'white'
         },
         whiteButton: {
-            // backgroundColor: 'none',
             borderColor: 'transparent',
             borderWidth: 2,
             borderRadius: 50,
@@ -392,9 +334,7 @@ export const useStyles = CreateResponsiveStyle(
             height: 1,
             width: '90%',
             backgroundColor: '#D9D9D9',
-            // marginTop: 10,
             alignSelf: 'center'
-            // marginLeft: '-78%',
         },
 
     },
@@ -462,9 +402,6 @@ export const useStyles = CreateResponsiveStyle(
                 height: 40,
                 width: '44%',
                 marginLeft: '5%',
-                // borderRadius: 15,
-                // borderColor: 'grey',
-                // borderWidth: 1,
                 justifyContent: 'center',
                 alignItems: 'center'
             },

@@ -12,14 +12,11 @@ export const productDetailsStyle = StyleSheet.create({
         height: 252,
         width: 145,
         marginRight: 15,
-        // backgroundColor: 'blue'
         position: 'relative'
     },
     imgRoot: {
         height: 145,
         width: 145,
-        // borderColor: 'red',
-        // borderWidth: 1
     },
     productImg: {
         height: '100%',
@@ -29,14 +26,11 @@ export const productDetailsStyle = StyleSheet.create({
         height: 95,
         width: 145,
         backgroundColor: '#0D0D0D',
-        // borderWidth: 1
     },
     textRoot1: {
         height: 36,
         width: 130,
         alignSelf: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1,
         marginTop: 5
     },
     contentText: {
@@ -48,7 +42,6 @@ export const productDetailsStyle = StyleSheet.create({
         alignSelf: 'center'
     },
     viewLatestProduct: {
-        // alignItems: 'center',
         marginHorizontal: 97,
         height: 15,
         borderBottomColor: '#999999',
@@ -116,8 +109,6 @@ export const productDetailsStyle = StyleSheet.create({
     },
     baseLine: {
         height: 1,
-        // width: '100%',
-        // alignSelf: 'center',
         backgroundColor: '#C4C4C4',
         marginTop: 5
     },

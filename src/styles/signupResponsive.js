@@ -5,7 +5,6 @@ import { Platform } from 'react-native';
 export const useStyles = CreateResponsiveStyle(
     {
         wrapper: {},
-
         rootContainter: {
             flex: 1,
             alignItems: 'center',
@@ -105,7 +104,6 @@ export const useStyles = CreateResponsiveStyle(
             backgroundColor: '#C68625',
             borderRadius: 24,
         },
-
     },
 
     {
@@ -118,7 +116,6 @@ export const useStyles = CreateResponsiveStyle(
                 width: '55%',
                 marginTop: "0%"
             },
-
             loginInput: {
                 width: '100%',
                 height: (Platform.OS === 'ios') ? 36 : 38,
@@ -135,7 +132,6 @@ export const useStyles = CreateResponsiveStyle(
                 width: '100%',
                 height: '50%',
                 color: theme.siteColor.colorFFFFFF,
-
             },
             LoginButtong: {
                 marginTop: 20,
@@ -149,14 +145,11 @@ export const useStyles = CreateResponsiveStyle(
                 fontWeight: (Platform.OS === 'ios') ? '500' : '500',
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH14,
-
             },
             loginBottom: {
                 bottom: 50,
             },
-
         },
-
 
         /** Extra Small Device Size */
 

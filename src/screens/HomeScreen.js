@@ -4,31 +4,15 @@ import Swiper from 'react-native-swiper'
 import Heading from '../components/Heading'
 import Header from '../components/Header'
 import axios from 'axios'
-import { List, Snackbar } from 'react-native-paper';
+import { Snackbar } from 'react-native-paper';
 import FooterImage from '../components/FooterImage'
-import { defaultStyles as ds } from '../styles/defaultStyle'
-import { bestSellingProductStyle as bsP } from '../styles/bestSellingProductStyle'
-import { categoriesStyle as cS } from '../styles/categoriesStyle'
 import { submitActions } from '../store/dataSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../styles/homeResponsive'
 import { SkeletonContainer } from 'react-native-dynamic-skeletons';
-import SocialIcon from '../components/SocialIcon'
 import { HOME_API, CONSUMER_KEY } from "@env";
 
 const HomeScreen = ({ navigation }) => {
-  // const userAdd = useSelector(state => state.userData.userAddress);
-  // const d = userAdd.find((el) =>
-  //   el.City === "mohali"
-  //   // el.id == ab.id
-  //   // console.log("jjhhgg", el)
-  // )
-
-  // if (d) {
-  //   d.State = "PB"
-  //   // setQuant(!quant)
-  // }
-  // console.log("jjjjjj", userAdd)
   let bs = "BestSellers";
   let lp = "latest Product";
   const styles = useStyles();
@@ -42,7 +26,6 @@ const HomeScreen = ({ navigation }) => {
   const [bestSelling, setBestSelling] = useState([]);
   const [category, setCategory] = useState([]);
   const [latestProduct, setLatestProduct] = useState([]);
-  // console.log("hghhghhh", latestProduct)
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
@@ -59,7 +42,6 @@ const HomeScreen = ({ navigation }) => {
         }
       }
     ).then((res) => {
-      // console.log("resss", res.data.best_selling_products)
       setBannerImage(res.data.banner_image)
       setBestSelling(res.data.best_selling_products)
       setCategory(res.data.category)
@@ -70,39 +52,6 @@ const HomeScreen = ({ navigation }) => {
     },);
   }, [])
 
-  // const Category_Api = () => {
-  //   axios.get(
-  //     `https://craggycosmetic.com/api/products/category/`,
-  //     {
-  //       headers: {
-  //         'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-  //       }
-  //     }
-  //   ).then((res) => {
-  //     if (res.data.status = "success") {
-  //       setData(res.data.response)
-  //     }
-  //   })
-  // }
-
-  // const BestSelling_Api = () => {
-  //   axios.get(
-  //     `https://craggycosmetic.com/api/products/best-selling/`,
-  //     {
-  //       headers: {
-  //         'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-  //       }
-  //     }
-  //   ).then((res) => {
-  //     // console.log("resss", res.data)
-  //     if (res.data.status = "success") {
-  //       setBestData(res.data.response)
-  //       // setTimeout(() => {
-  //       //   setLoading(false)
-  //       // }, 2000);
-  //     }
-  //   })
-  // }
   const onDismissSnackBar = () => setVisible(false);
   const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
     if (cartData.length !== 0) {
@@ -113,7 +62,6 @@ const HomeScreen = ({ navigation }) => {
         }
       })
       if (ss == true) {
-        // console.log("already in list")
         setVisible(!visible);
       }
       else {
@@ -149,14 +97,6 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.appContainer}>
-      {/* <Snackbar
-        visible={visible}
-        onDismiss={onDismissSnackBar}
-        duration={2000}
-        style={styles.Snackbar_style}
-      >
-        <Text style={styles.Snackbar_text}>Item is already added to the cart. Please Checkout..</Text>
-      </Snackbar> */}
       <Header search={SearchHandler} />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -186,7 +126,6 @@ const HomeScreen = ({ navigation }) => {
             <View style={styles.categories_inner_img_Root}>
               <ScrollView horizontal>
                 {category.map((data, i) => {
-                  // console.log("dataaa", data)
                   if (data.cat_name != "Uncategorized")
                     return (
                       <TouchableOpacity
@@ -231,7 +170,6 @@ const HomeScreen = ({ navigation }) => {
                 const sp = e.sale_price;
                 const regular_price = Number(rp).toFixed(2);
                 const sale_price = Number(sp).toFixed(2);
-                // console.log(result);
                 return (
                   <TouchableOpacity
                     activeOpacity={0.8}
@@ -310,9 +248,7 @@ const HomeScreen = ({ navigation }) => {
                       <View style={styles.descriptionRoot}>
                         <Text style={styles.descriptionText}>{e.product_title}</Text>
                       </View>
-
                       <View style={styles.baseLine}></View>
-
                       <View style={styles.priceRoot}>
                         <Text style={styles.oldprice}>₹{regular_price}</Text>
                         <Text style={styles.spaceRoot}></Text>
@@ -329,7 +265,6 @@ const HomeScreen = ({ navigation }) => {
                   </TouchableOpacity>
                 </SkeletonContainer>
               )
-
             })}
           </ScrollView>
         </View>
@@ -393,32 +328,3 @@ const HomeScreen = ({ navigation }) => {
   )
 }
 export default HomeScreen;
-// const styles1 = StyleSheet.create({
-//   bannerImgHight: {
-//     height: '100%',
-//     width: '100%'
-//   },
-//   category_root: {
-//     height: 80,
-//     width: 80,
-//     marginLeft: 8,
-//     marginTop: 30,
-//     borderRadius: 50,
-//     borderWidth: 1,
-//     borderColor: '#fff'
-//   },
-//   categoriesHeight: {
-//     height: 100,
-//     width: 80,
-//     marginLeft: 8,
-//     marginTop: 30
-//   },
-//   // bestSellerRoot: {
-//   //   height: 50,
-//   //   width: '100%',
-//   //   flexDirection: 'row',
-//   //   justifyContent: 'space-between',
-//   //   marginTop: 20,
-//   //   marginBottom: 10,
-//   // }
-// })

@@ -5,7 +5,6 @@ export const bestSellingProductStyle = StyleSheet.create({
         height: 252,
         width: '95%',
         alignSelf: 'center',
-        // bottom: 1
     },
 
     touchable: {
@@ -13,15 +12,11 @@ export const bestSellingProductStyle = StyleSheet.create({
         width: 145,
         marginRight: 15,
         position: 'relative',
-        // borderWidth: 1,
-        // borderColor: 'blue'
     },
 
     imgRoot: {
         height: 145,
         width: 145,
-        // borderColor: 'red',
-        // borderWidth: 1
     },
     productImg: {
         height: '100%',
@@ -31,16 +26,12 @@ export const bestSellingProductStyle = StyleSheet.create({
         height: 95,
         width: 145,
         backgroundColor: '#0D0D0D',
-        // borderWidth: 1
     },
     descriptionRoot: {
         height: 36,
         width: 130,
         alignSelf: 'center',
         justifyContent: 'center'
-        // borderColor: 'red',
-        // borderWidth: 5,
-        // marginTop: 5
     },
     descriptionText: {
         fontSize: 10,
@@ -64,8 +55,6 @@ export const bestSellingProductStyle = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         marginTop: 7,
-        // borderColor: 'red',
-        // borderWidth: 1,
     },
     price: {
         color: 'white',

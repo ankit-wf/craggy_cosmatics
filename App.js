@@ -1,22 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import MainNavigator from './src/navigation/MainNavigator';
 import { Provider } from 'react-redux'
 import Index from './src/store/index'
 import { PersistGate } from "redux-persist/integration/react";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { StyleSheet } from "react-native";
-import AnimatedSplash from "react-native-animated-splash-screen";
+import { Image, View } from 'react-native';
 
+import ProgressBar from 'react-native-animated-progress';
 export default function App() {
+
   const { store, persistor } = Index();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   setTimeout(() => {
-    setLoading(true);
-  }, 2000);
+    setLoading(false);
+  }, 4000);
 
   const [fontsLoaded] = useFonts({
     'Raleway': require('./assets/fonts/Ralway/Raleway-Regular.ttf'),
@@ -24,45 +25,33 @@ export default function App() {
     'Baskervville': require('./assets/fonts/Baskervville/Baskervville-Regular.ttf'),
   });
 
-  // useEffect(() => {
-  //   async function prepare() {
-  //     await SplashScreen.preventAutoHideAsync();
-  //   }
-  //   prepare();
-  // }, []);
-
   if (!fontsLoaded) {
     return undefined;
   } else {
     SplashScreen.hideAsync();
   }
 
-  return (
-    <AnimatedSplash
-      translucent={true}
-      isLoaded={loading}
-      logoImage={require("./assets/logo1.png")}
-      backgroundColor={"#262626"}
-      logoHeight={150}
-      logoWidth={150}
-    >
-      <NavigationContainer>
-        <StatusBar />
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <MainNavigator />
-          </PersistGate>
-        </Provider>
-      </NavigationContainer >
-    </AnimatedSplash>
+  return loading ? (
+    <View style={{ height: '100%', backgroundColor: 'black' }}>
+      <View style={{ height: 630, justifyContent: 'center', alignItems: 'center' }} >
+        <Image source={require('./assets/logo1.png')} resizeMode='center' />
+      </View>
+      <ProgressBar
+        indeterminate="true"
+        backgroundColor="#4a0072"
+        height={10}
+        progress={10}
+        animated={false}
+      />
+    </View>
+  ) : (
+    <NavigationContainer>
+      <StatusBar />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MainNavigator />
+        </PersistGate>
+      </Provider>
+    </NavigationContainer >
   )
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-

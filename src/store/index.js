@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import dataSlice from '../store/dataSlice';
 import UserSlice from "../store/UserSlice";
 import ReviewSlice from "../store/ReviewSlice";
+import wishlistSlice from "./wishlistSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
     persistStore,
@@ -22,13 +23,15 @@ const persistConfig = {
 const cardDataReducer = persistReducer(persistConfig, dataSlice);
 const userReduce = persistReducer(persistConfig, UserSlice);
 const reviewReducer = persistReducer(persistConfig, ReviewSlice);
+const wishlistReducer = persistReducer(persistConfig, wishlistSlice);
 
 export default () => {
     let store = configureStore({
         reducer: {
             cartData: cardDataReducer,
             userData: userReduce,
-            reviewData: reviewReducer
+            reviewData: reviewReducer,
+            wishListdata: wishlistReducer
         },
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({

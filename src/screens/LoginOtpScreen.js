@@ -1,26 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Button, ImageBackground, TextInput, Image } from 'react-native';
-import { Controller, useForm } from 'react-hook-form';
-// import TextInput from '../components/InputHook';
-import { useDispatch, useSelector, } from 'react-redux';
-import { loginActions } from '../store/UserSlice';
+import React, { useRef } from 'react';
+import { View, Text, StyleSheet, ImageBackground, TextInput, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
-import Checkbox from 'expo-checkbox';
 import { useStyles } from '../styles/otpSignupResponsive';
-import { Ionicons } from '@expo/vector-icons';
 import BackButton from '../components/BackButton';
-// import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 const OtpScreen = ({ navigation }) => {
     const styles = useStyles()
-    // const [isChecked, setChecked] = useState(false);
-    // const dispatch = useDispatch();
-    // const logindata = useSelector(state => state.userData.user);
-    // const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
-    // console.log("logged-in ", isLoggedIn)
-    // const [login, setLogin] = useState(false)
-    // const [passwordVisible, setPasswordVisible] = useState(true);
     const firstInput = useRef();
     const seconInput = useRef();
     const thirdInput = useRef();
@@ -28,7 +14,6 @@ const OtpScreen = ({ navigation }) => {
     const verifyHandler = () => {
         navigation.navigate('resetPassword')
     }
-
     return (
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
@@ -81,26 +66,21 @@ const OtpScreen = ({ navigation }) => {
         </View>
     )
 }
-
 export default OtpScreen;
-
 const styles = StyleSheet.create({
     borderStyleBase: {
         width: 30,
         height: 45
     },
-
     borderStyleHighLighted: {
         borderColor: "#03DAC6",
     },
-
     underlineStyleBase: {
         width: 30,
         height: 45,
         borderWidth: 0,
         borderBottomWidth: 1,
     },
-
     underlineStyleHighLighted: {
         borderColor: "#03DAC6",
     },

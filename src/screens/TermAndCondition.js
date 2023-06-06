@@ -13,9 +13,7 @@ const TermAndCondition = ({ navigation }) => {
         </View>
     )
 }
-
 export default TermAndCondition
-
 const styles = StyleSheet.create({
     ReviewsTitle: {
         paddingTop: '11%',

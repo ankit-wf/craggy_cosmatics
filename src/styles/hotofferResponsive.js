@@ -1,5 +1,4 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
 
 export const useStyles = CreateResponsiveStyle(
     {

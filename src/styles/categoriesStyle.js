@@ -10,12 +10,7 @@ export const categoriesStyle = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'space-around'
     },
-    // categoriesImgRoot: {
-    //     flexDirection: 'row',
-    //     width: "100%",
-    //     // justifyContent: 'center',
-    //     // alignSelf: 'center'
-    // },
+
     blankSpace: {
         width: "10%",
     },
@@ -25,21 +20,16 @@ export const categoriesStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 5,
-        // marginTop: 20,
-        // borderColor: '#fff',
-        // borderWidth: 1
+
     },
     skinImgRoot: {
         height: 80,
         width: 80,
-        birderWidth: 1,
-        borderColor: 'white',
     },
     imgCenter: {
         alignSelf: 'center',
         height: "100%",
         width: '100%',
-        birderWidth: 1,
         borderRadius: 40
     },
     skinImgText: {
@@ -56,8 +46,7 @@ export const categoriesStyle = StyleSheet.create({
         width: '100%',
         alignSelf: 'center',
         marginBottom: '30%'
-        // borderColor: 'red',
-        // borderWidth: 1
+
     },
     product109: {
         height: 252,
@@ -66,14 +55,12 @@ export const categoriesStyle = StyleSheet.create({
         marginLeft: '5%',
         marginTop: 20,
         marginBottom: 20,
-        // backgroundColor: 'blue',
-        // position: 'relative',
+
     },
     imgRoot: {
         height: 145,
         width: '100%',
-        // borderColor: 'red',
-        // borderWidth: 1
+
     },
     productImg: {
         height: '100%',
@@ -83,14 +70,11 @@ export const categoriesStyle = StyleSheet.create({
         height: 95,
         width: '100%',
         backgroundColor: '#0D0D0D',
-        // borderWidth: 1
     },
     textRoot: {
         height: 36,
         width: 130,
         alignSelf: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1,
         marginTop: 5
     },
     contentText: {
@@ -112,8 +96,6 @@ export const categoriesStyle = StyleSheet.create({
         height: 17,
         width: 103,
         alignSelf: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1, 
         marginTop: 7,
     },
     price: {
@@ -179,8 +161,6 @@ export const categoriesStyle = StyleSheet.create({
         fontWeight: '500',
         fontFamily: 'Raleway',
         borderBottomColor: '#222222',
-        // borderBottomWidth: 1,
-        // marginBottom: 10,
         alignSelf: 'center'
     },
     allProductText: {

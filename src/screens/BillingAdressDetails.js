@@ -7,40 +7,16 @@ import TextInput from '../components/AccountInputHook'
 
 const BillingAdressDetails = ({ navigation }) => {
 
-    const { control, handleSubmit, reset, formState: { errors } } = useForm({
-        // defaultValues: {
-        //     FirstName: '',
-        //     LastName: '',
-        //     CompanyName: '',
-        //     StreetName: '',
-        //     Apartment: '',
-        //     TownCity: '',
-        //     Pincode: '',
-        //     PhoneNumber: '',
-        //     email: '',
-        // }
-    })
-
+    const { control, handleSubmit, reset, formState: { errors } } = useForm({})
     const onSubmit = data => {
         console.log("datatata", data);
         reset();
     }
-
     return (
         <View>
-            {/* <View style={{ flexDirection: 'row', }}>
-
-                <BackButton goBack={navigation.goBack} Color={'#666666'} />
-
-                <Text style={styles.deliveryText}>Billing address</Text>
-            </View> */}
-
             <ScrollView>
                 <View style={{ marginTop: 20, width: '90%', alignSelf: 'center' }}>
-
                     <View style={{ height: 940 }}>
-
-                        {/* First Name */}
                         <Controller
                             control={control}
                             rules={{
@@ -63,8 +39,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.FirstName && errors.FirstName.type === 'required' && <Text> this is required !</Text>}
                         {errors.FirstName && errors.FirstName.type === 'pattern' && <Text> Please enter a valid FirstName</Text>}
-
-                        {/* Last Name */}
                         <Controller
                             control={control}
                             rules={{
@@ -87,8 +61,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.LastName && errors.LastName.type === 'required' && <Text> this is required !</Text>}
                         {errors.LastName && errors.LastName.type === 'pattern' && <Text> Please enter a valid LastName</Text>}
-
-                        {/* Company Name */}
                         <Controller
                             control={control}
                             rules={{
@@ -111,8 +83,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.CompanyName && errors.CompanyName.type === 'required' && <Text> this is required !</Text>}
                         {errors.CompanyName && errors.CompanyName.type === 'pattern' && <Text> Please enter a valid CompanyName</Text>}
-
-                        {/* Street Address  */}
                         <Controller
                             control={control}
                             rules={{
@@ -135,8 +105,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.StreetName && errors.StreetName.type === 'required' && <Text> this is required !</Text>}
                         {errors.StreetName && errors.StreetName.type === 'pattern' && <Text> Please enter a valid StreetName</Text>}
-
-                        {/* Apartment  */}
                         <Controller
                             control={control}
                             rules={{
@@ -159,8 +127,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.Apartment && errors.Apartment.type === 'required' && <Text> this is required !</Text>}
                         {errors.Apartment && errors.Apartment.type === 'pattern' && <Text> Please enter a valid Apartment</Text>}
-
-                        {/* Town / City   */}
                         <Controller
                             control={control}
                             rules={{
@@ -183,8 +149,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.TownCity && errors.TownCity.type === 'required' && <Text> this is required !</Text>}
                         {errors.TownCity && errors.TownCity.type === 'pattern' && <Text> Please enter a valid TownCity</Text>}
-
-                        {/* Postcode / ZIP */}
                         <Controller
                             control={control}
                             rules={{
@@ -207,10 +171,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.Pincode && errors.Pincode.type === 'required' && <Text> this is required !</Text>}
                         {errors.Pincode && errors.Pincode.type === 'pattern' && <Text> Please enter a valid Pincode</Text>}
-
-
-                        {/* Phone Number */}
-
                         <Controller
                             control={control}
                             rules={{
@@ -233,8 +193,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.PhoneNumber && errors.PhoneNumber.type === 'required' && <Text> this is required !</Text>}
                         {errors.PhoneNumber && errors.PhoneNumber.type === 'pattern' && <Text> Please enter a valid PhoneNumber</Text>}
-
-                        {/* Email Address */}
                         <Controller
                             control={control}
                             rules={{
@@ -257,7 +215,6 @@ const BillingAdressDetails = ({ navigation }) => {
                         />
                         {errors.email && errors.email.type === 'required' && <Text> this is required !</Text>}
                         {errors.email && errors.email.type === 'pattern' && <Text> Please enter a valid email</Text>}
-
                         <View style={styles.handleBtnRoot}>
                             <Button
                                 style={{ width: "100%", }}
@@ -267,16 +224,12 @@ const BillingAdressDetails = ({ navigation }) => {
                             />
                         </View>
                     </View>
-
                 </View>
             </ScrollView>
-
         </View >
     )
 }
-
 export default BillingAdressDetails;
-
 const styles = StyleSheet.create({
     deliveryText: {
         fontSize: 20,
@@ -286,8 +239,6 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     handleBtnRoot: {
-        // width: "100%",
-        // marginHorizontal: '5%',
         marginTop: 20
     }
 })

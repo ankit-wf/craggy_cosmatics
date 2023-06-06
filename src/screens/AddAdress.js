@@ -1,5 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, View, Select, SafeAreaView } from 'react-native'
-import React, { useState } from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form'
@@ -15,25 +15,19 @@ const AddAddress = ({ navigation }) => {
     const add_Style = useStyles()
     const userAdd = useSelector(state => state.userData.userAddress);
     const dispatch = useDispatch();
-    // console.log("userAdd", userAdd)
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
-
     })
-    // let AddData = []
     const onSubmit = data => {
         axios({
             method: 'post',
             url: USER_LOGIN_API,
             data: {
-                // username: data.userName,
-                // password: data.password
                 first_name: data.first_name,
                 last_name: data.last_name,
                 address_1: data.address_1,
                 address_2: data.address_2,
                 city: data.city,
                 state: data.state,
-                // "country": "IN",
                 postcode: data.postcode,
                 phone: data.phone
             },
@@ -42,7 +36,6 @@ const AddAddress = ({ navigation }) => {
                 'consumer_key': CONSUMER_KEY
             }
         }).then((res) => {
-            // console.log("gghghghgh", res.config.data)
             if (res.status === 200) {
                 const e = res.config.data
                 const d = JSON.parse(e)
@@ -56,7 +49,6 @@ const AddAddress = ({ navigation }) => {
                     postcode: d.postcode,
                     phone: d.phone
                 }];
-                // console.log("AddData", AddData)
                 dispatch(loginActions.useraddress(
                     {
                         userAddress: AddData
@@ -66,25 +58,6 @@ const AddAddress = ({ navigation }) => {
                 navigation.navigate('address')
             }
         })
-        // console.log("ggggggg", data.State);
-        // let AddData = [...userAdd, {
-        //     firstname: res.config.data.firstname,
-        //     Lastname: res.config.data.last_name,
-        //     flate: res.config.data.address_1,
-        //     Apartment: res.config.data.address_2,
-        //     State: res.config.data.state,
-        //     City: res.config.data.city,
-        //     Pincode: res.config.data.postcode,
-        //     phone: res.config.data.phone
-        // }];
-
-        // dispatch(loginActions.useraddress(
-        //     {
-        //         userAddress: AddData
-        //     }
-        // ));
-        // reset();
-        // navigation.navigate('address')
     }
     return (
         <View>
@@ -254,13 +227,9 @@ const AddAddress = ({ navigation }) => {
                                     setSelected={onChange}
                                     data={Dropdown}
                                     save="value"
-
                                 />
                             )}
                         />
-
-                        {/* {errors.state && errors.state.type === 'required' && <Text> this is required !</Text>}
-                        {errors.state && errors.state.type === 'pattern' && <Text> please enter correct !</Text>} */}
                     </View>
 
                     <View style={add_Style.other_input}>
@@ -296,5 +265,4 @@ const AddAddress = ({ navigation }) => {
         </View>
     )
 }
-
 export default AddAddress;

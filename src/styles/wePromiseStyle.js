@@ -4,8 +4,6 @@ export const wePromiseStyle = StyleSheet.create({
     promiseOuterRoot: {
         height: 350,
         width: 290,
-        // borderColor: 'black',
-        // borderWidth: 1,
         margin: 35,
         alignSelf: 'center'
     },
@@ -25,14 +23,10 @@ export const wePromiseStyle = StyleSheet.create({
         flexDirection: 'row',
         height: 69,
         marginTop: 20,
-        // borderColor: 'red',
-        // borderWidth: 1
     },
     oilIconRoot: {
         height: 69,
         width: 40,
-        // borderColor: 'blue',
-        // borderWidth: 1,
         marginLeft: 4
     },
     veganIconRoot: {
@@ -44,15 +38,11 @@ export const wePromiseStyle = StyleSheet.create({
         height: 40,
         width: 40,
         marginLeft: 4
-        // borderColor: 'blue',
-        // borderWidth: 1,
     },
     essientialOilRoot: {
         height: 22,
         marginTop: 3,
         width: 49,
-        // borderColor: 'blue',
-        // borderWidth: 1,
     },
     essientialOilText: {
         fontWeight: '400',
@@ -60,7 +50,6 @@ export const wePromiseStyle = StyleSheet.create({
         lineHeight: 11,
         fontSize: 9,
         textAlign: 'center',
-
     },
     ViewProduct: {
         height: 29,

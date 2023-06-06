@@ -9,7 +9,6 @@ export default function BackButton(props) {
         </TouchableOpacity>
     )
 }
-
 const styles = StyleSheet.create({
     goBackBtnMain: {
         width: 50,

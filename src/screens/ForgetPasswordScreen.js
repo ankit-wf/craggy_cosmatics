@@ -27,7 +27,6 @@ const ForgetPasswordScreen = ({ navigation }) => {
                 routes: [{ name: 'homeScreen' }],
             });
             setLogin(true);
-
         };
     }, [login])
 

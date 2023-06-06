@@ -13,253 +13,14 @@ export const useStyles = CreateResponsiveStyle(
         },
         headingText: {
             fontFamily: 'Raleway',
-            // fontWeight: '700',
             fontWeight: (Platform.OS === 'ios') ? '900' : '700',
             textTransform: "uppercase",
             color: '#CC933B',
-            // fontSize: 16,
             fontSize: (Platform.OS === 'ios') ? 17 : 16,
-            // lineHeight: 19,
             lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH18 : theme.lineHeightM.lineH18,
             textAlign: 'left'
 
         },
-        // headerN: {
-        //     paddingTop: 10,
-        //     paddingBottom: 20,
-        //     backgroundColor: '#000',
-        // },
-        // containerI: {
-        //     display: 'flex',
-        //     flexDirection: 'row',
-        //     justifyContent: 'space-between',
-        //     alignItems: 'center',
-        // },
-        // headerNotification: {
-        //     display: 'flex',
-        //     flexDirection: 'row',
-        //     alignItems: 'center',
-        // },
-        // headerLogo: {
-        //     width: 115,
-        //     height: 30,
-        //     marginLeft: 1,
-        // },
-        // container: {
-        // },
-        // searchbar_root: {
-        //     width: "100%",
-        //     flexDirection: 'row',
-        //     backgroundColor: '#222222',
-        //     borderRadius: 8,
-        //     alignSelf: 'center'
-        // },
-        // inner_search_root: {
-        //     width: '90%'
-        // },
-        // search_style: {
-        //     height: 48,
-        //     padding: 15
-        // },
-        // headerHamburger: {
-        //     width: 32,
-        //     height: 32,
-        //     marginTop: 0
-        // },
-        // headerLogo: {
-        //     width: 115,
-        //     height: 30,
-        //     marginLeft: 1,
-        // },
-        // headerIcon: {
-        //     display: 'flex',
-        //     flexDirection: 'row',
-        // },
-        // headerIcon1: {
-        //     fontSize: 20,
-        //     color: '#CC933B',
-        //     fontWeight: '700',
-        //     marginLeft: 50,
-        //     paddingTop: 10
-        // },
-
-
-
-        /** Login Page Style **/
-
-        // rootContainter: {
-        //     flex: 1,
-        //     alignItems: 'center',
-        //     justifyContent: 'center',
-        // },
-        // Signip_rootContainter: {
-        //     flex: 1,
-        //     alignItems: 'center',
-        //     justifyContent: 'center',
-        //     marginTop: 50,
-        // },
-        // loginBg: {
-        //     width: '100%',
-        //     flex: 1,
-        //     alignItems: 'center',
-        //     justifyContent: 'center',
-        //     backgroundColor: '#000',
-        // },
-        // Containterlogin: {
-        //     display: 'flex',
-        //     justifyContent: "center",
-        //     alignItems: "center",
-        //     padding: 25,
-        //     paddingBottom: 10,
-        //     backgroundColor: '#fff',
-        //     width: '90%',
-        //     borderRadius: 8,
-        //     position: 'relative',
-        //     zIndex: 999,
-        //     bottom: '15%',
-        // },
-        // logoBackground: {
-        //     height: '50%',
-        //     width: '100%',
-        // },
-        // icon_container: {
-        //     flexDirection: 'row',
-        //     backgroundColor: theme.siteColor.color9e9da4,
-        //     width: '100%',
-        // },
-        // reset_container: {
-        //     backgroundColor: theme.siteColor.color9e9da4,
-        //     width: '100%',
-        // },
-        // logInContainer: {
-        //     flexDirection: 'row',
-        //     backgroundColor: theme.siteColor.color9e9da4,
-        //     width: '100%',
-        // },
-        // loginInput: {
-        //     width: '100%',
-        //     fontSize: theme.fontsT.fontS14,
-        //     borderTopWidth: 0,
-        //     borderLeftWidth: 0,
-        //     borderRightWidth: 0,
-        //     borderBottomWidth: 0,
-        //     backgroundColor: '#fff',
-        //     padding: 0,
-        // },
-        // inputWidth: {
-        //     width: '100%',
-        //     color: theme.siteColor.colorFFFFFF,
-        // },
-        // LoginButtong: {
-        //     display: 'flex',
-        //     width: '100%',
-        //     marginTop: 10
-        // },
-        // buttonStyle: {
-        //     padding: 20,
-        //     backgroundColor: '#C68625',
-        //     borderRadius: 24,
-        // },
-        // LoginButtongTittle: {
-        //     textAlign: 'center',
-        //     textTransform: 'uppercase',
-        //     color: theme.siteColor.colorFFFFFF,
-        //     fontWeight: '800',
-        //     fontSize: theme.fontsT.fontS16,
-        //     lineHeight: theme.lineHeightT.lineH14,
-        // },
-        // inputError: {
-        //     color: theme.siteColor.colorCC933B,
-        //     ffontSize: theme.fontsT.fontS16,
-        //     fontStyle: 'italic',
-        //     fontWeight: '600',
-        // },
-        // inputIcon: {
-        //     position: 'relative',
-        //     top: 5,
-        // },
-        // Textinput_root: {
-        //     flex: 2,
-        //     justifyContent: 'space-evenly',
-        //     flexDirection: 'row',
-        //     marginTop: 10,
-        // },
-        // input_Style: {
-        //     height: 50,
-        //     width: 50,
-        //     borderRadius: 10,
-        //     borderWidth: 0.5,
-        //     fontWeight: "600",
-        //     alignSelf: 'center',
-        //     fontSize: 20,
-        //     justifyContent: 'center',
-        //     alignContent: 'center',
-        //     textAlign: 'center',
-        //     backgroundColor: '#f5f4f2',
-        // },
-        // checkboxPassword: {
-        //     display: 'flex',
-        //     flexDirection: 'row-reverse',
-        //     width: '100%',
-        //     paddingTop: 30,
-        //     paddingBottom: 30,
-        // },
-        // checkboxInput: {
-        //     display: 'flex',
-        //     alignItems: "center",
-        //     flexDirection: "row",
-        // },
-        // checkboxField: {
-        //     alignSelf: "center",
-        //     margin: 0,
-        //     padding: 0,
-        //     width: 20,
-        //     height: 20,
-        // },
-        // checkboxLabel: {
-        //     color: '#222',
-        //     fontSize: theme.fontsT.fontS16,
-        //     paddingLeft: 10,
-        // },
-        // forgetLabel: {
-        //     color: '#222',
-        //     fontSize: theme.fontsT.fontS16,
-        //     fontFamily: 'Raleway',
-        //     fontWeight: '400',
-        //     fontStyle: 'italic',
-        // },
-        // containerInput: {
-        //     width: '100%',
-        //     marginVertical: 12,
-        // },
-        // description: {
-        //     fontSize: theme.fontsT.fontS11,
-        //     color: theme.colors.secondary,
-        //     paddingTop: 8,
-        // },
-        // error: {
-        //     fontSize: theme.fontsT.fontS11,
-        //     color: theme.colors.error,
-        //     paddingTop: 8,
-        // },
-        // loginBottom: {
-        //     position: 'relative',
-        //     bottom: 50,
-        //     display: 'flex',
-        //     flexDirection: 'row',
-        //     justifyContent: 'center',
-        //     alignItems: 'center',
-        // },
-        // needHelpBottom: {
-        //     color: '#fff',
-        //     fontWeight: '600',
-        // },
-
-        // contactUsBottom: {
-        //     color: '#CC933B',
-        //     fontWeight: '700',
-        // },
-
 
         /** Home Page Style **/
 
@@ -301,8 +62,6 @@ export const useStyles = CreateResponsiveStyle(
         categories_inner_img_Root: {
             width: '90%',
             alignSelf: 'center',
-            // borderWidth: 1,
-            // borderColor: '#fff',
         },
         categoriesImgRoot: {
             flexDirection: 'row',
@@ -318,26 +77,17 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'center',
             borderWidth: 1
         },
-        // skinImgRoot: {
-        //     height: 90,
-        //     width: "100%",
-        // },
         skinImgRoot: {
             height: 80,
             width: 80,
-            birderWidth: 1,
-            borderColor: 'white',
         },
         imgCenter: {
             alignSelf: 'center',
             height: "100%",
             width: '100%',
-            birderWidth: 1,
             borderRadius: 40
         },
-        // imgCenter: {
-        //     alignSelf: 'center'
-        // },
+
         skinImgText: {
             color: '#fff',
             fontSize: 12,
@@ -361,32 +111,23 @@ export const useStyles = CreateResponsiveStyle(
         imgRoot: {
             height: 145,
             width: 145,
-            // width: '100%',
         },
         productImg: {
             height: '100%',
             width: "100%"
         },
-        // contentRoot: {
-        //     height: 95,
-        //     width: '100%',
-        //     backgroundColor: '#0D0D0D',
-        //     display: 'flex'
-        // },
+
         contentRoot: {
             height: 95,
             width: 145,
             backgroundColor: '#0D0D0D',
-            // borderWidth: 1
         },
         descriptionRoot: {
             height: 36,
             width: 130,
             alignSelf: 'center',
             justifyContent: 'center',
-            // borderColor: 'red',
-            // borderWidth: 5,
-            // marginTop: 5
+
         },
         descriptionText: {
             fontSize: 10,
@@ -410,12 +151,7 @@ export const useStyles = CreateResponsiveStyle(
             alignSelf: 'center',
             paddingTop: 8
         },
-        // baseLine: {
-        //     height: 1,
-        //     width: '100%',
-        //     backgroundColor: '#272727',
-        //     marginTop: 10
-        // },
+
         baseLine: {
             height: 1,
             width: 145,
@@ -439,15 +175,7 @@ export const useStyles = CreateResponsiveStyle(
             textAlign: 'center',
             lineHeight: 15
         },
-        // price: {
-        //     color: 'white',
-        //     fontSize: 12
-        // },
-        // spaceRoot: {
-        //     color: 'white',
-        //     marginLeft: 5,
-        //     fontSize: 12
-        // },
+
         spaceRoot: {
             color: 'white',
             marginLeft: 3,
@@ -618,7 +346,6 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'space-between',
             marginTop: 20,
             marginBottom: 20,
-            // borderWidth: 1
         },
         viewLatestProduct: {
             height: 25,
@@ -627,7 +354,6 @@ export const useStyles = CreateResponsiveStyle(
             borderWidth: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            // marginTop: 0,
             marginRight: (Platform.OS === 'ios') ? "3%" : '3%',
             alignSelf: 'center',
             flexDirection: 'row'
@@ -692,7 +418,6 @@ export const useStyles = CreateResponsiveStyle(
         shopping_btn: {
             height: 40,
             width: 150,
-            // borderWidth: 1,
             borderRadius: 5,
             alignSelf: 'center',
             justifyContent: 'center',
@@ -897,7 +622,6 @@ export const useStyles = CreateResponsiveStyle(
             shopping_btn: {
                 height: 40,
                 width: 150,
-                // borderWidth: 1,
                 borderRadius: 5,
                 alignSelf: 'center',
                 justifyContent: 'center',

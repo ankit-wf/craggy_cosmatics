@@ -1,6 +1,5 @@
 import { Platform } from 'react-native';
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -46,8 +45,6 @@ export const useStyles = CreateResponsiveStyle(
             flexDirection: 'row',
             width: '90%',
             alignSelf: 'center',
-            // borderWidth: 1,
-            // borderColor: 'red'
         },
         View_Container: {
             height: 35,
@@ -86,8 +83,6 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 12,
             lineHeight: 14.09,
             fontWeight: '600',
-            // color: '#00000',
-            // paddingLeft: 5
         },
         noData_root: {
             display: 'flex',
@@ -102,7 +97,6 @@ export const useStyles = CreateResponsiveStyle(
             height: "100%",
             width: '95%',
             alignSelf: 'center',
-            // borderWidth: 1
         },
         best_touchable: {
             height: 252,
@@ -117,7 +111,6 @@ export const useStyles = CreateResponsiveStyle(
             marginTop: 20,
             marginBottom: 20,
         },
-
     },
 
     {
@@ -132,8 +125,6 @@ export const useStyles = CreateResponsiveStyle(
                 flexDirection: 'row',
                 width: '95%',
                 alignSelf: 'center',
-                // borderWidth: 1,
-                // borderColor: 'red'
             },
             trending_Text_Container: {
                 marginTop: 10,
@@ -154,7 +145,6 @@ export const useStyles = CreateResponsiveStyle(
                 borderColor: 'blue',
                 margin: 20,
                 marginRight: 27,
-                // marginTop: -10,
                 borderRadius: 6
             },
             best_touchable: {
@@ -171,8 +161,6 @@ export const useStyles = CreateResponsiveStyle(
                 marginTop: 20,
                 marginBottom: 20,
             },
-
-
         },
         /** Extra Small Device Size */
 
@@ -185,8 +173,6 @@ export const useStyles = CreateResponsiveStyle(
                 flexDirection: 'row',
                 width: '90%',
                 alignSelf: 'center',
-                // borderWidth: 1,
-                // borderColor: 'red'
             },
             trending_Text_Container: {
                 marginTop: 10,
@@ -222,8 +208,6 @@ export const useStyles = CreateResponsiveStyle(
                 marginTop: 20,
                 marginBottom: 20,
             },
-
-
         },
     },
 )

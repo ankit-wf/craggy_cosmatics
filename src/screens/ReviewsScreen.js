@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { useSelector, } from 'react-redux'
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import { Rating } from 'react-native-ratings';
 import { productDetailsStyle as pDs } from '../styles/productdetailsStyle';
 
 const ReviewsScreen = ({ navigation }) => {
@@ -9,16 +9,8 @@ const ReviewsScreen = ({ navigation }) => {
     const [page, setPage] = useState('1')
     return (
         <View>
-            {/* <View style={{ backgroundColor: 'white' }}>
-                <Text style={styles.deliveryText}>REVIEWS</Text>
-            </View> */}
-
             <ScrollView>
                 {reviewData.map((value, k) => {
-                    // console.log("rewviewData", newData)
-                    // let ending = parseInt(page) * 3;
-                    // let starting = ending - 2;
-                    // if (k >= starting && k <= ending) {
                     return (
                         <View style={styles.root} key={k}>
                             <View style={styles.inner_root} key={k}>
@@ -33,7 +25,6 @@ const ReviewsScreen = ({ navigation }) => {
                                         startingValue={value.star}
                                         imageSize={28}
                                         style={{ padding: 10 }}
-                                    // tintColor="white"
                                     />
                                     <Text style={styles.starReviws}>{value.star}</Text>
                                 </View>
@@ -43,13 +34,8 @@ const ReviewsScreen = ({ navigation }) => {
                             </View>
                         </View>
                     )
-
                 })}
             </ScrollView>
-
-
-
-
         </View>
     )
 }

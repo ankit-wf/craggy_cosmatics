@@ -10,31 +10,18 @@ import { useStyles } from '../styles/responsiveStyle';
 
 const WriteReview = ({ navigation }) => {
     const [star, setStar] = useState('');
-    // const [text, setText] = useState("");
     const dispatch = useDispatch();
     const Wr_style = useStyles();
     const reviewData = useSelector(state => state.reviewData.review);
-
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
     const d = new Date();
     let name = month[d.getMonth()];
     let FullDate = name + "-" + d.getDate() + "-" + d.getFullYear()
-    // console.log("date", FullDate);
     const ratingCompleted = (rating) => {
         setStar(rating);
-        // console.log("Rating is: " + star)
     }
-
-    const { control, handleSubmit, reset, formState: { errors } } = useForm({
-        // defaultValues: {
-        //     title: '',
-        //     description: '',
-        // }
-    })
-
+    const { control, handleSubmit, reset, formState: { errors } } = useForm({})
     const onSubmit = (data) => {
-        // console.log("dataaaaa", data)
         let Data = [...reviewData, {
             star: star,
             description: data.description,
@@ -58,7 +45,6 @@ const WriteReview = ({ navigation }) => {
                 <Text style={Wr_style.ReviewsTitle}>My Reviews</Text>
             </View>
             <ScrollView>
-
                 <View style={Wr_style.rating_outer_root}>
                     <View style={Wr_style.rating_inner_root}>
                         <Rating
@@ -69,15 +55,12 @@ const WriteReview = ({ navigation }) => {
                             jumpValue={1}
                             style={{ padding: 10, }}
                         />
-
                     </View>
                     <Text style={Wr_style.starReviws}>{star}</Text>
                 </View>
-
                 <View style={Wr_style.rating_title_root}>
                     <Controller
                         control={control}
-
                         render={({ field: { onChange, value } }) => (
                             <TextInput
                                 onChangeText={onChange}
@@ -92,11 +75,9 @@ const WriteReview = ({ navigation }) => {
                         name="title"
                     />
                 </View>
-
                 <View style={Wr_style.rating_title_root}>
                     <Controller
                         control={control}
-
                         render={({ field: { onChange, value } }) => (
                             <TextInput
                                 onChangeText={onChange}
@@ -114,7 +95,6 @@ const WriteReview = ({ navigation }) => {
                         name="description"
                     />
                 </View>
-
                 <View style={Wr_style.rating_button_root}>
                     <Button
                         style={{ width: "100%", }}
@@ -127,9 +107,7 @@ const WriteReview = ({ navigation }) => {
         </View>
     )
 }
-
 export default WriteReview
-
 const styles = StyleSheet.create({
     write_root: {
         backgroundColor: '#fff',

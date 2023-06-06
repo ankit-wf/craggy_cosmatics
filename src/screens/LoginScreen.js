@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, ImageBackground, Image } from 'react-native';
+import { View, Text, ImageBackground, Image } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import TextInput from '../components/InputHook';
 import { useDispatch, useSelector, } from 'react-redux';
@@ -18,10 +18,7 @@ const LoginScreen = ({ navigation }) => {
     const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
     const [login, setLogin] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(true);
-    // const [userData, setUserData] = useState({});
-    // console.log("hjshssd", userData)
     const { control, handleSubmit, reset, formState: { errors } } = useForm()
-
     // login
     useEffect(() => {
         if (isLoggedIn == true) {
@@ -46,7 +43,6 @@ const LoginScreen = ({ navigation }) => {
                 'consumer_key': CONSUMER_KEY
             }
         }).then((response) => {
-            // console.log("response", response.data.user_data.shipping_address)
             if (response.data.login == true) {
                 dispatch(loginActions.userlogin({ user_data: response.data.user_data }));
                 dispatch(loginActions.useraddress({ userAddress: response.data.user_data.shipping_address }))
@@ -57,8 +53,6 @@ const LoginScreen = ({ navigation }) => {
                 });
             }
         })
-        // alert("You Are SuccessFully Registered");
-        // reset();
     }
     const forgetHandler = () => {
         navigation.navigate('forgetPassword')
@@ -116,16 +110,6 @@ const LoginScreen = ({ navigation }) => {
                         {errors.password && <Text style={styles.inputError}>This field is required.</Text>}
                     </View>
                     <View style={styles.checkboxPassword}>
-                        {/* <View style={styles.checkboxInput}>
-                            <Checkbox
-                                style={styles.checkboxField}
-                                uncheckedColor="#222"
-                                value={isChecked}
-                                onValueChange={setChecked}
-                                color={isChecked ? '#cc933b' : '#222'}
-                            />
-                            <Text style={styles.checkboxLabel}>Remember me</Text>
-                        </View> */}
                         <TouchableOpacity onPress={forgetHandler} style={styles.forgotPassword}>
                             <Title style={styles.forgetLabel}>Forgot Password?</Title>
                         </TouchableOpacity>

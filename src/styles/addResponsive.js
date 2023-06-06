@@ -5,9 +5,7 @@ import { theme } from '../../src/core/theme';
 export const useStyles = CreateResponsiveStyle(
     {
         wrapper: {},
-
         root_container: {
-            // flex: 1,
             marginTop: '10%',
             justifyContent: 'center',
             alignItems: 'center',
@@ -20,22 +18,18 @@ export const useStyles = CreateResponsiveStyle(
             width: '100%',
             alignSelf: 'center',
             marginTop: '10%'
-            // flex: 1,
-            // justifyContent: 'center',
         },
         root_text: {
             fontSize: (Platform.OS === 'ios') ? 12 : 13,
             fontWeight: (Platform.OS === 'ios') ? '400' : '400',
             fontFamily: 'Raleway'
         },
-
         add_Btn: {
             height: 50,
             width: 50,
             backgroundColor: '#000',
             borderRadius: 50,
             alignSelf: 'flex-end',
-            // marginRight: 20,
             marginTop: '40%',
             justifyContent: 'center',
         },
@@ -63,15 +57,10 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'center',
             alignItems: 'center',
             position: 'absolute',
-            // right: "-20%",
-            // bottom: 0,
         },
         add_Add: {
             fontSize: 18,
             color: '#fff',
-            // alignSelf: 'flex-end',
-            // paddingRight: 15
-            // alignItems: 'center'
         },
         default_color: {
             height: 30,
@@ -80,10 +69,8 @@ export const useStyles = CreateResponsiveStyle(
             borderRadius: 8,
             justifyContent: 'center',
             marginTop: 15,
-            // alignSelf: 'flex-end'
         },
         default_text: {
-            // color: '#fff',
             alignSelf: 'center',
             fontSize: 13,
             fontFamily: 'Raleway'
@@ -100,7 +87,6 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 15,
             fontWeight: '400',
             fontFamily: 'Lato'
-            // paddingHorizontal: 10
         },
         delete_root: {
             flexDirection: 'row',
@@ -156,7 +142,6 @@ export const useStyles = CreateResponsiveStyle(
             fontFamily: 'Raleway'
         },
         firstname_text: {
-            // height: 40,
             borderTopWidth: 0,
             borderLeftWidth: 0,
             borderRightWidth: 0,
@@ -170,7 +155,6 @@ export const useStyles = CreateResponsiveStyle(
             ffontSize: theme.fontsT.fontS16,
             fontStyle: 'italic',
             fontWeight: '600',
-
         },
         width_container: {
             flexDirection: 'row',
@@ -183,9 +167,7 @@ export const useStyles = CreateResponsiveStyle(
         half_width: {
             width: '45%'
         }
-
     },
-
     {
         /** Medium Device Size */
 
@@ -203,8 +185,6 @@ export const useStyles = CreateResponsiveStyle(
             },
             root_defaultImg: {
                 marginTop: '-5%'
-                // flex: 1,
-                // justifyContent: 'center',
             },
             root_text: {
                 fontSize: (Platform.OS === 'ios') ? 13 : 14,
@@ -274,7 +254,6 @@ export const useStyles = CreateResponsiveStyle(
             },
         },
 
-
         /** Extra Small Device Size */
 
         [maxSize(DEVICE_SIZES.XS)]: {
@@ -285,7 +264,6 @@ export const useStyles = CreateResponsiveStyle(
                 marginRight: (Platform.OS === 'ios') ? 20 : 10,
                 marginTop: (Platform.OS === 'ios') ? '35%' : '0%',
             },
-
             fab: {
                 top: (Platform.OS === 'ios') ? "5%" : '5%',
                 right: (Platform.OS === 'ios') ? 10 : 10,
@@ -361,7 +339,6 @@ export const useStyles = CreateResponsiveStyle(
             firstname_text: {
                 fontSize: (Platform.OS === 'ios') ? 14 : 14,
             },
-
         },
     },
 )

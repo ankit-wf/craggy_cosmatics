@@ -6,7 +6,6 @@ import { TextInput as Input } from 'react-native-paper'
 
 const AccountDetailScreen = () => {
     const [passwordVisible, setPasswordVisible] = useState(true);
-
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
             firstname: '',
@@ -21,7 +20,6 @@ const AccountDetailScreen = () => {
 
     const onSubmit = (data) => {
         console.log("accountData", data);
-
         reset();
     }
 
@@ -29,7 +27,6 @@ const AccountDetailScreen = () => {
         <View>
             <ScrollView>
                 <View style={styles.controllerRoot}>
-
                     <Controller
                         control={control}
                         rules={{
@@ -45,7 +42,6 @@ const AccountDetailScreen = () => {
                                 autoCapitalize="none"
                                 autoCompleteType="firstname"
                                 textContentType="firstname"
-
                             />
                         )}
                         name="firstname"
@@ -68,14 +64,12 @@ const AccountDetailScreen = () => {
                                 autoCompleteType="lastname"
                                 textContentType="lastname"
                                 keyboardType="lastname"
-
                             />
                         )}
                         name="lastname"
                     />
                     {errors.lastname && errors.lastname.type === 'required' && <Text> this is required !</Text>}
                     {errors.lastname && errors.lastname.type === 'pattern' && <Text> please enter correct last name!</Text>}
-
 
                     <Controller
                         control={control}
@@ -93,7 +87,6 @@ const AccountDetailScreen = () => {
                                 autoCompleteType="displayname"
                                 textContentType="displayname"
                                 keyboardType="displayname"
-
                             />
                         )}
                         name="displayname"
@@ -116,12 +109,10 @@ const AccountDetailScreen = () => {
                                 autoCompleteType="email"
                                 textContentType="email"
                                 keyboardType="email-address"
-
                             />
                         )}
                         name="email"
                     />
-
                     {errors.email && errors.email.type === 'required' && <Text> this is required !</Text>}
                     {errors.email && errors.email.type === 'pattern' && <Text> please enter valid email!</Text>}
 
@@ -149,7 +140,6 @@ const AccountDetailScreen = () => {
                         )}
                         name="passwordchange"
                     />
-
                     <Text style={styles.changePassword}>New Password</Text>
                     <Controller
                         control={control}
@@ -174,7 +164,6 @@ const AccountDetailScreen = () => {
                         )}
                         name="newpassword"
                     />
-
                     <Text style={styles.changePassword}>Confirm New Password</Text>
                     <Controller
                         control={control}
@@ -199,8 +188,6 @@ const AccountDetailScreen = () => {
                         )}
                         name="confirmNewPassword"
                     />
-
-
                     <View style={styles.btnRoot}>
                         <Button
                             title="Save changes"
@@ -213,9 +200,7 @@ const AccountDetailScreen = () => {
         </View>
     )
 }
-
 export default AccountDetailScreen
-
 const styles = StyleSheet.create({
     controllerRoot: {
         marginTop: 10,

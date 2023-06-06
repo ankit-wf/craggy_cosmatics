@@ -1,4 +1,3 @@
-
 import { StyleSheet } from "react-native";
 
 export const searchBarStyle = StyleSheet.create({
@@ -16,7 +15,6 @@ export const searchBarStyle = StyleSheet.create({
     searchImgRoot: {
         marginTop: 32,
         marginLeft: '5%',
-        // height: 50,
     },
     searchImg: {
         height: 35,

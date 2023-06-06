@@ -10,14 +10,11 @@ export const letestProductStyle = StyleSheet.create({
         height: 252,
         width: 145,
         marginRight: 15,
-        // backgroundColor: 'blue'
         position: 'relative'
     },
     imgRoot: {
         height: 145,
         width: 145,
-        // borderColor: 'red',
-        // borderWidth: 1
     },
     productImg: {
         height: '100%',
@@ -27,14 +24,11 @@ export const letestProductStyle = StyleSheet.create({
         height: 95,
         width: 145,
         backgroundColor: '#0D0D0D',
-        // borderWidth: 1
     },
     descriptionRoot: {
         height: 36,
         width: 130,
         alignSelf: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1,
         marginTop: 5
     },
     descriptionText: {
@@ -56,8 +50,6 @@ export const letestProductStyle = StyleSheet.create({
         height: 17,
         width: 103,
         alignSelf: 'center',
-        // borderColor: 'red', 
-        // borderWidth: 1, 
         marginTop: 7,
     },
     price: {

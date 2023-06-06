@@ -8,7 +8,6 @@ const PaymentScreen = () => {
         </View>
     )
 }
-
 export default PaymentScreen
 
 const styles = StyleSheet.create({})

@@ -1,22 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ScrollView, Alert } from 'react-native'
-import { Drawer, TouchableRipple } from 'react-native-paper';
-
-
+import { View, StyleSheet, ScrollView } from 'react-native'
+import { Drawer } from 'react-native-paper';
 
 const CustomeSidebar = ({ navigation }) => {
-
     return (
-
         <View>
             <ScrollView>
                 <View style={{ height: 50 }}>
-
                 </View>
                 <Drawer.Section >
                     <Drawer.Item
-
                     />
                     <Drawer.Item
                         label="TERM AND CONDITION"
@@ -29,15 +23,11 @@ const CustomeSidebar = ({ navigation }) => {
                         style={styles.homeNavigation}
                         icon={() => <Ionicons name="ios-phone-portrait-sharp" size={23} style={styles.iconMooved} />}
                     />
-
-
                 </Drawer.Section>
-
             </ScrollView>
         </View>
     )
 }
-
 export default CustomeSidebar;
 const styles = StyleSheet.create({
     root: {
@@ -79,8 +69,6 @@ const styles = StyleSheet.create({
         width: 100,
         borderRadius: 50
     }
-
-
 })
 
 

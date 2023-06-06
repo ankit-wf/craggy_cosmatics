@@ -1,5 +1,4 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -18,7 +17,6 @@ export const useStyles = CreateResponsiveStyle(
         searchImgRoot: {
             marginTop: 32,
             marginLeft: '5%',
-            // height: 50,
         },
         searchImg: {
             height: 35,
@@ -80,8 +78,6 @@ export const useStyles = CreateResponsiveStyle(
         imgRoot: {
             height: 145,
             width: '100%',
-            // borderColor: 'red',
-            // borderWidth: 1
         },
         productImg: {
             height: '100%',
@@ -92,7 +88,6 @@ export const useStyles = CreateResponsiveStyle(
             width: '100%',
             backgroundColor: '#0D0D0D',
             display: 'flex'
-            // borderWidth: 1
         },
         textRoot: {
             height: 36,
@@ -121,8 +116,6 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'center',
             alignSelf: 'center',
             marginTop: 7,
-            // borderColor: 'red',
-            // borderWidth: 1,
         },
         price: {
             color: 'white',
@@ -186,7 +179,6 @@ export const useStyles = CreateResponsiveStyle(
             lineHeight: 15,
             textAlign: 'center'
         },
-
     },
 
     {
@@ -210,8 +202,6 @@ export const useStyles = CreateResponsiveStyle(
                 bottom: 150,
                 opacity: 0.7
             },
-
-
         },
         /** Extra Small Device Size */
 
@@ -233,8 +223,6 @@ export const useStyles = CreateResponsiveStyle(
                 bottom: 250,
                 opacity: 0.7
             },
-
-
         },
     },
 )

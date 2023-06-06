@@ -1,31 +1,14 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, Keyboard } from 'react-native'
-import Ionicons from '@expo/vector-icons/Ionicons';
-// import { TextInput } from 'react-native-paper';
-// import { useNavigation } from '@react-navigation/native';
+import React from 'react'
+import { StyleSheet, View, } from 'react-native'
 import ResponsiveImage from "react-native-responsive-image";
-// import { DrawerActions } from '@react-navigation/drawer'
-// import { Badge } from 'react-native-paper';
-import { useSelector } from 'react-redux';
 
 export default Logo = ({ navigation }) => {
-    // const cart = useSelector(state => state.cartData.cart);
-    // const cartHandler = () => {
-    //     navigation.navigate("Cart");
-    // }
     return (
         <View style={styles.containerI}>
             <View onPress={() => navigation.navigate("ProductListing")}>
                 <ResponsiveImage style={styles.headerLogo} source={require('../../assets/logo1.png')} />
             </View>
             <View>
-                {/* <TouchableOpacity onPress={cartHandler} style={{ marginTop: 5 }} >
-                    <Ionicons name='cart-outline' color='#CC933B' size={25} />
-                    {cart.length > 0 ?
-                        <Badge size={15} style={{ position: 'absolute', marginTop: -7, backgroundColor: '#CC933B', }}>
-                            <Text style={{ color: '#000' }}>{cart.length}</Text>
-                        </Badge> : ""}
-                </TouchableOpacity> */}
             </View>
         </View>
     )

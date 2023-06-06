@@ -204,32 +204,6 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 10,
             lineHeight: 13,
         },
-        // btn_btn: {
-        //     height: 27,
-        //     width: '100%',
-        // },
-        // flatList_buyNowButton: {
-        //     height: 27,
-        //     width: 98,
-        //     borderRadius: 4,
-        //     backgroundColor: '#C68625',
-        //     position: 'absolute',
-        //     bottom: 0,
-        //     alignSelf: 'center',
-        //     alignItems: 'center',
-        // },
-        // flatList_buttonText: {
-        //     color: '#0D0D0D',
-        //     textAlign: 'center',
-        //     paddingTop: 7,
-        //     fontFamily: 'Raleway',
-        //     fontWeight: '700',
-        //     fontSize: 10,
-        //     lineHeight: 13,
-        // },
-
-
-
 
         /** Medium Device Size */
 
@@ -313,76 +287,10 @@ export const useStyles = CreateResponsiveStyle(
 
             /** Product Listing Page */
 
-            // flatList_contentText: {
-            //     fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS10 : theme.fontsM.fontS9,
-            //     fontWeight: (Platform.OS === 'ios') ? '300' : '400',
-            //     fontFamily: 'Lato',
-            //     lineHeight: (Platform.OS === 'ios') ? 12 : 13,
-            //     color: '#FFFFFF',
-            //     alignSelf: 'center',
-            // },
-            // flatList_oldprice: {
-            //     color: '#666666',
-            //     textDecorationLine: 'line-through',
-            //     fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
-            //     fontWeight: (Platform.OS === 'ios') ? '600' : '700',
-            //     fontFamily: 'Lato',
-            //     lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH16
-            // },
-            // flatList_price: {
-            //     color: 'white',
-            //     fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS12 : theme.fontsM.fontS13,
-            //     fontWeight: (Platform.OS === 'ios') ? '600' : '400',
-            //     fontFamily: 'Lato',
-            //     textAlign: 'center',
-            //     lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH16 : theme.lineHeightM.lineH15,
-            // },
-            // flatList_tochable_root: {
-            //     height: 252,
-            //     width: '42.2%',
-            //     marginLeft: '5%',
-            //     marginTop: 20,
-            //     marginBottom: 20,
-            // },
             flatList_imgRoot: {
                 height: 145,
                 width: '100%',
             },
-            // flatList_contentRoot: {
-            //     height: 95,
-            //     width: '100%',
-            //     backgroundColor: '#0D0D0D',
-            //     display: 'flex'
-            // },
-            // btn_btn: {
-            //     height: 27,
-            //     width: '100%',
-            //     position: 'absolute',
-            //     bottom: 0,
-            //     alignSelf: 'center',
-            //     alignItems: 'center',
-            // },
-            // flatList_buyNowButton: {
-            //     height: 27,
-            //     width: 98,
-            //     borderRadius: 4,
-            //     backgroundColor: '#C68625',
-            //     position: 'absolute',
-            //     bottom: 0,
-            //     alignSelf: 'center',
-            //     alignItems: 'center',
-            // },
-            // Snackbar_style: {
-            //     width: "65%",
-            //     height: 55,
-            //     alignSelf: 'center',
-            //     position: 'absolute',
-            //     zIndex: 3,
-            //     bottom: 250,
-            //     opacity: 0.7
-            // },
-
-
 
         },
     },

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import TextInput from '../components/AccountInputHook'
 import { TextInput as Input } from 'react-native-paper'
-import BackButton from '../components/BackButton';
 
 const MyProfileScreen = ({ navigation }) => {
     const [passwordVisible, setPasswordVisible] = useState(true);
@@ -18,7 +17,6 @@ const MyProfileScreen = ({ navigation }) => {
             confirmNewPassword: '',
         }
     })
-
     const onSubmit = (data) => {
         console.log("accountData", data);
         reset();
@@ -26,12 +24,6 @@ const MyProfileScreen = ({ navigation }) => {
 
     return (
         <View>
-            {/* <View style={styles.searchRoot}>
-                <BackButton goBack={navigation.goBack} Color={'#666666'} />
-                <View style={styles.searchImgRoot}>
-                    <Text style={styles.mycartText}>MY PROFILE</Text>
-                </View>
-            </View> */}
             <ScrollView>
                 <View style={styles.controllerRoot}>
                     <Controller
@@ -204,16 +196,12 @@ const MyProfileScreen = ({ navigation }) => {
         </View>
     )
 }
-
 export default MyProfileScreen;
-
 const styles = StyleSheet.create({
     controllerRoot: {
-        // marginTop: 10,
         width: '90%',
         alignSelf: 'center',
         height: 870,
-        // backgroundColor: 'blue'
     },
     changePassword: {
         fontSize: 16,
@@ -225,11 +213,8 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     searchRoot: {
-        // width: '95%',
-        // alignSelf: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        // borderWidth: 1,
     },
     searchImgRoot: {
         marginTop: 35,

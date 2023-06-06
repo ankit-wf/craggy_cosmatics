@@ -10,22 +10,14 @@ export const useStyles = CreateResponsiveStyle(
             backgroundColor: '#fff'
         },
         searchRoot: {
-            // width: '95%',
-            // alignSelf: 'center',
             justifyContent: 'space-between',
-            // alignItems: 'center',
             flexDirection: 'row',
-            // borderWidth: 1,
         },
         searchImgRoot: {
             marginTop: 35,
             marginRight: '35%',
             width: '100%',
-            // borderWidth: 1,
-            // borderColor: 'blue'
             height: 50,
-            // justifyContent: 'center'
-            // alignSelf: 'center'
         },
         mycartText: {
             alignSelf: 'center',
@@ -52,8 +44,6 @@ export const useStyles = CreateResponsiveStyle(
             width: '100%',
             display: 'flex',
             justifyContent: 'center',
-            // marginTop: '0%',
-            // borderWidth: 2, borderColor: 'red'
         },
         order_placed_text: {
             color: '#fff',
@@ -114,7 +104,6 @@ export const useStyles = CreateResponsiveStyle(
         full_name: {
             fontSize: 16,
             fontWeight: '700',
-            // fontFamily: 'Lato'
         },
         full_address: {
             fontSize: 15,

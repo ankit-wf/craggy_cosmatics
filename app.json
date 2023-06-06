@@ -2,39 +2,27 @@
   "expo": {
     "name": "craggy",
     "slug": "craggy",
-    "scheme": "myapp",
     "version": "1.0.0",
-    "icon": "./assets/icon.png",
+    "orientation": "portrait",
+    "icon": "./assets/logo1.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FFFFFF"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/f309e3e6-bcda-44d9-9b6a-c6e8cc2becb8"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "runtimeVersion": {
-        "policy": "sdkVersion"
-      },
-      "bundleIdentifier": "no"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ],
-      "package": "com.ankit_123.craggy",
-      "runtimeVersion": "1.0.0"
+      "package": "com.mk_kumar.craggy"
     },
     "web": {
       "favicon": "./assets/favicon.png"

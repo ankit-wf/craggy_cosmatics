@@ -15,7 +15,6 @@ const PasswordScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const logindata = useSelector(state => state.userData.user);
     const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
-    // console.log("logged-in ", isLoggedIn)
     const [login, setLogin] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(true);
     // login
@@ -25,21 +24,16 @@ const PasswordScreen = ({ navigation }) => {
                 index: 0,
                 routes: [{ name: 'homeScreen' }],
             });
-            // console.log("first:", isLoggedIn)
             setLogin(true);
-
         };
     }, [login])
 
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
-            // email: '',
             password: '',
         }
     })
-
     const onSubmit = (data) => {
-        // console.log("dataaaaaaaaaaaaa",data);
         {
             logindata.map((item) => {
                 console.log("data.email", item.email, item.password);
@@ -49,43 +43,18 @@ const PasswordScreen = ({ navigation }) => {
                         routes: [{ name: 'homeScreen' }],
                     });
                 }
-
             })
         }
         dispatch(loginActions.loginform({ isLoggedIn: true }));
         reset();
     }
-
     return (
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
-
                 <View style={styles.Containter}>
                     <Text style={styles.loginText}> customer login </Text>
                     <View style={styles.containerInner}>
                         <View style={styles.inputWidth}>
-                            {/* <Controller
-                                control={control}
-                                rules={{
-                                    required: true,
-                                }}
-                                render={({ field: { onChange, onBlur, value } }) => (
-                                    <TextInput
-                                        style={styles.loginInput}
-                                        onChangeText={onChange}
-                                        value={value}
-                                        label="Email / Phone number"
-                                        returnKeyType="next"
-                                        autoCapitalize="none"
-                                        autoCompleteType="email"
-                                        textContentType="emailAddress"
-                                        keyboardType="email-address"
-                                    />
-                                )}
-                                name="email"
-                            />
-                            {errors.email && <Text style={styles.inputError}>This field is required.</Text>} */}
-
                             <Controller
                                 control={control}
                                 rules={{
@@ -102,7 +71,6 @@ const PasswordScreen = ({ navigation }) => {
                                         returnKeyType="done"
                                         secureTextEntry={passwordVisible}
                                         right={<Input.Icon name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)} color="#fff" style={styles.inputIcon} />}
-
                                     />
                                 )}
                                 name="password"
@@ -111,14 +79,6 @@ const PasswordScreen = ({ navigation }) => {
                         </View>
                         <View style={styles.checkboxPassword}>
                             <View style={styles.checkboxInput}>
-                                {/* <Checkbox
-                                    style={styles.checkboxField}
-                                    uncheckedColor="#fff"
-                                    value={isChecked}
-                                    onValueChange={setChecked}
-                                    color={isChecked ? '#cc933b' : '#fff'}
-                                />
-                                <Text style={styles.checkboxLabel}>Remember me</Text> */}
                             </View>
                             <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.forgotPassword}>
                                 <Title style={styles.forgetLabel}>Forgot Password?</Title>
@@ -138,7 +98,5 @@ const PasswordScreen = ({ navigation }) => {
         </View>
     )
 }
-
 export default PasswordScreen;
-
 const styles = StyleSheet.create({})

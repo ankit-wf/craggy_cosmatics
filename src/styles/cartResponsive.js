@@ -6,22 +6,14 @@ export const useStyles = CreateResponsiveStyle(
     {
         wrapper: {},
         searchRoot: {
-            // width: '95%',
-            // alignSelf: 'center',
             justifyContent: 'space-between',
-            // alignItems: 'center',
             flexDirection: 'row',
-            // borderWidth: 1,
         },
         searchImgRoot: {
             marginTop: 35,
             marginRight: '35%',
             width: '100%',
-            // borderWidth: 1,
-            // borderColor: 'blue'
             height: 50,
-            // justifyContent: 'center'
-            // alignSelf: 'center'
         },
         mycartText: {
             alignSelf: 'center',
@@ -52,10 +44,7 @@ export const useStyles = CreateResponsiveStyle(
             flexDirection: 'row',
             width: '90%',
             height: 80,
-            // borderColor: 'red',
-            // borderWidth: 1,
             alignSelf: 'center',
-            // marginTop: "5%",
             marginBottom: "2%"
         },
         dataImgRoot: {
@@ -69,17 +58,12 @@ export const useStyles = CreateResponsiveStyle(
             borderRadius: 15
         },
         centerTextRoot: {
-            // borderColor: 'red', 
-            // borderWidth: 1, 
             height: 80,
             marginLeft: 10
         },
         textRoot: {
             height: 48,
             width: '42%',
-            // borderRadius: 15,
-            // borderColor: 'blue',
-            // borderWidth: 1,
             marginLeft: 5,
 
         },
@@ -101,7 +85,6 @@ export const useStyles = CreateResponsiveStyle(
         price: {
             fontSize: 12,
             fontWeight: '700',
-            // fontFamily: 'Lato',
             lineHeight: 15
         },
         slace: {
@@ -158,7 +141,6 @@ export const useStyles = CreateResponsiveStyle(
             color: 'white'
         },
         whiteButton: {
-            // backgroundColor: 'none',
             borderColor: 'transparent',
             borderWidth: 2,
             borderRadius: 50,
@@ -188,9 +170,7 @@ export const useStyles = CreateResponsiveStyle(
             height: 1,
             width: '90%',
             backgroundColor: '#D9D9D9',
-            // marginTop: 10,
             alignSelf: 'center'
-            // marginLeft: '-78%',
         },
         TextInputRoot: {
             flexDirection: 'row',
@@ -285,7 +265,6 @@ export const useStyles = CreateResponsiveStyle(
         maintotal: {
             fontSize: 16,
             fontWeight: '700',
-            // fontFamily: 'Raleway',
             lineHeight: 19
         },
         mainprice: {
@@ -325,7 +304,6 @@ export const useStyles = CreateResponsiveStyle(
             color: '#fff',
             lineHeight: 25,
             fontWeight: '700',
-            // fontFamily: 'Raleway'
         },
         Snackbar_style: {
             width: "70%",
@@ -370,8 +348,6 @@ export const useStyles = CreateResponsiveStyle(
                 flexDirection: 'row',
                 width: '90%',
                 height: 80,
-                // borderColor: 'red',
-                // borderWidth: 1,
                 alignSelf: 'center',
                 marginTop: "2%",
                 marginBottom: "2%"
@@ -379,11 +355,7 @@ export const useStyles = CreateResponsiveStyle(
             textRoot: {
                 height: 40,
                 width: '50%',
-                // borderRadius: 15,
-                // borderColor: 'blue',
-                // borderWidth: 1,
                 marginLeft: 15,
-                // justifyContent: 'center',
                 alignItems: 'center'
 
             },
@@ -392,7 +364,6 @@ export const useStyles = CreateResponsiveStyle(
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS14 : theme.fontsM.fontS14,
                 fontWeight: (Platform.OS === 'ios') ? '400' : '400',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH18 : theme.lineHeightM.lineH16,
-                // paddingLeft: (Platform.OS === 'ios') ? 15 : 17,
                 textAlign: 'center'
             },
             textPriceRoot: {
@@ -415,14 +386,7 @@ export const useStyles = CreateResponsiveStyle(
                 fontWeight: (Platform.OS === 'ios') ? '600' : '500',
                 fontFamily: 'Lato'
             },
-            // price: {
-            //     // fontSize: 13,
-            //     fontSize: (Platform.OS === 'ios') ? 12 : 13,
-            //     // fontWeight: '700',
-            //     fontWeight: (Platform.OS === 'ios') ? '900' : '700',
-            //     fontFamily: 'Lato',
-            //     lineHeight: 15
-            // },
+
             price_summary: {
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS16 : theme.fontsM.fontS16,
                 fontWeight: (Platform.OS === 'ios') ? '600' : '500',
@@ -490,18 +454,12 @@ export const useStyles = CreateResponsiveStyle(
                 flexDirection: 'row',
                 width: '90%',
                 height: 80,
-                // borderColor: 'blue',
-                // borderWidth: 1,
                 alignSelf: 'center',
-                // marginTop: "5%",
                 marginBottom: "2%"
             },
             textRoot: {
                 height: 48,
                 width: '42%',
-                // borderRadius: 15,
-                // borderColor: 'blue',
-                // borderWidth: 1,
                 marginLeft: 5
 
             },
@@ -509,7 +467,6 @@ export const useStyles = CreateResponsiveStyle(
                 fontSize: (Platform.OS === 'ios') ? 13 : 12,
                 fontWeight: (Platform.OS === 'ios') ? '400' : '500',
                 lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH18 : theme.lineHeightM.lineH16,
-                // paddingLeft: (Platform.OS === 'ios') ? 15 : 15,
                 textAlign: 'center'
             },
             textPriceRoot: {
@@ -518,20 +475,10 @@ export const useStyles = CreateResponsiveStyle(
                 flexDirection: 'row',
                 marginLeft: '-76%',
                 marginTop: '16%',
-                // borderColor: 'blue',
-                // borderWidth: 1,
                 paddingLeft: 15
 
             },
-            // TextInputRoot: {
-            //     flexDirection: 'row',
-            //     height: 50,
-            //     width: '100%',
-            //     alignSelf: 'center',
-            //     marginTop: 10,
-            //     backgroundColor: '#fff',
-            //     marginBottom: 10
-            // },
+
             coupon_icon: {
                 marginLeft: '5%',
                 padding: '3%'
@@ -568,7 +515,6 @@ export const useStyles = CreateResponsiveStyle(
             total: {
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS14,
                 fontWeight: (Platform.OS === 'ios') ? '500' : '600',
-                // lineHeight: (Platform.OS === 'ios') ? theme.lineHeightM.lineH14 : theme.lineHeightM.lineH15,
             },
             free_price: {
                 fontSize: (Platform.OS === 'ios') ? theme.fontsM.fontS13 : theme.fontsM.fontS14,

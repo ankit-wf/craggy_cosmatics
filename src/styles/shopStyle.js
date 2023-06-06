@@ -16,7 +16,6 @@ export const shopStyle = StyleSheet.create({
     searchImgRoot: {
         marginTop: 32,
         marginLeft: '5%',
-        // height: 50,
     },
     searchImg: {
         height: 35,
@@ -70,8 +69,6 @@ export const shopStyle = StyleSheet.create({
     imgRoot: {
         height: 145,
         width: '100%',
-        // borderColor: 'red',
-        // borderWidth: 1
     },
     productImg: {
         height: '100%',
@@ -82,7 +79,6 @@ export const shopStyle = StyleSheet.create({
         width: '100%',
         backgroundColor: '#0D0D0D',
         display: 'flex'
-        // borderWidth: 1
     },
     textRoot: {
         height: 36,
@@ -111,8 +107,6 @@ export const shopStyle = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         marginTop: 7,
-        // borderColor: 'red',
-        // borderWidth: 1,
     },
     price: {
         color: 'white',

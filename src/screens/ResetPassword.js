@@ -4,20 +4,17 @@ import { Controller, useForm } from 'react-hook-form';
 import TextInput from '../components/InputHook';
 import { useDispatch, useSelector, } from 'react-redux';
 import { loginActions } from '../store/UserSlice';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput as Input, Title } from 'react-native-paper';
-import Checkbox from 'expo-checkbox';
 import { useStyles } from '../styles/loginResponsive';
 import BackButton from '../components/BackButton';
 
 const ResetPassword = ({ navigation }) => {
-
     const styles = useStyles()
     const [isChecked, setChecked] = useState(false);
     const dispatch = useDispatch();
     const logindata = useSelector(state => state.userData.user);
     const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
-    // console.log("logged-in ", isLoggedIn)
     const [login, setLogin] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(true);
     const [CpasswordVisible, setCpasswordVisible] = useState(true);
@@ -27,20 +24,12 @@ const ResetPassword = ({ navigation }) => {
                 index: 0,
                 routes: [{ name: 'homeScreen' }],
             });
-            // console.log("first:", isLoggedIn)
             setLogin(true);
-
         };
     }, [login])
 
-    const { control, handleSubmit, reset, formState: { errors } } = useForm({
-        // defaultValues: {
-        //     password: '',
-        //     confirm_password: '',
-        // }
-    })
+    const { control, handleSubmit, reset, formState: { errors } } = useForm({})
     const onSubmit = (data) => {
-        // console.log("dataaaaaaaaaaaaa",data);
         if (data.password == data.confirm_password) {
             navigation.reset({
                 index: 0,
@@ -52,12 +41,10 @@ const ResetPassword = ({ navigation }) => {
     }
 
     return (
-
         <View style={styles.rootContainter}>
             <ImageBackground source={require('../../assets/images/login-bg.jpg')} resizeMode="cover" style={styles.loginBg}>
                 <BackButton goBack={navigation.goBack} />
                 <Image source={require('../../assets/images/logo-image.jpg')} style={styles.logoBackground} />
-
                 <View style={styles.Containterlogin}>
                     <View style={styles.inputWidth}>
                         <Controller
@@ -83,7 +70,6 @@ const ResetPassword = ({ navigation }) => {
                             name="password"
                         />
                         {errors.password && <Text style={styles.inputError}>This field is required.</Text>}
-
                         <Controller
                             control={control}
                             rules={{
@@ -108,14 +94,12 @@ const ResetPassword = ({ navigation }) => {
                         />
                         {errors.confirm_password && <Text style={styles.inputError}>This field is required.</Text>}
                     </View>
-
                     <View style={styles.LoginButtong}>
                         <TouchableOpacity style={styles.buttonStyle} onPress={handleSubmit(onSubmit)} >
                             <Title style={styles.LoginButtongTittle}>SAVE</Title>
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 <View style={styles.loginBottom}>
                     <Text style={styles.needHelpBottom}>Need Help?</Text>
                     <TouchableOpacity><Text style={styles.contactUsBottom}> Contact us</Text></TouchableOpacity>
@@ -124,7 +108,5 @@ const ResetPassword = ({ navigation }) => {
         </View>
     )
 }
-
 export default ResetPassword
-
 const styles = StyleSheet.create({})

@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import React, { useEffect } from 'react'
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form'
 import { loginActions } from '../store/UserSlice'
@@ -10,32 +9,16 @@ import { useRoute } from '@react-navigation/native'
 import { useStyles } from '../styles/addResponsive';
 import CustomDropDown from '../components/CustomDropDown';
 import DropDown from '../../Data/allState.json'
-import { USER_LOGIN_API, CONSUMER_KEY } from "@env";
 
 const EditAddress = ({ navigation }) => {
     const Edit_Style = useStyles();
     const route = useRoute();
     const index = route.params;
-    // console.log("iiiinnnnddddxxx", index)
-    // const userAdd = useSelector(state => state.userData.userAddress);
     const bllingData = useSelector(state => state.userData.user_data)
     const dispatch = useDispatch();
-    // console.log("recieved", userAdd)
-    const { control, handleSubmit, reset, formState: { errors } } = useForm({
-
-    })
-    // let d = {}
+    const { control, handleSubmit, reset, formState: { errors } } = useForm({})
     useEffect(() => {
         {
-            // userAdd.map((v, i) => {
-            // console.log("vvvgggg", v.State)
-            // d = DropDown.find((el) =>
-            //     el.value == v.State
-            //     // el.City === "mohali"
-            //     // el.id == ab.id
-            //     // console.log("jjhhgg", el.value == v.State)
-            // )
-            // console.log("jjhhgg", d.label)
             reset({
                 first_name: bllingData.billing_address.first_name,
                 last_name: bllingData.billing_address.last_name,
@@ -46,12 +29,9 @@ const EditAddress = ({ navigation }) => {
                 postcode: bllingData.billing_address.postcode,
                 phone: bllingData.billing_address.phone
             })
-            // })
         }
     }, [])
-    // console.log("dddddddd", d)
     const onSubmit = data => {
-        // console.log("datatata", data.State);
         let AddData = [{
             index: index,
             first_name: data.first_name,
@@ -63,54 +43,12 @@ const EditAddress = ({ navigation }) => {
             postcode: data.postcode,
             phone: data.phone
         }];
-        // console.log("dddddd", AddData)
         dispatch(loginActions.useraddress(
             {
                 userAddress: AddData
             }
         ));
         navigation.goBack();
-        // navigation.navigate('address')
-        // reset();
-
-        // axios({
-        //     method: 'post',
-        //     url:USER_LOGIN_API,
-        //     data: {
-        //         ID: index,
-        //         first_name: data.first_name,
-        //         last_name: data.last_name,
-        //         address_1: data.address_1,
-        //         address_2: data.address_2,
-        //         state: data.state,
-        //         city: data.city,
-        //         postcode: data.postcode,
-        //         phone: data.phone
-
-        //     },
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'consumer_key': CONSUMER_KEY
-        //     }
-
-
-        // }).then((res) => {
-        //     console.log("send",res.data);
-        //     if (res.data.data === "Data saved successfully") {
-        //         Alert.alert(
-        //             "Alert Title",
-        //             "Data Updated Successfully",
-        //             [
-        //                 {
-        //                     text: "Cancel",
-        //                     onPress: () => console.log("Cancel Pressed"),
-        //                     style: "cancel"
-        //                 },
-        //                 { text: "OK", onPress: () => navigation.navigate("dash") }
-        //             ])
-
-        //     }
-        // })
     }
     return (
         <View >
@@ -168,7 +106,6 @@ const EditAddress = ({ navigation }) => {
                                 {errors.last_name && errors.last_name.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                             </View>
                         </View>
-
                         <View style={Edit_Style.full_width}>
                             <Controller
                                 control={control}
@@ -274,10 +211,8 @@ const EditAddress = ({ navigation }) => {
                                 control={control}
                                 rules={{
                                     required: true,
-                                    // pattern: { value: /^[a-zA-Z ]{2,40}$/ }
                                 }}
                                 render={({ field: { onChange, value } }) => (
-                                    // <View style={{ width: '100%', borderWidth: 1 }}>
                                     < CustomDropDown
                                         defaultOption={{ key: value, value: value }}
                                         setSelected={onChange}
@@ -285,14 +220,10 @@ const EditAddress = ({ navigation }) => {
                                         save="value"
                                         fontFamily='Lato'
                                     />
-                                    // </View>
                                 )}
                                 name="state"
                             />
-                            {/* {errors.state && errors.state.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
-                                    {errors.state && errors.state.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>} */}
                         </View>
-
                         <View style={Edit_Style.full_width}>
                             <Controller
                                 control={control}
@@ -318,8 +249,6 @@ const EditAddress = ({ navigation }) => {
                             {errors.city && errors.city.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>}
                         </View>
                     </View>
-                    {/* ) */}
-                    {/* })} */}
                 </ScrollView>
             </View>
 
@@ -330,37 +259,3 @@ const EditAddress = ({ navigation }) => {
     )
 }
 export default EditAddress
-
-// const styles = StyleSheet.create({
-    // root_container: {
-    //     height: '88%',
-    //     width: '90%',
-    //     borderWidth: 0.5,
-    //     borderRadius: 15,
-    //     marginTop: 15,
-    //     alignSelf: 'center',
-    //     backgroundColor: '#fff'
-    // },
-    // btn_root: {
-    //     height: 45,
-    //     width: 200,
-    //     backgroundColor: 'black',
-    //     marginTop: 10,
-    //     borderRadius: 10,
-    //     alignSelf: 'center',
-    //     justifyContent: 'center'
-    // },
-    // btn_text: {
-    //     color: '#fff',
-    //     alignSelf: 'center',
-    //     fontSize: 16
-    // },
-    // firstname_text: {
-    //     // height: 40,
-    //     borderTopWidth: 0,
-    //     borderLeftWidth: 0,
-    //     borderRightWidth: 0,
-    //     borderBottomWidth: 0,
-    //     padding: 0,
-    // }
-// })

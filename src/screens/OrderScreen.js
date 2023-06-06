@@ -31,7 +31,6 @@ const OrderScreen = ({ navigation }) => {
                 }
             }
         ).then((res) => {
-            // console.log("resss", res.data)
             if (res.data.status = "success") {
                 setBestData(res.data.response)
                 setLoading(false)
@@ -40,20 +39,6 @@ const OrderScreen = ({ navigation }) => {
     }, [])
 
     const CartHolder = (product_title, product_id, image, sale_price, regular_price,) => {
-        // let Data = [...cartData, {
-        //     description: product_title,
-        //     sellingProduct_id: product_id,
-        //     images: image,
-        //     oldprice: sale_price,
-        //     price: regular_price,
-        //     quantity: 1
-        // }];
-        // dispatch(submitActions.price(
-        //     {
-        //         cart: Data
-        //     }
-        // ));
-        // navigation.navigate('cart', product_id);
         if (cartData.length !== 0) {
             let ss = false;
             cartData.find(data => {
@@ -62,7 +47,6 @@ const OrderScreen = ({ navigation }) => {
                 }
             })
             if (ss == true) {
-                // console.log("already in list")
                 setVisible(!visible);
             }
             else {
@@ -91,23 +75,8 @@ const OrderScreen = ({ navigation }) => {
             navigation.navigate("cart");
         }
     }
-
     return (
-
         <View style={styles.root} >
-            {/* <View style={{ flexDirection: 'row', }}>
-        <BackButton goBack={navigation.goBack} Color={'#666666'} />
-        <Text style={styles.deliveryText}>MY ORDERS</Text>
-      </View> */}
-            {/* <View style={{ alignItems: 'center', marginTop: '40%' }}>
-        <Text style={{ fontSize: 20 }}> Order List Empty</Text>
-      </View> */}
-            {/* <View>
-        <TouchableOpacity style={styles.shopping_btn}>
-          <Text style={styles.shopping_text}>Continue Shopping</Text>
-        </TouchableOpacity>
-      </View> */}
-
             <View>
                 {
                     loading ?
@@ -118,7 +87,6 @@ const OrderScreen = ({ navigation }) => {
                         <ScrollView>
                             <View>
                                 <Text style={hm.no_order_text}>No orders placed</Text>
-
                                 <View style={hm.bestSellerRoot}>
                                     <Heading title=' best selling ' />
                                     <TouchableOpacity
@@ -157,7 +125,6 @@ const OrderScreen = ({ navigation }) => {
                                                             <Text style={hm.oldprice}>₹{regular_price}</Text>
                                                             <Text style={hm.spaceRoot}></Text>
                                                             <Text style={hm.price}>₹{sale_price}</Text>
-
                                                         </View>
                                                     </View>
 
@@ -169,7 +136,6 @@ const OrderScreen = ({ navigation }) => {
                                                     >
                                                         <Text style={hm.buttonText}>BUY NOW</Text>
                                                     </TouchableOpacity>
-
                                                 </TouchableOpacity>
                                             )
                                         })}
@@ -178,7 +144,6 @@ const OrderScreen = ({ navigation }) => {
                                 <TouchableOpacity style={hm.shopping_btn} onPress={() => navigation.navigate('Home')} >
                                     <Text style={hm.shopping_text}>Continue Shopping</Text>
                                 </TouchableOpacity>
-
                             </View>
                         </ScrollView>
                 }
@@ -194,9 +159,7 @@ const OrderScreen = ({ navigation }) => {
         </View>
     )
 }
-
 export default OrderScreen
-
 const styles = StyleSheet.create({
     root: {
         flex: 1,
@@ -219,35 +182,4 @@ const styles = StyleSheet.create({
         paddingTop: 35,
         paddingLeft: '25%'
     },
-    // shopping_btn: {
-    //     height: 40,
-    //     width: 150,
-    //     borderWidth: 1,
-    //     borderRadius: 5,
-    //     alignSelf: 'center',
-    //     justifyContent: 'center',
-    //     backgroundColor: '#C68625',
-    //     marginTop: 50
-    // },
-    // shopping_text: {
-    //     fontSize: 16,
-    //     alignSelf: 'center',
-    //     color: '#fff',
-
-    // },
-    // Snackbar_style: {
-    //     width: "65%",
-    //     height: 55,
-    //     alignSelf: 'center',
-    //     position: 'absolute',
-    //     zIndex: 9,
-    //     bottom: 250,
-    //     opacity: 0.7
-    // },
-    // Snackbar_text: {
-    //     color: '#fff',
-    //     fontSize: 14,
-    //     lineHeight: 15,
-    //     textAlign: 'center'
-    // },
 })

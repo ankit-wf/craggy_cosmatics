@@ -1,5 +1,4 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -37,8 +36,6 @@ export const useStyles = CreateResponsiveStyle(
         available_coupan_root: {
             height: 60,
             width: '100%',
-            // backgroundColor: '#fff',
-            // marginTop: '2%',
             justifyContent: 'center'
         },
         coupon_text: {
@@ -63,12 +60,10 @@ export const useStyles = CreateResponsiveStyle(
         headeing_text: {
             fontSize: 18,
             fontWeight: '700',
-            // paddingLeft: '8%',
             paddingTop: 10
         },
         flat_off_text: {
             fontSize: 19,
-            // paddingLeft: '8%',
             paddingTop: 3
         },
         flat_799_text: {
@@ -124,10 +119,6 @@ export const useStyles = CreateResponsiveStyle(
             coupon_detail_root: {
                 height: 150,
                 width: '90%',
-                // borderWidth: 1,
-                // borderColor: '#D9D9D9',
-                // borderRadius: 20,
-                // alignSelf: 'center',
                 marginTop: 2
             },
             headeing_text: {

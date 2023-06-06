@@ -10,21 +10,8 @@ import { loginActions } from '../store/UserSlice'
 const AddressesScreen = ({ navigation }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  // const billingData = useSelector(state => state.userData.userAddress);
-  // const shippingData = useSelector(state => state.userData.userShipping);
   const alldata = useSelector(state => state.userData.user_data)
   const [aaa, setAaa] = useState(alldata);
-
-  // const billingData = alldata.billing_address;
-  // const shippingData = alldata.shipping_address;
-  // console.log("billing", billingData)
-  // console.log("shipping", shippingData)
-  console.log("alldata", alldata.billing_address.first_name == "")
-  console.log("shipping_address", alldata.shipping_address.first_name == "")
-  // console.log("billing", alldata.billing_address)
-  // console.log("shipping_address", alldata.shipping_address)
-  // const objectLength = Object.keys(alldata).length
-  // console.log("fgsdhfghfs", objectLength)
 
   const removeHandler = (index) => {
     dispatch(loginActions.remove(
@@ -59,31 +46,23 @@ const AddressesScreen = ({ navigation }) => {
                 <Text style={styles.add_text}> {alldata.billing_address.address_1} {alldata.billing_address.address_2} {alldata.billing_address.city} {alldata.billing_address.state} {alldata.billing_address.postcode} </Text>
                 <Text style={styles.add_text}>Phone : {alldata.billing_address.phone} </Text>
                 <View style={styles.delete_root}>
-                  {/* <TouchableOpacity onPress={() => removeHandler(i)}>
-                        <Text style={styles.add_delete}>Delete</Text>
-                      </TouchableOpacity> */}
                   <TouchableOpacity onPress={() => navigation.navigate('editAddress', alldata.ID)}>
                     <Text style={styles.edit_text}>Edit</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-
             </View>
           </View>
         }
-
-
 
         <View>
           {alldata.shipping_address.first_name == "" ?
             <View style={styles.default_address} >
               <View style={styles.default_address_inner}>
                 <Text style={styles.default_text}>Shipping address</Text>
-
                 <View style={{ marginTop: '20%', marginLeft: '25%' }}>
                   <Text style={styles.add_text}>Add Address </Text>
                 </View>
-
               </View>
               <TouchableOpacity style={styles.add_Btn} onPress={() => navigation.navigate('shippingaddressDetails')}>
                 <Text style={styles.btn_text}> + </Text>
@@ -97,26 +76,16 @@ const AddressesScreen = ({ navigation }) => {
                 <Text style={styles.add_text}> {alldata.shipping_address.address_1} {alldata.shipping_address.address_2} {alldata.shipping_address.city} {alldata.shipping_address.state} {alldata.shipping_address.postcode}</Text>
                 <Text style={styles.add_text}>Phone : {alldata.shipping_address.phone} </Text>
                 <View style={styles.delete_root}>
-                  {/* <TouchableOpacity onPress={() => removeHandler(i)}>
-                        <Text style={styles.add_delete}>Delete</Text>
-                      </TouchableOpacity> */}
                   <TouchableOpacity onPress={() => navigation.navigate('editShipping', alldata.ID)}>
                     <Text style={styles.edit_text}>Edit</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-
             </View>
           }
         </View>
-
-
       </View>
-
-
-
     </View >
   )
 }
-
 export default AddressesScreen

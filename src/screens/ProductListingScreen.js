@@ -1,9 +1,7 @@
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import { Text, View, SafeAreaView, FlatList, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState, useRef, } from 'react'
 import axios from 'axios'
-// import Swiper from 'react-native-swiper'
-import { List, Snackbar } from 'react-native-paper';
-import { shopStyle as sS } from '../styles/shopStyle'
+import { Snackbar } from 'react-native-paper';
 import { useStyles } from '../styles/responsiveStyle'
 import { useStyles as h_Style } from '../styles/homeResponsive'
 import { useDispatch, useSelector } from 'react-redux'
@@ -48,10 +46,6 @@ const ProductListingScreen = ({ navigation, route }) => {
                 setLoading(false)
             },);
         }
-        // bannerApi();
-        // setTimeout(() => {
-        //     setLoading(false)
-        // },);
     }, [id])
 
     const allProductsApi = () => {
@@ -97,19 +91,6 @@ const ProductListingScreen = ({ navigation, route }) => {
             setData(res.data.latest_products)
         })
     }
-    // const bannerApi = () => {
-    //     axios.get(
-    //         ` https://craggycosmetic.com/api/banner/`,
-    //         {
-    //             headers: {
-    //                 // 'Content-Type': 'application/json',
-    //                 'consumer_key': '3b137de2b677819b965ddb7288bd73f62fc6c1f04a190678ca6e72fca3986629',
-    //             }
-    //         }
-    //     ).then((res) => {
-    //         setBannerData(res.data.response)
-    //     })
-    // }
     const onDismissSnackBar = () => setVisible(false);
     const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
         if (cartData.length !== 0) {
@@ -120,7 +101,6 @@ const ProductListingScreen = ({ navigation, route }) => {
                 }
             })
             if (ss == true) {
-                // console.log("already in list")
                 setVisible(!visible);
             }
             else {
@@ -149,46 +129,6 @@ const ProductListingScreen = ({ navigation, route }) => {
             navigation.navigate("cart");
         }
     }
-    // const CartHolder = (product_title, product_id, image, regular_price, sale_price,) => {
-    //     if (cartData.length !== 0) {
-    //         let ss = false;
-    //         cartData.find(data => {
-    //             if (data.categoriesDetail_id == product_id) {
-    //                 ss = true;
-    //             }
-    //         })
-    //         if (ss == true) {
-    //             // console.log("already in list")
-    //             setVisible(!visible);
-    //         }
-    //         else {
-    //             let Data = [...cartData, {
-    //                 description: product_title,
-    //                 categoriesDetail_id: product_id,
-    //                 images: image,
-    //                 oldprice: regular_price,
-    //                 price: sale_price,
-    //                 quantity: 1
-    //             }];
-    //             dispatch(submitActions.price({ cart: Data }));
-    //             navigation.navigate("cart");
-    //         }
-    //     }
-    //     else {
-    //         let Data = [...cartData, {
-    //             description: product_title,
-    //             categoriesDetail_id: product_id,
-    //             images: image,
-    //             oldprice: regular_price,
-    //             price: sale_price,
-    //             quantity: 1
-    //         }];
-    //         dispatch(submitActions.price({ cart: Data }));
-    //         navigation.navigate("cart");
-    //     }
-
-    // }
-
     const latestData = () => {
         setChecked('Latest')
         data.sort((a, b) => b.publish_data.localeCompare(a.publish_data));
@@ -204,7 +144,6 @@ const ProductListingScreen = ({ navigation, route }) => {
         data.sort((a, b) => b.sale_price.localeCompare(a.sale_price));
         setData(data)
     }
-
     return (
         <View>
             <ScrollView
@@ -231,13 +170,11 @@ const ProductListingScreen = ({ navigation, route }) => {
                             </TouchableOpacity>
                         </View>
                     </SkeletonContainer>
-
                     <BottomSheet hasDraggableIcon ref={bs} height={220}   >
                         <View style={Pl_Style.panel}>
                             <View style={Pl_Style.sort_align_root}>
                                 <Text style={Pl_Style.panelTitle}>Sort By</Text>
                             </View>
-
                             <View style={Pl_Style.panel_btnText_Root}>
                                 <Text style={Pl_Style.panel_select_text}>Popularity</Text>
                                 <RadioButton
@@ -273,7 +210,6 @@ const ProductListingScreen = ({ navigation, route }) => {
                         </View>
                     </BottomSheet>
                 </SafeAreaView>
-
                 <View style={Pl_Style.flatList_Root}>
                     <SkeletonContainer isLoading={loading}>
                         <FlatList
@@ -295,7 +231,6 @@ const ProductListingScreen = ({ navigation, route }) => {
                                             <View style={Pl_Style.flatList_imgRoot} >
                                                 <Image source={{ uri: item.image }} style={Pl_Style.flatList_Img} />
                                             </View>
-
                                             <View style={Pl_Style.flatList_contentRoot}>
                                                 <View style={Pl_Style.flatList_textRoot}>
                                                     <Text style={Pl_Style.flatList_contentText}>{item.product_title}</Text>
@@ -340,5 +275,4 @@ const ProductListingScreen = ({ navigation, route }) => {
         </View>
     )
 }
-
 export default ProductListingScreen

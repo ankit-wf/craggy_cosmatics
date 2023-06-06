@@ -7,7 +7,6 @@ import { ALL_CATEGORIES_API, CONSUMER_KEY } from "@env";
 
 const CategoriesScreen = ({ navigation }) => {
   const styles = useStyles()
-  // const imageData = BackgroundImageService();
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true);
   let Cat = "Categories";
@@ -35,15 +34,12 @@ const CategoriesScreen = ({ navigation }) => {
 
   return (
     <View>
-
       <View style={styles.categories_root}>
         <Text style={styles.categories_text}>{Cat}</Text>
       </View>
-
       <ScrollView>
         <View style={styles.categoryMainDiv}>
           {data.map((data, i) => {
-            // if (data.count > 0)
             return (
               <SkeletonContainer isLoading={loading} key={i} >
                 <TouchableOpacity

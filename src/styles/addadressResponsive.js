@@ -1,15 +1,9 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
 
 export const useStyles = CreateResponsiveStyle(
     {
         wrapper: {},
-
-
         root_container: {
-            // flex: 1,
-            // justifyContent: 'center',
-            // alignItems: 'center',
             height: '85%',
             width: '90%',
             borderWidth: 0.5,
@@ -41,7 +35,6 @@ export const useStyles = CreateResponsiveStyle(
             fontSize: 16
         },
         firstname_text: {
-            // height: 40,
             borderTopWidth: 0,
             borderLeftWidth: 0,
             borderRightWidth: 0,
@@ -58,7 +51,6 @@ export const useStyles = CreateResponsiveStyle(
             alignSelf: 'center'
         }
     },
-
     {
         /** Medium Device Size */
 
@@ -67,7 +59,6 @@ export const useStyles = CreateResponsiveStyle(
                 marginTop: 10,
                 height: (Platform.OS === 'ios') ? '77%' : '78%',
             },
-
             btn_root: {
                 height: 40,
                 width: 200,
@@ -80,8 +71,6 @@ export const useStyles = CreateResponsiveStyle(
             firstname_text: {
                 fontSize: (Platform.OS === 'ios') ? 14 : 14,
             },
-
-
         },
         /** Extra Small Device Size */
 
@@ -90,7 +79,6 @@ export const useStyles = CreateResponsiveStyle(
                 height: (Platform.OS === 'ios') ? '84%' : '85%',
                 marginTop: "8%",
             },
-
             btn_root: {
                 height: 45,
                 width: 200,
@@ -104,8 +92,6 @@ export const useStyles = CreateResponsiveStyle(
             firstname_text: {
                 fontSize: (Platform.OS === 'ios') ? 14 : 14,
             },
-
-
         },
     },
 )

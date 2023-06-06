@@ -13,9 +13,7 @@ const PrivacyPolicy = ({ navigation }) => {
         </View>
     )
 }
-
 export default PrivacyPolicy
-
 const styles = StyleSheet.create({
     ReviewsTitle: {
         paddingTop: '11%',

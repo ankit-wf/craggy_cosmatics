@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list'
 
 const CustomDropDown = ({ ...props }) => {
-
     return (
         <View style={styles.container}>
             <SelectList
@@ -12,15 +11,12 @@ const CustomDropDown = ({ ...props }) => {
         </View>
     );
 };
-
 export default CustomDropDown;
-
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         width: '100%',
         marginVertical: 12,
-        // padding: 16,
     },
     dropdown: {
         height: 50,

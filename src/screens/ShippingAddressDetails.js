@@ -1,5 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, View, Select, SafeAreaView } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form'
@@ -12,15 +12,11 @@ import Dropdown from '../../Data/allState.json'
 import { USER_LOGIN_API, CONSUMER_KEY } from "@env";
 
 const ShippingAddressDetails = ({ navigation }) => {
-
     const add_Style = useStyles()
     const userAdd = useSelector(state => state.userData.userShipping);
     const dispatch = useDispatch();
-    // console.log("userAdd", userAdd)
-    const { control, handleSubmit, reset, formState: { errors } } = useForm({
+    const { control, handleSubmit, reset, formState: { errors } } = useForm({})
 
-    })
-    // let AddData = []
     const onSubmit = data => {
         axios({
             method: 'post',
@@ -32,7 +28,6 @@ const ShippingAddressDetails = ({ navigation }) => {
                 address_2: data.address_2,
                 city: data.city,
                 state: data.state,
-                // "country": "IN",
                 postcode: data.pincode,
                 phone: data.phone
             },
@@ -41,11 +36,9 @@ const ShippingAddressDetails = ({ navigation }) => {
                 'consumer_key': CONSUMER_KEY
             }
         }).then((res) => {
-            // console.log("gghghghgh", res.config.data)
             if (res.status === 200) {
                 const e = res.config.data
                 const d = JSON.parse(e)
-                // console.log("ddddddd", d.ID)
                 let AddData = [...userAdd, {
                     first_name: d.first_name,
                     last_name: d.last_name,
@@ -56,7 +49,6 @@ const ShippingAddressDetails = ({ navigation }) => {
                     postcode: d.postcode,
                     phone: d.phone
                 }];
-                // console.log("AddData", AddData)
                 dispatch(loginActions.usershipping(
                     {
                         userShipping: AddData
@@ -67,7 +59,6 @@ const ShippingAddressDetails = ({ navigation }) => {
             }
         })
     }
-
     return (
         <View>
             <View style={add_Style.root_container}>
@@ -124,7 +115,6 @@ const ShippingAddressDetails = ({ navigation }) => {
                             {errors.last_name && errors.last_name.type === 'pattern' && <Text> please enter correct !</Text>}
                         </View>
                     </View>
-
                     <View style={add_Style.other_input}>
                         <Controller
                             control={control}
@@ -225,7 +215,6 @@ const ShippingAddressDetails = ({ navigation }) => {
                         {errors.postcode && errors.postcode.type === 'required' && <Text> this is required !</Text>}
                         {errors.postcode && errors.postcode.type === 'pattern' && <Text> please enter correct !</Text>}
                     </View>
-
                     <View style={add_Style.other_input}>
                         <Controller
                             name="state"
@@ -236,15 +225,10 @@ const ShippingAddressDetails = ({ navigation }) => {
                                     setSelected={onChange}
                                     data={Dropdown}
                                     save="value"
-
                                 />
                             )}
                         />
-
-                        {/* {errors.state && errors.state.type === 'required' && <Text> this is required !</Text>}
-                    {errors.state && errors.state.type === 'pattern' && <Text> please enter correct !</Text>} */}
                     </View>
-
                     <View style={add_Style.other_input}>
                         <Controller
                             control={control}
@@ -271,21 +255,15 @@ const ShippingAddressDetails = ({ navigation }) => {
                     </View>
                 </ScrollView>
             </View>
-
             <TouchableOpacity style={add_Style.btn_root} onPress={handleSubmit(onSubmit)}>
                 <Text style={add_Style.btn_text}>Save And Continue</Text>
             </TouchableOpacity>
         </View>
-
     );
 }
 export default ShippingAddressDetails;
-
 const styles = StyleSheet.create({
     handleBtnRoot: {
-        // width: "100%",
-        // marginHorizontal: '5%',
         marginTop: 20
     }
-
 });

@@ -1,5 +1,4 @@
 import { CreateResponsiveStyle, DEVICE_SIZES, maxSize } from 'rn-responsive-styles';
-// import { theme } from '../../src/core/theme';
 
 export const useStyles = CreateResponsiveStyle(
     {
@@ -71,8 +70,6 @@ export const useStyles = CreateResponsiveStyle(
             justifyContent: 'center',
             alignSelf: 'center',
             marginTop: 7,
-            // borderColor: 'red',
-            // borderWidth: 1,
         },
         price: {
             color: 'white',
@@ -128,7 +125,6 @@ export const useStyles = CreateResponsiveStyle(
             lineHeight: 15,
             textAlign: 'center'
         },
-
     },
 
     {
@@ -136,16 +132,10 @@ export const useStyles = CreateResponsiveStyle(
 
         [maxSize(DEVICE_SIZES.MD)]: {
 
-
-
-
         },
         /** Extra Small Device Size */
 
         [maxSize(DEVICE_SIZES.XS)]: {
-
-
-
 
         },
     },

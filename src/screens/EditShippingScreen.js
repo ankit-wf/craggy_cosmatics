@@ -1,6 +1,5 @@
 import { Text, View, TouchableOpacity } from 'react-native'
 import React, { useEffect } from 'react'
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form'
 import { loginActions } from '../store/UserSlice'
@@ -10,23 +9,16 @@ import { useRoute } from '@react-navigation/native'
 import { useStyles } from '../styles/addResponsive';
 import CustomDropDown from '../components/CustomDropDown';
 import DropDown from '../../Data/allState.json'
-import { USER_LOGIN_API, CONSUMER_KEY } from "@env";
 
 const EditShippingScreen = ({ navigation }) => {
     const Edit_Style = useStyles();
     const route = useRoute();
     const index = route.params;
-    console.log("index", index)
-    // const shippingData = useSelector(state => state.userData.userShipping);
     const shippingData = useSelector(state => state.userData.user_data)
-    // console.log("datata", shippingData)
     const dispatch = useDispatch();
-    const { control, handleSubmit, reset, formState: { errors } } = useForm({
-
-    })
+    const { control, handleSubmit, reset, formState: { errors } } = useForm({})
     useEffect(() => {
         {
-            // shippingData.map((v, i) => {
             reset({
                 first_name: shippingData.shipping_address.first_name,
                 last_name: shippingData.shipping_address.last_name,
@@ -37,11 +29,9 @@ const EditShippingScreen = ({ navigation }) => {
                 postcode: shippingData.shipping_address.postcode,
                 phone: shippingData.shipping_address.phone
             })
-            // })
         }
     }, [])
     const onSubmit = data => {
-        // console.log("datatatadddd", data.State);
         let AddData = [{
             index: index,
             first_name: data.first_name,
@@ -59,46 +49,6 @@ const EditShippingScreen = ({ navigation }) => {
             }
         ));
         navigation.goBack();
-        // navigation.navigate('address')
-        // reset();
-
-        // axios({
-        //     method: 'post',
-        //     url:USER_LOGIN_API,
-        //     data: {
-        //         ID: index,
-        //         first_name: data.first_name,
-        //         last_name: data.last_name,
-        //         address_1: data.address_1,
-        //         address_2: data.address_2,
-        //         state: data.state,
-        //         city: data.city,
-        //         postcode: data.postcode,
-        //         phone: data.phone
-
-        //     },
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'consumer_key': CONSUMER_KEY
-        //     }         
-
-        // }).then((res) => {
-        //     console.log("send",res.data);
-        //     if (res.data.data === "Data saved successfully") {
-        //         Alert.alert(
-        //             "Alert Title",
-        //             "Data Updated Successfully",
-        //             [
-        //                 {
-        //                     text: "Cancel",
-        //                     onPress: () => console.log("Cancel Pressed"),
-        //                     style: "cancel"
-        //                 },
-        //                 { text: "OK", onPress: () => navigation.navigate("dash") }
-        //             ])
-
-        //     }
-        // })
     }
     return (
         <View >
@@ -262,7 +212,6 @@ const EditShippingScreen = ({ navigation }) => {
                                 control={control}
                                 rules={{
                                     required: true,
-                                    // pattern: { value: /^[a-zA-Z ]{2,40}$/ }
                                 }}
                                 render={({ field: { onChange, value } }) => (
                                     < CustomDropDown
@@ -275,8 +224,6 @@ const EditShippingScreen = ({ navigation }) => {
                                 )}
                                 name="state"
                             />
-                            {/* {errors.state && errors.state.type === 'required' && <Text style={Edit_Style.input_error}> this is required !</Text>}
-                                    {errors.state && errors.state.type === 'pattern' && <Text style={Edit_Style.input_error}> please enter correct !</Text>} */}
                         </View>
 
                         <View style={Edit_Style.full_width}>
@@ -306,7 +253,6 @@ const EditShippingScreen = ({ navigation }) => {
                     </View>
                 </ScrollView>
             </View>
-
             <TouchableOpacity style={Edit_Style.btn_root} onPress={handleSubmit(onSubmit)}>
                 <Text style={Edit_Style.edit_btn_text}>Update</Text>
             </TouchableOpacity>
