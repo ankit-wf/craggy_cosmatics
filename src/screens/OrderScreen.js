@@ -22,6 +22,7 @@ const OrderScreen = ({ navigation }) => {
     const [visible, setVisible] = useState(false);
     const onDismissSnackBar = () => setVisible(false);
     console.log("hello")
+    console.log("kkkk")
 
     useEffect(() => {
         axios.get(
