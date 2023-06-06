@@ -21,6 +21,7 @@ const OrderScreen = ({ navigation }) => {
     const [loading, setLoading] = useState(true);
     const [visible, setVisible] = useState(false);
     const onDismissSnackBar = () => setVisible(false);
+    console.log("hello")
 
     useEffect(() => {
         axios.get(
